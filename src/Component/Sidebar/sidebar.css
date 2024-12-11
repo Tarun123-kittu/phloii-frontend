@@ -1,0 +1,89 @@
+header {
+    background: rgba(14, 14, 14, 1);
+    position: fixed;
+    width: calc(100% - var(--sidebar-width));
+    right: 0;
+    padding: 1rem;
+    padding-right: 2rem;
+    gap: 15px;
+}
+.notify {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 1);
+}
+.notify img {
+    width: 18px;
+    height: 18px;
+}
+span.dot {
+    width: 8px;
+    height: 8px;
+    background: #000000;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    top: 10px;
+    right: 11px;
+}
+.user_image {
+    flex: 0 0 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #FBB90D 0%, #22EBFF 100%);
+}
+
+.user {
+    display: flex;
+    gap: 10px;
+    color: rgba(255, 255, 255, 1);
+}
+
+.user h4 {
+    font-size: 16px;
+}
+
+.user span {
+    font-size: 12px;
+}
+.side_bar {
+    position: fixed;
+    background: rgba(9, 9, 10, 1);
+    z-index: 99;
+    height: 100vh;
+    width: var(--sidebar-width);
+    border-right: 1px solid rgba(31, 31, 34, 1);
+    padding: 1rem;
+}
+
+.side_bar ul li {
+    list-style: none;
+    margin-bottom:10px
+}
+
+.side_bar ul {
+    padding: 00px;
+}
+li.sidebar_active  svg path {
+    stroke: rgba(9, 9, 10, 1);
+}
+
+.side_bar ul li a {
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: unset;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.side_bar ul li a svg {
+    flex: 0 0 24px;
+}
+
+.side_bar ul li.sidebar_active a {
+    color: rgba(9, 9, 10, 1);
+    background: rgba(251, 196, 46, 1);
+}

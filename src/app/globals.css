@@ -1,6 +1,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --highlight: rgba(251, 185, 13, 1);
+  --sidebar-width:230px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,8 +24,76 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+}
+.sub-text{
+  font-size: 12px;
+}
+.fadeColor{
+color: rgba(117, 129, 143, 1);
+}
+.header-card {
+  text-align: center;
+  background: rgba(14, 14, 14, 1);
+  padding: 1rem 10px;
+  border-bottom: 1px solid #FFFFFF4D;
 }
 
+.form-control.cmn_input:focus,select.form-select.cmn-select:focus {
+  box-shadow: unset;
+  background-color: rgba(0, 0, 0, 1);
+  border: 1px solid rgba(0, 0, 0, 1);
+  color: rgba(200, 200, 208, 1);
+  }
+  .form-control.cmn_input,select.form-select.cmn-select {
+      background-color: rgba(0, 0, 0, 1);
+      border: 1px solid rgba(0, 0, 0, 1);
+      color: rgba(200, 200, 208, 1);
+      font-size: 14px;
+  }
+  .form-control.cmn_input::placeholder{
+      color: rgba(200, 200, 208, 1);
+  }
+  label.form-label.cmn_label {
+      color: rgba(255, 255, 255, 1);
+      font-size: 14px;
+  }
+  button.upload_btn.cmn_btn {
+    height: 34px;
+}
+.add_file {
+  border: 1px dashed rgba(211, 211, 211, 1);
+  background: rgba(0, 0, 0, 1);
+ 
+  border-radius: 7px;
+}
+.wrapper {
+  padding: 30px;
+  background: #000;
+  padding-left: calc(var( --sidebar-width) + 30px);
+  padding-top: calc(76px + 30px);
+  min-height: 100vh;
+}
+.cmn-heading {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 1);
+}
+input.form-control.cmn_input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.add_file p {
+  font-size: 14px;
+  margin: 0;
+  color: rgba(136, 136, 136, 1);
+}
+
+.add_file span {
+  font-size: 12px;
+  color: rgba(120, 120, 120, 1);
+}
 * {
   box-sizing: border-box;
   padding: 0;
@@ -34,9 +104,28 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.main_heading {
+  font-size: 28px;
+  color: var(--highlight);
+}
+.sort_desc {
+  font-size: 14px;
+}
+.form-check input.form-check-input {
+  background-color: rgba(255, 255, 255, 0.16); 
+  border-color: rgba(255, 255, 255, 0.16); 
 
+}
+.text-hightLight{
+color: var( --highlight);
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+@media(max-width:1440px){
+  div.container{
+    max-width: 90%;
   }
 }

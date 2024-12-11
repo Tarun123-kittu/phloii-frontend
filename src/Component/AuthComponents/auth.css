@@ -1,0 +1,59 @@
+.image_auth{
+    height: 100vh;
+    overflow: hidden;
+}
+.image_auth img{
+        object-fit: cover;
+        object-position: top;
+}
+.auth-wrapper {
+    height: 100vh;
+    background: var(--bs-black);
+}
+
+input.form-control.cmn_input:focus {
+box-shadow: unset;
+}
+input.form-control.cmn_input {
+    background: rgba(14, 14, 14, 1);
+    border: 1px solid rgba(14, 14, 14, 1);
+    color: rgba(200, 200, 208, 1);
+    font-size: 14px;
+}
+input.form-control.cmn_input::placeholder{
+    color: rgba(200, 200, 208, 1);
+}
+label.form-label.cmn_label {
+    color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+}
+.loginAlready{
+    font-size: 14px;
+}
+.loginAlready a{
+    font-size: 16px;
+}
+.auth_form {
+    max-width: 466px;
+    width: 100%;
+    flex: 1;
+    margin-right: auto;
+}
+.auth-wrapper{
+    padding-left: 7rem;
+}
+.image_auth {
+    position: relative;
+}
+
+.image_auth::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #0000004d;
+    backdrop-filter: blur(8px);
+    filter: blur(0px);
+}
