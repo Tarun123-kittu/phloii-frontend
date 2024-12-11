@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Button from "../Hotel/Button/Button";
+import Link from "next/link";
 const Login = () => {
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
@@ -42,7 +43,7 @@ const Login = () => {
           <label class="form-check-label sub-text fadeColor mt-1" for="flexCheckDefault">
           Remember me
           </label>
-          <a href="/" className="sub-text text-hightLight ms-auto text-decoration-none mt-1">Forgot Password?</a>
+          <Link to="/" className="sub-text text-hightLight ms-auto text-decoration-none mt-1">Forgot Password?</Link>
         </div>
         <div className="mt-4">
             <Button text="Sign up" className={"w-100"}/>  
