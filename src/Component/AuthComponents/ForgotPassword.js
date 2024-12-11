@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Button from "../Hotel/Button/Button";
-
+import Link from "next/link";
 const ForgotPassword = () => {
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
@@ -27,7 +27,7 @@ const ForgotPassword = () => {
       <div className="mt-4">
           <Button text="Send" className={"w-100"}/>  
       </div>
-      <p className="text-center loginAlready fadeColor mt-2 mb-0">Don't have an account? <a href="/" className="text-white">Login</a></p>
+      <p className="text-center loginAlready fadeColor mt-2 mb-0">Don't have an account? <Link href="/" className="text-white">Login</Link></p>
     </div>
   </div>
   )

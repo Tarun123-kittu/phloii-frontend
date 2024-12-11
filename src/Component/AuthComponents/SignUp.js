@@ -57,7 +57,7 @@ const SignUP = () => {
         <div className="mt-4">
             <Button text="Sign up" className={"w-100"}/>  
         </div>
-        <p className="text-center loginAlready fadeColor mt-2 mb-0">Already have an account? <Link to="/" className="text-white">Login</Link></p>
+        <p className="text-center loginAlready fadeColor mt-2 mb-0">Already have an account? <Link href="/" className="text-white">Login</Link></p>
       </div>
     </div>
   );

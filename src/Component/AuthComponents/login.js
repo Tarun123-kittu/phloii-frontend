@@ -43,12 +43,12 @@ const Login = () => {
           <label class="form-check-label sub-text fadeColor mt-1" for="flexCheckDefault">
           Remember me
           </label>
-          <Link to="/" className="sub-text text-hightLight ms-auto text-decoration-none mt-1">Forgot Password?</Link>
+          <Link href="/" className="sub-text text-hightLight ms-auto text-decoration-none mt-1">Forgot Password?</Link>
         </div>
         <div className="mt-4">
             <Button text="Sign up" className={"w-100"}/>  
         </div>
-        <p className="text-center loginAlready fadeColor mt-2 mb-0">Don't have an account? <a href="/" className="text-white">Signup</a></p>
+        <p className="text-center loginAlready fadeColor mt-2 mb-0">Don't have an account? <Link href="/" className="text-white">Signup</Link></p>
       </div>
     </div>
   );
