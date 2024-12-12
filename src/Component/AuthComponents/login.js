@@ -48,7 +48,7 @@ const Login = () => {
         <div className="mt-4">
             <Button text="Sign up" className={"w-100"}/>  
         </div>
-        <p className="text-center loginAlready fadeColor mt-2 mb-0">Don't have an account? <Link href="/" className="text-white">Signup</Link></p>
+        <p className="text-center loginAlready fadeColor mt-2 mb-0">{"Don&apos;t  have an account? "}<Link href="/" className="text-white">Signup</Link></p>
       </div>
     </div>
   );
