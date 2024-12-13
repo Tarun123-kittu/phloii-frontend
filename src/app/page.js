@@ -18,47 +18,45 @@ export default function Home() {
             Discreet Relationships Starts Here
           </p>
           <div className={styles.navImmages}>
-            <img width={150} src="assets/playstoreMb.png" alt="" />
-            <img width={150} src="assets/appstoreMb.png" className="ms-4" alt="" />
+            <img width={180} src="assets/playstoreMb.png" alt="" />
+            <img
+              width={180}
+              src="assets/appstoreMb.png"
+              className="ms-4"
+              alt=""
+            />
           </div>
         </div>
         <div className={styles.image_grid}>
           <ul>
             <li className="mt-5">
               <img src="assets/oneImage.png" alt="" />
-            
             </li>
             <li>
-            <img src="assets/imgeone.png" className="mb-3" alt="" />
+              <img src="assets/imgeone.png" className="mb-3" alt="" />
               <img src="assets/imagetwo.png" alt="" />
-            
             </li>
             <li className="mt-5">
-            <img src="assets/imagethree.png" className="mb-3" alt="" />
+              <img src="assets/imagethree.png" className="mb-3" alt="" />
               <img src="assets/imagefour.png" alt="" />
-              
             </li>
             <li>
-            <img src="assets/imagefive.png" className="mb-3" alt="" />
-            <img src="assets/imgeone.png" className="mb-3" alt="" />
+              <img src="assets/imagefive.png" className="mb-3" alt="" />
+              <img src="assets/imgeone.png" className="mb-3" alt="" />
               <img src="assets/imagesix.png" alt="" />
-           
             </li>
             <li className="mt-5">
-            <img src="assets/imageseven.png" className="mb-3" alt="" />
+              <img src="assets/imageseven.png" className="mb-3" alt="" />
               <img src="assets/imageeight.png" alt="" />
-           
             </li>
-            <li >
-            <img src="assets/imagenine.png" className="mb-3" alt="" />
+            <li>
+              <img src="assets/imagenine.png" className="mb-3" alt="" />
               <img src="assets/imageten.png" alt="" />
-           
             </li>
             <li className="mt-5">
               <img src="assets/imagetweleve.png" className="mb-3" alt="" />
               <img src="assets/imgeone.png" alt="" />
             </li>
-            
           </ul>
         </div>
       </div>
@@ -275,7 +273,9 @@ export default function Home() {
             {" "}
             Real love <span>stories</span> last forever
           </h2>
-          <p className={`${styles.cmn_desc} text-center mb-5 position-relative z-2`}>
+          <p
+            className={`${styles.cmn_desc} text-center mb-5 position-relative z-2`}
+          >
             Kerjarodi.com is an application for job seekers and workers who
             prioritize <br /> user comfort and the quality of services provided
             by our team
@@ -289,8 +289,8 @@ export default function Home() {
                 <h3>
                   Jakob <span className="text-white">/</span> <span>Rayna</span>
                 </h3>
-                
-                 <p className={`${styles.cmn_desc} mb-0`}>
+
+                <p className={`${styles.cmn_desc} mb-0`}>
                   Kerjarodi.com is an application for job seekers and workers
                   who prioritize user comfort and the quality of services
                   provided by our team
@@ -305,7 +305,7 @@ export default function Home() {
                   Angel <span className="text-white">/</span>{" "}
                   <span>kierra</span>
                 </h3>
-                 <p className={`${styles.cmn_desc} mb-0`}>
+                <p className={`${styles.cmn_desc} mb-0`}>
                   Kerjarodi.com is an application for job seekers and workers
                   who prioritize user comfort and the quality of services
                   provided by our team
@@ -320,7 +320,7 @@ export default function Home() {
                   Jaxson <span className="text-white">/</span>{" "}
                   <span>Aspen</span>
                 </h3>
-                 <p className={`${styles.cmn_desc} mb-0`}>
+                <p className={`${styles.cmn_desc} mb-0`}>
                   Kerjarodi.com is an application for job seekers and workers
                   who prioritize user comfort and the quality of services
                   provided by our team
@@ -335,7 +335,7 @@ export default function Home() {
                   Cristofer <span className="text-white">/</span>{" "}
                   <span>Dulce</span>
                 </h3>
-                 <p className={`${styles.cmn_desc} mb-0`}>
+                <p className={`${styles.cmn_desc} mb-0`}>
                   Kerjarodi.com is an application for job seekers and workers
                   who prioritize user comfort and the quality of services
                   provided by our team
@@ -348,33 +348,36 @@ export default function Home() {
       <div
         className={`${styles.padding} ${styles.bg_black} ${styles.appDownload}`}
       >
-        <h2
-          className={`${styles.cmn_heading} text-center position-relative z-2`}
-        >
-          Phloii is Just a Download Away – Get it on <br />{" "}
-          <span>Google Play or the App Store</span>
-        </h2>
-        <p className={`${styles.cmn_desc} text-center mb-5 position-relative z-2 pt-3`}>
-          Kerjarodi.com is an application for job seekers and workers who
-          prioritize <br />
-          user comfort and the quality of services provided by our team
-        </p>
-        <div className={`${styles.dowloadGrid}`}>
-          <div
-            className={`${styles.mobile_screen} ${styles.borderEnd} text-center`}
+        <div className="container">
+         <h2
+            className={`${styles.cmn_heading} text-start position-relative z-2`}
           >
-            <img src="assets/appscreen.png" className="mb-4" alt="" />
-            <img src="assets/playstore.png" alt="" />
-          </div>
-          <div className={`${styles.centered_screen}`}>
-            <img src="assets/multiscreen.png" alt="" />
-          </div>
-          <div
-            className={`${styles.mobile_screen} ${styles.borderStart} text-center`}
+            Phloii is Just a Download Away – Get it on <br />{" "}
+            <span>Google Play or the App Store</span>
+          </h2>
+        <div className={`${styles.appwraper} position-relative`}>
+        <div className={`${styles.floatingtext} position-absolute`}>
+          <p
+            className={`${styles.cmn_desc} text-start mb-3 position-relative z-2 pt-3`}
           >
-            <img src="assets/appscreen.png" className="mb-4" alt="" />
-            <img src="assets/appStore.png" alt="" />
+            Kerjarodi.com is an application for job seekers and workers who
+            prioritize <br />
+            user comfort and the quality of services provided by our team
+          </p>
+          <div className={styles.navImmages}>
+            <img width={180} src="assets/playstoreMb-dark.png" alt="" />
+            <img
+              width={180}
+              src="assets/appstoreMb-dark.png"
+              className="ms-4"
+              alt=""
+            />
           </div>
+         </div>
+          <div className={`${styles.screenimage}`}>
+            <img src="assets/floii.png" alt="" className="img-fluid" />
+          </div>
+        </div>
         </div>
       </div>
       <div

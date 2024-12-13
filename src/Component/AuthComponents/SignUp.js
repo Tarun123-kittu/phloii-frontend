@@ -1,8 +1,49 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "../Hotel/Button/Button";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import {
+  hotel_signup,
+  clear_hotel_signup_state,
+} from "@/utils/redux/slices/authSlice/signUp";
+import validator from "validator";
+import toast from "react-hot-toast";
 const SignUP = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const is_user_signed_up = useSelector((store) => store.HOTEL_SIGNUP)
+  console.log(is_user_signed_up,"is user signed up")
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    if (!username) {
+      setUsernameError("username is required");
+      return;
+    }
+    if (!email) {
+      setEmailError("Email is required");
+      return;
+    }
+    if (!validator.isEmail) {
+      setEmailError("Email is not valid");
+      return;
+    }
+    if (!password) {
+      setPasswordError("password is required");
+      return;
+    }
+    dispatch(hotel_signup({ username, email, password }));
+  };
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">
@@ -13,51 +54,86 @@ const SignUP = () => {
         <p className="sort_desc text-center text-white">
           Please fill out this form with the required information
         </p>
-        <div class="mb-3">
-          <label for="name" class="form-label cmn_label">
-            Name
-          </label>
+        <div className="mb-3">
+          <label className="form-label cmn_label">Name</label>
           <input
             type="text"
-            class="form-control cmn_input"
+            className="form-control cmn_input"
             placeholder="Enter your name"
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              setUsernameError("");
+            }}
+            style={usernameError ? { border: "1px solid red" } : {}}
           />
+           {usernameError && (
+            <span style={usernameError ? { color: "red", fontSize: "10px" } : {}}>
+              {usernameError}
+            </span>
+          )}
         </div>
-        <div class="mb-3">
-          <label for="email" class="form-label cmn_label">
-            Email
-          </label>
+        <div className="mb-3">
+          <label className="form-label cmn_label">Email</label>
           <input
             type="email"
-            class="form-control cmn_input"
+            className="form-control cmn_input"
             placeholder="Enter your email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setEmailError("");
+            }}
+            style={emailError ? { border: "1px solid red" } : {}}
           />
+           {emailError && (
+            <span style={emailError ? { color: "red", fontSize: "10px" } : {}}>
+              {emailError}
+            </span>
+          )}
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label cmn_label">
-            Email
-          </label>
+        <div className="mb-3">
+          <label className="form-label cmn_label">Email</label>
           <input
             type="password"
-            class="form-control cmn_input"
+            className="form-control cmn_input"
             placeholder="*********"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setPasswordError("");
+            }}
+            style={passwordError ? { border: "1px solid red" } : {}}
           />
+           {passwordError && (
+            <span style={passwordError ? { color: "red", fontSize: "10px" } : {}}>
+              {passwordError}
+            </span>
+          )}
         </div>
-        <div class="form-check">
+        <div className="form-check">
           <input
-            class="form-check-input"
+            className="form-check-input"
             type="checkbox"
             value=""
             id="flexCheckDefault"
           />
-          <label class="form-check-label sub-text fadeColor" for="flexCheckDefault">
-          I have read and agree to the <span className="text-hightLight text-decoration-underline">Terms of Service</span>
+          <label className="form-check-label sub-text fadeColor">
+            I have read and agree to the{" "}
+            <span className="text-hightLight text-decoration-underline">
+              Terms of Service
+            </span>
           </label>
         </div>
         <div className="mt-4">
-            <Button text="Sign up" className={"w-100"}/>  
+          <Button buttonClick={handleSignUp} text={is_user_signed_up?.status !== "Loading" ? "Signup" : "Loading"} className="w-100" />
         </div>
-        <p className="text-center loginAlready fadeColor mt-2 mb-0">{'Already have an account?'} <Link href="/" className="text-white">Login</Link></p>
+        <p className="text-center loginAlready fadeColor mt-2 mb-0">
+          {"Already have an account?"}{" "}
+          <Link href="/" className="text-white">
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );

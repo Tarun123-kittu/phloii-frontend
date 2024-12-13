@@ -1,8 +1,63 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "../Hotel/Button/Button";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  hotel_login,
+  clear_hotel_login_state,
+} from "@/utils/redux/slices/authSlice/login";
+import validator from "validator";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 const Login = () => {
+  const dispatch = useDispatch();
+  const router = useRouter()
+  if(localStorage.getItem('phloii_token_auth')){
+    router.push('/hotels')
+  }
+  const [email, setemail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setemailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const is_loggedIn = useSelector((store) => store.HOTEL_LOGIN);
+  console.log(is_loggedIn, "this is the logged in details");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    if (!email) {
+      setemailError("Email is required");
+      return;
+    }
+
+    if (!validator.isEmail(email)) {
+      setemailError("Email is not valid");
+      return;
+    }
+
+    if (!password) {
+      setPasswordError("Password is requires");
+      return;
+    }
+    dispatch(hotel_login({ email, password }));
+  };
+
+  useEffect(() => {
+    if (is_loggedIn?.status === "Success") {
+      toast.success("Logged in");
+      localStorage.setItem('phloii_token_auth',is_loggedIn?.data?.data)
+      router.push("/hotels")
+      dispatch(clear_hotel_login_state())
+    }
+    if (is_loggedIn?.status === "Error") {
+      toast.success(is_loggedIn?.error?.message);
+      dispatch(clear_hotel_login_state())
+    }
+  }, [is_loggedIn]);
+
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">
@@ -12,7 +67,7 @@ const Login = () => {
         <h2 className="main_heading text-center mt-2">Create Account</h2>
         <p className="sort_desc text-center text-white">
           Please fill out this form with the required information
-        </p>     
+        </p>
         <div class="mb-3">
           <label for="email" class="form-label cmn_label">
             Email
@@ -21,7 +76,18 @@ const Login = () => {
             type="email"
             class="form-control cmn_input"
             placeholder="Enter your email"
+            value={email}
+            onChange={(e) => {
+              setemail(e.target.value);
+              setemailError("");
+            }}
+            style={emailError ? { border: "1px solid red" } : {}}
           />
+          {emailError && (
+            <span style={emailError ? { color: "red", fontSize: "10px" } : {}}>
+              {emailError}
+            </span>
+          )}
         </div>
         <div class="mb-3">
           <label for="password" class="form-label cmn_label">
@@ -31,7 +97,20 @@ const Login = () => {
             type="password"
             class="form-control cmn_input"
             placeholder="*********"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setPasswordError("");
+            }}
+            style={passwordError ? { border: "1px solid red" } : {}}
           />
+          {passwordError && (
+            <span
+              style={passwordError ? { color: "red", fontSize: "10px" } : {}}
+            >
+              {passwordError}
+            </span>
+          )}
         </div>
         <div class="form-check d-flex align-itmes-center gap-2">
           <input
@@ -40,15 +119,32 @@ const Login = () => {
             value=""
             id="flexCheckDefault"
           />
-          <label class="form-check-label sub-text fadeColor mt-1" for="flexCheckDefault">
-          Remember me
+          <label
+            class="form-check-label sub-text fadeColor mt-1"
+            for="flexCheckDefault"
+          >
+            Remember me
           </label>
-          <Link href="/" className="sub-text text-hightLight ms-auto text-decoration-none mt-1">Forgot Password?</Link>
+          <Link
+            href="/"
+            className="sub-text text-hightLight ms-auto text-decoration-none mt-1"
+          >
+            Forgot Password?
+          </Link>
         </div>
         <div className="mt-4">
-            <Button text="Sign up" className={"w-100"}/>  
+          <Button
+            buttonClick={handleLogin}
+            text={is_loggedIn?.status !== "Loading" ? "Signin" : "Loading"}
+            className={"w-100"}
+          />
         </div>
-        <p className="text-center loginAlready fadeColor mt-2 mb-0">{"Don&apos;t  have an account? "}<Link href="/" className="text-white">Signup</Link></p>
+        <p className="text-center loginAlready fadeColor mt-2 mb-0">
+          {"Don&apos;t  have an account? "}
+          <Link href="/" className="text-white">
+            Signup
+          </Link>
+        </p>
       </div>
     </div>
   );

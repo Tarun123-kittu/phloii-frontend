@@ -1,8 +1,15 @@
+'use client'
+
 import React from 'react';
 import './page.css';
 import SideBar from '@/Component/Sidebar/SideBar';
+import { useRouter } from 'next/navigation';
 
 const page = () => {
+  const router = useRouter()
+  if(!localStorage.getItem('phloii_token_auth')){
+    router.push('/hotels/login')
+  }
   return (
     <SideBar>
       <div className='wrapper'>

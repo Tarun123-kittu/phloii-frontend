@@ -30,8 +30,7 @@ right: 0;
 background: rgba(34, 235, 255, 0.3);
 }
 .navImmages img{
-  width: 150px;
-  height: 44px;
+  width: 180px;
 }
 .mainBanner h1, .mainBanner p{
   color: #fff;
@@ -173,32 +172,10 @@ gap: 2rem;
 .stories_grid span{
   color: #FBB90D;
 }
-.dowloadGrid {
-  display:flex;
-  align-items: end;
-  gap: 30px;
-  justify-content: space-between;
-}
-.mobile_screen{
-  padding:4rem 4rem;
-  background-color: #575757;
-  
-}
-.borderEnd{
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
-}
-.borderStart{
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
-}
-.centered_screen img{
-  width: 100%;
-}
-.centered_screen{
-  margin-bottom: 6rem;
-  width: 100%;
-}
+
+
+
+
 .clientName{
   color: var(--bs-white);
   font-size: 32px;
