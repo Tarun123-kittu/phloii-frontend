@@ -15,6 +15,7 @@ const Hotels = () => {
   const [images,setImages] = useState()
   const [show_image_preview,setShow_image_preview] = useState(false)
   const all_hotels = useSelector((store) => store.HOTEL_DETAILS)
+  console.log(all_hotels,"this is the all hotels")
   if (!localStorage.getItem('phloii_token_auth')) {
     router.push('/hotels/login')
   }
@@ -28,6 +29,10 @@ const Hotels = () => {
       setHotel_details(all_hotels?.data?.data)
     }
   }, [all_hotels])
+
+  const handleViewHotel = (id) => {
+router.push(`/hotels/hotel-details/${id}`)
+  }
 
   return (
     <SideBar>
@@ -84,7 +89,7 @@ const Hotels = () => {
                       </div>}
                     </div>
                   </div>
-                  <button className="edit-btn"> <img src="" alt="Hotel 1" />  Viewe</button>
+                  <button onClick={() => handleViewHotel(hotel?._id)} className="edit-btn">  View</button>
                 </div>
 
 
@@ -100,7 +105,7 @@ const Hotels = () => {
                     <div className=" p-0">
                       <img src={hotel?.images[2]} alt="Hotel 2" />
                     </div>
-                    <div onClick={() => {setImages(hotel?.images);setShow_image_preview(true)}} className=" p-0 view-more">
+                    <div onClick={() => {setImages(hotel?.images);setShow_image_preview(true)}} className="p-0 view-more">
                       <img src={hotel?.images[3]} alt="Hotel 3" className="view-more-img" />
                     </div>
                   </div>
