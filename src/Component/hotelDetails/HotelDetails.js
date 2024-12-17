@@ -93,7 +93,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         </div>}
                         {hotel_details?.hotel?.inPersonVisitAvailability && <div className='info'>
                             <label htmlFor="" className='info_label'>Are you open to an in-person visit? If yes, when is a good time to meet?</label>
-                            <p>{hotel_details?.hotel?.inPersonVisitAvailability}</p>
+                            <p>{hotel_details?.hotel?.inPersonVisitAvailability}</p> 
                         </div>}
                     </div>
                     <div className='owner_info'>
