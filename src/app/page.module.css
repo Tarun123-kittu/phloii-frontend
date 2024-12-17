@@ -89,9 +89,9 @@ font-size: 20px;
 .bg_black{
   background-color: var(--bs-black);
 }
-.homeWrapper p{ 
-  color: vra(--bs-white);
-}
+/* .homeWrapper p{ 
+  color: var(--bs-white);
+} */
 .about_image::before, .features:before, .realstories::before, .stories_wrapper::before{
   content: "";
   position: absolute;
@@ -233,7 +233,27 @@ width: 100%;
  flex: 0 0 200px;
  width: 100%;
 }
+.appDownload::before,.appDownload::after{
+  position: absolute;
+  content: "";
+  width: 688px;
+  height: 688px;
+  background-color: rgba(34, 235, 255, 0.3);
+  bottom: -200px;
+  left: -200px;
+  border-radius: 50%;
+  filter: blur(200px);
+}
+.appDownload::after{
+background-color: rgba(251, 185, 13, 0.3);
+right: 0;
+left: auto;
+bottom: -300px;
 
+}
+.floatingtext{
+  position: absolute;
+}
 @media(max-width:1440px){
   .cmn_heading{
     color: var(--bs-white);
@@ -246,4 +266,99 @@ width: 100%;
   .padding{
     padding: 7rem 0;
   }
+}
+@media(max-width:1326px){
+  .mainBanner h1{
+    font-size: 50px;
+  }
+}
+@media(max-width:1199){
+  .mainBanner h1{
+    font-size: 40px;
+  }
+  .padding{
+    padding: 8rem 0;
+  }
+  .cmn_heading{
+    font-size: 32px;
+  }
+  .clientName{
+    font-size: 28px;
+  }
+  .mainBanner {
+    background-color: #000;
+    padding-top: 5rem;
+    overflow: hidden;
+    position: relative;
+    height: 650px;
+}
+.navImmages img{
+  width: 20%;
+}
+}
+@media(max-width:991px){
+  .mainBanner h1{
+    font-size: 32px;
+  }
+  .cmn_heading{
+    font-size: 28px;
+  }
+  .clientName{
+    font-size: 24px;
+  }
+  .mainBanner {
+    background-color: #000;
+    padding-top: 5rem;
+    overflow: hidden;
+    position: relative;
+    height: 550px;
+}
+.padding{
+  padding: 5rem 0;
+}
+.review{
+  padding: 1rem;
+  font-size: 14px;
+  line-height: 22px;
+}
+.cmn_desc {
+  font-size: 14px;
+  line-height: 22px;
+}
+}
+
+@media(max-width:767px){
+  .mainBanner h1{
+    font-size: 28px;
+  }
+  .navImmages img{
+    width: 120px;
+  }
+  .cmn_heading{
+    font-size: 26px;
+  }
+  .clientName{
+    font-size: 20px;
+  }
+  .padding{
+    padding: 5rem 0;
+  }
+  .stories_grid{
+    grid-template-columns: auto;
+  }
+  .keen-slider{
+    display: none;
+  }
+  .client_image{
+    display: none;
+  }
+  .floatingtext{
+    position: relative;
+  }
+  .image_grid li {
+      flex: 0 0 120px;
+}
+.image_grid{
+  transform: translateY(88px);
+}
 }

@@ -75,8 +75,8 @@ const Testimonials = () => {
         </div>
 
         {/* Right Column: Images */}
-        <div className="col-md-6">
-          <div ref={sliderRefRight} className="keen-slider">
+        <div className={`${styles.client_image} col-md-6`}>
+          <div ref={sliderRefRight} className={` keen-slider`}>
             {clients.map((client, index) => (
               <div className="keen-slider__slide" key={index}>
             <img src={client?.image} className='img-fluid' />

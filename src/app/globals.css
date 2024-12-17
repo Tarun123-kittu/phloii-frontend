@@ -124,8 +124,8 @@ color: var( --highlight);
     color-scheme: dark;
   }
 }
-/* @media(max-width:1440px){
-  div.container{
-    max-width: 90%;
+@media(max-width:576px){
+  br{
+    display: none;
   }
-} */
+}

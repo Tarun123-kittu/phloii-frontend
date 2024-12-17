@@ -10,7 +10,7 @@ export default function Home() {
       <div className={`${styles.mainBanner}`}>
         <div className="container position-relative">
           <h1>
-            Experience <span>Secret</span> <br />
+            Experience <span>Safe</span> <br />
             Dating with <span>Phloii</span>
           </h1>
           <p className={styles.cmn_desc}>
@@ -64,7 +64,7 @@ export default function Home() {
         className={`${styles.about} ${styles.bg_black} ${styles.padding} overflow-hidden`}
       >
         <div className="container">
-          <div className="row align-items-center">
+          <div className="row align-items-center row-gap-3">
             <div className="col-lg-6">
               <span className={`${styles.sub_heading} inline-block`}>
                 About Us
@@ -118,7 +118,7 @@ export default function Home() {
             We shall never deny a guest, even the most ridiculous request. We
             provide excellent features from us
           </p>
-          <div className="row row-gap-4 position-relative z-2">
+          <div className="row row-gap-4 position-relative z-2 row-gap-3">
             <div className="col-lg-6">
               <div className={styles.features_card}>
                 <div
@@ -346,9 +346,9 @@ export default function Home() {
         </div>
       </div>
       <div
-        className={`${styles.padding} ${styles.bg_black} ${styles.appDownload}`}
+        className={`${styles.padding} ${styles.bg_black} ${styles.appDownload} position-relative`}
       >
-        <div className="container">
+        <div className="container z-2 position-relative">
          <h2
             className={`${styles.cmn_heading} text-start position-relative z-2`}
           >
@@ -356,9 +356,9 @@ export default function Home() {
             <span>Google Play or the App Store</span>
           </h2>
         <div className={`${styles.appwraper} position-relative`}>
-        <div className={`${styles.floatingtext} position-absolute`}>
+        <div className={`${styles.floatingtext}`}>
           <p
-            className={`${styles.cmn_desc} text-start mb-3 position-relative z-2 pt-3`}
+            className={`${styles.cmn_desc} text-start mb-3 position-relative z-2 pt-md-2 pt-lg-3`}
           >
             Kerjarodi.com is an application for job seekers and workers who
             prioritize <br />
@@ -369,13 +369,14 @@ export default function Home() {
             <img
               width={180}
               src="assets/appstoreMb-dark.png"
-              className="ms-4"
+              className="ms-2"
               alt=""
             />
           </div>
          </div>
           <div className={`${styles.screenimage}`}>
-            <img src="assets/floii.png" alt="" className="img-fluid" />
+            <img src="assets/floii.png" alt="" className="img-fluid d-none d-md-block" />
+            <img src="assets/phlioo-mobile.png" alt="" className="img-fluid d-block d-md-none mt-4" />
           </div>
         </div>
         </div>
@@ -384,7 +385,7 @@ export default function Home() {
         className={`${styles.features} ${styles.padding} position-relative overflow-hidden`}
       >
         <div className="container">
-          <div className="row align-items-center">
+          <div className="row align-items-center row-gap-3">
             <div className="col-lg-6">
               <div className={`${styles.about_image} position-relative `}>
                 <Image
