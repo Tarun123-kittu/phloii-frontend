@@ -14,6 +14,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [hotel_details, setHotel_details] = useState()
     const [show_image_preview, setShow_image_preview] = useState()
     const [images, setImages] = useState()
+    const [index, setIndex] = useState(null)
     const hotelDetails = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
 
     useEffect(() => {
@@ -31,9 +32,9 @@ const HotelDetailsComponent = ({ hotelId }) => {
             setHotel_details(hotelDetails?.data?.data);
         }
     }, [hotelDetails]);
-    return hotelDetails?.status === "Loading" ? <Loader /> :     (
+    return (
         <SideBar>
-            <div className='wrapper'>
+            {hotelDetails?.status === "Loading" ? <Loader /> : <div className='wrapper'>
                 <div className='dashboard_wrapper'>
                     <div className='dashboard_info'>
                         <div className='dashboard_head d-flex gap-3 align-items-center'>
@@ -113,10 +114,10 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         </ul>
                         <div className='hotel_image'>
                             <h5>Hotel Photos</h5>
-                            <img  onClick={() => { setShow_image_preview(true); setImages(hotel_details?.hotel?.images) }}  src={hotel_details?.hotel?.images[0]} className='imge_one img-fluid' alt="" />
+                            <img onClick={() => { setShow_image_preview(true); setImages(hotel_details?.hotel?.images); setIndex(-1) }} src={hotel_details?.hotel?.images[0]} className='imge_one img-fluid' alt="" />
                             <ul className="image-grid mt-3">
                                 {hotel_details?.hotel?.images?.slice(1).map((image, i) => (
-                                    <li onClick={() => { setShow_image_preview(true); setImages(hotel_details?.hotel?.images) }} key={i}>
+                                    <li onClick={() => { setShow_image_preview(true); setImages(hotel_details?.hotel?.images); setIndex(i) }} key={i}>
                                         <img src={image} className="img-fluid" alt={`Hotel Image ${i + 1}`} />
                                     </li>
                                 ))}
@@ -125,8 +126,8 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         </div>
                     </div>
                 </div>
-                {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} />}
-            </div>
+                {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
+            </div>}
         </SideBar>
     )
 }

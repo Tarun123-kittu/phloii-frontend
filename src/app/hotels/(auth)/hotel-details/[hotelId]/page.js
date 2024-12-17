@@ -1,11 +1,23 @@
-import React from 'react'
-import HotelDetailsComponent from '@/Component/hotelDetails/HotelDetails'
+import HotelDetailsComponent from '@/Component/hotelDetails/HotelDetails';
 
-const HotelDetails = ({params}) => {
-    const {hotelId} = params
-  return (
-    <HotelDetailsComponent hotelId={hotelId}/>
-  )
+export async function generateMetadata({ params }) {
+    const { hotelId } = params;
+
+    const metadata = {
+        title: `Hotel Details - ${hotelId}`,
+        description: `Find details about hotel ${hotelId}. Discover amenities, reviews, and more.`,
+    };
+
+    return {
+        title: metadata.title,
+        description: metadata.description,
+    };
 }
 
-export default HotelDetails
+const HotelDetails = ({ params }) => {
+    const { hotelId } = params;
+
+    return <HotelDetailsComponent hotelId={hotelId} />;
+};
+
+export default HotelDetails;

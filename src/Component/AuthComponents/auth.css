@@ -11,16 +11,16 @@
     background: var(--bs-black);
 }
 
-input.form-control.cmn_input:focus {
+.auth-wrapper input.form-control.cmn_input:focus {
 box-shadow: unset;
 }
-input.form-control.cmn_input {
+.auth-wrapper input.form-control.cmn_input {
     background: rgba(14, 14, 14, 1);
     border: 1px solid rgba(14, 14, 14, 1);
     color: rgba(200, 200, 208, 1);
     font-size: 14px;
 }
-input.form-control.cmn_input::placeholder{
+.auth-wrapper input.form-control.cmn_input::placeholder{
     color: rgba(200, 200, 208, 1);
 }
 label.form-label.cmn_label {

@@ -1,10 +1,10 @@
-"use client"; // Use for Next.js App Router setup
+"use client"; 
 
 import React, { useState } from "react";
 import "./imagePreview.css"
 
-const ImageGallery = ({images,setShow_image_preview,show_image_preview}) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const ImageGallery = ({images,setShow_image_preview,show_image_preview,index}) => {
+  const [currentIndex, setCurrentIndex] = useState(index+1 || 0);
 
   const openPopup = (index) => {
     setCurrentIndex(index);
@@ -29,7 +29,6 @@ const ImageGallery = ({images,setShow_image_preview,show_image_preview}) => {
 
   return (
     <div>
-      {/* Image Thumbnails */}
       <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
         {images?.map((image, index) => (
           <img

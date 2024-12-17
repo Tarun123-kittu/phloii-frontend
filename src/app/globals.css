@@ -19,6 +19,7 @@ body {
   overflow-x: hidden;
 }
 
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -90,6 +91,7 @@ input.form-control.cmn_input[type="file"] {
   height: 100%;
   opacity: 0;
 }
+
 .add_file p {
   font-size: 14px;
   margin: 0;
