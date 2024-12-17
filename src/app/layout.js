@@ -7,7 +7,7 @@ import AppStore from "@/utils/redux/AppStore";
 import { Toaster } from "react-hot-toast";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
+  variable: "--font-geist-poppins",
   weight: "100 900",
 });
 const geistMono = localFont({

@@ -13,9 +13,9 @@ const Hotels = () => {
   const router = useRouter()
   const [hotel_details, setHotel_details] = useState()
   const [images,setImages] = useState()
+    const [index,setIndex] = useState(null)
   const [show_image_preview,setShow_image_preview] = useState(false)
   const all_hotels = useSelector((store) => store.HOTEL_DETAILS)
-  console.log(all_hotels,"this is the all hotels")
   if (!localStorage.getItem('phloii_token_auth')) {
     router.push('/hotels/login')
   }
@@ -99,13 +99,13 @@ router.push(`/hotels/hotel-details/${id}`)
                 <div className='hotel-photo-wrapper'>
                   <h5>Hotel Photos</h5>
                   <div className=" hotel-photos ">
-                    <div className="- p-0">
+                    <div onClick={() => {setImages(hotel?.images);setShow_image_preview(true);setIndex(0)}} className="- p-0">
                       <img src={hotel?.images[1]} alt="Hotel 1" />
                     </div>
-                    <div className=" p-0">
+                    <div onClick={() => {setImages(hotel?.images);setShow_image_preview(true);setIndex(1)}} className=" p-0">
                       <img src={hotel?.images[2]} alt="Hotel 2" />
                     </div>
-                    <div onClick={() => {setImages(hotel?.images);setShow_image_preview(true)}} className="p-0 view-more">
+                    <div onClick={() => {setImages(hotel?.images);setShow_image_preview(true);setIndex(0)}} className="p-0 view-more">
                       <img src={hotel?.images[3]} alt="Hotel 3" className="view-more-img" />
                     </div>
                   </div>
@@ -114,7 +114,7 @@ router.push(`/hotels/hotel-details/${id}`)
             </div>
           </>
         ))}
-        {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview}/>}
+        {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index}/>}
       </div>
       {/* <div className='wrapper'>
         <div className='dashboard_wrapper'>

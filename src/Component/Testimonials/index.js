@@ -3,7 +3,7 @@
 import React from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
-import styles from '../../app/page.module.css'
+import styles from "../homeComponent/page.module.css"
 const Testimonials = () => {
   const [sliderRefLeft, sliderLeft] = useKeenSlider({
     loop: true,

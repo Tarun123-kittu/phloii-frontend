@@ -15,9 +15,7 @@ import { useRouter } from "next/navigation";
 const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter()
-  if(localStorage.getItem('phloii_token_auth')){
-    router.push('/hotels')
-  }
+
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setemailError] = useState("");
@@ -47,21 +45,27 @@ const Login = () => {
 
   useEffect(() => {
     if (is_loggedIn?.status === "Success") {
-      console.log(is_loggedIn,"is_loggedIn")
+      console.log(is_loggedIn, "is_loggedIn");
       toast.success("Logged in");
-      localStorage.setItem('phloii_token_auth',is_loggedIn?.data?.data)
-      if(is_loggedIn?.data?.isOnboradingDone){
-        router.push("/hotels")
-      }else{
-        router.push("/hotels/onboarding")
+      localStorage.setItem("phloii_token_auth", is_loggedIn?.data?.data);
+      if (is_loggedIn?.data?.isOnboradingDone) {
+        router.push("/hotels");
+      } else {
+        router.push("/hotels/onboarding");
       }
-      dispatch(clear_hotel_login_state())
+
+      dispatch(clear_hotel_login_state());
     }
+
     if (is_loggedIn?.status === "Error") {
       toast.error(is_loggedIn?.error?.message);
       dispatch(clear_hotel_login_state())
     }
   }, [is_loggedIn]);
+
+  // if (localStorage.getItem('phloii_token_auth')) {
+  //   router.push('/hotels')
+  // }
 
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
@@ -69,7 +73,7 @@ const Login = () => {
         <div className="text-center">
           <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
         </div>
-        <h2 className="main_heading text-center mt-2">Create Account</h2>
+        <h2 className="main_heading text-center mt-2">Login With Your Account</h2>
         <p className="sort_desc text-center text-white">
           Please fill out this form with the required information
         </p>
@@ -131,7 +135,7 @@ const Login = () => {
             Remember me
           </label>
           <Link
-            href="/"
+            href="/hotels/forgot-password"
             className="sub-text text-hightLight ms-auto text-decoration-none mt-1"
           >
             Forgot Password?
