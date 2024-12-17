@@ -1,7 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../Hotel/Button/Button";
 
-const EstablishmentDetails = ({ col }) => {
+const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries }) => {
+  const [states, setStates] = useState([])
+  const [establishmentnameError, setEstablishmentError] = useState('')
+  const [establishmenttypeError, setEstablishmentTypeError] = useState('')
+  const [addressError, setAddressError] = useState('')
+  const [unitnumberError, setUnitNumberError] = useState('')
+  const [countryError, setCountryError] = useState('')
+  const [stateError, setStateError] = useState('')
+  const [pincodeError, setPincodeError] = useState('')
+  const handleForward = () => {
+    if (!establishmentname && !establishedtype && !streetaddress && !country && !state && !pincode) {
+      setEstablishmentError("Please enter the establishment name")
+      setEstablishmentTypeError("Please Select the establishment type")
+      setAddressError("Please enter the street address")
+      setUnitNumberError("Please enter the unit number")
+      setCountryError("Please select the country")
+      setStateError("Please select the state")
+      setPincodeError("Please enter the pincode")
+    }
+    if (!establishmentname) {
+      setEstablishmentError("Please enter the establishment name")
+      return
+    }
+    if (!establishedtype) {
+      setEstablishmentTypeError("Please Select the establishment type")
+      return
+    }
+    if (!streetaddress) {
+      setAddressError("Please enter the street address")
+      return
+    }
+    if (!country) {
+      setCountryError("Please select the country")
+      return
+    }
+    if (!state) {
+      setStateError("Please select the state")
+      return
+    }
+    if (!pincode) {
+      setPincodeError("Please enter the pincode")
+      return
+    }
+    setStep(2)
+  }
+  const handleBackword = () => {
+    setStep(1)
+  }
+  useEffect(() => {
+    if (country) {
+      const countryData = all_countries?.find((el) => el.name === country);
+      if (countryData?.states?.length > 0) {
+        setStates(countryData.states);
+      }
+    }
+  }, [country]);
+
   return (
     <div className="mt-5">
       <div className="row">
@@ -14,7 +70,15 @@ const EstablishmentDetails = ({ col }) => {
               type="text"
               className="form-control cmn_input"
               placeholder="Establishment name"
+              value={establishmentname}
+              onChange={(e) => { setEstablishmentname(e.target.value); setEstablishmentError("") }}
+              style={establishmentnameError ? { border: "1px solid red" } : {}}
             />
+            {establishmentnameError && (
+              <span style={establishmentnameError ? { color: "red", fontSize: "10px" } : {}}>
+                {establishmentnameError}
+              </span>
+            )}
           </div>
         </div>
         <div className={col}>
@@ -25,12 +89,20 @@ const EstablishmentDetails = ({ col }) => {
             <select
               class="form-select cmn-select"
               aria-label="Default select example"
+              style={establishmenttypeError ? { border: "1px solid red" } : {}}
+              onChange={(e) => { setEstablishedtype(e.target.value); setEstablishmentTypeError('') }}
+              value={establishedtype}
             >
               <option selected>select establishment</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="hotel">Hotel</option>
+              <option value="restaurant">Resraurant</option>
+              <option value="bar">Bar</option>
             </select>
+            {establishmenttypeError && (
+              <span style={establishmenttypeError ? { color: "red", fontSize: "10px" } : {}}>
+                {establishmenttypeError}
+              </span>
+            )}
           </div>
         </div>
         <div className={col}>
@@ -42,21 +114,44 @@ const EstablishmentDetails = ({ col }) => {
               type="address"
               className="form-control cmn_input"
               placeholder="enter street address"
+              value={streetaddress}
+              onChange={(e) => { setStreetAddress(e.target.value); setAddressError('') }}
+              style={addressError ? { border: "1px solid red" } : {}}
             />
+            {addressError && (
+              <span style={addressError ? { color: "red", fontSize: "10px" } : {}}>
+                {addressError}
+              </span>
+            )}
           </div>
         </div>
         <div className={col}>
           <div className="mb-3">
-            <label for="email" className="form-label cmn_label">
+            <label htmlFor="email" className="form-label cmn_label">
               Suite/Unit Number
             </label>
             <input
               type="text"
               className="form-control cmn_input"
-              placeholder="enter unit number"
+              placeholder="Enter unit number"
+              value={unitNumber}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^\d*$/.test(value)) {
+                  setUnitNumber(value);
+                  setUnitNumberError('');
+                }
+              }}
+              style={unitnumberError ? { border: "1px solid red" } : {}}
             />
+            {unitnumberError && (
+              <span style={{ color: "red", fontSize: "10px" }}>
+                {unitnumberError}
+              </span>
+            )}
           </div>
         </div>
+
         <div className={col}>
           <div className="mb-3">
             <label for="type" className="form-label cmn_label">
@@ -65,12 +160,21 @@ const EstablishmentDetails = ({ col }) => {
             <select
               class="form-select cmn-select"
               aria-label="Default select example"
+              onChange={(e) => { setCountry(e.target.value); setCountryError('') }}
+              style={countryError ? { border: "1px solid red" } : {}}
+              value={country}
             >
-              <option selected>select country</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option>select country</option>
+              {all_countries?.map((country, i) => (
+                <option key={i} value={country?.name}>{country?.name}</option>
+
+              ))}
             </select>
+            {countryError && (
+              <span style={countryError ? { color: "red", fontSize: "10px" } : {}}>
+                {countryError}
+              </span>
+            )}
           </div>
         </div>
         <div className={col}>
@@ -81,12 +185,20 @@ const EstablishmentDetails = ({ col }) => {
             <select
               class="form-select cmn-select"
               aria-label="Default select example"
+              onChange={(e) => { setState(e.target.value); setStateError('') }}
+              style={stateError ? { border: "1px solid red" } : {}}
+              value={state}
             >
               <option selected>select state</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {states?.map((state, i) => (
+                <option key={i} value={state?.name}>{state?.name}</option>
+              ))}
             </select>
+            {stateError && (
+              <span style={stateError ? { color: "red", fontSize: "10px" } : {}}>
+                {stateError}
+              </span>
+            )}
           </div>
         </div>
         <div className={col}>
@@ -98,14 +210,28 @@ const EstablishmentDetails = ({ col }) => {
               type="text"
               className="form-control cmn_input"
               placeholder="enter pin code"
+              value={pincode}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^\d*$/.test(value)) { // Regex to allow only digits
+                  setPincode(value);
+                  setPincodeError('');
+                }
+              }}
+              style={pincodeError ? { border: "1px solid red" } : {}}
             />
+            {pincodeError && (
+              <span style={pincodeError ? { color: "red", fontSize: "10px" } : {}}>
+                {pincodeError}
+              </span>
+            )}
           </div>
         </div>
       </div>
 
       <div className="d-flex justify-content-end gap-3">
-        <Button text="Previous" className="grey_btn" />
-        <Button text="Next" />
+        <Button buttonClick={handleBackword} text="Previous" className="grey_btn" />
+        <Button buttonClick={handleForward} text="Next" />
       </div>
     </div>
   );

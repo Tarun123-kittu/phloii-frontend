@@ -47,13 +47,18 @@ const Login = () => {
 
   useEffect(() => {
     if (is_loggedIn?.status === "Success") {
+      console.log(is_loggedIn,"is_loggedIn")
       toast.success("Logged in");
       localStorage.setItem('phloii_token_auth',is_loggedIn?.data?.data)
-      router.push("/hotels")
+      if(is_loggedIn?.data?.isOnboradingDone){
+        router.push("/hotels")
+      }else{
+        router.push("/hotels/onboarding")
+      }
       dispatch(clear_hotel_login_state())
     }
     if (is_loggedIn?.status === "Error") {
-      toast.success(is_loggedIn?.error?.message);
+      toast.error(is_loggedIn?.error?.message);
       dispatch(clear_hotel_login_state())
     }
   }, [is_loggedIn]);
@@ -141,7 +146,7 @@ const Login = () => {
         </div>
         <p className="text-center loginAlready fadeColor mt-2 mb-0">
           {"Don&apos;t  have an account? "}
-          <Link href="/" className="text-white">
+          <Link href="/hotels/signup" className="text-white">
             Signup
           </Link>
         </p>

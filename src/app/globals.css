@@ -119,6 +119,26 @@ a {
 .text-hightLight{
 color: var( --highlight);
 }
+
+/* Add to your CSS file or module */
+
+@keyframes floatLeftToRight {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(100px); /* Adjust as needed */
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.floating {
+  animation: floatLeftToRight 4s ease-in-out infinite; /* Adjust duration as needed */
+  display: inline-block;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
