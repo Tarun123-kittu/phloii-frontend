@@ -21,7 +21,6 @@ const Login = () => {
   const [emailError, setemailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const is_loggedIn = useSelector((store) => store.HOTEL_LOGIN);
-  console.log(is_loggedIn, "this is the logged in details");
 
   const handleLogin = (e) => {
     e.preventDefault();

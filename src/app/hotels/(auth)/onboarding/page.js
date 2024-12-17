@@ -27,7 +27,6 @@ const Page = () => {
   // const [images, setImages] = useState([])
   // const all_countries = useSelector((store) => store.ALL_COUNTRIES?.data?.data)
   // const is_hotel_verified = useSelector((store) => store.ONBOARD_HOTEl)
-  // console.log(is_hotel_verified, "is_hotel_verified is_hotel_verified")
 
   // useEffect(() => {
   //   dispatch(get_countries())
