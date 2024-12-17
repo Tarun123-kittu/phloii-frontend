@@ -9,10 +9,9 @@ import ImageGallery from '../imagePreview/ImagePreview'
 import Loader from '../loader/Loader'
 import { useRouter } from 'next/navigation'
 const HotelDetailsComponent = ({ hotelId }) => {
-    console.log(hotelId, "hotelId hotelId hotelId")
     const router = useRouter()
-    const handleEdit = () =>{
-        router.push(`/hotels/edit-establishment`)
+    const handleEdit = (id) =>{
+        router.push(`/hotels/edit-establishment/${id}`)
     }
     const dispatch = useDispatch()
     const [hotel_details, setHotel_details] = useState()
@@ -119,7 +118,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     <path d="M6.1499 2.70898C6.34647 3.9707 7.37047 4.93527 8.64133 5.06327" stroke="white" strokeWidth="0.914286" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M2.08569 10.4572H10.3143" stroke="white" strokeWidth="0.914286" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <span className='text-light' onClick={handleEdit}>Edit</span>
+                                {/* <span className='text-light' onClick={() => handleEdit(hotel_details?.hotel?._id)}>Edit</span> */}
                             </button>
                         </div>
                         <ul className='owner_details'>

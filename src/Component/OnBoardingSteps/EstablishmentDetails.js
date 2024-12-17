@@ -46,9 +46,6 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
     }
     setStep(2)
   }
-  // const handleBackword = () => {
-  //   setStep(1)
-  // }
   useEffect(() => {
     if (country) {
       const countryData = all_countries?.find((el) => el.name === country);

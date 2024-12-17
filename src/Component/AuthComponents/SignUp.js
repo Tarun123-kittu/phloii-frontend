@@ -18,6 +18,7 @@ const SignUP = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [terms,setTerms] = useState(false)
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -25,6 +26,10 @@ const SignUP = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
+    if(!terms){
+      toast.error("Please select Terms and Conditions!!")
+      return
+    }
     if (!username) {
       setUsernameError("username is required");
       return;
@@ -128,6 +133,8 @@ const SignUP = () => {
             type="checkbox"
             value=""
             id="flexCheckDefault"
+            checked={terms}
+            onChange={() => setTerms(!terms)}
           />
           <label className="form-check-label sub-text fadeColor">
             I have read and agree to the{" "}

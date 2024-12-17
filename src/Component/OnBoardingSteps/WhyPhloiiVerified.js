@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Button from "../Hotel/Button/Button";
 
-const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages ,handleOnboardHotel,is_hotel_verified}) => {
+const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified }) => {
+  console.log(images,"this is images")
   const [errors, setErrors] = useState("");
   const [whyPhloiiError, setWhyPhloiiError] = useState('')
   const [uniqueError, setUniqueError] = useState('')
@@ -16,12 +17,17 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
   }
 
   const handleForward = () => {
-    if (!whyphloii && !inpersonvisit) {
+    if (!whyphloii && !inpersonvisit && images?.length === 0) {
       setWhyPhloiiError("Please enter why do you want to be on phloii")
       setInPersonError("Please enter are you open to in-person visit")
+      setImagesError("Please select atleast 5 images")
     }
     if (!whyphloii) {
       setWhyPhloiiError("Please enter why do you want to be on phloii")
+      return
+    }
+    if (images.length < 5) {
+      setImagesError("Please select atleast 5 images")
       return
     }
     if (!inpersonvisit) {
@@ -74,6 +80,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
+
+  useEffect(() => {
+    setImages(images)
+  }, [images])
 
 
   return (
@@ -140,13 +150,9 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   onChange={handleFileChange}
                   style={imagesError ? { border: "1px solid red" } : {}}
                 />
-                {imagesError && (
-                  <span style={imagesError ? { color: "red", fontSize: "10px" } : {}}>
-                    {imagesError}
-                  </span>
-                )}
 
-               {images.length < 0 && <div className="flex-grow-1">
+
+                {images.length === 0 && <div className="flex-grow-1">
                   <p className="px-3 pt-2">
                     Drag and drop files here or upload
                   </p>
@@ -155,31 +161,31 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   </span>
                 </div>}
                 {images.length > 0 && (
-                <div className="preview flex-grow-1">
-                  {images.map((image, index) => (
-                    <div key={index} className="image-view">
-                      <img
-                        src={URL.createObjectURL(image)}
-                        alt="Preview"
-                        width={50}
-                        className="rounded"
-                      />
-                   
-                       <svg   onClick={() => handleRemoveImage(index)} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" fill="url(#paint0_linear_4573_9679)"/>
-                      <path d="M9.16992 14.83L14.8299 9.17004" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M14.8299 14.83L9.16992 9.17004" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      <defs>
-                      <linearGradient id="paint0_linear_4573_9679" x1="2" y1="12" x2="22" y2="12" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#FBB90D"/>
-                      <stop offset="1" stop-color="#22EBFF"/>
-                      </linearGradient>
-                      </defs>
-                      </svg>
-                    </div>
-                  ))}
-                </div>
-              )}
+                  <div className="preview flex-grow-1">
+                    {images.map((image, index) => (
+                      <div key={index} className="image-view">
+                        <img
+                          src={URL?.createObjectURL(image)}
+                          alt="Preview"
+                          width={50}
+                          className="rounded"
+                        />
+
+                        <svg onClick={() => handleRemoveImage(index)} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" fill="url(#paint0_linear_4573_9679)" />
+                          <path d="M9.16992 14.83L14.8299 9.17004" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M14.8299 14.83L9.16992 9.17004" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                          <defs>
+                            <linearGradient id="paint0_linear_4573_9679" x1="2" y1="12" x2="22" y2="12" gradientUnits="userSpaceOnUse">
+                              <stop stop-color="#FBB90D" />
+                              <stop offset="1" stop-color="#22EBFF" />
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <Button
                   buttonClick={handleRemoveImage}
                   text="Upload"
@@ -193,8 +199,13 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                 </div>
               )}
 
-              
+
             </div>
+            {imagesError && (
+              <span style={imagesError ? { color: "red", fontSize: "10px" } : {}}>
+                {imagesError}
+              </span>
+            )}
           </div>
         </div>
         <div className={col}>
@@ -249,3 +260,4 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
 };
 
 export default WhyPhloiiVerified;
+
