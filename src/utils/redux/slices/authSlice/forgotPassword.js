@@ -12,7 +12,7 @@ export const forgot_password = createAsyncThunk("forgot_password", async ({ emai
         const requestOptions = {
             method: "POST",
             headers: myHeaders,
-            body: raw,
+            body: raw,  
             redirect: "follow"
         };
 
