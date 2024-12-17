@@ -1,6 +1,7 @@
 import React from 'react'
 import SideBar from '@/Component/Sidebar/SideBar'
 import '../onboarding/onboard.css'
+import OnBoardingSteps from '../onboarding/onBoardingSteps'
 const Page = () => {
   return (
     <SideBar>
@@ -28,6 +29,7 @@ const Page = () => {
               </p>
             </li>
           </ul>
+          <OnBoardingSteps col="col-lg-6"/>
           </div>
         </div>
     </SideBar>

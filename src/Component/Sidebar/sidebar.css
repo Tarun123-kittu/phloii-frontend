@@ -6,6 +6,7 @@ header {
     padding: 1rem;
     padding-right: 2rem;
     gap: 15px;
+    z-index: 999;
 }
 .notify {
     width: 40px;

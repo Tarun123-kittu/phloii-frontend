@@ -131,7 +131,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               onDragOver={handleDragOver}
               onDrop={handleDrop}
             >
-              <div className="d-flex justify-content-between align-items-center pe-3 position-relative">
+              <div className="d-flex justify-content-between align-items-center p-3 position-relative">
                 <input
                   type="file"
                   className="form-control cmn_input"
@@ -146,14 +146,40 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   </span>
                 )}
 
-                <div className="flex-grow-1">
+               {images.length < 0 && <div className="flex-grow-1">
                   <p className="px-3 pt-2">
                     Drag and drop files here or upload
                   </p>
                   <span className="px-3 pb-3 d-block pt-1">
                     Accepted file types: JPEG, PNG
                   </span>
+                </div>}
+                {images.length > 0 && (
+                <div className="preview flex-grow-1">
+                  {images.map((image, index) => (
+                    <div key={index} className="image-view">
+                      <img
+                        src={URL.createObjectURL(image)}
+                        alt="Preview"
+                        width={50}
+                        className="rounded"
+                      />
+                   
+                       <svg   onClick={() => handleRemoveImage(index)} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" fill="url(#paint0_linear_4573_9679)"/>
+                      <path d="M9.16992 14.83L14.8299 9.17004" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M14.8299 14.83L9.16992 9.17004" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <defs>
+                      <linearGradient id="paint0_linear_4573_9679" x1="2" y1="12" x2="22" y2="12" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#FBB90D"/>
+                      <stop offset="1" stop-color="#22EBFF"/>
+                      </linearGradient>
+                      </defs>
+                      </svg>
+                    </div>
+                  ))}
                 </div>
+              )}
                 <Button
                   buttonClick={handleRemoveImage}
                   text="Upload"
@@ -167,27 +193,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                 </div>
               )}
 
-              {images.length > 0 && (
-                <div className="preview mt-3">
-                  {images.map((image, index) => (
-                    <div key={index} className="me-2">
-                      <img
-                        src={URL.createObjectURL(image)}
-                        alt="Preview"
-                        width={50}
-                        className="rounded"
-                      />
-                      <button
-                        type="button"
-                        className="btn btn-danger btn-sm ms-1"
-                        onClick={() => handleRemoveImage(index)}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
+              
             </div>
           </div>
         </div>
