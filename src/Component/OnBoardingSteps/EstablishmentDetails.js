@@ -94,8 +94,8 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               value={establishedtype}
             >
               <option selected>select establishment</option>
-              <option value="restaurant">Restaurant & Bar</option>
-              <option value="bar">Bar</option>
+              <option value="Restaurant & Bar">Restaurant & Bar</option>
+              <option value="Bar">Bar</option>
             </select>
             {establishmenttypeError && (
               <span style={establishmenttypeError ? { color: "red", fontSize: "10px" } : {}}>

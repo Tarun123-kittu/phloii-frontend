@@ -29,7 +29,7 @@ const handleLogo = () =>{
             <span className='dot position-absolute'></span>
           <img  src="/assets/notify.svg" alt="Notification Icon" />
         </div>
-        <div className='user'>
+        {/* <div className='user'>
             <div className='user_image d-flex align-items-center justify-content-center'>
                 <img src="/assets/profile-circle.svg" alt="" />
             </div>
@@ -37,7 +37,7 @@ const handleLogo = () =>{
             <h4 className='mb-0'>Deepak rawat</h4>
             <span>deepak1212@gmail.com</span>
             </div>
-        </div>
+        </div> */}
       </header>
       <div className="side_bar">
       <div className='text-center mt-3 mb-5'> 

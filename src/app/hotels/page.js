@@ -101,7 +101,7 @@ router.push(`/hotels/hotel-details/${id}`)
 
 
                 <div className='hotel-photo-wrapper'>
-                  <h5>Hotel Photos</h5>
+                  <h5>Restaurant Photos</h5>
                   <div className=" hotel-photos ">
                     <div onClick={() => {setImages(hotel?.images);setShow_image_preview(true);setIndex(0)}} className="- p-0">
                       <img src={hotel?.images[1]} alt="Hotel 1" />
@@ -199,7 +199,7 @@ router.push(`/hotels/hotel-details/${id}`)
               <li><img src="assets/globe_icon.svg" alt="" /> <a href="">{hotel_details?.ownerDetails?.ownerEmail}</a></li>
             </ul>
             <div className='hotel_image'>
-              <h5>Hotel Photos</h5>
+              <h5>Restaurant Photos</h5>
               <img src={hotel_details?.images[0]} className='imge_one img-fluid' alt="" />
               <ul className="image-grid mt-3">
                 {hotel_details?.images?.slice(1).map((image, i) => (
