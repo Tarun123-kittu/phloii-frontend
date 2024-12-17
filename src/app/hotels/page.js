@@ -16,9 +16,6 @@ const Hotels = () => {
     const [index,setIndex] = useState(null)
   const [show_image_preview,setShow_image_preview] = useState(false)
   const all_hotels = useSelector((store) => store.HOTEL_DETAILS)
-  if (!localStorage.getItem('phloii_token_auth')) {
-    router.push('/hotels/login')
-  }
 
   useEffect(() => {
     if (typeof window !== "undefined") {
