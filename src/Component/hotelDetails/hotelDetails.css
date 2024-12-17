@@ -16,6 +16,7 @@
 }
 .dashboard_info{
     padding: 1rem;
+    flex-grow: 1;
 }
 .info {
     color: rgba(255, 255, 255, 1);
