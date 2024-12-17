@@ -21,8 +21,7 @@ const SignUP = () => {
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const is_user_signed_up = useSelector((store) => store.HOTEL_SIGNUP)
-  console.log(is_user_signed_up,"is user signed up")
+  const is_signed_up = useSelector((store) => store.HOTEL_SIGNUP)
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -44,6 +43,18 @@ const SignUP = () => {
     }
     dispatch(hotel_signup({ username, email, password }));
   };
+
+  useEffect(() => {
+    if (is_signed_up?.status === "Success") {
+      toast.success(is_signed_up?.data?.message)
+      router.push('/hotels/login')
+      dispatch(clear_hotel_signup_state())
+    }
+    if (is_signed_up?.status === "Error") {
+      toast.error(is_signed_up?.error?.message)
+      dispatch(clear_hotel_signup_state())
+    }
+  }, [is_signed_up])
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">
@@ -67,7 +78,7 @@ const SignUP = () => {
             }}
             style={usernameError ? { border: "1px solid red" } : {}}
           />
-           {usernameError && (
+          {usernameError && (
             <span style={usernameError ? { color: "red", fontSize: "10px" } : {}}>
               {usernameError}
             </span>
@@ -86,14 +97,14 @@ const SignUP = () => {
             }}
             style={emailError ? { border: "1px solid red" } : {}}
           />
-           {emailError && (
+          {emailError && (
             <span style={emailError ? { color: "red", fontSize: "10px" } : {}}>
               {emailError}
             </span>
           )}
         </div>
         <div className="mb-3">
-          <label className="form-label cmn_label">Email</label>
+          <label className="form-label cmn_label">Password</label>
           <input
             type="password"
             className="form-control cmn_input"
@@ -105,7 +116,7 @@ const SignUP = () => {
             }}
             style={passwordError ? { border: "1px solid red" } : {}}
           />
-           {passwordError && (
+          {passwordError && (
             <span style={passwordError ? { color: "red", fontSize: "10px" } : {}}>
               {passwordError}
             </span>
@@ -126,7 +137,7 @@ const SignUP = () => {
           </label>
         </div>
         <div className="mt-4">
-          <Button buttonClick={handleSignUp} text={is_user_signed_up?.status !== "Loading" ? "Signup" : "Loading"} className="w-100" />
+          <Button buttonClick={handleSignUp} text={is_signed_up?.status !== "Loading" ? "Signup" : "Loading"} className="w-100" />
         </div>
         <p className="text-center loginAlready fadeColor mt-2 mb-0">
           {"Already have an account?"}{" "}

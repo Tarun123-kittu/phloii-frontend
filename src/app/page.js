@@ -30,35 +30,36 @@ export default function Home() {
         <div className={styles.image_grid}>
           <ul>
             <li className="mt-5">
-              <img src="assets/oneImage.png" alt="" />
+              <img src="assets/oneImage.png" alt="" className="floating" />
             </li>
             <li>
-              <img src="assets/imgeone.png" className="mb-3" alt="" />
-              <img src="assets/imagetwo.png" alt="" />
+              <img src="assets/imgeone.png" className="floating mb-3" alt="" />
+              <img src="assets/imagetwo.png" className="floating" alt="" />
             </li>
             <li className="mt-5">
-              <img src="assets/imagethree.png" className="mb-3" alt="" />
-              <img src="assets/imagefour.png" alt="" />
+              <img src="assets/imagethree.png" className="floating mb-3" alt="" />
+              <img src="assets/imagefour.png" className="floating" alt="" />
             </li>
             <li>
-              <img src="assets/imagefive.png" className="mb-3" alt="" />
-              <img src="assets/imgeone.png" className="mb-3" alt="" />
-              <img src="assets/imagesix.png" alt="" />
+              <img src="assets/imagefive.png" className="floating mb-3" alt="" />
+              <img src="assets/imgeone.png" className="floating mb-3" alt="" />
+              <img src="assets/imagesix.png" className="floating" alt="" />
             </li>
             <li className="mt-5">
-              <img src="assets/imageseven.png" className="mb-3" alt="" />
-              <img src="assets/imageeight.png" alt="" />
+              <img src="assets/imageseven.png" className="floating mb-3" alt="" />
+              <img src="assets/imageeight.png" className="floating" alt="" />
             </li>
             <li>
-              <img src="assets/imagenine.png" className="mb-3" alt="" />
-              <img src="assets/imageten.png" alt="" />
+              <img src="assets/imagenine.png" className="floating mb-3" alt="" />
+              <img src="assets/imageten.png" className="floating" alt="" />
             </li>
             <li className="mt-5">
-              <img src="assets/imagetweleve.png" className="mb-3" alt="" />
-              <img src="assets/imgeone.png" alt="" />
+              <img src="assets/imagetweleve.png" className="floating mb-3" alt="" />
+              <img src="assets/imgeone.png" className="floating" alt="" />
             </li>
           </ul>
         </div>
+
       </div>
       <div
         className={`${styles.about} ${styles.bg_black} ${styles.padding} overflow-hidden`}
@@ -349,35 +350,35 @@ export default function Home() {
         className={`${styles.padding} ${styles.bg_black} ${styles.appDownload}`}
       >
         <div className="container">
-         <h2
+          <h2
             className={`${styles.cmn_heading} text-start position-relative z-2`}
           >
             Phloii is Just a Download Away – Get it on <br />{" "}
             <span>Google Play or the App Store</span>
           </h2>
-        <div className={`${styles.appwraper} position-relative`}>
-        <div className={`${styles.floatingtext} position-absolute`}>
-          <p
-            className={`${styles.cmn_desc} text-start mb-3 position-relative z-2 pt-3`}
-          >
-            Kerjarodi.com is an application for job seekers and workers who
-            prioritize <br />
-            user comfort and the quality of services provided by our team
-          </p>
-          <div className={styles.navImmages}>
-            <img width={180} src="assets/playstoreMb-dark.png" alt="" />
-            <img
-              width={180}
-              src="assets/appstoreMb-dark.png"
-              className="ms-4"
-              alt=""
-            />
+          <div className={`${styles.appwraper} position-relative`}>
+            <div className={`${styles.floatingtext} position-absolute`}>
+              <p
+                className={`${styles.cmn_desc} text-start mb-3 position-relative z-2 pt-3`}
+              >
+                Kerjarodi.com is an application for job seekers and workers who
+                prioritize <br />
+                user comfort and the quality of services provided by our team
+              </p>
+              <div className={styles.navImmages}>
+                <img width={180} src="assets/playstoreMb-dark.png" alt="" />
+                <img
+                  width={180}
+                  src="assets/appstoreMb-dark.png"
+                  className="ms-4"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className={`${styles.screenimage}`}>
+              <img src="assets/floii.png" alt="" className="img-fluid" />
+            </div>
           </div>
-         </div>
-          <div className={`${styles.screenimage}`}>
-            <img src="assets/floii.png" alt="" className="img-fluid" />
-          </div>
-        </div>
         </div>
       </div>
       <div
