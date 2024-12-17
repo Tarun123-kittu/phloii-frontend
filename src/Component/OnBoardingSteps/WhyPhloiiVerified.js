@@ -77,7 +77,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
 
 
   return (
-    <div className="mt-5">
+    <div className="">
       <div className="row">
         <div className={col}>
           <div className="mb-3">

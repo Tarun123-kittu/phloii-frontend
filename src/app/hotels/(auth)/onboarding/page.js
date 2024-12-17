@@ -76,7 +76,7 @@ const Page = () => {
           <p className="sort_desc text-center text-white">
             Please fill out this form with the required information
           </p>
-          <ul className="step_counter">
+          {/* <ul className="step_counter">
             <li>
               <span>1</span>
               <p>
@@ -96,7 +96,7 @@ const Page = () => {
                 Why Phloii <br /> Verified
               </p>
             </li>
-          </ul>
+          </ul> */}
         </div>
        <OnBoardingSteps col="col-lg-12"/>
       </div>

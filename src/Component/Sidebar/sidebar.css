@@ -77,7 +77,7 @@ li.sidebar_active  svg path {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: unset;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .side_bar ul li a svg {
@@ -87,4 +87,15 @@ li.sidebar_active  svg path {
 .side_bar ul li.sidebar_active a {
     color: rgba(9, 9, 10, 1);
     background: rgba(251, 196, 46, 1);
+}
+li.logout_btn span {
+    color: #ffffffb3;
+    padding-left: 8px;
+}
+
+li.logout_btn {
+    padding-left: 10px;
+    position: absolute;
+    bottom: 6px;
+    cursor: pointer;
 }

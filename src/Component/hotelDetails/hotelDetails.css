@@ -13,9 +13,10 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
     border-radius: 5px;
+    white-space: nowrap;
 }
 .dashboard_info{
-    padding: 1rem;
+    padding: 2rem;
     flex-grow: 1;
 }
 .info {
@@ -93,14 +94,10 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);}
 
 .owner_info {
     flex: 0 0 350px;
-    padding: 1rem;
+    padding: 2rem;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
-.owner_info {
-    flex: 0 0 350px;
-    padding: 1rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-}
+
 
 .hotel_image img.imge_one {
     height: 278px;
@@ -206,6 +203,7 @@ ul.image-grid li {
 }
 
 /* Hotel Photos */
+
 .hotel-photo-wrapper{
     padding: 20px 0 0 30px;
 }

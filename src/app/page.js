@@ -30,32 +30,32 @@ export default function Home() {
         <div className={styles.image_grid}>
           <ul>
             <li className="mt-5">
-              <img src="assets/oneImage.png" alt="" className="floating" />
+              <img src="assets/oneImage.png" alt="" className="" />
             </li>
             <li>
-              <img src="assets/imgeone.png" className="floating mb-3" alt="" />
-              <img src="assets/imagetwo.png" className="floating" alt="" />
+              <img src="assets/imgeone.png" className=" mb-3" alt="" />
+              <img src="assets/imagetwo.png" className="" alt="" />
             </li>
             <li className="mt-5">
-              <img src="assets/imagethree.png" className="floating mb-3" alt="" />
-              <img src="assets/imagefour.png" className="floating" alt="" />
+              <img src="assets/imagethree.png" className=" mb-3" alt="" />
+              <img src="assets/imagefour.png" className="" alt="" />
             </li>
             <li>
-              <img src="assets/imagefive.png" className="floating mb-3" alt="" />
-              <img src="assets/imgeone.png" className="floating mb-3" alt="" />
-              <img src="assets/imagesix.png" className="floating" alt="" />
+              <img src="assets/imagefive.png" className=" mb-3" alt="" />
+              <img src="assets/imgeone.png" className=" mb-3" alt="" />
+              <img src="assets/imagesix.png" className="" alt="" />
             </li>
             <li className="mt-5">
-              <img src="assets/imageseven.png" className="floating mb-3" alt="" />
-              <img src="assets/imageeight.png" className="floating" alt="" />
+              <img src="assets/imageseven.png" className=" mb-3" alt="" />
+              <img src="assets/imageeight.png" className="" alt="" />
             </li>
             <li>
-              <img src="assets/imagenine.png" className="floating mb-3" alt="" />
-              <img src="assets/imageten.png" className="floating" alt="" />
+              <img src="assets/imagenine.png" className=" mb-3" alt="" />
+              <img src="assets/imageten.png" className="" alt="" />
             </li>
             <li className="mt-5">
-              <img src="assets/imagetweleve.png" className="floating mb-3" alt="" />
-              <img src="assets/imgeone.png" className="floating" alt="" />
+              <img src="assets/imagetweleve.png" className=" mb-3" alt="" />
+              <img src="assets/imgeone.png" className="" alt="" />
             </li>
           </ul>
         </div>
@@ -269,13 +269,13 @@ export default function Home() {
       >
         <div className={`${styles.stories_wrapper} ${styles.padding}`}>
           <h2
-            className={`${styles.cmn_heading} text-center position-relative z-2`}
+            className={`${styles.cmn_heading} text-center position-relative z-2 px-2`}
           >
             {" "}
             Real love <span>stories</span> last forever
           </h2>
           <p
-            className={`${styles.cmn_desc} text-center mb-5 position-relative z-2`}
+            className={`${styles.cmn_desc} text-center mb-2 mb-md-5  position-relative z-2 px-2`}
           >
             Kerjarodi.com is an application for job seekers and workers who
             prioritize <br /> user comfort and the quality of services provided

@@ -37,7 +37,7 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
     setStep(1)
   }
   return (
-    <div className="mt-5">
+    <div className="">
       <div className="row">
         <div className={col}>
           <div className="mb-3">

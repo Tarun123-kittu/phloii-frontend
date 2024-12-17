@@ -59,7 +59,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   }, [country]);
 
   return (
-    <div className="mt-5">
+    <div className="">
       <div className="row">
         <div className={col}>
           <div className="mb-3">

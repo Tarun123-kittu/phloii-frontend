@@ -6,7 +6,7 @@ const Page = () => {
   return (
     <SideBar>
         <div className='wrapper'>
-           <h1 className='cmn-heading mb-3'>Add New Hotel</h1>
+           <h1 className='cmn-heading mb-3'>Edit Hotel</h1>
           <div className='steps_form'>
         
           <OnBoardingSteps col="col-lg-6"/>

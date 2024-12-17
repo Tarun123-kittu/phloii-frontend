@@ -35,10 +35,10 @@ ul.step_counter {
     padding: 0;
     margin: 0;
     display: flex;
-    margin-top: 2rem;
     align-items: center;
     gap: 10px;
     justify-content: center;
+    margin-bottom: 30px;
 }
 
 ul.step_counter li {
@@ -70,12 +70,12 @@ ul.step_counter li span {
 ul.step_counter p {
     margin: 0;
     color: rgba(136, 136, 136, 1);
-    font-size:12px;
+    font-size:14px;
     text-align: left;
-    font-weight: 700
+    font-weight: 600
 }
 .steps_form {
-    padding: 1.2rem;
+    padding: 2rem;
     background: rgba(14, 14, 14, 1);
     border-radius: 10px;
 }
@@ -104,4 +104,11 @@ ul.step_counter p {
     right: -8px;
     top: -9px;
     cursor: pointer;
+}
+ul.step_counter li.step_item.done span,li.line.done {
+    background: linear-gradient(90deg, #FBB90D 0%, #22EBFF 100%);
+}
+
+ul.step_counter li.step_item.done p {
+    color: rgba(251, 185, 13, 1);
 }

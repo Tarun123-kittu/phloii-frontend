@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import "./onboard.css";
 import EstablishmentDetails from "@/Component/OnBoardingSteps/EstablishmentDetails";
 import PersonalDetails from "@/Component/OnBoardingSteps/PersonalDetails";
@@ -15,7 +14,6 @@ const OnBoardingSteps = ({col}) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const [step, setStep] = useState(1)
-  // establishmentname,establishedtype,streetaddress,country,state,pincode,ownername,ownerphone,owneremail,whyphloii,unoquefeatures,inpersonvisit,images
   const [establishmentname, setEstablishmentname] = useState('')
   const [establishedtype, setEstablishedtype] = useState('')
   const [streetaddress, setStreetAddress] = useState('')
@@ -73,7 +71,38 @@ const OnBoardingSteps = ({col}) => {
     }
   }, [is_hotel_verified])
   return (
-   <>
+            <>
+            <ul className={`${col== "col-lg-6" && "justify-content-start"} step_counter`}>
+            {Array.from({ length: 3 }, (_, i) => {
+                const stepNumber = i + 1;
+                const isActive = step === stepNumber; // Current step
+                const isDone = step > stepNumber; // Completed step
+
+                return (
+                <React.Fragment key={stepNumber}>
+                    <li
+                    className={`step_item ${isActive ? "active" : ""} ${
+                        isDone ? "done" : ""
+                    }`}
+                    >
+                    <span>{stepNumber}</span>
+                    <p>
+                        {stepNumber === 1 && "Establishment details"}
+                        {stepNumber === 2 && "Personal Details"}
+                        {stepNumber === 3 && "Why Phloii Verified"}
+                    </p>
+                    </li>
+                    {/* Add the line only between steps */}
+                    {stepNumber < 3 && (
+                    <li
+                        className={`line ${isDone ? "done" : ""}`}
+                    ></li>
+                    )}
+                </React.Fragment>
+                );
+            })}
+            </ul>
+          
         {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} />}
         {step === 2 && <PersonalDetails col={col} setStep={setStep} ownername={ownername} setOwnername={setOwnername} ownerPhone={ownerPhone} setOwnerPhone={setOwnerPhone} websiteLink={websiteLink} setWebsiteLink={setWebsiteLink} owneremail={owneremail} setOwnerEmail={setOwnerEmail} />}
         {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} />}
