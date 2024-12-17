@@ -38,7 +38,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
     }, [hotelDetails]);
     return (
         <SideBar>
-            {hotelDetails?.status === "Loading" ? <Loader /> : <div className='wrapper'>
+            {hotelDetails?.status === "Loading"  ? <Loader /> : <div className='wrapper'>
                 <div className='dashboard_wrapper'>
                     <div className='dashboard_info'>
                         <div className='dashboard_head d-flex gap-3 align-items-center'>

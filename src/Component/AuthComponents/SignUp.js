@@ -61,8 +61,8 @@ const SignUP = () => {
         <div className="text-center">
           <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
         </div>
-        <h2 className="main_heading text-center mt-2">Create Account</h2>
-        <p className="sort_desc text-center text-white">
+        <h2 className="main_heading text-center mt-4">Create Account</h2>
+        <p className="sort_desc text-center">
           Please fill out this form with the required information
         </p>
         <div className="mb-3">
@@ -141,7 +141,7 @@ const SignUP = () => {
         </div>
         <p className="text-center loginAlready fadeColor mt-2 mb-0">
           {"Already have an account?"}{" "}
-          <Link href="/" className="text-white">
+          <Link href="/hotels/login" className="text-white">
             Login
           </Link>
         </p>

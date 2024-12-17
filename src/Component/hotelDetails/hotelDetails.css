@@ -201,7 +201,13 @@ ul.image-grid li {
     padding: 5px 10px;
     border-radius: 5px;
 }
-
+span.verified {
+    font-size: 14px;
+    display: flex
+;
+    align-items: center;
+    gap: 5px;
+}
 /* Hotel Photos */
 
 .hotel-photo-wrapper{

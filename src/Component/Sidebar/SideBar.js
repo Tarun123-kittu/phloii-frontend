@@ -19,12 +19,15 @@ localStorage.clear();
 router.push('/hotels/login')
 
 }
+const handleLogo = () =>{
+  router.push('/hotels')
+}
   return (
     <div className="side_bar_wrapper">
       <header className='d-flex justify-content-end'>
         <div className="notify d-flex align-items-center justify-content-center position-relative">
             <span className='dot position-absolute'></span>
-          <img src="/assets/notify.svg" alt="Notification Icon" />
+          <img  src="/assets/notify.svg" alt="Notification Icon" />
         </div>
         <div className='user'>
             <div className='user_image d-flex align-items-center justify-content-center'>
@@ -38,7 +41,7 @@ router.push('/hotels/login')
       </header>
       <div className="side_bar">
       <div className='text-center mt-3 mb-5'> 
-      <img src="/assets/logo.png" alt="Logo" className='m-auto'/>
+      <img onClick={handleLogo}  src="/assets/logo.png" alt="Logo" className='m-auto'/>
       </div>
         <ul className="m-0">
           {SidebarMenuItems &&

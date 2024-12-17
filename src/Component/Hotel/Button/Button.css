@@ -7,6 +7,7 @@
     padding: 0px 1rem;
     border-radius: 4px;
     color: var(--bs-black);
+    font-weight: 500;
 }
 button.grey_btn.cmn_btn {
     background: rgba(255, 255, 255, 0.31);

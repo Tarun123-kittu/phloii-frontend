@@ -94,8 +94,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               value={establishedtype}
             >
               <option selected>select establishment</option>
-              <option value="hotel">Hotel</option>
-              <option value="restaurant">Resraurant</option>
+              <option value="restaurant">Restaurant & Bar</option>
               <option value="bar">Bar</option>
             </select>
             {establishmenttypeError && (

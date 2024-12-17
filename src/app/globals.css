@@ -34,6 +34,7 @@ p,span,a,li,h1,h2,h3,h4,h5,h6,label,input,select,textarea{
 }
 .sub-text{
   font-size: 12px;
+  font-weight: 500;
 }
 .fadeColor{
 color: rgba(117, 129, 143, 1);
@@ -118,6 +119,9 @@ a {
 }
 .sort_desc {
   font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  margin-bottom: 1.5rem;
 }
 .form-check input.form-check-input {
   background-color: rgba(255, 255, 255, 0.16); 

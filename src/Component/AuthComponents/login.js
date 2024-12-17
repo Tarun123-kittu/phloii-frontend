@@ -73,9 +73,9 @@ const Login = () => {
         <div className="text-center">
           <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
         </div>
-        <h2 className="main_heading text-center mt-2">Login With Your Account</h2>
-        <p className="sort_desc text-center text-white">
-          Please fill out this form with the required information
+        <h2 className="main_heading text-center mt-4">Login Account</h2>
+        <p className="sort_desc text-center">
+        Welcome back! Please log in to access your account
         </p>
         <div class="mb-3">
           <label for="email" class="form-label cmn_label">
@@ -149,7 +149,7 @@ const Login = () => {
           />
         </div>
         <p className="text-center loginAlready fadeColor mt-2 mb-0">
-          {"Don&apos;t  have an account? "}
+          {"Dont have an account? "}
           <Link href="/hotels/signup" className="text-white">
             Signup
           </Link>

@@ -68,7 +68,9 @@ span.dot {
 li.sidebar_active  svg path {
     stroke: rgba(9, 9, 10, 1);
 }
-
+.side_bar img[alt="Logo"]{
+    cursor: pointer;
+}
 .side_bar ul li a {
     padding: 10px;
     border-radius: 8px;
@@ -78,6 +80,7 @@ li.sidebar_active  svg path {
     text-decoration: unset;
     font-size: 14px;
     font-weight: 400;
+    align-items: center;
 }
 
 .side_bar ul li a svg {

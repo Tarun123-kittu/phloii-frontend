@@ -44,8 +44,8 @@ const ForgotPassword = () => {
         <div className="text-center">
           <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
         </div>
-        <h2 className="main_heading text-center mt-2">Create Account</h2>
-        <p className="sort_desc text-center text-white">
+        <h2 className="main_heading text-center mt-4">Forget Password</h2>
+        <p className="sort_desc text-center">
           Please fill out this form with the required information
         </p>
         <div className="mb-3">

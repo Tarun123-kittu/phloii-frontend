@@ -51,9 +51,10 @@ const ResetPassword = ({ token }) => {
         <div className="text-center">
           <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
         </div>
-        <h2 className="main_heading text-center mt-2">Create Account</h2>
-        <p className="sort_desc text-center text-white">
-          Please fill out this form with the required information
+        <h2 className="main_heading text-center mt-2">Set a new password</h2>
+        <p className="sort_desc text-center">
+        Create a new password. Ensure it differs from <br/>
+        previous ones for security
         </p>
         <div className="mb-3">
           <label htmlFor="Password" className="form-label cmn_label">

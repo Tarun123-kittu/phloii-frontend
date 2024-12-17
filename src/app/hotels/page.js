@@ -50,8 +50,8 @@ router.push(`/hotels/hotel-details/${id}`)
                 <p className="pending_pay mb-3">payment pending</p>
                 <ul className="owner_details px-2">         
                  {hotel?.ownerDetails?.ownerPhone &&  <li><img src="/assets/mobile_icon.svg" alt="" /> <a href="">{hotel?.ownerDetails?.ownerPhone}</a></li>}
-                 {hotel?.ownerDetails?.ownerEmail &&   <li><img src="/assets/globe_icon.svg" alt="" /> <a href="">{hotel?.ownerDetails?.ownerEmail}</a></li>}
-                 {hotel_details?.ownerDetails?.websiteLink && <li><img src="/assets/message_icon.svg" alt="" /> <a href="">{hotel_details?.ownerDetails?.websiteLink}</a></li>}
+                 {hotel?.ownerDetails?.ownerEmail &&   <li><img src="/assets/message_icon.svg" alt="" /> <a href="">{hotel?.ownerDetails?.ownerEmail}</a></li>}
+                 {hotel_details?.ownerDetails?.websiteLink && <li className='pb-0'><img src="/assets/globe_icon.svg" alt="" /> <a href="">{hotel_details?.ownerDetails?.websiteLink}</a></li>}
                  </ul>
               </div>
 

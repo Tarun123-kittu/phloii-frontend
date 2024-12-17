@@ -188,6 +188,7 @@ span.hotel_address {
 }
 .dash-list span.hotel_name {
     font-size: 16px;
+    text-transform: capitalize;
 }
 .location-text{
     color: #fff;
@@ -224,19 +225,23 @@ span.hotel_address {
 }
 
 /* Hotel Details Section */
-
+.hotel-photo-wrapper .hotel-photos div {
+    width: 100%;
+}
 
 .edit-btn {
     color: #fff;
     background-color: #333;
     border: 1px solid #444;
     font-size: 12px;
-    padding: 5px 10px;
+    padding: 8px 10px;
     border-radius: 5px;
+    line-height: 12px;
 }
 p.pending_pay {
     color: var(--bs-white);
     font-size: 12px;
+    text-transform: capitalize;
 }
 
 .profile-sidebar ul.owner_details li a {
