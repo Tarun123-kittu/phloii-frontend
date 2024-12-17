@@ -101,6 +101,7 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);}
     height: 278px;
     object-fit: cover;
     border-radius: 7px;
+    width: 100%;
 }
 ul.image-grid {
     display: grid;

@@ -119,13 +119,13 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     <path d="M6.1499 2.70898C6.34647 3.9707 7.37047 4.93527 8.64133 5.06327" stroke="white" strokeWidth="0.914286" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M2.08569 10.4572H10.3143" stroke="white" strokeWidth="0.914286" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <span className='text-light' onClick={handleEdit}>Edit</span>
+                                {/* <span className='text-light' onClick={handleEdit}>Edit</span> */}
                             </button>
                         </div>
                         <ul className='owner_details'>
                             <li><img src="/assets/mobile_icon.svg" alt="" /> <a href="">{hotel_details?.hotel?.ownerDetails?.ownerPhone}</a></li>
-                            {hotel_details?.hotel?.ownerDetails?.websiteLink && <li><img src="/assets/message_icon.svg" alt="" /> <a href="">{hotel_details?.hotel?.ownerDetails?.websiteLink}</a></li>}
-                            <li><img src="/assets/globe_icon.svg" alt="" /> <a href="">{hotel_details?.hotel?.ownerDetails?.ownerEmail}</a></li>
+                            <li><img src="/assets/message_icon.svg" alt="" /> <a href="">{hotel_details?.hotel?.ownerDetails?.ownerEmail}</a></li>
+                            {hotel_details?.hotel?.ownerDetails?.websiteLink && <li><img src="/assets/globe_icon.svg" alt="" /> <a href="">{hotel_details?.hotel?.ownerDetails?.websiteLink}</a></li>}
                         </ul>
                         <div className='hotel_image'>
                             <h5>Hotel Photos</h5>

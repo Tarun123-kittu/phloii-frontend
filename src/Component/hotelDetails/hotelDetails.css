@@ -103,6 +103,7 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);}
     height: 278px;
     object-fit: cover;
     border-radius: 7px;
+    width: 100%;
 }
 ul.image-grid {
     display: grid;
@@ -236,12 +237,12 @@ span.verified {
 .hotel-photos .view-more::after {
     content: "View more";
     position: absolute;
-    bottom: 10px;
-    right: 15px;
+    /* bottom: 10px;
+    right: 15px; */
     background: rgba(0, 0, 0, 0.7);
     padding: 5px 10px;
     font-size: 12px;
-    border-radius: 5px;
+    border-radius: 10px;
     color : #fff
 }
 

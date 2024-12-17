@@ -122,7 +122,7 @@ const Login = () => {
           )}
         </div>
         <div class="form-check d-flex align-itmes-center gap-2">
-          <input
+          {/* <input
             class="form-check-input"
             type="checkbox"
             value=""
@@ -133,7 +133,7 @@ const Login = () => {
             for="flexCheckDefault"
           >
             Remember me
-          </label>
+          </label> */}
           <Link
             href="/hotels/forgot-password"
             className="sub-text text-hightLight ms-auto text-decoration-none mt-1"
