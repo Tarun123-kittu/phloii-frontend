@@ -1,3 +1,5 @@
+'use client'
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const get_hotels_details = createAsyncThunk("get_hotels_details", async (thunkAPI) => {
