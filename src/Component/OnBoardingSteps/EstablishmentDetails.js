@@ -46,9 +46,9 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
     }
     setStep(2)
   }
-  const handleBackword = () => {
-    setStep(1)
-  }
+  // const handleBackword = () => {
+  //   setStep(1)
+  // }
   useEffect(() => {
     if (country) {
       const countryData = all_countries?.find((el) => el.name === country);
@@ -230,7 +230,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
       </div>
 
       <div className="d-flex justify-content-end gap-3">
-        <Button buttonClick={handleBackword} text="Previous" className="grey_btn" />
+        {/* <Button buttonClick={handleBackword} text="Previous" className="grey_btn" /> */}
         <Button buttonClick={handleForward} text="Next" />
       </div>
     </div>
