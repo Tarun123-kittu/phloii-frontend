@@ -21,6 +21,14 @@ const Hotels = () => {
   }
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (!localStorage.getItem('phloii_token_auth')) {
+        router.push('/hotels/login')
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     dispatch(get_hotels_details())
   }, [])
 
