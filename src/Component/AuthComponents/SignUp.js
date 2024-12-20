@@ -12,6 +12,7 @@ import {
 } from "@/utils/redux/slices/authSlice/signUp";
 import validator from "validator";
 import toast from "react-hot-toast";
+import { hotel_login, clear_hotel_login_state } from "@/utils/redux/slices/authSlice/login";
 const SignUP = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -22,6 +23,7 @@ const SignUP = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const is_signed_up = useSelector((store) => store.HOTEL_SIGNUP)
+  const is_loggedIn = useSelector((store) => store.HOTEL_LOGIN);
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -46,8 +48,7 @@ const SignUP = () => {
 
   useEffect(() => {
     if (is_signed_up?.status === "Success") {
-      toast.success(is_signed_up?.data?.message)
-      router.push('/establishment/login')
+      dispatch(hotel_login({ email, password }))
       dispatch(clear_hotel_signup_state())
     }
     if (is_signed_up?.status === "Error") {
@@ -55,6 +56,29 @@ const SignUP = () => {
       dispatch(clear_hotel_signup_state())
     }
   }, [is_signed_up])
+
+  useEffect(() => {
+    if (is_loggedIn?.status === "Success") {
+      console.log(is_loggedIn, "is_loggedIn");
+      toast.success("Logged in");
+      localStorage.setItem("phloii_token_auth", is_loggedIn?.data?.data);
+      localStorage.setItem("phloii_user", is_loggedIn?.data?.email);
+      localStorage.setItem("phloii_user_name", is_loggedIn?.data?.username);
+      localStorage.setItem("phloii_onboarding_done", is_loggedIn?.data?.isOnboradingDone);
+      if (is_loggedIn?.data?.isOnboradingDone) {
+        router.push("/establishment");
+      } else {
+        router.push("/establishment/onboarding");
+      }
+
+      dispatch(clear_hotel_login_state());
+    }
+
+    if (is_loggedIn?.status === "Error") {
+      toast.error(is_loggedIn?.error?.message);
+      dispatch(clear_hotel_login_state())
+    }
+  }, [is_loggedIn]);
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">

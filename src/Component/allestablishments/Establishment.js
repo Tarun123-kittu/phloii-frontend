@@ -36,8 +36,8 @@ const Establishment = () => {
     }
   }, [all_hotels])
 
-  const handleViewHotel = (id) => {
-    router.push(`establishment/establishment-details/${id}`)
+  const handleViewHotel = (id,name) => {
+    router.push(`/establishment/establishment-details/${id}/${decodeURIComponent(name)}`)
   }
 
   return (
@@ -49,7 +49,7 @@ const Establishment = () => {
       <SideBar>
         <div className="wrapper">
           <h5 className='text-white mb-3'>Hotel Information</h5>
-          {hotel_details?.map((hotel, i) => (
+          {hotel_details?.length === 0 ? <img src='/noData.svg' /> : hotel_details?.map((hotel, i) => (
 
             <div className="profile-card m-0  row mb-4" key={i}>
 
@@ -101,7 +101,7 @@ const Establishment = () => {
                       <strong>{hotel?.address?.suiteUnitNumber}</strong>
                     </li>}
                     <li>
-                      <button onClick={() => handleViewHotel(hotel?._id)} className="edit-btn">  View</button>
+                      <button onClick={() => handleViewHotel(hotel?._id,hotel?.establishmentName)} className="edit-btn">  View</button>
                     </li>
                   </ul>
 

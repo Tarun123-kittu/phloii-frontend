@@ -156,7 +156,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
     if (is_hotel_updated?.status === "Success") {
       toast.success(is_hotel_updated?.data?.message)
       dispatch(clear_hotel_details_state())
-      router.push(`/establishment/establishment-details/${hotelId}`)
+      router.push(`/establishment/establishment-details/${hotelId}/${establishmentname}`)
     }
     if(is_hotel_updated?.status === "Error"){
       toast.error(is_hotel_updated?.error?.message)

@@ -1,11 +1,12 @@
 import HotelDetailsComponent from '@/Component/hotelDetails/HotelDetails';
 
 export async function generateMetadata({ params }) {
-    const { hotelId } = params;
+    const { hotelId, name } = params;
+    const decodedName = decodeURIComponent(name)
 
     const metadata = {
-        title: `Hotel Details - ${hotelId}`,
-        description: `Find details about hotel ${hotelId}. Discover amenities, reviews, and more.`,
+        title: `${decodedName}`,
+        description: `Find details about hotel ${decodedName}. Discover amenities, reviews, and more.`,
     };
 
     return {

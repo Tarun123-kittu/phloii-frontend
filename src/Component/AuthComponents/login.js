@@ -20,7 +20,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [emailError, setemailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const is_loggedIn = useSelector((store) => store.HOTEL_LOGIN);
+
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        if (localStorage.getItem('phloii_token_auth') && localStorage.getItem('phloii_remember_me')) {
+          router.push('/establishment')
+        }
+        else{
+          localStorage.clear()
+        }
+      }
+    }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -47,6 +59,9 @@ const Login = () => {
       console.log(is_loggedIn, "is_loggedIn");
       toast.success("Logged in");
       localStorage.setItem("phloii_token_auth", is_loggedIn?.data?.data);
+      localStorage.setItem("phloii_user", is_loggedIn?.data?.email);
+      localStorage.setItem("phloii_user_name", is_loggedIn?.data?.username);
+      localStorage.setItem("phloii_onboarding_done", is_loggedIn?.data?.isOnboradingDone);
       if (is_loggedIn?.data?.isOnboradingDone) {
         router.push("/establishment");
       } else {
@@ -62,6 +77,11 @@ const Login = () => {
     }
   }, [is_loggedIn]);
 
+  useEffect(() => {
+    if (rememberMe) {
+      localStorage.setItem('phloii_remember_me', email)
+    }
+  }, [rememberMe])
   // if (localStorage.getItem('phloii_token_auth')) {
   //   router.push('establishment')
   // }
@@ -74,7 +94,7 @@ const Login = () => {
         </div>
         <h2 className="main_heading text-center mt-4">Login Account</h2>
         <p className="sort_desc text-center">
-        Welcome back! Please log in to access your account
+          Welcome back! Please log in to access your account
         </p>
         <div class="mb-3">
           <label for="email" class="form-label cmn_label">
@@ -121,18 +141,20 @@ const Login = () => {
           )}
         </div>
         <div class="form-check d-flex align-itmes-center gap-2">
-          {/* <input
+          <input
             class="form-check-input"
             type="checkbox"
             value=""
             id="flexCheckDefault"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(!rememberMe)}
           />
           <label
             class="form-check-label sub-text fadeColor mt-1"
             for="flexCheckDefault"
           >
             Remember me
-          </label> */}
+          </label>
           <Link
             href="establishment/forgot-password"
             className="sub-text text-hightLight ms-auto text-decoration-none mt-1"
@@ -149,7 +171,7 @@ const Login = () => {
         </div>
         <p className="text-center loginAlready fadeColor mt-2 mb-0">
           {"Dont have an account? "}
-          <Link href="establishment/signup" className="text-white">
+          <Link href="/establishment/signup" className="text-white">
             Signup
           </Link>
         </p>

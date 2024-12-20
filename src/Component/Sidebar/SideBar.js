@@ -16,7 +16,7 @@ const SideBar = ({ children }) => {
   }, []);
 const handleLogout = () =>{
 localStorage.clear();
-router.push('establishment/login')
+router.push('/establishment/login')
 
 }
 const handleLogo = () =>{
@@ -29,15 +29,15 @@ const handleLogo = () =>{
             <span className='dot position-absolute'></span>
           <img  src="/assets/notify.svg" alt="Notification Icon" />
         </div>
-        {/* <div className='user'>
+        <div className='user'>
             <div className='user_image d-flex align-items-center justify-content-center'>
                 <img src="/assets/profile-circle.svg" alt="" />
             </div>
             <div className='d-inline-grid'>  
-            <h4 className='mb-0'>Deepak rawat</h4>
-            <span>deepak1212@gmail.com</span>
+            <h4 className='mb-0'>{localStorage?.getItem('phloii_user_name')}</h4>
+            <span>{localStorage.getItem("phloii_user")}</span>
             </div>
-        </div> */}
+        </div>
       </header>
       <div className="side_bar">
       <div className='text-center mt-3 mb-5'> 
