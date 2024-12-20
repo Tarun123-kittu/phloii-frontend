@@ -56,7 +56,7 @@ const Page = () => {
   // useEffect(() => {
   //   if (is_hotel_verified.status === "Success") {
   //     toast.success(is_hotel_verified?.data?.message)
-  //     router.push("/hotels")
+  //     router.push("establishment")
   //     dispatch(clear_onboard_hotel_state())
   //   }
   //   if(is_hotel_verified.status === "Error"){

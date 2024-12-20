@@ -47,7 +47,7 @@ const SignUP = () => {
   useEffect(() => {
     if (is_signed_up?.status === "Success") {
       toast.success(is_signed_up?.data?.message)
-      router.push('/hotels/login')
+      router.push('/establishment/login')
       dispatch(clear_hotel_signup_state())
     }
     if (is_signed_up?.status === "Error") {
@@ -141,7 +141,7 @@ const SignUP = () => {
         </div>
         <p className="text-center loginAlready fadeColor mt-2 mb-0">
           {"Already have an account?"}{" "}
-          <Link href="/hotels/login" className="text-white">
+          <Link href="establishment/login" className="text-white">
             Login
           </Link>
         </p>

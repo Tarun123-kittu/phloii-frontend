@@ -1,11 +1,10 @@
-'use client'
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const onboard_hotel = createAsyncThunk(
-  "onboard_hotel",
+export const update_hotel_details = createAsyncThunk(
+  "update_hotel_details",
   async (
     {
+      hotelId,
       establishmentname,
       establishedtype,
       streetaddress,
@@ -27,7 +26,7 @@ export const onboard_hotel = createAsyncThunk(
       opentiming,
       closetiming,
       customerservicenumber,
-      images, // Array of images
+      images,
     },
     thunkAPI
   ) => {
@@ -36,6 +35,7 @@ export const onboard_hotel = createAsyncThunk(
       myHeaders.append("Authorization", "Bearer " + localStorage.getItem("phloii_token_auth"));
 
       const formdata = new FormData();
+      formdata.append("hotelId", hotelId);
       formdata.append("establishmentName", establishmentname);
       formdata.append("establishmentType", establishedtype);
       formdata.append("streetAddress", streetaddress);
@@ -52,38 +52,33 @@ export const onboard_hotel = createAsyncThunk(
       formdata.append("inPersonVisitAvailability", inpersonvisit);
       formdata.append("safeWord", safeWord);
 
-      // Add array fields
       food.forEach((item) => formdata.append("food", item));
       atmosphere.forEach((item) => formdata.append("atmosphere", item));
       services.forEach((item) => formdata.append("services", item));
 
-      // Add additional fields
       formdata.append("openTiming", opentiming);
       formdata.append("closeTiming", closetiming);
       formdata.append("customerServiceNumber", customerservicenumber);
 
-      // Add images
       images.forEach((image) => {
         formdata.append("images", image);
       });
 
       const requestOptions = {
-        method: "POST",
+        method: "PUT",
         headers: myHeaders,
         body: formdata,
         redirect: "follow",
       };
 
       const response = await fetch(
-        `https://dev.phloii.com/api/v1/hotel/saveHotelDetails`,
+        "https://dev.phloii.com/api/v1/hotel/update_hotel_details",
         requestOptions
       );
 
       if (!response.ok) {
         const errorMessage = await response.json();
-        if (errorMessage) {
-          throw new Error(errorMessage.message);
-        }
+        throw new Error(errorMessage.message || "Failed to update hotel details");
       }
 
       const result = await response.json();
@@ -96,15 +91,15 @@ export const onboard_hotel = createAsyncThunk(
   }
 );
 
-const onboardHotel = createSlice({
-  name: "onboardHotel",
+const hotelDetailsSlice = createSlice({
+  name: "hotelDetailsSlice",
   initialState: {
     status: null,
     data: null,
     error: null,
   },
   reducers: {
-    clear_onboard_hotel_state: (state) => {
+    clear_hotel_details_state: (state) => {
       state.status = null;
       state.data = null;
       state.error = null;
@@ -113,19 +108,19 @@ const onboardHotel = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(onboard_hotel.pending, (state) => {
+      .addCase(update_hotel_details.pending, (state) => {
         state.status = "Loading";
       })
-      .addCase(onboard_hotel.fulfilled, (state, action) => {
+      .addCase(update_hotel_details.fulfilled, (state, action) => {
         state.status = "Success";
         state.data = action.payload;
       })
-      .addCase(onboard_hotel.rejected, (state, action) => {
+      .addCase(update_hotel_details.rejected, (state, action) => {
         state.status = "Error";
         state.error = action.payload;
       });
   },
 });
 
-export const { clear_onboard_hotel_state } = onboardHotel.actions;
-export default onboardHotel.reducer;
+export const { clear_hotel_details_state } = hotelDetailsSlice.actions;
+export default hotelDetailsSlice.reducer;

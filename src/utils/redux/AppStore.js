@@ -7,6 +7,8 @@ import getHotelsDetails from "./slices/hotelOnboardingSlice/getHotelsDetails"
 import getSelectedHotelDetails from "./slices/hotelOnboardingSlice/getSelectedHotelDetails"
 import forgotPasswordAPI from "./slices/authSlice/forgotPassword"
 import resetPasswordAPI from "./slices/authSlice/resetPassword"
+import deleteHotelImage from "./slices/hotelOnboardingSlice/deleteHotelimage"
+import hotelDetailsSlice from "./slices/hotelOnboardingSlice/updateHotelDetails"
 
 const AppStore = configureStore({
   reducer: {
@@ -17,7 +19,9 @@ const AppStore = configureStore({
     HOTEL_DETAILS: getHotelsDetails,
     SELECTED_HOTEL_DETAILS: getSelectedHotelDetails,
     FORGOT_PASSWORD: forgotPasswordAPI,
-    RESET_PASSWORD: resetPasswordAPI
+    RESET_PASSWORD: resetPasswordAPI,
+    DELETE_HOTEL_IMAGE: deleteHotelImage,
+    UPDATE_HOTEL_DETAILS: hotelDetailsSlice
   },
 });
 

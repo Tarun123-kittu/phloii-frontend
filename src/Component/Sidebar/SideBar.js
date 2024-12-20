@@ -16,11 +16,11 @@ const SideBar = ({ children }) => {
   }, []);
 const handleLogout = () =>{
 localStorage.clear();
-router.push('/hotels/login')
+router.push('establishment/login')
 
 }
 const handleLogo = () =>{
-  router.push('/hotels')
+  router.push('establishment')
 }
   return (
     <div className="side_bar_wrapper">

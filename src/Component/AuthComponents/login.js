@@ -48,9 +48,9 @@ const Login = () => {
       toast.success("Logged in");
       localStorage.setItem("phloii_token_auth", is_loggedIn?.data?.data);
       if (is_loggedIn?.data?.isOnboradingDone) {
-        router.push("/hotels");
+        router.push("/establishment");
       } else {
-        router.push("/hotels/onboarding");
+        router.push("/establishment/onboarding");
       }
 
       dispatch(clear_hotel_login_state());
@@ -63,7 +63,7 @@ const Login = () => {
   }, [is_loggedIn]);
 
   // if (localStorage.getItem('phloii_token_auth')) {
-  //   router.push('/hotels')
+  //   router.push('establishment')
   // }
 
   return (
@@ -134,7 +134,7 @@ const Login = () => {
             Remember me
           </label> */}
           <Link
-            href="/hotels/forgot-password"
+            href="establishment/forgot-password"
             className="sub-text text-hightLight ms-auto text-decoration-none mt-1"
           >
             Forgot Password?
@@ -149,7 +149,7 @@ const Login = () => {
         </div>
         <p className="text-center loginAlready fadeColor mt-2 mb-0">
           {"Dont have an account? "}
-          <Link href="/hotels/signup" className="text-white">
+          <Link href="establishment/signup" className="text-white">
             Signup
           </Link>
         </p>
