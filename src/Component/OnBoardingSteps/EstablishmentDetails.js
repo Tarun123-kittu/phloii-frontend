@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "../Hotel/Button/Button";
 
 const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries }) => {
+  console.log(country,state,pincode)
   const [states, setStates] = useState([])
   const [establishmentnameError, setEstablishmentError] = useState('')
   const [establishmenttypeError, setEstablishmentTypeError] = useState('')

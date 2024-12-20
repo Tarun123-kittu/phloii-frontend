@@ -37,7 +37,7 @@ const ResetPassword = ({ token }) => {
   useEffect(() => {
     if (is_password_reset?.status === "Success") {
       toast.success(is_password_reset?.data?.message)
-      router.push("/hotels/login")
+      router.push("establishment/login")
       dispatch(clear_reset_password_state())
     }
     if (is_password_reset?.status === "Error") {

@@ -30,7 +30,7 @@ const ForgotPassword = () => {
   useEffect(() => {
     if (is_email_sent?.status === "Success") {
       toast.success(is_email_sent?.data?.message)
-      router.push("/hotels/login")
+      router.push("establishment/login")
       dispatch(clear_forgot_password_state())
     }
     if (is_email_sent?.status === "Error") {
