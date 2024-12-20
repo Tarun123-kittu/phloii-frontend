@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Button from "../Hotel/Button/Button";
+import VerifiedModal from "../Modal/verifiedModal";
 
 const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages ,handleOnboardHotel,is_hotel_verified}) => {
   const [errors, setErrors] = useState("");
@@ -167,8 +168,8 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                    
                        <svg   onClick={() => handleRemoveImage(index)} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" fill="url(#paint0_linear_4573_9679)"/>
-                      <path d="M9.16992 14.83L14.8299 9.17004" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M14.8299 14.83L9.16992 9.17004" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M9.16992 14.83L14.8299 9.17004" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M14.8299 14.83L9.16992 9.17004" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       <defs>
                       <linearGradient id="paint0_linear_4573_9679" x1="2" y1="12" x2="22" y2="12" gradientUnits="userSpaceOnUse">
                       <stop stop-color="#FBB90D"/>
@@ -242,8 +243,20 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       </div>
       <div className="d-flex justify-content-end gap-3">
         <Button buttonClick={handleBackword} text="Previous" className="grey_btn" />
-        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" ? "Loading" : "Done"} />
+        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" ? "Loading" : "Save"} />
+        {/* <button   
+                type="button"
+                className="cmn_btn"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+        test
+        </button> */}
       </div>
+      {/* <VerifiedModal  
+                modalId="exampleModal"
+                title="Modal Title"
+                body="This is the modal body."
+                /> */}
     </div>
   );
 };

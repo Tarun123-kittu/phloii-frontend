@@ -1,0 +1,45 @@
+.modal-content {
+    background: rgba(14, 14, 14, 1);
+}
+
+.cmn_modal  button.btn-close {
+    opacity: 1;
+    background: unset;
+}
+
+button.btn-close svg {
+    width: 13px;
+}
+.modal-content {
+    background: rgba(14, 14, 14, 1);
+}
+
+.cmn_modal  button.btn-close {
+    opacity: 1;
+    background: unset;
+}
+.cmn_modal  button.btn-close:focus{
+    box-shadow: unset;
+}
+button.btn-close svg {
+    width: 13px;
+}
+
+p.model_desc {
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 300;
+    font-size: 14px;
+}
+
+p.verifed_text {
+    text-align: center;
+    color: rgba(251, 185, 13, 1);
+    font-size: 27px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.cmn_modal .modal-body {
+    padding: 2rem 2rem;
+}

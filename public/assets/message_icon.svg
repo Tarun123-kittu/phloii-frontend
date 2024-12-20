@@ -1,5 +1,5 @@
 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 <circle cx="15" cy="15" r="14.3197" stroke="white" strokeWidth="1.36054"/>
-<path d="M18.7527 21.3743H11.2527C9.00269 21.3743 7.50269 20.2493 7.50269 17.6243V12.3743C7.50269 9.74927 9.00269 8.62427 11.2527 8.62427H18.7527C21.0027 8.62427 22.5027 9.74927 22.5027 12.3743V17.6243C22.5027 20.2493 21.0027 21.3743 18.7527 21.3743Z" stroke="white" strokeWidth="1.36054" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M18.7528 12.749L16.4053 14.624C15.6328 15.239 14.3653 15.239 13.5928 14.624L11.2528 12.749" stroke="white" strokeWidth="1.36054" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18.7527 21.3743H11.2527C9.00269 21.3743 7.50269 20.2493 7.50269 17.6243V12.3743C7.50269 9.74927 9.00269 8.62427 11.2527 8.62427H18.7527C21.0027 8.62427 22.5027 9.74927 22.5027 12.3743V17.6243C22.5027 20.2493 21.0027 21.3743 18.7527 21.3743Z" stroke="white" strokeWidth="1.36054" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18.7528 12.749L16.4053 14.624C15.6328 15.239 14.3653 15.239 13.5928 14.624L11.2528 12.749" stroke="white" strokeWidth="1.36054" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>

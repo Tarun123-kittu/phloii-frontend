@@ -76,13 +76,13 @@ const Login = () => {
         <p className="sort_desc text-center">
         Welcome back! Please log in to access your account
         </p>
-        <div class="mb-3">
-          <label for="email" class="form-label cmn_label">
+        <div className="mb-3">
+          <label for="email" className="form-label cmn_label">
             Email
           </label>
           <input
             type="email"
-            class="form-control cmn_input"
+            className="form-control cmn_input"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => {
@@ -97,13 +97,13 @@ const Login = () => {
             </span>
           )}
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-label cmn_label">
+        <div className="mb-3">
+          <label for="password" className="form-label cmn_label">
             Password
           </label>
           <input
             type="password"
-            class="form-control cmn_input"
+            className="form-control cmn_input"
             placeholder="*********"
             value={password}
             onChange={(e) => {
@@ -120,15 +120,15 @@ const Login = () => {
             </span>
           )}
         </div>
-        <div class="form-check d-flex align-itmes-center gap-2">
+        <div className="form-check d-flex align-itmes-center gap-2">
           {/* <input
-            class="form-check-input"
+            className="form-check-input"
             type="checkbox"
             value=""
             id="flexCheckDefault"
           />
           <label
-            class="form-check-label sub-text fadeColor mt-1"
+            className="form-check-label sub-text fadeColor mt-1"
             for="flexCheckDefault"
           >
             Remember me
