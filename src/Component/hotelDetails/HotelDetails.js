@@ -8,6 +8,7 @@ import "./hotelDetails.css"
 import ImageGallery from '../imagePreview/ImagePreview'
 import Loader from '../loader/Loader'
 import { useRouter } from 'next/navigation'
+import { delete_subscription, clear_delete_subscription_state } from '@/utils/redux/slices/hotelOnboardingSlice/deleteSubscription'
 const HotelDetailsComponent = ({ hotelId }) => {
     const router = useRouter()
     const handleEdit = () => {
@@ -19,6 +20,15 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [images, setImages] = useState()
     const [index, setIndex] = useState(null)
     const hotelDetails = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
+    const is_subscription_deleted = useSelector((store) => store.DELETE_SUBSCRIPTION)
+
+      useEffect(() => {
+        if (typeof window !== "undefined") {
+          if (!localStorage.getItem('phloii_token_auth')) {
+            router.push('/establishment/login')
+          }
+        }
+      }, []);
 
     useEffect(() => {
         dispatch(clear_selected_hotel_details());
@@ -35,6 +45,10 @@ const HotelDetailsComponent = ({ hotelId }) => {
             setHotel_details(hotelDetails?.data?.data);
         }
     }, [hotelDetails]);
+
+    const handleDeleteSubscription = (customerId) => {
+        dispatch(delete_subscription({ customerId }))
+    }
     return (
         <SideBar>
             {hotelDetails?.status === "Loading" ? <Loader /> : <div className='wrapper'>
@@ -49,12 +63,17 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                         <path d="M7.2545 8.62089C8.29645 8.62089 9.14112 7.77622 9.14112 6.73427C9.14112 5.69232 8.29645 4.84766 7.2545 4.84766C6.21256 4.84766 5.36789 5.69232 5.36789 6.73427C5.36789 7.77622 6.21256 8.62089 7.2545 8.62089Z" stroke="white" strokeWidth="0.907026" />
                                         <path d="M2.19437 5.63436C3.3856 0.397798 11.1437 0.403845 12.3289 5.64041C13.0243 8.71221 11.1135 11.3123 9.43848 12.9208C8.22307 14.0939 6.30017 14.0939 5.07871 12.9208C3.40978 11.3123 1.49898 8.70616 2.19437 5.63436Z" stroke="white" strokeWidth="0.907026" />
                                     </svg>
-                                    {hotel_details?.hotel?.address?.streetAddress.slice(0, 30) + "..."}
+                                    {
+                                        hotel_details?.hotel?.address?.streetAddress?.length > 30
+                                            ? hotel_details?.hotel?.address?.streetAddress.slice(0, 30) + "..."
+                                            : hotel_details?.hotel?.address?.streetAddress
+                                    }
                                 </span>
                             </div>
-                            <div className={'payment_info'}>
-                                <img src="/assets/card-remove.svg" alt="payment type" /> Payment pending
+                            <div className={hotelDetails?.paymentDetails?.paymentStatus ? 'bg-success' : 'payment_info'}>
+                                <img src="/assets/card-remove.svg" alt="payment type" /> Payment {hotelDetails?.paymentDetails?.paymentStatus === "completed" ? "Completed" : "Pending"}
                             </div>
+                            {hotelDetails?.paymentDetails?.paymentStatus !== "completed" && <button className='' onClick={() => handleDeleteSubscription(hotelDetails?.paymentDetails?.customerId)}>Delete Subscription</button>}
                         </div>
                         <ul className='dash-list p-0 mb-4'>
                             {hotel_details?.hotel?.establishmentType && <li>
@@ -118,7 +137,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     <path d="M6.1499 2.70898C6.34647 3.9707 7.37047 4.93527 8.64133 5.06327" stroke="white" strokeWidth="0.914286" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M2.08569 10.4572H10.3143" stroke="white" strokeWidth="0.914286" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <span className='text-light' >Edit</span>
+                                <span className='text-light ms-2' >Edit</span>
                             </button>
                         </div>
                         <ul className='owner_details'>

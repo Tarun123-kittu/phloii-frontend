@@ -19,10 +19,11 @@ const geistMono = localFont({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <link rel="shortcut icon" href="/favicon.png" />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={AppStore} >
-        {children}
-        <Toaster />
+          {children}
+          <Toaster />
         </Provider>
       </body>
     </html>

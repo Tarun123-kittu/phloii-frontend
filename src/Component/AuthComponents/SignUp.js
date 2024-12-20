@@ -165,7 +165,7 @@ const SignUP = () => {
         </div>
         <p className="text-center loginAlready fadeColor mt-2 mb-0">
           {"Already have an account?"}{" "}
-          <Link href="establishment/login" className="text-white">
+          <Link to="/establishment/login" className="text-white">
             Login
           </Link>
         </p>

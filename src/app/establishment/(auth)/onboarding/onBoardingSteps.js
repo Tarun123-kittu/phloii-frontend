@@ -45,6 +45,14 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const selected_hotel_details = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
   const is_hotel_updated = useSelector((store) => store.UPDATE_HOTEL_DETAILS)
 
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        if (!localStorage.getItem('phloii_token_auth')) {
+          router.push('/establishment/login')
+        }
+      }
+    }, []);
+
   useEffect(() => {
     dispatch(get_countries())
   }, [])
