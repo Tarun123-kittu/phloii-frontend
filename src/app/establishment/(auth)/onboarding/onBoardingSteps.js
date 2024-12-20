@@ -44,7 +44,6 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const is_hotel_verified = useSelector((store) => store.ONBOARD_HOTEl)
   const selected_hotel_details = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
   const is_hotel_updated = useSelector((store) => store.UPDATE_HOTEL_DETAILS)
-  console.log(is_hotel_updated, "is_hotel_updated is_hotel_updated is_hotel_updated")
 
   useEffect(() => {
     dispatch(get_countries())
