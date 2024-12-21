@@ -150,7 +150,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
   const handleRemove = (selectedList) => {
     const food = selectedList.map((item) => item.name);
     setSelectedFood(selectedList);
-    setFoodValues(days)
+    setFoodValues(food)
   };
 
   const handleSelectService = (selectedList) => {
