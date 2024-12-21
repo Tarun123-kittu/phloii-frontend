@@ -14,6 +14,10 @@
     color: #fff;
     border-radius: 5px;
 }
+.payment_info.payment_success {
+    background: linear-gradient(90deg, #fbb90d 0%, #22ebff 100%);
+    border: unset;
+}
 .dashboard_info{
     padding: 2rem;
 }

@@ -17,7 +17,7 @@ export const delete_subscription = createAsyncThunk("delete_subscription", async
             redirect: "follow"
         };
 
-        const response = await fetch("https://1kgnwnst17.execute-api.us-east-1.amazonaws.com/prod/apidelete_subscription", requestOptions)
+        const response = await fetch("https://dev.phloii.com/api/v1/hotel/delete_subscription", requestOptions)
         if (!response.ok) {
             const errorMessage = await response.json();
             if (errorMessage) {

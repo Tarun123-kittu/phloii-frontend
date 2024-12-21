@@ -156,7 +156,7 @@ const Login = () => {
             Remember me
           </label>
           <Link
-            href="establishment/forgot-password"
+            href="/establishment/forgot-password"
             className="sub-text text-hightLight ms-auto text-decoration-none mt-1"
           >
             Forgot Password?

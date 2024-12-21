@@ -16,6 +16,7 @@ const Establishment = () => {
   const [images, setImages] = useState()
   const [index, setIndex] = useState(null)
   const [show_image_preview, setShow_image_preview] = useState(false)
+  const [show_page_preview2, setShow_page_preview2] = useState('')
   const all_hotels = useSelector((store) => store.HOTEL_DETAILS)
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const Establishment = () => {
         router.push('/establishment/login')
       }
     }
+    setShow_page_preview2(localStorage.getItem('phloii_token_auth'))
   }, []);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ const Establishment = () => {
     router.push(`/establishment/establishment-details/${id}/${decodeURIComponent(name)}`)
   }
 
-  return (
+  return show_page_preview2 && (
     <>
       <Head>
         <title>Hotel Information</title>

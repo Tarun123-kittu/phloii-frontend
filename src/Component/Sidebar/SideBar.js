@@ -4,17 +4,29 @@ import Link from 'next/link';
 import './sidebar.css';
 import { SidebarMenuItems } from './SidebarMenu';
 import { useRouter } from 'next/navigation';
+import { hotel_notifications, clear_hotel_notifications } from '@/utils/redux/slices/hotelOnboardingSlice/hotelNotifications';
+import { useDispatch, useSelector } from 'react-redux';
+
 const SideBar = ({ children }) => {
   const [currentPath, setCurrentPath] = useState('');
   const router = useRouter()
   const [userName, setUserName] = useState(null);
   const [user, setUser] = useState(null);
+  const [notification_view, setNotification_view] = useState(false)
+  const notifications = useSelector((store) => store.HOTEL_NOTIFICATIONS)
+  console.log(notifications, "ths is the hiteol notifications")
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setCurrentPath(window.location.pathname);
     }
   }, []);
+
+  useEffect(() => {
+    dispatch(hotel_notifications())
+  }, [])
+
   const handleLogout = () => {
     localStorage.clear();
     router.push('/establishment/login')
@@ -34,9 +46,22 @@ const SideBar = ({ children }) => {
   return (
     <div className="side_bar_wrapper">
       <header className='d-flex justify-content-end'>
-        <div className="notify d-flex align-items-center justify-content-center position-relative">
-          <span className='dot position-absolute'></span>
-          <img src="/assets/notify.svg" alt="Notification Icon" />
+        <div className='position-relative'>
+          <div className="notify d-flex align-items-center justify-content-center position-relative ms-auto">
+            <span className='dot position-absolute'></span>
+            <img src="/assets/notify.svg" alt="Notification Icon" onClick={() => setNotification_view(!notification_view)} /> </div>
+          {notification_view && (
+            <ul className="notify_list position-absolute">
+              {notifications?.data?.data?.length === 0 ? (
+                <li className='text-center'>No Notifications</li>
+              ) : (
+                notifications?.data?.data?.map((notification, index) => (
+                  <li key={index}>{notification}</li>
+                ))
+              )}
+            </ul>
+          )}
+
         </div>
         <div className='user'>
           <div className='user_image d-flex align-items-center justify-content-center'>

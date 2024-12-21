@@ -15,6 +15,10 @@
     border-radius: 5px;
     white-space: nowrap;
 }
+.payment_info.payment_success {
+    background: linear-gradient(90deg, #fbb90d 0%, #22ebff 100%);
+    border: unset;
+}
 .dashboard_info{
     padding: 2rem;
     flex-grow: 1;

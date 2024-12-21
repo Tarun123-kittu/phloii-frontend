@@ -9,6 +9,8 @@ import ImageGallery from '../imagePreview/ImagePreview'
 import Loader from '../loader/Loader'
 import { useRouter } from 'next/navigation'
 import { delete_subscription, clear_delete_subscription_state } from '@/utils/redux/slices/hotelOnboardingSlice/deleteSubscription'
+import toast from 'react-hot-toast'
+
 const HotelDetailsComponent = ({ hotelId }) => {
     const router = useRouter()
     const handleEdit = () => {
@@ -16,19 +18,20 @@ const HotelDetailsComponent = ({ hotelId }) => {
     }
     const dispatch = useDispatch()
     const [hotel_details, setHotel_details] = useState()
+    console.log(hotel_details, "this is the hotel details component")
     const [show_image_preview, setShow_image_preview] = useState()
     const [images, setImages] = useState()
     const [index, setIndex] = useState(null)
     const hotelDetails = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
     const is_subscription_deleted = useSelector((store) => store.DELETE_SUBSCRIPTION)
 
-      useEffect(() => {
+    useEffect(() => {
         if (typeof window !== "undefined") {
-          if (!localStorage.getItem('phloii_token_auth')) {
-            router.push('/establishment/login')
-          }
+            if (!localStorage.getItem('phloii_token_auth')) {
+                router.push('/establishment/login')
+            }
         }
-      }, []);
+    }, []);
 
     useEffect(() => {
         dispatch(clear_selected_hotel_details());
@@ -47,8 +50,31 @@ const HotelDetailsComponent = ({ hotelId }) => {
     }, [hotelDetails]);
 
     const handleDeleteSubscription = (customerId) => {
-        dispatch(delete_subscription({ customerId }))
+        dispatch(delete_subscription({ subscriptionId: customerId }))
     }
+
+    useEffect(() => {
+        if (is_subscription_deleted?.status === "Success") {
+            toast.success("Subscription Cancelled Successfully")
+            dispatch(get_selected_hotel_details({ id: hotelId }));
+            dispatch(clear_delete_subscription_state())
+        }
+        if (is_subscription_deleted?.status === "Error") {
+            toast.error(is_subscription_deleted?.error?.message)
+            dispatch(clear_delete_subscription_state())
+        }
+    }, [is_subscription_deleted])
+
+    const formatTime = (time) => {
+        const [hours, minutes] = time.split(':').map(Number);
+        const isPM = hours >= 12;
+        const formattedHours = hours % 12 || 12; // Convert 24-hour format to 12-hour
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; // Add leading zero if minutes < 10
+        const period = isPM ? 'PM' : 'AM';
+
+        return `${formattedHours}:${formattedMinutes} ${period}`;
+    };
+
     return (
         <SideBar>
             {hotelDetails?.status === "Loading" ? <Loader /> : <div className='wrapper'>
@@ -70,10 +96,25 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     }
                                 </span>
                             </div>
-                            <div className={hotelDetails?.paymentDetails?.paymentStatus ? 'bg-success' : 'payment_info'}>
-                                <img src="/assets/card-remove.svg" alt="payment type" /> Payment {hotelDetails?.paymentDetails?.paymentStatus === "completed" ? "Completed" : "Pending"}
+                            <div className={hotel_details?.paymentDetails?.paymentStatus ? "payment_info" : 'payment_info payment_success'}>
+                                <img src="/assets/card-remove.svg" alt="payment type" /> Payment {hotel_details?.paymentDetails?.paymentStatus === "completed" ? "Completed" : "Pending"}
                             </div>
-                            {hotelDetails?.paymentDetails?.paymentStatus !== "completed" && <button className='' onClick={() => handleDeleteSubscription(hotelDetails?.paymentDetails?.customerId)}>Delete Subscription</button>}
+                            {hotel_details?.paymentDetails?.paymentStatus === "completed" && (
+                                <button
+                                    className="cmn_btn"
+                                    onClick={() =>
+                                        handleDeleteSubscription(hotel_details?.paymentDetails?.customerId)
+                                    }
+                                >
+                                    Cancel Subscription
+                                    {is_subscription_deleted?.status === "Loading" && (
+                                        <div className="spinner-border text-warning" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </div>
+                                    )}
+                                </button>
+                            )}
+
                         </div>
                         <ul className='dash-list p-0 mb-4'>
                             {hotel_details?.hotel?.establishmentType && <li>
@@ -95,6 +136,28 @@ const HotelDetailsComponent = ({ hotelId }) => {
                             {hotel_details?.hotel?.address?.suiteUnitNumber && <li>
                                 <span className='d-block'>Suite/Unit Number</span>
                                 <strong>{hotel_details?.hotel?.address?.suiteUnitNumber}</strong>
+                            </li>}
+                        </ul>
+                        <ul className='dash-list p-0 mb-4'>
+                            {hotel_details?.hotel?.food?.length > 0 && <li>
+                                <span className='d-block'>Food</span>
+                                <strong>{hotel_details?.hotel?.food?.join(", ")}</strong>
+                            </li>}
+                            {hotel_details?.hotel?.atmosphere?.length > 0 && <li>
+                                <span className='d-block'>Atmosphere</span>
+                                <strong>{hotel_details?.hotel?.atmosphere?.join(", ")}</strong>
+                            </li>}
+                            {hotel_details?.hotel?.services && <li>
+                                <span className='d-block'>Services</span>
+                                <strong>{hotel_details?.hotel?.services?.join(", ")}</strong>
+                            </li>}
+                            {hotel_details?.hotel?.openCloseTimings && <li>
+                                <span className='d-block'>Open & Close Timing</span>
+                                <strong>{formatTime(hotel_details?.hotel?.openCloseTimings?.open)} - {formatTime(hotel_details?.hotel?.openCloseTimings?.close)}</strong>
+                            </li>}
+                            {hotel_details?.hotel?.customerServiceNumber && <li>
+                                <span className='d-block'>Coustmer Servce Number</span>
+                                <strong>{hotel_details?.hotel?.customerServiceNumber}</strong>
                             </li>}
                         </ul>
                         {hotel_details?.hotel?.why_want_phloi && <div className='info'>
