@@ -38,6 +38,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       setWhyPhloiiError("Please enter why do you want to be on phloii")
       return
     }
+    if(images?.length < 5){
+      setImagesError('Please upload atleast 5 images')
+      return
+    }
     if (!inpersonvisit) {
       setInPersonError("Please enter are you open to in-person visit")
       return
