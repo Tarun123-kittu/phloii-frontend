@@ -10,6 +10,8 @@ import Loader from '../loader/Loader'
 import { useRouter } from 'next/navigation'
 import { delete_subscription, clear_delete_subscription_state } from '@/utils/redux/slices/hotelOnboardingSlice/deleteSubscription'
 import toast from 'react-hot-toast'
+import DeleteModal from '../deleteModal/DeleteModal'
+
 
 const HotelDetailsComponent = ({ hotelId }) => {
     const router = useRouter()
@@ -22,6 +24,8 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [show_image_preview, setShow_image_preview] = useState()
     const [images, setImages] = useState()
     const [index, setIndex] = useState(null)
+    const [viewDeleteModal, setViewDeleteModal] = useState(false)
+    const [customer_id, setCoustmer_id] = useState(null)
     const hotelDetails = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
     const is_subscription_deleted = useSelector((store) => store.DELETE_SUBSCRIPTION)
 
@@ -50,13 +54,16 @@ const HotelDetailsComponent = ({ hotelId }) => {
     }, [hotelDetails]);
 
     const handleDeleteSubscription = (customerId) => {
-        dispatch(delete_subscription({ subscriptionId: customerId }))
+        setViewDeleteModal(true)
+        setCoustmer_id(customerId)
+
     }
 
     useEffect(() => {
         if (is_subscription_deleted?.status === "Success") {
             toast.success("Subscription Cancelled Successfully")
             dispatch(get_selected_hotel_details({ id: hotelId }));
+            setViewDeleteModal(false)
             dispatch(clear_delete_subscription_state())
         }
         if (is_subscription_deleted?.status === "Error") {
@@ -75,6 +82,12 @@ const HotelDetailsComponent = ({ hotelId }) => {
         return `${formattedHours}:${formattedMinutes} ${period}`;
     };
 
+    const handleCancelPlan = () => {
+        dispatch(delete_subscription({ subscriptionId: customer_id }))
+    }
+
+    const closeModal = () => setViewDeleteModal(false)
+
     return (
         <SideBar>
             {hotelDetails?.status === "Loading" ? <Loader /> : <div className='wrapper'>
@@ -85,23 +98,23 @@ const HotelDetailsComponent = ({ hotelId }) => {
                             <div className='info flex-grow-1'>
                                 <h3>{hotel_details?.hotel?.establishmentName || "Not Available"}</h3>
                                 <span title={hotel_details?.hotel?.address?.streetAddress}>
-                                    <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg className='me-2' width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.2545 8.62089C8.29645 8.62089 9.14112 7.77622 9.14112 6.73427C9.14112 5.69232 8.29645 4.84766 7.2545 4.84766C6.21256 4.84766 5.36789 5.69232 5.36789 6.73427C5.36789 7.77622 6.21256 8.62089 7.2545 8.62089Z" stroke="white" strokeWidth="0.907026" />
                                         <path d="M2.19437 5.63436C3.3856 0.397798 11.1437 0.403845 12.3289 5.64041C13.0243 8.71221 11.1135 11.3123 9.43848 12.9208C8.22307 14.0939 6.30017 14.0939 5.07871 12.9208C3.40978 11.3123 1.49898 8.70616 2.19437 5.63436Z" stroke="white" strokeWidth="0.907026" />
                                     </svg>
                                     {
-                                        hotel_details?.hotel?.address?.streetAddress?.length > 30
-                                            ? hotel_details?.hotel?.address?.streetAddress.slice(0, 30) + "..."
-                                            : hotel_details?.hotel?.address?.streetAddress
+                                        // hotel_details?.hotel?.address?.streetAddress?.length > 30
+                                        //     ? hotel_details?.hotel?.address?.streetAddress.slice(0, 30) + "..."
+                                        hotel_details?.hotel?.address?.streetAddress
                                     }
                                 </span>
                             </div>
-                            <div className={hotel_details?.paymentDetails?.paymentStatus ? "payment_info" : 'payment_info payment_success'}>
+                            <div className={hotel_details?.paymentDetails?.paymentStatus === "completed" ? "payment_info payment_success" : 'payment_info '}>
                                 <img src="/assets/card-remove.svg" alt="payment type" /> Payment {hotel_details?.paymentDetails?.paymentStatus === "completed" ? "Completed" : "Pending"}
                             </div>
                             {hotel_details?.paymentDetails?.paymentStatus === "completed" && (
                                 <button
-                                    className="cmn_btn"
+                                    className="cmn_btn d-flex align-items-center justify-content-center gap-2"
                                     onClick={() =>
                                         handleDeleteSubscription(hotel_details?.paymentDetails?.customerId)
                                     }
@@ -206,7 +219,16 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         <ul className='owner_details'>
                             <li><img src="/assets/mobile_icon.svg" alt="" /> <a href="">{hotel_details?.hotel?.ownerDetails?.ownerPhone}</a></li>
                             <li><img src="/assets/message_icon.svg" alt="" /> <a href="">{hotel_details?.hotel?.ownerDetails?.ownerEmail}</a></li>
-                            {hotel_details?.hotel?.ownerDetails?.websiteLink && <li><img src="/assets/globe_icon.svg" alt="" /> <a href="">{hotel_details?.hotel?.ownerDetails?.websiteLink}</a></li>}
+                            {hotel_details?.hotel?.ownerDetails?.websiteLink && <li><img src="/assets/globe_icon.svg" alt="" /> <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={hotel_details?.hotel?.ownerDetails?.websiteLink?.startsWith('http')
+                                    ? hotel_details?.hotel?.ownerDetails?.websiteLink
+                                    : `https://${hotel_details?.hotel?.ownerDetails?.websiteLink}`}
+                            >
+                                {hotel_details?.hotel?.ownerDetails?.websiteLink}
+                            </a>
+                            </li>}
                         </ul>
                         <div className='hotel_image'>
                             <h5>Restaurant Photos</h5>
@@ -238,6 +260,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                     </div>
                 </div>
                 {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
+                {viewDeleteModal && <DeleteModal isVisible={viewDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to cancel your subscription ?"} onConfirm={handleCancelPlan} is_subscription_deleted={is_subscription_deleted}/>}
             </div>}
         </SideBar>
     )

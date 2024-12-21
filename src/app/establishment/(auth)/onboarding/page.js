@@ -66,9 +66,9 @@ const Page = () => {
   // }, [is_hotel_verified])
   return (
     <div className="onboard_wrapper">
-      <header className={"header-card"}>
+      <div className={"header-card"}>
         <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
-      </header>
+      </div>
       <div className="board_form">
         <div className="auth_form">
           <h2 className="main_heading text-center mt-2 mb-4">Registration Form</h2>

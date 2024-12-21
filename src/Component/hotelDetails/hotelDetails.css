@@ -19,6 +19,16 @@
     background: linear-gradient(90deg, #fbb90d 0%, #22ebff 100%);
     border: unset;
 }
+.payment_info.payment_success {
+    background: linear-gradient(90deg, #fbb90d 0%, #22ebff 100%);
+    border: unset;
+    color: #000;
+    font-weight: 500;
+    font-size: 14px;
+}
+.payment_info.payment_success img {
+    filter: invert(1);
+}
 .dashboard_info{
     padding: 2rem;
     flex-grow: 1;
@@ -94,12 +104,13 @@ ul.owner_details li {
     padding-bottom: 13px;
 }
 
-ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);}
+ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);word-break: break-all; font-size: 13px;}
 
 .owner_info {
     flex: 0 0 350px;
     padding: 2rem;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
+    width: 350px;
 }
 
 
@@ -110,9 +121,9 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);}
     width: 100%;
 }
 ul.image-grid {
-    display: grid;
+   display: flex;
     padding: 0;
-    grid-template-columns: auto auto auto auto;
+    
     gap: 10px;
 }
 
@@ -120,10 +131,12 @@ ul.image-grid img {
     width: 100%;
     height: 74px;
     border-radius: 7px;
+    
 }
 
 ul.image-grid li {
     list-style: none;
+    width: 25%;
 }
 .hotel_image h5 {
     color: rgba(255, 255, 255, 1);
@@ -149,19 +162,12 @@ ul.image-grid li {
     color: rgba(255, 255, 255, 1);
 }
 /* Hotel Css Strat Here */
-.profile-card {
-    background-color: #1e1e1e;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-    border: 1px solid #FFFFFF1A;
-    padding: 30px;
-}
+
 
 /* Profile Left Side */
 .profile-sidebar {
     background-color: #121212;
-    padding: 30px 15px;
+    padding: 15px;
     text-align: center;
     border: 1px solid #FFFFFF1A;
     color: #fff;
@@ -170,7 +176,7 @@ ul.image-grid li {
    padding: 0;
    color: #fff;
    border-bottom: 1px solid #FFFFFF3D;
-   padding: 0 10px 25px 30px;
+   padding: 0 0px 20px 20px;
 }
 .location-text{
     color: #fff;
@@ -216,7 +222,7 @@ span.verified {
 /* Restaurant Photos */
 
 .hotel-photo-wrapper{
-    padding: 20px 0 0 30px;
+    padding: 20px 0 0 20px;
 }
 .hotel-photo-wrapper h5{
     color: #fff;

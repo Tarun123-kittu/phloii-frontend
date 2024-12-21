@@ -14,10 +14,7 @@
     color: #fff;
     border-radius: 5px;
 }
-.payment_info.payment_success {
-    background: linear-gradient(90deg, #fbb90d 0%, #22ebff 100%);
-    border: unset;
-}
+
 .dashboard_info{
     padding: 2rem;
 }
@@ -46,6 +43,7 @@
     justify-content: space-between;
     color: rgba(255, 255, 255, 1);
     margin-top: 20px;
+    gap: 10px;
 }
 
 .dash-list span {
@@ -189,7 +187,7 @@ span.hotel_address {
    padding: 0;
    color: #fff;
    border-bottom: 1px solid #FFFFFF3D;
-   padding: 0 0 25px 25px;
+   padding: 0 0 20px 20px;
 }
 .dash-list span.hotel_name {
     font-size: 16px;
@@ -201,7 +199,7 @@ span.hotel_address {
 }
 ul.dash-list strong {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
 }
 span.hotel_address {
     display: flex;
@@ -257,7 +255,7 @@ p.pending_pay {
 
 /* Restaurant Photos */
 .hotel-photo-wrapper{
-    padding: 25px 0 0 25px;
+    padding: 20px 0 0 20px;
 }
 .hotel-photo-wrapper h5{
     color: #fff;
@@ -298,9 +296,9 @@ p.pending_pay {
     font-weight: 500;
 }
 
-.hotel-photos img.view-more-img {
-    filter: brightness(0.7);
-}
+/* .hotel-photos img.view-more-img {
+    filter: brightness();
+} */
 
 /* Hotel Info Grid */
 .hotel-info p {

@@ -71,7 +71,7 @@ const ImageGallery = ({images,setShow_image_preview,show_image_preview,index}) =
               top: "20px",
               right: "20px",
               color: "white",
-              fontSize: "20px",
+              fontSize: "40px",
               background: "none",
               border: "none",
               cursor: "pointer",

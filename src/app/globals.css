@@ -69,6 +69,22 @@ color: rgba(117, 129, 143, 1);
   button.upload_btn.cmn_btn {
     height: 34px;
 }
+.cmn_btn{
+  background: linear-gradient(90deg, #FBB90D 0%, #22EBFF 100%);
+  border: transparent;
+  font-size: 14px;
+  line-height: 24px;
+  height: 42px;
+  padding: 0px 1rem;
+  border-radius: 4px;
+  color: var(--bs-black);
+  font-weight: 500;
+  white-space: nowrap;
+}
+button.grey_btn.cmn_btn {
+  background: rgba(255, 255, 255, 0.31);
+  color: var(--bs-white);
+}
 .add_file {
   border: 1px dashed rgba(211, 211, 211, 1);
   background: rgba(0, 0, 0, 1);

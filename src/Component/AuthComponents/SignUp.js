@@ -22,11 +22,16 @@ const SignUP = () => {
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [isTerms, setIsTerms] = useState(false);
   const is_signed_up = useSelector((store) => store.HOTEL_SIGNUP)
   const is_loggedIn = useSelector((store) => store.HOTEL_LOGIN);
 
   const handleSignUp = (e) => {
     e.preventDefault();
+    if(!isTerms){
+      toast.error("Please agree to the terms of service")
+      return
+    }
     if (!username) {
       setUsernameError("username is required");
       return;
@@ -150,8 +155,9 @@ const SignUP = () => {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
+            checked={isTerms}
             id="flexCheckDefault"
+            onChange={() => setIsTerms(!isTerms)}
           />
           <label className="form-check-label sub-text fadeColor">
             I have read and agree to the{" "}

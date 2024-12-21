@@ -43,6 +43,7 @@ const SideBar = ({ children }) => {
     setUserName(storedUserName);
     setUser(storedUser);
   }, []);
+  
   return (
     <div className="side_bar_wrapper">
       <header className='d-flex justify-content-end'>
@@ -56,7 +57,7 @@ const SideBar = ({ children }) => {
                 <li className='text-center'>No Notifications</li>
               ) : (
                 notifications?.data?.data?.map((notification, index) => (
-                  <li key={index}>{notification}</li>
+                  <li key={index}>{notification?.notification_text}</li>
                 ))
               )}
             </ul>
