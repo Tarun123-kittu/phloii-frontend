@@ -91,7 +91,7 @@ const Establishment = () => {
                       <span className='d-block'>Establishment Type</span>
                       <strong>{hotel?.establishmentType}</strong>
                     </li>}
-                    {hotel?.address?.country && <li>
+                    {/* {hotel?.address?.country && <li>
                       <span className='d-block'>Country</span>
                       <strong>{hotel?.address?.country}</strong>
                     </li>}
@@ -106,7 +106,7 @@ const Establishment = () => {
                     {hotel?.address?.suiteUnitNumber && <li>
                       <span className='d-block'>Suite/Unit Number</span>
                       <strong>{hotel?.address?.suiteUnitNumber}</strong>
-                    </li>}
+                    </li>} */}
                     <li>
                       <button onClick={() => handleViewHotel(hotel?._id, hotel?.establishmentName)} className="edit-btn">  View</button>
                     </li>
