@@ -232,7 +232,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         </ul>
                         <div className='hotel_image'>
                             <h5>Restaurant Photos</h5>
-                            <img onClick={() => { setShow_image_preview(true); setImages(hotel_details?.hotel?.images); setIndex(-1) }} src={hotel_details?.hotel?.images[0]} className='imge_one img-fluid' alt="" />
+                            <img onClick={() => { setShow_image_preview(true); setImages(hotel_details?.hotel?.images); setIndex(-1) }} src={hotel_details?.hotel?.images[0]} className='imge_one img-fluid' style={{cursor:"pointer"}} alt="" />
                             <ul className="image-grid mt-3">
                                 {hotel_details?.hotel?.images?.slice(1, 5).map((image, i) => (
                                     <li
@@ -249,7 +249,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                                 <p className="view-more-text">View More</p>
                                             </div>
                                         )}
-                                        <img src={image} className="img-fluid" alt={`Hotel Image ${i + 1}`} />
+                                        <img src={image} className="img-fluid"  style={{cursor:"pointer"}} alt={`Hotel Image ${i + 1}`} />
                                     </li>
                                 ))}
                             </ul>

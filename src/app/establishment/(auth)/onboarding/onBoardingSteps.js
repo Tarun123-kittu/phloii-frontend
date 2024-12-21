@@ -160,7 +160,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   }, [])
 
   useEffect(() => {
-    if (selected_hotel_details?.status === "Success") {
+    if (selected_hotel_details?.status === "Success" && hotelId) {
       setEstablishmentname(selected_hotel_details?.data?.data?.hotel?.establishmentName)
       setEstablishedtype(selected_hotel_details?.data?.data?.hotel?.establishmentType)
       setStreetAddress(selected_hotel_details?.data?.data?.hotel?.address?.streetAddress)
