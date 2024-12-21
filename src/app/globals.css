@@ -69,6 +69,9 @@ color: rgba(117, 129, 143, 1);
   button.upload_btn.cmn_btn {
     height: 34px;
 }
+input {
+  color-scheme: dark;
+}
 .cmn_btn{
   background: linear-gradient(90deg, #FBB90D 0%, #22EBFF 100%);
   border: transparent;

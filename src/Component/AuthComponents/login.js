@@ -106,7 +106,7 @@ const Login = () => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => {
-              setemail(e.target.value);
+              setemail(e.target.value.toLowerCase());
               setemailError("");
             }}
             style={emailError ? { border: "1px solid red" } : {}}

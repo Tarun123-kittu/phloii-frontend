@@ -386,6 +386,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               Food Prefrences
             </label>
             <Multiselect
+            
               options={FoodOptions}
               selectedValues={selectedFood}
               onSelect={handleSelect}

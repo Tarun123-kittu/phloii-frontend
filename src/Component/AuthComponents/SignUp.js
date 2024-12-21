@@ -121,7 +121,7 @@ const SignUP = () => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => {
-              setEmail(e.target.value);
+              setEmail(e.target.value.toLowerCase());
               setEmailError("");
             }}
             style={emailError ? { border: "1px solid red" } : {}}
