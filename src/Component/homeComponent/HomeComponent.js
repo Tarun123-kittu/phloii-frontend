@@ -426,7 +426,7 @@ export default function HomeComponent() {
       </div>
       <Testimonials />
       <footer className={styles.footer}>
-        <p className="text-center mb-0">© Copyright 2022 phloii.com</p>
+        <p className="text-center mb-0">© Copyright 2024 phloii.com</p>
       </footer>
     </div>
   );
