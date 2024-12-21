@@ -110,7 +110,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                 </span>
                             </div>
                             <div className={hotel_details?.paymentDetails?.paymentStatus === "completed" ? "payment_info payment_success" : 'payment_info '}>
-                                <img src="/assets/card-remove.svg" alt="payment type" /> Payment {hotel_details?.paymentDetails?.paymentStatus === "completed" ? "Completed" : "Pending"}
+                                <img src="/assets/card-remove.svg" alt="payment type" /> Payment {hotel_details?.paymentDetails?.paymentStatus === "completed" ? "Completed" : hotel_details?.paymentDetails?.paymentStatus === "canceled" ? "Canceled " : "Pending"}
                             </div>
                             {hotel_details?.paymentDetails?.paymentStatus === "completed" && (
                                 <button
