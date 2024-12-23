@@ -164,6 +164,9 @@ color: var( --highlight);
     transform: translateX(0);
   }
 }
+.cardBg{
+ background-color: rgb(14 14 14);
+}
 
 .floating {
   animation: floatLeftToRight 4s ease-in-out infinite; /* Adjust duration as needed */
