@@ -70,7 +70,7 @@ const SideBar = ({ children }) => {
         <div className="text-center mt-3 mb-5">
           <img
             onClick={handleLogo}
-            src="/assets/logo.png"
+            src="/assets/logo.svg"
             alt="Logo"
             className="m-auto"
           />
