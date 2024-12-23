@@ -109,10 +109,10 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     }
                                 </span>
                             </div>
-                            <div className={hotel_details?.paymentDetails?.paymentStatus !== "completed" ? "payment_info payment_success" : 'payment_info '}>
+                            <div className={hotel_details?.paymentDetails?.paymentStatus === "completed" ? "payment_info payment_success" : 'payment_info '}>
                                 <img src="/assets/card-remove.svg" alt="payment type" /> Payment {hotel_details?.paymentDetails?.paymentStatus === "completed" ? "Completed" : hotel_details?.paymentDetails?.paymentStatus === "canceled" ? "Canceled " : "Pending"}
                             </div>
-                            {hotel_details?.paymentDetails?.paymentStatus !== "completed" && (
+                            {hotel_details?.paymentDetails?.paymentStatus === "completed" && (
                                 <button
                                     className="payment_info  d-flex align-items-center justify-content-center gap-2"
                                     onClick={() =>

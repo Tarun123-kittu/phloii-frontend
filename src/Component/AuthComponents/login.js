@@ -99,7 +99,7 @@ const Login = () => {
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">
         <div className="text-center">
-          <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
+          <Image src="/assets/logo.svg" width={139} height={57} alt="logo" />
         </div>
         <h2 className="main_heading text-center mt-4">Login Account</h2>
         <p className="sort_desc text-center">
