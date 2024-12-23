@@ -9,6 +9,8 @@ const SideBar = ({ children }) => {
   const [currentPath, setCurrentPath] = useState("");
   const router = useRouter();
   const [userName, setUserName] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
+  console.log(activeIndex,"active index")
   const [user, setUser] = useState(null);
   const pathname = usePathname();
 
@@ -32,6 +34,21 @@ const SideBar = ({ children }) => {
     setUserName(storedUserName);
     setUser(storedUser);
   }, []);
+
+  useEffect(() => {
+    // Set the active index based on the current route
+    const activeItemIndex = SidebarMenuItems.findIndex((menu) => {
+      const isEstablishmentRoute = pathname.startsWith("/establishment");
+      return menu.path === "/establishment"
+        ? pathname === menu.path
+        : isEstablishmentRoute && pathname.includes(menu.path);
+    });
+    setActiveIndex(activeItemIndex);
+  }, [pathname, SidebarMenuItems]);
+
+  const handleMenuClick = (index) => {
+    setActiveIndex(index);
+  };
   return (
     <div className="side_bar_wrapper">
       <header className="d-flex justify-content-end">
@@ -61,16 +78,13 @@ const SideBar = ({ children }) => {
         <ul className="m-0">
           {SidebarMenuItems &&
             SidebarMenuItems.map((menu, index) => {
-              // Check if the route is for the parent `/establishment` or its dynamic children
-              const isEstablishmentRoute =
-                pathname.startsWith("/establishment");
-              const isActive =
-                menu.path === "/establishment"
-                  ? pathname === menu.path
-                  : isEstablishmentRoute && pathname.includes(menu.path);
-
+              const isActive = activeIndex === index;
               return (
-                <li key={index} className={isActive ? "sidebar_active" : ""}>
+                <li
+                  key={index}
+                  className={isActive ? "sidebar_active" : ""}
+                  onClick={() => handleMenuClick(index)}
+                >
                   <Link href={menu.path}>
                     {menu.icon} <span>{menu.name}</span>
                   </Link>
