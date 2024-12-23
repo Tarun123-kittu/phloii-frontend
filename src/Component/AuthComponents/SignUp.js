@@ -22,13 +22,14 @@ const SignUP = () => {
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isTerms, setIsTerms] = useState(false);
   const is_signed_up = useSelector((store) => store.HOTEL_SIGNUP)
   const is_loggedIn = useSelector((store) => store.HOTEL_LOGIN);
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    if(!isTerms){
+    if (!isTerms) {
       toast.error("Please agree to the terms of service")
       return
     }
@@ -84,6 +85,10 @@ const SignUP = () => {
       dispatch(clear_hotel_login_state())
     }
   }, [is_loggedIn]);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">
@@ -134,17 +139,25 @@ const SignUP = () => {
         </div>
         <div className="mb-3">
           <label className="form-label cmn_label">Password</label>
-          <input
-            type="password"
-            className="form-control cmn_input"
-            placeholder="*********"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              setPasswordError("");
-            }}
-            style={passwordError ? { border: "1px solid red" } : {}}
-          />
+          <div className="input-group">
+            <input
+              type={showPassword ? "text" : "password"} // Toggle input type based on state
+              className="form-control cmn_input"
+              placeholder="*********"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setPasswordError("");
+              }}
+              style={passwordError ? { border: "1px solid red" } : {}}
+            />
+            <div
+              className="position-absolute end-0 me-3 mt-1"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
+            </div>
+          </div>
           {passwordError && (
             <span style={passwordError ? { color: "red", fontSize: "10px" } : {}}>
               {passwordError}

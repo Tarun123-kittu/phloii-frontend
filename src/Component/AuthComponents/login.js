@@ -87,6 +87,9 @@ const Login = () => {
   //   router.push('establishment')
   // }
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">
@@ -134,6 +137,12 @@ const Login = () => {
               }}
               style={passwordError ? { border: "1px solid red" } : {}}
             />
+              <div
+              className="position-absolute end-0 me-3 mt-1 top-0"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
+            </div>
             <span
               onClick={() => setShowPassword(!showPassword)}
               style={{
