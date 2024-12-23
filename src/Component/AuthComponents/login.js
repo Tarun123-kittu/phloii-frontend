@@ -190,7 +190,7 @@ const Login = () => {
               )}
             </span>
           </div>
-          <span className="password_input">Password must contain atleast 8 chracter,including a number and letter</span>
+          <span className="password_input d-block pt-1">Password must contain atleast 8 chracter,including a number and letter</span>
           {passwordError && (
             <span
               style={passwordError ? { color: "red", fontSize: "10px" } : {}}

@@ -9,11 +9,13 @@
     align-items: center;
     gap: 10px;
     background: rgba(255, 255, 255, 0.15);
-    padding: 10px;
+    padding: 7px 10px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
     border-radius: 5px;
     white-space: nowrap;
+    font-size: 13px;
+    height: 38px;
 }
 .payment_info.payment_success {
     background: linear-gradient(90deg, #fbb90d 0%, #22ebff 100%);
@@ -30,7 +32,7 @@
     filter: invert(1);
 }
 .dashboard_info{
-    padding: 2rem;
+    padding: 1.2rem;
     flex-grow: 1;
 }
 .info {
@@ -108,7 +110,7 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);word
 
 .owner_info {
     flex: 0 0 350px;
-    padding: 2rem;
+    padding: 1.2rem;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
     width: 350px;
 }

@@ -36,6 +36,21 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
   const handleBackword = () => {
     setStep(1)
   }
+
+  const validateWebsiteLink = (link) => {
+    const regex = /^(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+    return regex.test(link);
+  };
+
+  const handleBlur = () => {
+    if (!websiteLink) {
+      setWebsiteError("Website link is required.");
+    } else if (!validateWebsiteLink(websiteLink)) {
+      setWebsiteError("Please enter a valid website link.");
+    } else {
+      setWebsiteError(""); // Clear error if the link is valid
+    }
+  };
   return (
     <div className="">
       <div className="row">
@@ -62,20 +77,22 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="type" className="form-label cmn_label">
-              Establishment Website link
+              Establishment Website Link
             </label>
             <input
               type="text"
               className="form-control cmn_input"
-              placeholder="enter website link"
+              placeholder="Enter website link"
               value={websiteLink}
-              onChange={(e) => { setWebsiteLink(e.target.value); setWebsiteError('') }}
+              onChange={(e) => {
+                setWebsiteLink(e.target.value);
+                setWebsiteError(""); // Clear the error while typing
+              }}
+              onBlur={handleBlur} // Validate on blur
               style={websiteError ? { border: "1px solid red" } : {}}
             />
             {websiteError && (
-              <span style={websiteError ? { color: "red", fontSize: "10px" } : {}}>
-                {websiteError}
-              </span>
+              <span style={{ color: "red", fontSize: "10px" }}>{websiteError}</span>
             )}
           </div>
         </div>

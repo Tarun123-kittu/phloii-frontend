@@ -95,7 +95,7 @@ button.grey_btn.cmn_btn {
   border-radius: 7px;
 }
 .wrapper {
-  padding: 30px;
+  padding: 20px;
   background: #000;
   padding-left: calc(var( --sidebar-width) + 30px);
   padding-top: calc(76px + 30px);

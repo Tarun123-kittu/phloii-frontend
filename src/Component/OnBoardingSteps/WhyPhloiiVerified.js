@@ -574,7 +574,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       </div>
       <div className="d-flex justify-content-end gap-3">
         <Button buttonClick={handleBackword} text="Previous" className="grey_btn" />
-        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : "Done"} />
+        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : hotelId ? "Update" : "Done"} />
       </div>
     </div>
   );

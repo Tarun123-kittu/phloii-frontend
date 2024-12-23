@@ -9,14 +9,16 @@
     align-items: center;
     gap: 10px;
     background: rgba(255, 255, 255, 0.15);
-    padding: 10px;
+    padding:7px  10px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
     border-radius: 5px;
+    font-size: 13px;
+    height: 38px;
 }
 
 .dashboard_info{
-    padding: 2rem;
+    padding: 1.2rem;
 }
 .info {
     color: rgba(255, 255, 255, 1);
@@ -94,7 +96,7 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);}
 
 .owner_info {
     flex: 0 0 350px;
-    padding: 2rem;
+    padding: 1.2rem;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
