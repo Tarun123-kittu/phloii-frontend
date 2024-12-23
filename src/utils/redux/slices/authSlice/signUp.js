@@ -30,7 +30,7 @@ export const hotel_signup = createAsyncThunk(
 
       console.log("Sending signup request...");
       const response = await fetch(
-        `${API_CONFIG.BASE_URL}/v1/hotel/signUp`,
+        `${API_CONFIG.BASE_URL}/hotel/signUp`,
         requestOptions
       );
       console.log("Received response status:", response.status);
