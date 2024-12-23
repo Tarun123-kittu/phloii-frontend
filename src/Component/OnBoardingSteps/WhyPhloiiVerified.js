@@ -392,6 +392,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               onSelect={handleSelect}
               onRemove={handleRemove}
               displayValue="name"
+              className="custom-multiselect"
             />
             {foodError && (
               <span style={foodError ? { color: "red", fontSize: "10px" } : {}}>
@@ -411,6 +412,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               onSelect={handleSelectService}
               onRemove={handleRemoveService}
               displayValue="name"
+              className="custom-multiselect"
             />
             {serviceError && (
               <span style={serviceError ? { color: "red", fontSize: "10px" } : {}}>
@@ -430,6 +432,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               onSelect={handleSelectAtmosphere}
               onRemove={handleRemoveAtmosphere}
               displayValue="name"
+              className="custom-multiselect"
             />
             {atmosphereError && (
               <span style={atmosphereError ? { color: "red", fontSize: "10px" } : {}}>
