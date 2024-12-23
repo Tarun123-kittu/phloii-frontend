@@ -42,7 +42,7 @@ const Establishment = () => {
     router.push(`/establishment/establishment-details/${id}/${decodeURIComponent(name)}`)
   }
 
-  return show_page_preview2 && (
+  return (
     <>
       <Head>
         <title>Hotel Information</title>
