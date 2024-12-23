@@ -37,6 +37,11 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    if(!email && !password){
+      setemailError("Email is required");
+      setPasswordError("Password is requires");
+      return
+    }
 
     if (!email) {
       setemailError("Email is required");
@@ -185,6 +190,7 @@ const Login = () => {
               )}
             </span>
           </div>
+          <span className="password_input">Password must contain atleast 8 chracter,including a number and letter</span>
           {passwordError && (
             <span
               style={passwordError ? { color: "red", fontSize: "10px" } : {}}

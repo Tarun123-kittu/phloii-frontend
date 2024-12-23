@@ -143,7 +143,7 @@ const SignUP = () => {
             <input
               type={showPassword ? "text" : "password"} // Toggle input type based on state
               className="form-control cmn_input"
-              placeholder="*********"
+              placeholder=""
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -158,6 +158,7 @@ const SignUP = () => {
               {showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
             </div>
           </div>
+          <span className="password_input">Password must contain atleast 8 chracter,including a number and letter</span>
           {passwordError && (
             <span style={passwordError ? { color: "red", fontSize: "10px" } : {}}>
               {passwordError}

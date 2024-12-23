@@ -225,7 +225,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
-              What makes your restaurant unique?
+              What makes your establishment unique?
             </label>
             <textarea
               rows={5}

@@ -194,6 +194,11 @@ a {
 color: var( --highlight);
 }
 
+span.password_input {
+  font-size: 10px;
+  color: white;
+}
+
 /* Add to your CSS file or module */
 
 @keyframes floatLeftToRight {

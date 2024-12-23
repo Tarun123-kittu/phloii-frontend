@@ -7,7 +7,7 @@ export default function HomeComponent() {
   return (
     <div className={styles.homeWrapper}>
       <header className={styles.header}>
-        <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
+        <Image src="/assets/logo.svg" width={139} height={57} alt="logo" />
       </header>
       <div className={`${styles.mainBanner}`}>
         <div className="container position-relative">
