@@ -128,6 +128,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
 
   const FoodOptions = [
     { name: 'veg' },
+    { name: 'Non-veg' },
     { name: 'vegan' },
   ]
   const Services = [

@@ -67,7 +67,7 @@ const Page = () => {
   return (
     <div className="onboard_wrapper">
       <div className={"header-card"}>
-        <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
+        <Image src="/assets/logo.svg" width={139} height={57} alt="logo" />
       </div>
       <div className="board_form">
         <div className="auth_form m-auto">
