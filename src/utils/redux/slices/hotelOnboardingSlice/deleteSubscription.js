@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_CONFIG } from "@/config/app_config";
 
 export const delete_subscription = createAsyncThunk("delete_subscription", async ({ subscriptionId }, thunkAPI) => {
     try {
@@ -17,7 +18,7 @@ export const delete_subscription = createAsyncThunk("delete_subscription", async
             redirect: "follow"
         };
 
-        const response = await fetch("https://dev.phloii.com/api/v1/hotel/delete_subscription", requestOptions)
+        const response = await fetch(`${API_CONFIG.BASE_URL}/hotel/delete_subscription`, requestOptions)
         if (!response.ok) {
             const errorMessage = await response.json();
             if (errorMessage) {

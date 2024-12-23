@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import "./imagePreview.css"
 
 const ImageGallery = ({images,setShow_image_preview,show_image_preview,index}) => {
-  const [currentIndex, setCurrentIndex] = useState(index+1 || 0);
+  const [currentIndex, setCurrentIndex] = useState(index);
 
   const openPopup = (index) => {
     setCurrentIndex(index);

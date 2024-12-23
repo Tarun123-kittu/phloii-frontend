@@ -1,6 +1,7 @@
 'use client'
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_CONFIG } from "@/config/app_config";
 
 export const update_hotel_details = createAsyncThunk(
   "update_hotel_details",
@@ -74,7 +75,7 @@ export const update_hotel_details = createAsyncThunk(
       };
 
       const response = await fetch(
-        "https://dev.phloii.com/api/v1/hotel/update_hotel_details",
+        `${API_CONFIG.BASE_URL}/hotel/update_hotel_details`,
         requestOptions
       );
 

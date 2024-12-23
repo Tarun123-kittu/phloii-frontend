@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_CONFIG } from "@/config/app_config";
 
 // Async thunk for hotel signup
 export const hotel_signup = createAsyncThunk(
@@ -29,7 +30,7 @@ export const hotel_signup = createAsyncThunk(
 
       console.log("Sending signup request...");
       const response = await fetch(
-        "https://dev.phloii.com/api/v1/hotel/signUp",
+        `${API_CONFIG.BASE_URL}/v1/hotel/signUp`,
         requestOptions
       );
       console.log("Received response status:", response.status);

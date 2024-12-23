@@ -75,8 +75,8 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const formatTime = (time) => {
         const [hours, minutes] = time.split(':').map(Number);
         const isPM = hours >= 12;
-        const formattedHours = hours % 12 || 12; // Convert 24-hour format to 12-hour
-        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; // Add leading zero if minutes < 10
+        const formattedHours = hours % 12 || 12;
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; 
         const period = isPM ? 'PM' : 'AM';
 
         return `${formattedHours}:${formattedMinutes} ${period}`;

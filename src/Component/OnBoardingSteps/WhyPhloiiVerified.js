@@ -38,7 +38,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       setWhyPhloiiError("Please enter why do you want to be on phloii")
       return
     }
-    if(images?.length < 5){
+    if (images?.length < 5) {
       setImagesError('Please upload atleast 5 images')
       return
     }
@@ -386,7 +386,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               Food Prefrences
             </label>
             <Multiselect
-            
+
               options={FoodOptions}
               selectedValues={selectedFood}
               onSelect={handleSelect}
@@ -440,24 +440,33 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
         </div>
         <div className={col}>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label cmn_label">
-              Coustmer Service Number
+            <label htmlFor="customerServiceNumber" className="form-label cmn_label">
+              Customer Service Number
             </label>
             <input
-              type="text"
+              type="tel"  // Using 'tel' allows for mobile number input with a better user experience.
               className="form-control cmn_input"
-              placeholder="write message"
+              placeholder="Customer Service Number"
               value={customerServiceNumber}
-              onChange={(e) => { setCustomerServiceNumber(e.target.value); setServiceNumberError('') }}
+              onChange={(e) => {
+                const value = e.target.value;
+                // Only set the value if it is a number and contains 10 digits
+                if (/^\d{0,10}$/.test(value)) {
+                  setCustomerServiceNumber(value);
+                }
+                setServiceNumberError('');
+              }}
               style={serviceNumberError ? { border: "1px solid red" } : {}}
+              maxLength={10}  // Limit to 10 digits
             />
             {serviceNumberError && (
-              <span style={serviceError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={serviceNumberError ? { color: "red", fontSize: "10px" } : {}}>
                 {serviceNumberError}
               </span>
             )}
           </div>
         </div>
+
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">

@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_CONFIG } from "@/config/app_config";
 
 export const hotel_notifications = createAsyncThunk("hotel_notifications", async (thunkAPI) => {
     try {
@@ -11,7 +12,7 @@ export const hotel_notifications = createAsyncThunk("hotel_notifications", async
             redirect: "follow"
         };
 
-        const response = await fetch(`https://dev.phloii.com/api/v1/hotel/get_hotel_notifications`, requestOptions)
+        const response = await fetch(`${API_CONFIG.BASE_URL}/hotel/get_hotel_notifications`, requestOptions)
 
         if (!response.ok) {
             const errorMessage = await response.json();

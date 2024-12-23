@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_CONFIG } from "@/config/app_config";
 
 export const forgot_password = createAsyncThunk("forgot_password", async ({ email }, thunkAPI) => {
     try {
@@ -16,7 +17,7 @@ export const forgot_password = createAsyncThunk("forgot_password", async ({ emai
             redirect: "follow"
         };
 
-        const response = await fetch("https://dev.phloii.com/api/v1/hotel/forgetPassword", requestOptions)
+        const response = await fetch(`${API_CONFIG.BASE_URL}/hotel/forgetPassword`, requestOptions)
         if (!response.ok) {
             const errorMessage = await response.json();
             console.log("Error response:", errorMessage);

@@ -1,6 +1,7 @@
 'use client'
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_CONFIG } from "@/config/app_config";
 
 // Async thunk to fetch hotel details
 export const get_selected_hotel_details = createAsyncThunk(
@@ -24,7 +25,7 @@ export const get_selected_hotel_details = createAsyncThunk(
             };
 
             const response = await fetch(
-                `https://dev.phloii.com/api/v1/hotel/get_hotel_data?hotelId=${id}`,
+                `${API_CONFIG.BASE_URL}/hotel/get_hotel_data?hotelId=${id}`,
                 requestOptions
             );
 
