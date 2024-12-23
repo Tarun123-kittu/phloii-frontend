@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import "../../app/establishment/page.css"
+import "../../app/(slug)/establishment/page.css"
 import SideBar from '@/Component/Sidebar/SideBar';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
