@@ -210,13 +210,13 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               rows={5}
               type="text"
               className="form-control cmn_input"
-              placeholder="write message"
+              placeholder="Write message"
               value={whyphloii}
               onChange={(e) => { setWhyphloii(e.target.value); setWhyPhloiiError('') }}
               style={whyPhloiiError ? { border: "1px solid red" } : {}}
             />
             {whyPhloiiError && (
-              <span style={whyPhloiiError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={whyPhloiiError ? { color: "red", fontSize: "12px" } : {}}>
                 {whyPhloiiError}
               </span>
             )}
@@ -231,13 +231,13 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               rows={5}
               type="text"
               className="form-control cmn_input"
-              placeholder="write message"
+              placeholder="Write message"
               value={uniquefeatures}
               onChange={(e) => { setUniqueFeatures(e.target.value); setUniqueError('') }}
               style={uniqueError ? { border: "1px solid red" } : {}}
             />
             {whyPhloiiError && (
-              <span style={uniqueError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={uniqueError ? { color: "red", fontSize: "12px" } : {}}>
                 {uniqueError}
               </span>
             )}
@@ -333,7 +333,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               </div>
             </div>
             {imagesError && (
-              <span style={imagesError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={imagesError ? { color: "red", fontSize: "12px" } : {}}>
                 {imagesError}
               </span>
             )}
@@ -348,13 +348,13 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
             <input
               type="text"
               className="form-control cmn_input"
-              placeholder="write message"
+              placeholder="Write message"
               value={safeWord}
               onChange={(e) => { setSafeWord(e.target.value); setSafeError('') }}
               style={uniqueError ? { border: "1px solid red" } : {}}
             />
             {safeError && (
-              <span style={safeError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={safeError ? { color: "red", fontSize: "12px" } : {}}>
                 {safeError}
               </span>
             )}
@@ -369,13 +369,13 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
             <input
               type="text"
               className="form-control cmn_input"
-              placeholder="write message"
+              placeholder="Write message"
               value={inpersonvisit}
               onChange={(e) => { setInpersonvisit(e.target.value); setInPersonError('') }}
               style={uniqueError ? { border: "1px solid red" } : {}}
             />
             {inpersonError && (
-              <span style={inpersonError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={inpersonError ? { color: "red", fontSize: "12px" } : {}}>
                 {inpersonError}
               </span>
             )}
@@ -396,7 +396,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               className="custom-multiselect"
             />
             {foodError && (
-              <span style={foodError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={foodError ? { color: "red", fontSize: "12px" } : {}}>
                 {foodError}
               </span>
             )}
@@ -416,7 +416,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               className="custom-multiselect"
             />
             {serviceError && (
-              <span style={serviceError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={serviceError ? { color: "red", fontSize: "12px" } : {}}>
                 {serviceError}
               </span>
             )}
@@ -436,7 +436,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               className="custom-multiselect"
             />
             {atmosphereError && (
-              <span style={atmosphereError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={atmosphereError ? { color: "red", fontSize: "12px" } : {}}>
                 {atmosphereError}
               </span>
             )}
@@ -464,7 +464,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               maxLength={10}  // Limit to 10 digits
             />
             {serviceNumberError && (
-              <span style={serviceNumberError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={serviceNumberError ? { color: "red", fontSize: "12px" } : {}}>
                 {serviceNumberError}
               </span>
             )}
@@ -514,7 +514,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               style={openError ? { border: "1px solid red" } : {}}
             />
             {openError && (
-              <span style={{ color: "red", fontSize: "10px" }}>
+              <span style={{ color: "red", fontSize: "12px" }}>
                 {openError}
               </span>
             )}
@@ -565,7 +565,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               style={closeError ? { border: "1px solid red" } : {}}
             />
             {closeError && (
-              <span style={{ color: "red", fontSize: "10px" }}>
+              <span style={{ color: "red", fontSize: "12px" }}>
                 {closeError}
               </span>
             )}

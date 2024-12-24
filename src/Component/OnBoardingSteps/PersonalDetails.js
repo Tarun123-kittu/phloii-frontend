@@ -9,7 +9,6 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
   const handleForward = () => {
     if (!ownername && !ownerPhone && !owneremail) {
       setNameError("Please enter owner name")
-      setWebsiteError("Please enter the website link")
       setPhoneError("Please enter owner phone number")
       setEmailError("Please enter owner email")
     }
@@ -41,20 +40,15 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
     setStep(1)
   }
 
-  const validateWebsiteLink = (link) => {
-    const regex = /^(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
-    return regex.test(link);
-  };
-
   const handleBlur = () => {
-    if (!websiteLink) {
-      setWebsiteError("Website link is required.");
-    } else if (!validateWebsiteLink(websiteLink)) {
-      setWebsiteError("Please enter a valid website link.");
+    // Only validate if the input is not empty
+    if (websiteLink && !/^https:\/\//i.test(websiteLink)) {
+      setWebsiteError('Please enter a valid URL starting with https://');
     } else {
-      setWebsiteError(""); // Clear error if the link is valid
+      setWebsiteError('');
     }
   };
+
   return (
     <div className="">
       <div className="row">
@@ -66,40 +60,42 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
             <input
               type="text"
               className="form-control cmn_input"
-              placeholder="enter owner name"
+              placeholder="Enter owner name"
               value={ownername}
               onChange={(e) => { setOwnername(e.target.value); setNameError('') }}
               style={nameError ? { border: "1px solid red" } : {}}
             />
             {nameError && (
-              <span style={nameError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={nameError ? { color: "red", fontSize: "12px" } : {}}>
                 {nameError}
               </span>
             )}
           </div>
         </div>
-        <div className={col}>
-          <div className="mb-3">
-            <label htmlFor="type" className="form-label cmn_label">
-              Establishment Website Link (Optional)
-            </label>
-            <input
-              type="text"
-              className="form-control cmn_input"
-              placeholder="Enter website link"
-              value={websiteLink}
-              onChange={(e) => {
-                setWebsiteLink(e.target.value);
-                setWebsiteError(""); // Clear the error while typing
-              }}
-              onBlur={handleBlur} // Validate on blur
-              style={websiteError ? { border: "1px solid red" } : {}}
-            />
-            {websiteError && (
-              <span style={{ color: "red", fontSize: "10px" }}>{websiteError}</span>
-            )}
-          </div>
-        </div>
+        <div className="col">
+      <div className="mb-3">
+        <label htmlFor="type" className="form-label cmn_label">
+          Establishment Website Link (Optional)
+        </label>
+        <input
+          type="url"
+          className="form-control cmn_input"
+          placeholder="Enter website link"
+          value={websiteLink}
+          onChange={(e) => {
+            setWebsiteLink(e.target.value);
+            setWebsiteError(''); // Clear the error while typing
+          }}
+          onBlur={handleBlur} // Validate on blur
+          style={websiteError ? { border: '1px solid red' } : {}}
+          pattern="https://.*" // Regex to match URLs starting with "https://"
+          title="Please enter a valid URL starting with https://"
+        />
+        {websiteError && (
+          <span style={{ color: 'red', fontSize: '12px' }}>{websiteError}</span>
+        )}
+      </div>
+    </div>
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="phone" className="form-label cmn_label">
@@ -124,7 +120,7 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               style={phoneError ? { border: "1px solid red" } : {}}
             />
             {phoneError && (
-              <span style={{ color: "red", fontSize: "10px" }}>
+              <span style={{ color: "red", fontSize: "12px" }}>
                 {phoneError}
               </span>
             )}
@@ -139,13 +135,13 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
             <input
               type="email"
               className="form-control cmn_input"
-              placeholder="enter email"
+              placeholder="Enter email"
               value={owneremail}
               onChange={(e) => { setOwnerEmail(e.target.value); setEmailError('') }}
               style={emailError ? { border: "1px solid red" } : {}}
             />
             {emailError && (
-              <span style={emailError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={emailError ? { color: "red", fontSize: "12px" } : {}}>
                 {emailError}
               </span>
             )}

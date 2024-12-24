@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { forgot_password, clear_forgot_password_state } from "@/utils/redux/slices/authSlice/forgotPassword";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 const ForgotPassword = () => {
   const dispatch = useDispatch()
   const router = useRouter()
@@ -64,7 +65,7 @@ const ForgotPassword = () => {
             style={emailError ? { border: "1px solid red" } : {}}
           />
           {emailError && (
-            <span style={emailError ? { color: "red", fontSize: "10px" } : {}}>
+            <span style={emailError ? { color: "red", fontSize: "12px" } : {}}>
               {emailError}
             </span>
           )}
@@ -72,6 +73,7 @@ const ForgotPassword = () => {
 
         <div className="mt-4">
           <Button buttonClick={handleSendEmail} text={is_email_sent?.status === "Loading" ? "Loading" : "Send"} className={"w-100"} />
+          <p class="text-center loginAlready fadeColor mt-2 mb-0">Back to &nbsp;<Link className="text-white" href="/establishment/login">Login</Link></p>
         </div>
       </div>
     </div>

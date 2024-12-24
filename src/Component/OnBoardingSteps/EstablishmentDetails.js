@@ -76,7 +76,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               style={establishmentnameError ? { border: "1px solid red" } : {}}
             />
             {establishmentnameError && (
-              <span style={establishmentnameError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={establishmentnameError ? { color: "red", fontSize: "12px" } : {}}>
                 {establishmentnameError}
               </span>
             )}
@@ -94,13 +94,13 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               onChange={(e) => { setEstablishedtype(e.target.value); setEstablishmentTypeError('') }}
               value={establishedtype}
             >
-              <option selected>select establishment</option>
+              <option selected>Select establishment</option>
               <option value="coffee_shop">Coffee Shop</option>
               <option value="Restaurant">Restaurant</option>
               <option value="Bar">Bar</option>
             </select>
             {establishmenttypeError && (
-              <span style={establishmenttypeError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={establishmenttypeError ? { color: "red", fontSize: "12px" } : {}}>
                 {establishmenttypeError}
               </span>
             )}
@@ -114,13 +114,13 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
             <input
               type="address"
               className="form-control cmn_input"
-              placeholder="enter street address"
+              placeholder="Enter street address"
               value={streetaddress}
               onChange={(e) => { setStreetAddress(e.target.value); setAddressError('') }}
               style={addressError ? { border: "1px solid red" } : {}}
             />
             {addressError && (
-              <span style={addressError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={addressError ? { color: "red", fontSize: "12px" } : {}}>
                 {addressError}
               </span>
             )}
@@ -146,7 +146,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               style={unitnumberError ? { border: "1px solid red" } : {}}
             />
             {unitnumberError && (
-              <span style={{ color: "red", fontSize: "10px" }}>
+              <span style={{ color: "red", fontSize: "12px" }}>
                 {unitnumberError}
               </span>
             )}
@@ -165,14 +165,14 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               style={countryError ? { border: "1px solid red" } : {}}
               value={country}
             >
-              <option>select country</option>
+              <option>Select country</option>
               {all_countries?.map((country, i) => (
                 <option key={i} value={country?.name}>{country?.name}</option>
 
               ))}
             </select>
             {countryError && (
-              <span style={countryError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={countryError ? { color: "red", fontSize: "12px" } : {}}>
                 {countryError}
               </span>
             )}
@@ -190,13 +190,13 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               style={stateError ? { border: "1px solid red" } : {}}
               value={state}
             >
-              <option selected>select state</option>
+              <option selected>Select state</option>
               {states?.map((state, i) => (
                 <option key={i} value={state?.name}>{state?.name}</option>
               ))}
             </select>
             {stateError && (
-              <span style={stateError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={stateError ? { color: "red", fontSize: "12px" } : {}}>
                 {stateError}
               </span>
             )}
@@ -210,7 +210,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
             <input
               type="text"
               className="form-control cmn_input"
-              placeholder="enter pin code"
+              placeholder="Enter pin code"
               value={pincode}
               onChange={(e) => {
                 const value = e.target.value;
@@ -222,7 +222,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               style={pincodeError ? { border: "1px solid red" } : {}}
             />
             {pincodeError && (
-              <span style={pincodeError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={pincodeError ? { color: "red", fontSize: "12px" } : {}}>
                 {pincodeError}
               </span>
             )}

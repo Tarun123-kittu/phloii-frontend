@@ -39,7 +39,7 @@ const Login = () => {
     e.preventDefault();
     if (!email && !password) {
       setemailError("Email is required");
-      setPasswordError("Password is requires");
+      setPasswordError("Password is required");
       return
     }
 
@@ -54,7 +54,7 @@ const Login = () => {
     }
 
     if (!password) {
-      setPasswordError("Password is requires");
+      setPasswordError("Password is required");
       return;
     }
     dispatch(hotel_login({ email, password }));
@@ -120,7 +120,7 @@ const Login = () => {
             style={emailError ? { border: "1px solid red" } : {}}
           />
           {emailError && (
-            <span style={emailError ? { color: "red", fontSize: "10px" } : {}}>
+            <span style={emailError ? { color: "red", fontSize: "12px" } : {}}>
               {emailError}
             </span>
           )}
@@ -192,7 +192,7 @@ const Login = () => {
           <span className="password_input d-block pt-1">Password must contain atleast 8 chracter,including a number and letter</span>
           {passwordError && (
             <span
-              style={passwordError ? { color: "red", fontSize: "10px" } : {}}
+              style={passwordError ? { color: "red", fontSize: "12px" } : {}}
             >
               {passwordError}
             </span>

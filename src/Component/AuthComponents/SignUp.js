@@ -29,12 +29,9 @@ const SignUP = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    if (!isTerms) {
-      toast.error("Please agree to the terms of service")
-      return
-    }
+   
     if (!username) {
-      setUsernameError("username is required");
+      setUsernameError("Username is required");
       return;
     }
     if (!email) {
@@ -46,8 +43,12 @@ const SignUP = () => {
       return;
     }
     if (!password) {
-      setPasswordError("password is required");
+      setPasswordError("Password is required");
       return;
+    }
+    if (!isTerms) {
+      toast.error("Please agree to the terms of service")
+      return
     }
     dispatch(hotel_signup({ username, email, password }));
   };
@@ -113,7 +114,7 @@ const SignUP = () => {
             style={usernameError ? { border: "1px solid red" } : {}}
           />
           {usernameError && (
-            <span style={usernameError ? { color: "red", fontSize: "10px" } : {}}>
+            <span style={usernameError ? { color: "red", fontSize: "12px" } : {}}>
               {usernameError}
             </span>
           )}
@@ -132,7 +133,7 @@ const SignUP = () => {
             style={emailError ? { border: "1px solid red" } : {}}
           />
           {emailError && (
-            <span style={emailError ? { color: "red", fontSize: "10px" } : {}}>
+            <span style={emailError ? { color: "red", fontSize: "12px" } : {}}>
               {emailError}
             </span>
           )}
@@ -160,7 +161,7 @@ const SignUP = () => {
           </div>
           <span className="password_input d-block pt-1">Password must contain atleast 8 chracter,including a number and letter</span>
           {passwordError && (
-            <span style={passwordError ? { color: "red", fontSize: "10px" } : {}}>
+            <span style={passwordError ? { color: "red", fontSize: "12px" } : {}}>
               {passwordError}
             </span>
           )}
