@@ -5,7 +5,6 @@ import Image from "next/image";
 import { API_CONFIG } from "@/config/app_config";
 const SlugDetails = ({ slugName }) => {
     const [slug_data, setSlug_data] = useState();
-    console.log(slug_data, "this is the slug data")
 
     const getData = async () => {
         const response = await fetch(

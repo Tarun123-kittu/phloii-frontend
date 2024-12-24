@@ -81,7 +81,7 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="type" className="form-label cmn_label">
-              Establishment Website Link
+              Establishment Website Link (Optional)
             </label>
             <input
               type="text"

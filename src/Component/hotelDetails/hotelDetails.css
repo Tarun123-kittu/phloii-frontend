@@ -300,3 +300,12 @@ span.verified {
     font-weight: bold;
     text-align: center;
 }
+img.user_profile_image{
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    object-fit: cover;
+    object-position: center center;
+    flex: 0 0 56px;
+
+}

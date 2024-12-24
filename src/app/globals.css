@@ -198,7 +198,18 @@ span.password_input {
   font-size: 10px;
   color: white;
 }
+textarea::-webkit-scrollbar {
+  width: 5px;
+}
 
+textarea::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+textarea::-webkit-scrollbar-thumb {
+background-color: darkgrey;
+outline: 1px solid slategrey;
+}
 /* Add to your CSS file or module */
 
 @keyframes floatLeftToRight {

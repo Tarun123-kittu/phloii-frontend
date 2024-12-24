@@ -225,7 +225,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
-              What makes your establishment unique?
+              What makes your establishment unique? (Optional)
             </label>
             <textarea
               rows={5}
@@ -343,7 +343,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
               Are you open to having a safe word that a person can say to get
-              help?
+              help? (Optional)
             </label>
             <input
               type="text"
@@ -480,6 +480,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               type="time"
               className="form-control cmn_input"
               value={openTiming}
+              placeholder="00:00"
               onChange={(e) => {
                 const inputTime = e.target.value.trim();
                 const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i; // Regex to check 12-hour format
@@ -529,6 +530,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               type="time"
               id="close-timings"
               className="form-control cmn_input"
+              placeholder="00:00"
               value={closeTiming}
               onChange={(e) => {
                 const inputTime = e.target.value.trim();

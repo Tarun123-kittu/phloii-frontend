@@ -94,7 +94,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                 <div className='dashboard_wrapper'>
                     <div className='dashboard_info'>
                         <div className='dashboard_head d-flex gap-3 align-items-center'>
-                            <img src="/assets/userImage.png" alt="user" className='user_image' />
+                            <img src={hotel_details?.hotel?.images[0]} alt="user" className='user_profile_image' />
                             <div className='info flex-grow-1'>
                                 <h3>{hotel_details?.hotel?.establishmentName || "Not Available"}</h3>
                                 <span title={hotel_details?.hotel?.address?.streetAddress}>
@@ -232,7 +232,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         </ul>
                         <div className='hotel_image'>
                             <h5>Restaurant Photos</h5>
-                            <img onClick={() => { setShow_image_preview(true); setImages(hotel_details?.hotel?.images); setIndex(-1) }} src={hotel_details?.hotel?.images[0]} className='imge_one img-fluid' style={{cursor:"pointer"}} alt="" />
+                            <img onClick={() => { setShow_image_preview(true); setImages(hotel_details?.hotel?.images); setIndex(0) }} src={hotel_details?.hotel?.images[0]} className='imge_one img-fluid' style={{cursor:"pointer"}} alt="" />
                             <ul className="image-grid mt-3">
                                 {hotel_details?.hotel?.images?.slice(1, 5).map((image, i) => (
                                     <li
