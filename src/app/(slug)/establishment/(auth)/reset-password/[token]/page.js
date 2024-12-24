@@ -2,6 +2,19 @@ import React from 'react'
 import SideImage from '@/Component/AuthComponents/sideImage'
 import ResetPassword from '@/Component/AuthComponents/ResetPassword'
 
+export async function generateMetadata() {
+
+  const metadata = {
+    title: `Establishment Reset Password`,
+    description: `Phloii Reset passoword`,
+  };
+
+  return {
+    title: metadata.title,
+    description: metadata.description,
+  };
+}
+
 const page = ({params}) => {
   const {token} = params
   return (

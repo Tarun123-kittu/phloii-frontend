@@ -37,7 +37,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if(!email && !password){
+    if (!email && !password) {
       setemailError("Email is required");
       setPasswordError("Password is requires");
       return
@@ -62,7 +62,6 @@ const Login = () => {
 
   useEffect(() => {
     if (is_loggedIn?.status === "Success") {
-      console.log(is_loggedIn, "is_loggedIn");
       toast.success("Logged in");
       localStorage.setItem("phloii_token_auth", is_loggedIn?.data?.data);
       localStorage.setItem("phloii_user", is_loggedIn?.data?.email);
@@ -142,7 +141,7 @@ const Login = () => {
               }}
               style={passwordError ? { border: "1px solid red" } : {}}
             />
-              <div
+            <div
               className="position-absolute end-0 me-3 mt-1 top-0"
               onClick={togglePasswordVisibility}
             >
@@ -223,6 +222,8 @@ const Login = () => {
         </div>
         <div className="mt-4">
           <Button
+            type="button"
+            disabled={is_loggedIn?.status === "Loading"}
             buttonClick={handleLogin}
             text={is_loggedIn?.status !== "Loading" ? "Signin" : "Loading"}
             className={"w-100"}
