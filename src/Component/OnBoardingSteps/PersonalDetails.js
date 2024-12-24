@@ -21,6 +21,10 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
       setPhoneError("Please enter owner phone number")
       return
     }
+    if(websiteError){
+      setWebsiteError("Please input a valid url!")
+      return
+    }
     if (!owneremail) {
       setEmailError("Please enter owner email");
       return;
