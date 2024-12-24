@@ -177,7 +177,7 @@ const SignUP = () => {
           <label className="form-check-label sub-text fadeColor">
             I have read and agree to the{" "}
             <span className="text-hightLight text-decoration-underline">
-              Terms of Service
+              <a className="text-hightLight text-decoration-underline" href="https://phloii.com/privacy-policy" target="_bkank">Terms of Service</a>
             </span>
           </label>
         </div>
