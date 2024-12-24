@@ -57,3 +57,31 @@ label.form-label.cmn_label {
     backdrop-filter: blur(8px);
     filter: blur(0px);
 }
+
+@media(max-width:1299px){
+    .auth-wrapper {
+        padding-left:0;
+      
+    }
+    .auth_form{
+        max-width: 350px;
+        margin: auto;
+    }
+}
+@media(max-width:991px){
+    .auth-wrapper {
+        padding:0 20px;
+      
+    }
+    .mobile_blank{
+        display: none;
+    }
+    .main_heading {
+        font-size: 20px;
+        color: var(--highlight);
+    }
+    .sort_desc {
+        font-size: 13px;
+
+    }
+}

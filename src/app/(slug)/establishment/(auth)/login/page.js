@@ -21,10 +21,10 @@ const page = () => {
   return (
     <div className='mh-100-vh'>
       <div className='row'>
-        <div className="col-md-6 p-0">
+        <div className="col-md-6 p-0 mobile_blank">
           <SideImage />
         </div>
-        <div className="col-md-6 p-0">
+        <div className="col-md-12 col-lg-6 p-0">
           <Login />
         </div>
       </div>
