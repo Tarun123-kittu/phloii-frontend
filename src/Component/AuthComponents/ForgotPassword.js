@@ -73,7 +73,7 @@ const ForgotPassword = () => {
 
         <div className="mt-4">
           <Button buttonClick={handleSendEmail} text={is_email_sent?.status === "Loading" ? "Loading" : "Send"} className={"w-100"} />
-          <p class="text-center loginAlready fadeColor mt-2 mb-0">Back to &nbsp;<Link className="text-white" href="/establishment/login">Login</Link></p>
+          <p className="text-center loginAlready fadeColor mt-2 mb-0">Back to &nbsp;<Link className="text-white" href="/establishment/login">Login</Link></p>
         </div>
       </div>
     </div>
