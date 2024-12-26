@@ -230,7 +230,7 @@ const Login = () => {
           />
         </div>
         <p className="text-center loginAlready fadeColor mt-2 mb-0">
-          {"Dont have an account? "}
+          {"Don't have an account? "}
           <Link href="/establishment/signup" className="text-white">
             Signup
           </Link>
