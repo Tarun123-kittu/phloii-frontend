@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_hotels_details } from '@/utils/redux/slices/hotelOnboardingSlice/getHotelsDetails';
 import ImageGallery from '@/Component/imagePreview/ImagePreview';
-
+import Link from 'next/link';
 const Establishment = () => {
   const dispatch = useDispatch()
   const router = useRouter()
@@ -62,9 +62,9 @@ const Establishment = () => {
                 <h5 className="mb-1">{hotel?.ownerDetails?.ownerName}</h5>
                 <p className="pending_pay mb-3">payment {hotel?.hotelPayments?.paymentStatus}</p>
                 <ul className="owner_details px-2">
-                  {hotel?.ownerDetails?.ownerPhone && <li><img src="/assets/mobile_icon.svg" alt="" /> <a href="">{hotel?.ownerDetails?.ownerPhone}</a></li>}
-                  {hotel?.ownerDetails?.ownerEmail && <li><img src="/assets/message_icon.svg" alt="" /> <a href="">{hotel?.ownerDetails?.ownerEmail}</a></li>}
-                  {hotel_details?.ownerDetails?.websiteLink && <li className='pb-0'><img src="/assets/globe_icon.svg" alt="" /> <a href="">{hotel_details?.ownerDetails?.websiteLink}</a></li>}
+                  {hotel?.ownerDetails?.ownerPhone && <li><img src="/assets/mobile_icon.svg" alt="" /> <a href={`tel:${hotel?.ownerDetails?.ownerPhone}`}>{hotel?.ownerDetails?.ownerPhone}</a></li>}
+                  {hotel?.ownerDetails?.ownerEmail && <li><img src="/assets/message_icon.svg" alt="" /> <a href={`mailto:${hotel?.ownerDetails?.ownerEmail}`}>{hotel?.ownerDetails?.ownerEmail}</a></li>}
+                  {hotel?.ownerDetails?.websiteLink && <li className='pb-0'><img src="/assets/globe_icon.svg" alt="" /> <Link target='_blank' href={hotel?.ownerDetails?.websiteLink}>{hotel?.ownerDetails?.websiteLink}</Link></li>}
                 </ul>
               </div>
 

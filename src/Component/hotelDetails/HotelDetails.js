@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 import { delete_subscription, clear_delete_subscription_state } from '@/utils/redux/slices/hotelOnboardingSlice/deleteSubscription'
 import toast from 'react-hot-toast'
 import DeleteModal from '../deleteModal/DeleteModal'
-
+import Link from 'next/link'
 
 const HotelDetailsComponent = ({ hotelId }) => {
     const router = useRouter()
@@ -120,11 +120,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     }
                                 >
                                     Cancel Subscription
-                                    {is_subscription_deleted?.status === "Loading" && (
-                                        <div className="spinner-border text-warning" role="status">
-                                            <span className="visually-hidden">Loading...</span>
-                                        </div>
-                                    )}
+                                   
                                 </button>
                             )}
 
@@ -217,9 +213,9 @@ const HotelDetailsComponent = ({ hotelId }) => {
                             </button>
                         </div>
                         <ul className='owner_details'>
-                            <li><img src="/assets/mobile_icon.svg" alt="" /> <a href="">{hotel_details?.hotel?.ownerDetails?.ownerPhone}</a></li>
-                            <li><img src="/assets/message_icon.svg" alt="" /> <a href="">{hotel_details?.hotel?.ownerDetails?.ownerEmail}</a></li>
-                            {hotel_details?.hotel?.ownerDetails?.websiteLink && <li><img src="/assets/globe_icon.svg" alt="" /> <a
+                            <li><img src="/assets/mobile_icon.svg" alt="" /> <a href={`tel:${hotel_details?.hotel?.ownerDetails?.ownerPhone}`}>{hotel_details?.hotel?.ownerDetails?.ownerPhone}</a></li>
+                            <li><img src="/assets/message_icon.svg" alt="" /> <a href={`mailto:${hotel_details?.hotel?.ownerDetails?.ownerEmail}`}>{hotel_details?.hotel?.ownerDetails?.ownerEmail}</a></li>
+                            {hotel_details?.hotel?.ownerDetails?.websiteLink && <li><img src="/assets/globe_icon.svg" alt="" /> <Link
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 href={hotel_details?.hotel?.ownerDetails?.websiteLink?.startsWith('http')
@@ -227,7 +223,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     : `https://${hotel_details?.hotel?.ownerDetails?.websiteLink}`}
                             >
                                 {hotel_details?.hotel?.ownerDetails?.websiteLink}
-                            </a>
+                            </Link>
                             </li>}
                         </ul>
                         <div className='hotel_image'>

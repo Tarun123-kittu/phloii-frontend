@@ -26,17 +26,17 @@ const Testimonials = () => {
   const clients = [
         {   name: 'Cameron Williamson',
             designation:'Founder Gojek Corp.',
-            review: 'Kerjarodi.com is an application for job seekers and workers who prioritize user comfort and the quality of services provided by our team', 
+            review: "I can’t recommend Phloii enough! Unlike other dating apps, it genuinely focuses on safety and authenticity, which made me feel so much more comfortable. The approved meeting locations gave me peace of mind, and the matches felt real and meaningful. I met someone amazing on Phloii, and it’s all thanks to the thoughtful features and user-friendly design. If you're looking for a dating app that truly cares about creating real connections, Phloii is the one!", 
             image: 'assets/clientOne.png' 
         },
         {   name: 'John Snow',
             designation:'Founder Gojek Corp.',
-            review: 'Kerjarodi.com is an application for job seekers and workers who prioritize user comfort and the quality of services provided by our team', 
+            review:  "I can’t recommend Phloii enough! Unlike other dating apps, it genuinely focuses on safety and authenticity, which made me feel so much more comfortable. The approved meeting locations gave me peace of mind, and the matches felt real and meaningful. I met someone amazing on Phloii, and it’s all thanks to the thoughtful features and user-friendly design. If you're looking for a dating app that truly cares about creating real connections, Phloii is the one!", 
             image: 'assets/clientOne.png' 
         },
         {   name: 'John Snow',
             designation:'Founder Gojek Corp.',
-            review: 'Kerjarodi.com is an application for job seekers and workers who prioritize user comfort and the quality of services provided by our team', 
+            review: "I can’t recommend Phloii enough! Unlike other dating apps, it genuinely focuses on safety and authenticity, which made me feel so much more comfortable. The approved meeting locations gave me peace of mind, and the matches felt real and meaningful. I met someone amazing on Phloii, and it’s all thanks to the thoughtful features and user-friendly design. If you're looking for a dating app that truly cares about creating real connections, Phloii is the one!", 
             image: 'assets/clientOne.png' 
         },
     
@@ -45,7 +45,7 @@ const Testimonials = () => {
   return (
     <div className={`${styles.padding} ${styles.bg_black}`} style={{ position: 'relative' }}>
      <div className="container">
-     <div className="row">
+     <div className="row align-items-center">
         {/* Left Column: Reviews */}
         <div className="col-md-6">
             <h2 className={`${styles.cmn_heading}`}>What do they <span>think about</span> <br />our App?</h2>
