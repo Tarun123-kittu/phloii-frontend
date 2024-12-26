@@ -27,8 +27,13 @@ const DeleteModal = ({ isVisible, onClose, onConfirm, title, message,is_subscrip
           textAlign: 'center',
         }}
       >
-        <h2 className='text-white'>{title}</h2>
+        <h3 className='text-white'>{title}</h3>
         <p className='text-white'>{message}</p>
+        {is_subscription_deleted?.status === "Loading"  && (
+                                        <div className="spinner-border text-warning" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </div>
+                                    )}
         <div className='d-flex justify-content-center mt-4 gap-3'>
           <button
            className='grey_btn cmn_btn'
@@ -40,7 +45,7 @@ const DeleteModal = ({ isVisible, onClose, onConfirm, title, message,is_subscrip
            className='cmn_btn'
             onClick={onConfirm}
           >
-            {is_subscription_deleted?.status === "Loading" ? "Deleting" : "Delete"}
+            {is_subscription_deleted?.status === "Loading" ? "Deleting" : "Submit"}
           </button>
         </div>
       </div>

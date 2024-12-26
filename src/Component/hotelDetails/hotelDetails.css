@@ -123,9 +123,9 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);word
     width: 100%;
 }
 ul.image-grid {
-   display: flex;
+    display: grid;
     padding: 0;
-    
+    grid-template-columns: auto auto auto auto;
     gap: 10px;
 }
 
@@ -138,7 +138,6 @@ ul.image-grid img {
 
 ul.image-grid li {
     list-style: none;
-    width: 25%;
 }
 .hotel_image h5 {
     color: rgba(255, 255, 255, 1);

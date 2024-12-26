@@ -208,7 +208,7 @@ const Login = () => {
             onChange={(e) => setRememberMe(!rememberMe)}
           />
           <label
-            class="form-check-label sub-text fadeColor mt-1"
+            class="form-check-label sub-text fadeColor mt-1 "
             for="flexCheckDefault"
           >
             Remember me
