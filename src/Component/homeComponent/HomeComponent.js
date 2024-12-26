@@ -109,7 +109,7 @@ export default function HomeComponent() {
                 environment.
               </p>
               <p className={styles.cmn_desc}>
-                Whether you're looking for friendship, love, or something in
+                Whether you&apos;re looking for friendship, love, or something in
                 between, Phloii is here to make your dating experience simple,
                 seamless, and enjoyable.
               </p>
@@ -321,7 +321,7 @@ export default function HomeComponent() {
                 </h3>
 
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Emily and Ryan's love story began on Phloii, where their
+                  Emily and Ryan&apos;s love story began on Phloii, where their
                   shared love for hiking and adventure brought them together.
                   After weeks of meaningful conversations and getting to know
                   each other through the app, they decided to meet at a
