@@ -29,6 +29,13 @@ const SignUP = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
+
+    if(!username && !email && !password){
+      setUsernameError("Username is required");
+      setEmailError("Email is required");
+      setPasswordError("Password is required");
+      return
+    }
    
     if (!username) {
       setUsernameError("Username is required");
