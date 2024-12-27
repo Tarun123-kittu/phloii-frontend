@@ -22,6 +22,7 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loggedinError,setLoggedInError] = useState('')
   const is_loggedIn = useSelector((store) => store.HOTEL_LOGIN);
 
   useEffect(() => {
@@ -37,6 +38,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setLoggedInError('')
     if (!email && !password) {
       setemailError("Email is required");
       setPasswordError("Password is required");
@@ -77,7 +79,7 @@ const Login = () => {
     }
 
     if (is_loggedIn?.status === "Error") {
-      toast.error(is_loggedIn?.error?.message);
+      setLoggedInError(is_loggedIn?.error?.message);
       dispatch(clear_hotel_login_state())
     }
   }, [is_loggedIn]);
@@ -197,6 +199,9 @@ const Login = () => {
               {passwordError}
             </span>
           )}
+          <p className="loggederror">{loggedinError}</p>
+        </div>
+        <div>
         </div>
         <div className="form-check d-flex align-itmes-center gap-2">
           <input
