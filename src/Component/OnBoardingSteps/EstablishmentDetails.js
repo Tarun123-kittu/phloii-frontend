@@ -88,7 +88,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               What type of establishment are you?
             </label>
             <select
-              className="form-select cmn-select"
+              class="form-select cmn-select"
               aria-label="Default select example"
               style={establishmenttypeError ? { border: "1px solid red" } : {}}
               onChange={(e) => { setEstablishedtype(e.target.value); setEstablishmentTypeError('') }}
@@ -159,7 +159,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               Country
             </label>
             <select
-              className="form-select cmn-select"
+              class="form-select cmn-select"
               aria-label="Default select example"
               onChange={(e) => { setCountry(e.target.value); setCountryError('') }}
               style={countryError ? { border: "1px solid red" } : {}}
@@ -184,7 +184,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               State
             </label>
             <select
-              className="form-select cmn-select"
+              class="form-select cmn-select"
               aria-label="Default select example"
               onChange={(e) => { setState(e.target.value); setStateError('') }}
               style={stateError ? { border: "1px solid red" } : {}}
