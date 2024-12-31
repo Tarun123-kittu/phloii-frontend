@@ -54,6 +54,7 @@ background: rgba(34, 235, 255, 0.3);
   border-radius: 10px;
   border: 1px solid #FFFFFF8F;
   color: #fff;
+  height: 100%;
 }
 .features_card h3 {
 font-size: 20px;

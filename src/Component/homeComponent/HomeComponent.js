@@ -304,7 +304,7 @@ export default function HomeComponent() {
             Real love <span>stories</span> last forever
           </h2>
           <p
-            className={`${styles.cmn_desc} text-center mb-5 position-relative z-2`}
+            className={`${styles.cmn_desc} text-center mb-5 position-relative z-2 px-2`}
           >
             Real love stories last forever because they’re built on genuine
             connections, trust, and shared <br /> moments that stand the test of
@@ -369,7 +369,7 @@ export default function HomeComponent() {
 
               <div className={styles.features_card}>
                 <div className={`${styles.private_image} overflow-hidden mb-4`}>
-                  <img src="assets/jacob.png" alt="jacob" />
+                  <img src="assets/mia.png" alt="jacob" />
                 </div>
                 <h3>
                   Mia <span className="text-white">/</span> <span>Alex</span>

@@ -4,6 +4,7 @@ import React from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import styles from "../homeComponent/page.module.css"
+import { clients } from './testimonialsJason';
 const Testimonials = () => {
   const [sliderRefLeft, sliderLeft] = useKeenSlider({
     loop: true,
@@ -22,25 +23,6 @@ const Testimonials = () => {
     sliderLeft.current?.prev();
     sliderRight.current?.prev();
   };
-
-  const clients = [
-        {   name: 'Cameron Williamson',
-            designation:'Founder Gojek Corp.',
-            review: "I can’t recommend Phloii enough! Unlike other dating apps, it genuinely focuses on safety and authenticity, which made me feel so much more comfortable. The approved meeting locations gave me peace of mind, and the matches felt real and meaningful. I met someone amazing on Phloii, and it’s all thanks to the thoughtful features and user-friendly design. If you're looking for a dating app that truly cares about creating real connections, Phloii is the one!", 
-            image: 'assets/clientOne.png' 
-        },
-        {   name: 'John Snow',
-            designation:'Founder Gojek Corp.',
-            review:  "I can’t recommend Phloii enough! Unlike other dating apps, it genuinely focuses on safety and authenticity, which made me feel so much more comfortable. The approved meeting locations gave me peace of mind, and the matches felt real and meaningful. I met someone amazing on Phloii, and it’s all thanks to the thoughtful features and user-friendly design. If you're looking for a dating app that truly cares about creating real connections, Phloii is the one!", 
-            image: 'assets/clientOne.png' 
-        },
-        {   name: 'John Snow',
-            designation:'Founder Gojek Corp.',
-            review: "I can’t recommend Phloii enough! Unlike other dating apps, it genuinely focuses on safety and authenticity, which made me feel so much more comfortable. The approved meeting locations gave me peace of mind, and the matches felt real and meaningful. I met someone amazing on Phloii, and it’s all thanks to the thoughtful features and user-friendly design. If you're looking for a dating app that truly cares about creating real connections, Phloii is the one!", 
-            image: 'assets/clientOne.png' 
-        },
-    
-  ];
 
   return (
     <div className={`${styles.padding} ${styles.bg_black}`} style={{ position: 'relative' }}>
