@@ -440,7 +440,7 @@ export default function HomeComponent() {
             <div className="col-lg-6">
               <div className={`${styles.about_image} position-relative `}>
                 <Image
-                  src="/assets/aboutImage.png"
+                  src="/assets/veirfied_image.png"
                   height={524}
                   width={596}
                   className="img-fluid position-relative z-2"

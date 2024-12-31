@@ -71,7 +71,7 @@ font-size: 20px;
   background-color: var(--bs-black);
 }
 .padding{
-  padding: 9rem 0;
+  padding: 7rem 0;
 }
 .sub_heading {
   color: #36ECFF;
@@ -150,9 +150,9 @@ bottom: auto;
 top: 30%;
 }
 .cmn_desc{
-  font-size: 20px;
+  font-size: 16px;
   color: #fff;
-  line-height: 33px;
+  line-height: 25px;
 }
 .phlooi_rights p{
   max-width: 950px;
@@ -269,7 +269,7 @@ bottom: -300px;
     line-height: 28px;
   }
   .padding{
-    padding: 7rem 0;
+    padding: 6rem 0;
   }
 }
 @media(max-width:1326px){
@@ -281,9 +281,7 @@ bottom: -300px;
   .mainBanner h1{
     font-size: 40px;
   }
-  .padding{
-    padding: 8rem 0;
-  }
+ 
   .cmn_heading{
     font-size: 32px;
   }
