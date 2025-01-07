@@ -465,7 +465,7 @@ export default function HomeComponent() {
                 enjoyable meetups. By becoming a Phloii Verified location, your
                 business can benefit from increased foot traffic, as it helps
                 drive more customers to your establishment. The service is
-                available for $99 a month, offering a great opportunity to boost
+                offering a great opportunity to boost
                 sales while promoting safety for all users.
               </p>
             </div>
