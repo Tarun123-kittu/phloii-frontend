@@ -4,6 +4,18 @@
   padding: 1rem 10px;
   border-bottom: 1px solid #FFFFFF4D;
 }
+.rister_est {
+  border: 2px solid #fbb90d;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 6px;
+  color: #fbb90d;
+  background-color: transparent;
+  text-decoration: none;
+  cursor: pointer;
+}
 .mainBanner{
   background-color: #000000;
   padding-top: 5rem;
@@ -363,5 +375,13 @@ bottom: -300px;
 }
 .image_grid{
   transform: translateY(88px);
+}
+.rister_est {
+ 
+  padding: 10px;
+  font-size: 12px;
+}
+.header img{
+  width: 100px;
 }
 }
