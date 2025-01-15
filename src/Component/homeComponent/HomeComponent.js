@@ -473,7 +473,7 @@ export default function HomeComponent() {
                 offering a great opportunity to boost
                 sales while promoting safety for all users.
               </p>
-             <div className="pt-3">
+             <div className="">
              <Link href={'/establishment/login'} className={styles.rister_est}>Register Establishment</Link>
              </div>
             </div>
