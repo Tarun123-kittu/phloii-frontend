@@ -22,8 +22,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* Favicon links */}
-        <link rel="icon" href="/assets/phloii_fav_icon.png" sizes="32x32" type="image/png" />
-        <link rel="apple-touch-icon" href="/assets/phloii_fav_icon.png" />
+        <link rel="icon" href="/black.svg" sizes="32x32" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/assets/phloii_fav_icon.png" type="image/png" />
         <meta name="theme-color" content="#ffffff" />
         {/* Title and Meta Tags */}
         <meta property="og:title" content="Phloii Dating App" />
