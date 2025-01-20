@@ -24,8 +24,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Head>
         {/* General meta tags */}
-        <meta property="og:image" content="https://staging.phloii.com/assets/phloii_image.png" />
-        <meta property="og:image:secure_url" content="https://staging.phloii.com/assets/phloii_image.png" />
+        <meta property="og:image" content="https://staging.phloii.com/assets/phloii_fav_icon.png" />
+        <meta property="og:image:secure_url" content="https://staging.phloii.com/assets/phloii_fav_icon.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="628" />
         
@@ -36,14 +36,14 @@ export default function RootLayout({ children }) {
         <meta property="og:url" content="https://staging.phloii.com" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Phloii" />
-        <meta property="og:description" content="Description of your website" />
+        <meta property="og:description" content="Find Matches Near you" />
         
         {/* Twitter meta tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@yourtwitterhandle" />
         <meta name="twitter:title" content="Phloii" />
-        <meta name="twitter:description" content="Description of your website" />
-        <meta name="twitter:image" content="https://staging.phloii.com/assets/phloii_image.png" />
+        <meta name="twitter:description" content="Find Matches Near you" />
+        <meta name="twitter:image" content="https://staging.phloii.com/assets/phloii_fav_icon.png" />
 
         {/* WhatsApp meta tag */}
         <meta property="og:whatsapp" content="whatsapp://send?text=Check%20this%20out%20https://staging.phloii.com" />
