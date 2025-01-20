@@ -4,7 +4,7 @@ export async function generateMetadata() {
   const metadata = {
     title: "Phloii Dating App",
     description: "Find Matches Near you",
-    image: "/black.svg", // Replace with your image URL
+    image: "/phloii_fav_icon.png", 
   };
 
   return {
@@ -16,8 +16,8 @@ export async function generateMetadata() {
       images: [
         {
           url: metadata.image,
-          width: 1200, // Optional: Specify image width
-          height: 630, // Optional: Specify image height
+          width: 1200, 
+          height: 630, 
         },
       ],
     },
