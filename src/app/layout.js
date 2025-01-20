@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import AppStore from "@/utils/redux/AppStore";
 import { Toaster } from "react-hot-toast";
-
+import Head from "next/head";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-poppins",
@@ -20,17 +20,12 @@ const geistMono = localFont({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        {/* Favicon links */}
-        <link rel="icon" href="/black.svg" sizes="32x32" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/assets/phloii_fav_icon.png" type="image/png" />
-        <meta name="theme-color" content="#ffffff" />
-        {/* Title and Meta Tags */}
-        <meta property="og:title" content="Phloii Dating App" />
-        <meta property="og:description" content="Find Matches Near you" />
-        <meta property="og:image" content="/assets/phloii_fav_icon.png" />
-        <meta property="og:url" content="https://phloii.com" />
-      </head>
+      <link rel="shortcut icon" href="/black.svg" type="image/svg+xml" />
+      <Head>
+        <meta property="og:image" content="https://staging.phloii.com/assets/phloii_fav_icon.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="628" />
+      </Head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={AppStore}>
           {children}
