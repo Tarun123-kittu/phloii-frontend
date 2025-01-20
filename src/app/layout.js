@@ -20,12 +20,12 @@ const geistMono = localFont({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <link rel="shortcut icon" href="/black.svg" type="image/svg+xml" />
       <Head>
         <meta property="og:image" content="https://staging.phloii.com/assets/phloii_fav_icon.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="628" />
       </Head>
+      <link rel="shortcut icon" href="/black.svg" type="image/svg+xml" />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={AppStore}>
           {children}
