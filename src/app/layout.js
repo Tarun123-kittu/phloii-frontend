@@ -47,7 +47,7 @@ export default function RootLayout({ children }) {
         {/* Skype meta tag */}
         <meta name="skype_toolbar" content="skype:send?chat&url=https://staging.phloii.com" />
       </Head>
-      <link rel="shortcut icon" href="/black.svg" type="image/svg+xml" />
+      {/* <link rel="shortcut icon" href="/black.svg" type="image/svg+xml" /> */}
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={AppStore}>
           {children}
