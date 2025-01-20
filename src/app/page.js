@@ -15,7 +15,7 @@ export async function generateMetadata() {
       description: metadata.description,
       images: [
         {
-          url: metadata.image,
+          url: "https://www.phloii.com"+metadata.image,
           width: 1200, 
           height: 630, 
         },

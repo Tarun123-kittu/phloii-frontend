@@ -19,10 +19,10 @@ const geistMono = localFont({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <link rel="shortcut icon" href="/black.svg" type="image/svg+xml" />
+      {/* <link rel="shortcut icon" href="/black.svg" type="image/svg+xml" /> */}
       <head>
-        <link rel="icon" href="/black.svg" type="image/x-icon" />
-        <link rel="shortcut icon" href="/black.svg" type="image/x-icon" />
+        <link rel="icon" href="/black.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/black.svg" type="image/svg+xml" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={AppStore}>
