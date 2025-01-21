@@ -231,10 +231,15 @@ color: var(--bs-white);
 }
 .footer{
   background-color: #202020;
-  color: #ffffff;
-  padding: 1.2rem 0;
+  color: #ffffff; 
+  padding-top: 30px;
 
 }
+.footer p{
+  padding: 15px;
+  border-top: 1px solid #fbb90d;
+}
+
 .image_grid ul{
   display: flex;
   padding: 0;
@@ -250,6 +255,7 @@ width: 100%;
  /* flex: 0 0 200px; */
  width: 100%;
 }
+
 .appDownload::before,.appDownload::after{
   position: absolute;
   content: "";

@@ -9,7 +9,7 @@ export default function HomeComponent() {
         <div className="container">
 
        <div className="d-flex justify-content-between align-items-center">
-       <Image src="/assets/logo.svg" width={139} height={57} alt="logo" /> <Link href={'/establishment/login'} className={styles.rister_est}>Register Establishment</Link>
+       <Link href="/" className="cursor-pointer"><Image src="/assets/logo.svg" width={139} height={57} alt="logo" /></Link> <Link href={'/establishment/login'} className={styles.rister_est}>Register Establishment</Link>
        </div>
         </div>
       </header>
@@ -482,7 +482,56 @@ export default function HomeComponent() {
       </div>
       <Testimonials />
       <footer className={styles.footer}>
-        <p className="text-center mb-0">© Copyright 2024 phloii.com</p>
+        <div className="container">
+            <div className="row align-items-center">
+                <div className="col-lg-4">
+                <Image src="/assets/logo.svg" width={200} height={57} className="img-fluid mb-3" alt="logo" /> 
+                
+                </div>
+                <div className="col-lg-8 text-center">
+                   <div className="footer_links">
+                   <div className="footer_cta">
+                      <h5>Quick Links</h5>
+                      <ul>
+                        <li>
+
+                      <Link href={'/block-contacts'}>Safety & Reporting</Link>
+                        </li>
+                        <li>
+                        <Link href={'/cookie-policy'}>Cookie Policy</Link>
+                        </li>
+                        <li>
+                        <Link className="mb-0" href={'/privacy-policy'}>Privacy Policy</Link>
+                        </li>
+                        
+                      </ul>
+                   
+                   
+                  </div>
+                    <div className="footer_cta">
+                      <h5>Quick Links</h5>
+                      <ul>
+                        <li>
+
+                      <Link href={'/block-contacts'}>Safety & Reporting</Link>
+                        </li>
+                        <li>
+                        <Link href={'/cookie-policy'}>Cookie Policy</Link>
+                        </li>
+                        <li>
+                        <Link className="mb-0" href={'/privacy-policy'}>Privacy Policy</Link>
+                        </li>
+                        
+                      </ul>
+                   
+                   
+                  </div>
+                   </div>
+
+                </div>
+            </div>
+        </div>
+        <p className="text-center mb-0 mt-5">© Copyright 2024 phloii.com</p>
       </footer>
     </div>
   );
