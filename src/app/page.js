@@ -4,8 +4,8 @@ import image from "next/image";
 export async function generateMetadata() {
 
   const metadata = {
-    title: `Phloii Dating App`,
-    description: `Find Matches Near you`,
+    title: `Phloii app of dating`,
+    description: `You can find your match here`,
     image: "https://images.unsplash.com/photo-1737320372090-c61d2cb88ab3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw4fHx8ZW58MHx8fHx8",
   };
 
