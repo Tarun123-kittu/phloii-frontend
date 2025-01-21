@@ -5,7 +5,7 @@ export async function generateMetadata() {
     title: "Phloii - A Dating App",
     description: "Find your perfect match on Phloii, the leading dating app!",
     image: "/assets/phloii_fav_icon.png",
-    url: `${NODE_ENV === "production" ? "https://www.phloii.com" : "https://staging.phloii.com/"}`, 
+    url: `${process.env.NODE_ENV === "production" ? "https://www.phloii.com" : "https://staging.phloii.com/"}`, 
   };
 
   return {
