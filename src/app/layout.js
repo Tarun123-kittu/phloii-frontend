@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 "use client"
-=======
-"use client";
->>>>>>> 1cdcc9cabb38721720549e7f334a52d553cde8cc
 import localFont from "next/font/local";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
