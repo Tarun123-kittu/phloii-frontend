@@ -4,8 +4,8 @@ export async function generateMetadata() {
   const metadata = {
     title: "Phloii - A Dating App",
     description: "Find your perfect match on Phloii, the leading dating app!",
-    image: "https://images.unsplash.com/photo-1737320372090-c61d2cb88ab3?w=1200&h=630&auto=format&fit=crop&q=60",
-    url: "https://staging.phloii.com", // Replace with your actual website URL
+    image: "/assets/phloii_fav_icon.png",
+    url: `${NODE_ENV === "production" ? "https://www.phloii.com" : "https://staging.phloii.com/"}`, 
   };
 
   return {
