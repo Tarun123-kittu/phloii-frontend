@@ -33,7 +33,7 @@ const Testimonials = () => {
             <h2 className={`${styles.cmn_heading}`}>What do they <span>think about</span> <br />our App?</h2>
           <div ref={sliderRefLeft} className="keen-slider">
             {clients.map((client, index) => (
-              <div className="keen-slider__slide" key={index}>
+              <div className="keen-slider__slide pe-2" key={index}>
                 <h2 className={styles.clientName}>{client.name}</h2>
                 <p className={styles.designation}>{client.designation}</p>
                 <h5 className={styles.review}>{client.review}</h5>

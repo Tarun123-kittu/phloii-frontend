@@ -236,37 +236,7 @@ outline: 1px solid slategrey;
   animation: floatLeftToRight 4s ease-in-out infinite; /* Adjust duration as needed */
   display: inline-block;
 }
-.footer_cta {
-  display: inline-block;
-}
 
-.col-lg-6 {}
-
-.footer_cta {
-  text-align: left;
-}
-
-.footer_cta ul {
-  padding: 0;
-}
-
-.footer_cta ul li {
-  list-style: none;
-}
-.footer_cta h5 {
-  margin-bottom: 15px;
-}
-.footer_links {
-  display: flex;
-  justify-content: space-around;
-  gap: 22px;
-}
-.footer_cta ul li a {
-  color: #fbb90d;
-  text-decoration: unset;
-  margin-bottom: 10px;
-  display: inline-block;
-}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

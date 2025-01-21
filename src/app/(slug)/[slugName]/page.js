@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
         };
     }
 
-    const slugData = await fetchSlugData(params.slugName);
+    const slugData = await fetchSlugData(params?.slugName);
 
     if (!slugData) {
         return {
@@ -36,8 +36,8 @@ export async function generateMetadata({ params }) {
     }
 
     return {
-        title: slugData.title,
-        description: slugData.content.substring(0, 160),
+        title: slugData?.title,
+        description: slugData?.content?.substring(0, 160),
     };
 }
 
