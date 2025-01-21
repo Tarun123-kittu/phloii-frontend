@@ -12,6 +12,7 @@ import {
 } from "@/utils/redux/slices/authSlice/signUp";
 import validator from "validator";
 import toast from "react-hot-toast";
+import { hotel_login, clear_hotel_login_state } from "@/utils/redux/slices/authSlice/login";
 const SignUP = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -21,12 +22,23 @@ const SignUP = () => {
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isTerms, setIsTerms] = useState(false);
   const is_signed_up = useSelector((store) => store.HOTEL_SIGNUP)
+  const is_loggedIn = useSelector((store) => store.HOTEL_LOGIN);
 
   const handleSignUp = (e) => {
     e.preventDefault();
+
+    if(!username && !email && !password){
+      setUsernameError("Username is required");
+      setEmailError("Email is required");
+      setPasswordError("Password is required");
+      return
+    }
+   
     if (!username) {
-      setUsernameError("username is required");
+      setUsernameError("Username is required");
       return;
     }
     if (!email) {
@@ -38,16 +50,19 @@ const SignUP = () => {
       return;
     }
     if (!password) {
-      setPasswordError("password is required");
+      setPasswordError("Password is required");
       return;
+    }
+    if (!isTerms) {
+      toast.error("Please agree with terms of service")
+      return
     }
     dispatch(hotel_signup({ username, email, password }));
   };
 
   useEffect(() => {
     if (is_signed_up?.status === "Success") {
-      toast.success(is_signed_up?.data?.message)
-      router.push('/establishment/login')
+      dispatch(hotel_login({ email, password }))
       dispatch(clear_hotel_signup_state())
     }
     if (is_signed_up?.status === "Error") {
@@ -55,11 +70,38 @@ const SignUP = () => {
       dispatch(clear_hotel_signup_state())
     }
   }, [is_signed_up])
+
+  useEffect(() => {
+    if (is_loggedIn?.status === "Success") {
+      console.log(is_loggedIn, "is_loggedIn");
+      toast.success("Logged in");
+      localStorage.setItem("phloii_token_auth", is_loggedIn?.data?.data);
+      localStorage.setItem("phloii_user", is_loggedIn?.data?.email);
+      localStorage.setItem("phloii_user_name", is_loggedIn?.data?.username);
+      localStorage.setItem("phloii_onboarding_done", is_loggedIn?.data?.isOnboradingDone);
+      if (is_loggedIn?.data?.isOnboradingDone) {
+        router.push("/establishment");
+      } else {
+        router.push("/establishment/onboarding");
+      }
+
+      dispatch(clear_hotel_login_state());
+    }
+
+    if (is_loggedIn?.status === "Error") {
+      toast.error(is_loggedIn?.error?.message);
+      dispatch(clear_hotel_login_state())
+    }
+  }, [is_loggedIn]);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">
         <div className="text-center">
-          <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
+          <Image src="/assets/logo.svg" width={139} height={57} alt="logo" />
         </div>
         <h2 className="main_heading text-center mt-4">Create Account</h2>
         <p className="sort_desc text-center">
@@ -79,7 +121,7 @@ const SignUP = () => {
             style={usernameError ? { border: "1px solid red" } : {}}
           />
           {usernameError && (
-            <span style={usernameError ? { color: "red", fontSize: "10px" } : {}}>
+            <span style={usernameError ? { color: "red", fontSize: "12px" } : {}}>
               {usernameError}
             </span>
           )}
@@ -92,32 +134,41 @@ const SignUP = () => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => {
-              setEmail(e.target.value);
+              setEmail(e.target.value.toLowerCase());
               setEmailError("");
             }}
             style={emailError ? { border: "1px solid red" } : {}}
           />
           {emailError && (
-            <span style={emailError ? { color: "red", fontSize: "10px" } : {}}>
+            <span style={emailError ? { color: "red", fontSize: "12px" } : {}}>
               {emailError}
             </span>
           )}
         </div>
         <div className="mb-3">
           <label className="form-label cmn_label">Password</label>
-          <input
-            type="password"
-            className="form-control cmn_input"
-            placeholder="*********"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              setPasswordError("");
-            }}
-            style={passwordError ? { border: "1px solid red" } : {}}
-          />
+          <div className="input-group">
+            <input
+              type={showPassword ? "text" : "password"} // Toggle input type based on state
+              className="form-control cmn_input"
+              placeholder="Please enter your password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setPasswordError("");
+              }}
+              style={passwordError ? { border: "1px solid red" } : {}}
+            />
+            <div
+              className="position-absolute end-0 me-3 mt-1"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
+            </div>
+          </div>
+          <span className="password_input d-block pt-1">Password must contain atleast 8 chracter,including a number and letter</span>
           {passwordError && (
-            <span style={passwordError ? { color: "red", fontSize: "10px" } : {}}>
+            <span style={passwordError ? { color: "red", fontSize: "12px" } : {}}>
               {passwordError}
             </span>
           )}
@@ -126,13 +177,14 @@ const SignUP = () => {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
+            checked={isTerms}
             id="flexCheckDefault"
+            onChange={() => setIsTerms(!isTerms)}
           />
           <label className="form-check-label sub-text fadeColor">
             I have read and agree to the{" "}
             <span className="text-hightLight text-decoration-underline">
-              Terms of Service
+              <a className="text-hightLight text-decoration-underline" href="https://phloii.com/privacy-policy" target="_bkank">Terms of Service</a>
             </span>
           </label>
         </div>
@@ -141,7 +193,7 @@ const SignUP = () => {
         </div>
         <p className="text-center loginAlready fadeColor mt-2 mb-0">
           {"Already have an account?"}{" "}
-          <Link href="establishment/login" className="text-white">
+          <Link href="/establishment/login" className="text-white">
             Login
           </Link>
         </p>

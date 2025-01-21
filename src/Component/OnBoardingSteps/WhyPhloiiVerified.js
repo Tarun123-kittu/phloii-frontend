@@ -10,7 +10,7 @@ import { delete_hotel_image, clear_delete_hotel_image } from "@/utils/redux/slic
 import { useDispatch, useSelector } from "react-redux";
 >>>>>>> 7de9a6439395a86d020f0485ebd0ddc3d48ca73a
 
-const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setFoodValues, foodValues, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel,is_hotel_updated }) => {
+const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setFoodValues, foodValues, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel, is_hotel_updated }) => {
   console.log(customerServiceNumber, "customerServiceNumber customerServiceNumber")
   const dispatch = useDispatch()
   const [errors, setErrors] = useState("");
@@ -40,6 +40,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
     }
     if (!whyphloii) {
       setWhyPhloiiError("Please enter why do you want to be on phloii")
+      return
+    }
+    if (images?.length < 5) {
+      setImagesError('Please upload atleast 5 images')
       return
     }
     if (!inpersonvisit) {
@@ -128,6 +132,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
 
   const FoodOptions = [
     { name: 'veg' },
+    { name: 'Non-veg' },
     { name: 'vegan' },
   ]
   const Services = [
@@ -150,7 +155,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
   const handleRemove = (selectedList) => {
     const food = selectedList.map((item) => item.name);
     setSelectedFood(selectedList);
-    setFoodValues(days)
+    setFoodValues(food)
   };
 
   const handleSelectService = (selectedList) => {
@@ -209,13 +214,13 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               rows={5}
               type="text"
               className="form-control cmn_input"
-              placeholder="write message"
+              placeholder="Write message"
               value={whyphloii}
               onChange={(e) => { setWhyphloii(e.target.value); setWhyPhloiiError('') }}
               style={whyPhloiiError ? { border: "1px solid red" } : {}}
             />
             {whyPhloiiError && (
-              <span style={whyPhloiiError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={whyPhloiiError ? { color: "red", fontSize: "12px" } : {}}>
                 {whyPhloiiError}
               </span>
             )}
@@ -224,19 +229,19 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
-              What makes your restaurant unique?
+              What makes your establishment unique? (Optional)
             </label>
             <textarea
               rows={5}
               type="text"
               className="form-control cmn_input"
-              placeholder="write message"
+              placeholder="Write message"
               value={uniquefeatures}
               onChange={(e) => { setUniqueFeatures(e.target.value); setUniqueError('') }}
               style={uniqueError ? { border: "1px solid red" } : {}}
             />
             {whyPhloiiError && (
-              <span style={uniqueError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={uniqueError ? { color: "red", fontSize: "12px" } : {}}>
                 {uniqueError}
               </span>
             )}
@@ -332,7 +337,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               </div>
             </div>
             {imagesError && (
-              <span style={imagesError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={imagesError ? { color: "red", fontSize: "12px" } : {}}>
                 {imagesError}
               </span>
             )}
@@ -342,18 +347,18 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
               Are you open to having a safe word that a person can say to get
-              help?
+              help? (Optional)
             </label>
             <input
               type="text"
               className="form-control cmn_input"
-              placeholder="write message"
+              placeholder="Write message"
               value={safeWord}
               onChange={(e) => { setSafeWord(e.target.value); setSafeError('') }}
               style={uniqueError ? { border: "1px solid red" } : {}}
             />
             {safeError && (
-              <span style={safeError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={safeError ? { color: "red", fontSize: "12px" } : {}}>
                 {safeError}
               </span>
             )}
@@ -368,13 +373,13 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
             <input
               type="text"
               className="form-control cmn_input"
-              placeholder="write message"
+              placeholder="Write message"
               value={inpersonvisit}
               onChange={(e) => { setInpersonvisit(e.target.value); setInPersonError('') }}
               style={uniqueError ? { border: "1px solid red" } : {}}
             />
             {inpersonError && (
-              <span style={inpersonError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={inpersonError ? { color: "red", fontSize: "12px" } : {}}>
                 {inpersonError}
               </span>
             )}
@@ -386,14 +391,16 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               Food Prefrences
             </label>
             <Multiselect
+
               options={FoodOptions}
               selectedValues={selectedFood}
               onSelect={handleSelect}
               onRemove={handleRemove}
               displayValue="name"
+              className="custom-multiselect"
             />
             {foodError && (
-              <span style={foodError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={foodError ? { color: "red", fontSize: "12px" } : {}}>
                 {foodError}
               </span>
             )}
@@ -410,9 +417,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               onSelect={handleSelectService}
               onRemove={handleRemoveService}
               displayValue="name"
+              className="custom-multiselect"
             />
             {serviceError && (
-              <span style={serviceError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={serviceError ? { color: "red", fontSize: "12px" } : {}}>
                 {serviceError}
               </span>
             )}
@@ -429,9 +437,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               onSelect={handleSelectAtmosphere}
               onRemove={handleRemoveAtmosphere}
               displayValue="name"
+              className="custom-multiselect"
             />
             {atmosphereError && (
-              <span style={atmosphereError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={atmosphereError ? { color: "red", fontSize: "12px" } : {}}>
                 {atmosphereError}
               </span>
             )}
@@ -439,37 +448,46 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
         </div>
         <div className={col}>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label cmn_label">
-              Coustmer Service Number
+            <label htmlFor="customerServiceNumber" className="form-label cmn_label">
+              Customer Service Number
             </label>
             <input
-              type="text"
+              type="tel"  // Using 'tel' allows for mobile number input with a better user experience.
               className="form-control cmn_input"
-              placeholder="write message"
+              placeholder="Customer Service Number"
               value={customerServiceNumber}
-              onChange={(e) => { setCustomerServiceNumber(e.target.value); setServiceNumberError('') }}
+              onChange={(e) => {
+                const value = e.target.value;
+                // Only set the value if it is a number and contains 10 digits
+                if (/^\d{0,10}$/.test(value)) {
+                  setCustomerServiceNumber(value);
+                }
+                setServiceNumberError('');
+              }}
               style={serviceNumberError ? { border: "1px solid red" } : {}}
+              maxLength={10}  // Limit to 10 digits
             />
             {serviceNumberError && (
-              <span style={serviceError ? { color: "red", fontSize: "10px" } : {}}>
+              <span style={serviceNumberError ? { color: "red", fontSize: "12px" } : {}}>
                 {serviceNumberError}
               </span>
             )}
           </div>
         </div>
+
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
               Open Timings
             </label>
             <input
-              type="text"
+              type="time"
               className="form-control cmn_input"
-              placeholder="e.g., 10:00 AM or 6:00 PM"
               value={openTiming}
+              placeholder="00:00"
               onChange={(e) => {
                 const inputTime = e.target.value.trim();
-                const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i;
+                const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i; // Regex to check 12-hour format
                 const match = inputTime.match(timeRegex);
 
                 if (match) {
@@ -477,6 +495,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   hours = parseInt(hours, 10);
                   minutes = parseInt(minutes, 10);
 
+                  // Convert to 24-hour format if AM/PM is provided
                   if (period?.toUpperCase() === "PM" && hours < 12) {
                     hours += 12;
                   } else if (period?.toUpperCase() === "AM" && hours === 12) {
@@ -486,35 +505,40 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   const militaryTime = `${hours.toString().padStart(2, "0")}:${minutes
                     .toString()
                     .padStart(2, "0")}`;
-                  setOpenTiming(militaryTime); // Set the formatted time
+                  setOpenTiming(militaryTime); // Set the time in 24-hour format
+                  setOpenError(""); // Clear any existing error
+                } else if (/^\d{2}:\d{2}$/.test(inputTime)) {
+                  // If user enters valid 24-hour format, accept it directly
+                  setOpenTiming(inputTime);
                   setOpenError(""); // Clear the error
                 } else {
-                  setOpenTiming(inputTime); // Keep the raw input for user feedback
-                  setOpenError("Invalid time format. Use HH:MM AM/PM."); // Show error message
+                  setOpenError("Invalid time format. Use HH:MM AM/PM or 24-hour format.");
                 }
               }}
               style={openError ? { border: "1px solid red" } : {}}
             />
             {openError && (
-              <span style={{ color: "red", fontSize: "10px" }}>
+              <span style={{ color: "red", fontSize: "12px" }}>
                 {openError}
               </span>
             )}
           </div>
-        </div>
+        </div>;
+
         <div className={col}>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label cmn_label">
+            <label htmlFor="close-timings" className="form-label cmn_label">
               Close Timings
             </label>
             <input
-              type="text"
+              type="time"
+              id="close-timings"
               className="form-control cmn_input"
-              placeholder="e.g., 10:00 AM or 6:00 PM"
+              placeholder="00:00"
               value={closeTiming}
               onChange={(e) => {
                 const inputTime = e.target.value.trim();
-                const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i;
+                const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i; // Regex to check 12-hour format
                 const match = inputTime.match(timeRegex);
 
                 if (match) {
@@ -522,6 +546,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   hours = parseInt(hours, 10);
                   minutes = parseInt(minutes, 10);
 
+                  // Convert to 24-hour format if AM/PM is provided
                   if (period?.toUpperCase() === "PM" && hours < 12) {
                     hours += 12;
                   } else if (period?.toUpperCase() === "AM" && hours === 12) {
@@ -531,27 +556,31 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   const militaryTime = `${hours.toString().padStart(2, "0")}:${minutes
                     .toString()
                     .padStart(2, "0")}`;
-                  setCloseTiming(militaryTime); // Set the formatted time
+                  setCloseTiming(militaryTime); // Set the time in 24-hour format
+                  setCloseError(""); // Clear any existing error
+                } else if (/^\d{2}:\d{2}$/.test(inputTime)) {
+                  // If user enters valid 24-hour format, accept it directly
+                  setCloseTiming(inputTime);
                   setCloseError(""); // Clear the error
                 } else {
-                  setCloseTiming(inputTime); // Keep the raw input for user feedback
-                  setCloseError("Invalid time format. Use HH:MM AM/PM."); // Show error message
+                  setCloseError("Invalid time format. Use HH:MM AM/PM or 24-hour format.");
                 }
               }}
               style={closeError ? { border: "1px solid red" } : {}}
             />
             {closeError && (
-              <span style={{ color: "red", fontSize: "10px" }}>
+              <span style={{ color: "red", fontSize: "12px" }}>
                 {closeError}
               </span>
             )}
           </div>
         </div>
 
+
       </div>
       <div className="d-flex justify-content-end gap-3">
         <Button buttonClick={handleBackword} text="Previous" className="grey_btn" />
-        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : "Done"} />
+        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : hotelId ? "Update" : "Done"} />
       </div>
       {/* <VerifiedModal  
                 modalId="exampleModal"

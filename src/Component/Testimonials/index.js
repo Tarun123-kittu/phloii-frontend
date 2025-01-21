@@ -4,6 +4,7 @@ import React from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import styles from "../homeComponent/page.module.css"
+import { clients } from './testimonialsJason';
 const Testimonials = () => {
   const [sliderRefLeft, sliderLeft] = useKeenSlider({
     loop: true,
@@ -23,35 +24,16 @@ const Testimonials = () => {
     sliderRight.current?.prev();
   };
 
-  const clients = [
-        {   name: 'Cameron Williamson',
-            designation:'Founder Gojek Corp.',
-            review: 'Kerjarodi.com is an application for job seekers and workers who prioritize user comfort and the quality of services provided by our team', 
-            image: 'assets/clientOne.png' 
-        },
-        {   name: 'John Snow',
-            designation:'Founder Gojek Corp.',
-            review: 'Kerjarodi.com is an application for job seekers and workers who prioritize user comfort and the quality of services provided by our team', 
-            image: 'assets/clientOne.png' 
-        },
-        {   name: 'John Snow',
-            designation:'Founder Gojek Corp.',
-            review: 'Kerjarodi.com is an application for job seekers and workers who prioritize user comfort and the quality of services provided by our team', 
-            image: 'assets/clientOne.png' 
-        },
-    
-  ];
-
   return (
     <div className={`${styles.padding} ${styles.bg_black}`} style={{ position: 'relative' }}>
      <div className="container">
-     <div className="row">
+     <div className="row align-items-center">
         {/* Left Column: Reviews */}
         <div className="col-md-6">
             <h2 className={`${styles.cmn_heading}`}>What do they <span>think about</span> <br />our App?</h2>
           <div ref={sliderRefLeft} className="keen-slider">
             {clients.map((client, index) => (
-              <div className="keen-slider__slide" key={index}>
+              <div className="keen-slider__slide pe-2" key={index}>
                 <h2 className={styles.clientName}>{client.name}</h2>
                 <p className={styles.designation}>{client.designation}</p>
                 <h5 className={styles.review}>{client.review}</h5>

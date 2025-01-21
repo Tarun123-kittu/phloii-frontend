@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { forgot_password, clear_forgot_password_state } from "@/utils/redux/slices/authSlice/forgotPassword";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 const ForgotPassword = () => {
   const dispatch = useDispatch()
   const router = useRouter()
@@ -30,7 +31,7 @@ const ForgotPassword = () => {
   useEffect(() => {
     if (is_email_sent?.status === "Success") {
       toast.success(is_email_sent?.data?.message)
-      router.push("establishment/login")
+      router.push("/establishment/login")
       dispatch(clear_forgot_password_state())
     }
     if (is_email_sent?.status === "Error") {
@@ -42,7 +43,7 @@ const ForgotPassword = () => {
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">
         <div className="text-center">
-          <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
+          <Image src="/assets/logo.svg" width={139} height={57} alt="logo" />
         </div>
         <h2 className="main_heading text-center mt-4">Forget Password</h2>
         <p className="sort_desc text-center">
@@ -64,7 +65,7 @@ const ForgotPassword = () => {
             style={emailError ? { border: "1px solid red" } : {}}
           />
           {emailError && (
-            <span style={emailError ? { color: "red", fontSize: "10px" } : {}}>
+            <span style={emailError ? { color: "red", fontSize: "12px" } : {}}>
               {emailError}
             </span>
           )}
@@ -72,6 +73,7 @@ const ForgotPassword = () => {
 
         <div className="mt-4">
           <Button buttonClick={handleSendEmail} text={is_email_sent?.status === "Loading" ? "Loading" : "Send"} className={"w-100"} />
+          <p class="text-center loginAlready fadeColor mt-2 mb-0">Back to &nbsp;<Link className="text-white" href="/establishment/login">Login</Link></p>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ const ResetPassword = ({ token }) => {
   useEffect(() => {
     if (is_password_reset?.status === "Success") {
       toast.success(is_password_reset?.data?.message)
-      router.push("establishment/login")
+      router.push("/establishment/login")
       dispatch(clear_reset_password_state())
     }
     if (is_password_reset?.status === "Error") {
@@ -49,7 +49,7 @@ const ResetPassword = ({ token }) => {
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">
         <div className="text-center">
-          <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
+          <Image src="/assets/logo.svg" width={139} height={57} alt="logo" />
         </div>
         <h2 className="main_heading text-center mt-2">Set a new password</h2>
         <p className="sort_desc text-center">

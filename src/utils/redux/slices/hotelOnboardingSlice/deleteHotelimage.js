@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_CONFIG } from "@/config/app_config";
 
 export const delete_hotel_image = createAsyncThunk("delete_hotel_image", async ({ index, id }, thunkAPI) => {
     try {
@@ -11,7 +12,7 @@ export const delete_hotel_image = createAsyncThunk("delete_hotel_image", async (
             redirect: "follow"
         };
 
-        const response = await fetch(`https://dev.phloii.com/api/v1/hotel/delete_Hotel_image?hotelId=${id}&deleteImageIndex=${index}`, requestOptions)
+        const response = await fetch(`${API_CONFIG.BASE_URL}/hotel/delete_Hotel_image?hotelId=${id}&deleteImageIndex=${index}`, requestOptions)
 
         if (!response.ok) {
             const errorMessage = await response.json();

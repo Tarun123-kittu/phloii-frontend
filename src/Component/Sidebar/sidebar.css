@@ -102,3 +102,34 @@ li.logout_btn {
     bottom: 6px;
     cursor: pointer;
 }
+.payment_info.payment_success {
+    background: linear-gradient(90deg, #fbb90d 0%, #22ebff 100%);
+    border: unset;
+}
+
+ul.notify_list li{
+font-weight: 400;
+padding: 10px;
+border-bottom: 1px solid #ffffff1a;
+font-size: 13px;
+}
+ul.notify_list li:last-child{
+    border-bottom:unset 
+}
+ul.notify_list {
+    top: 45px;
+    background: #323232;
+    min-width: 300px;
+    max-width: 300px;
+    color: #fff;
+    border-radius: 8px;
+    list-style: none;
+    font-size: 13px;
+    padding: 0;
+    right: 0;
+}
+
+ul.notify_list.position-relative {
+    padding: 0px;
+    margin: 0;
+}

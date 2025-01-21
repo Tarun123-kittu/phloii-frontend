@@ -1,9 +1,4 @@
-.header {
-  text-align: center;
-  background: #000000;
-  padding: 1rem 10px;
-  border-bottom: 1px solid #FFFFFF4D;
-}
+
 .mainBanner{
   background-color: #000000;
   padding-top: 5rem;
@@ -30,7 +25,7 @@ right: 0;
 background: rgba(34, 235, 255, 0.3);
 }
 .navImmages img{
-  width: 180px;
+  width: 140px;
 }
 .mainBanner h1, .mainBanner p{
   color: #fff;
@@ -54,6 +49,7 @@ background: rgba(34, 235, 255, 0.3);
   border-radius: 10px;
   border: 1px solid #FFFFFF8F;
   color: #fff;
+  height: 100%;
 }
 .features_card h3 {
 font-size: 20px;
@@ -70,7 +66,7 @@ font-size: 20px;
   background-color: var(--bs-black);
 }
 .padding{
-  padding: 9rem 0;
+  padding: 7rem 0;
 }
 .sub_heading {
   color: #36ECFF;
@@ -149,9 +145,9 @@ bottom: auto;
 top: 30%;
 }
 .cmn_desc{
-  font-size: 20px;
+  font-size: 16px;
   color: #fff;
-  line-height: 33px;
+  line-height: 25px;
 }
 .phlooi_rights p{
   max-width: 950px;
@@ -181,8 +177,8 @@ gap: 2rem;
 
 .clientName{
   color: var(--bs-white);
-  font-size: 32px;
-  margin-top: 1rem;
+  font-size: 24px;
+  margin-top: 0.5rem;
 }
 .designation{
   color: var(--bs-white);
@@ -190,20 +186,20 @@ gap: 2rem;
   font-weight: 300;
 }
 .review{
-  padding: 2rem;
+  padding: 15px;
   border: 1px solid #FFFFFF8F;
   border-radius: 10px;
   background-color: rgba(13, 13, 13, 1);
   color: var(--bs-white);
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 300;
-  line-height: 33px;
-  margin-top: 2rem;
+  line-height: 26px;
+  margin-top: 1rem;
   margin-bottom: 2rem;
 }
 .navigations button{
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border: 1px solid rgba(251, 185, 13, 1);
   border-radius: 5px;
   background-color: transparent;
@@ -216,11 +212,8 @@ color: var(--bs-white);
   display: flex;
   gap: 20px;
 }
-.footer{
-  background-color: rgba(255, 255, 255, 1);
-  color: rgba(0, 0, 0, 1);
-  padding: 1.2rem 0px;
-}
+
+
 .image_grid ul{
   display: flex;
   padding: 0;
@@ -236,6 +229,7 @@ width: 100%;
  /* flex: 0 0 200px; */
  width: 100%;
 }
+
 .appDownload::before,.appDownload::after{
   position: absolute;
   content: "";
@@ -267,7 +261,7 @@ bottom: -300px;
     line-height: 28px;
   }
   .padding{
-    padding: 7rem 0;
+    padding: 6rem 0;
   }
 }
 @media(max-width:1326px){
@@ -279,9 +273,7 @@ bottom: -300px;
   .mainBanner h1{
     font-size: 40px;
   }
-  .padding{
-    padding: 8rem 0;
-  }
+ 
   .cmn_heading{
     font-size: 32px;
   }

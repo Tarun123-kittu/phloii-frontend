@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { API_CONFIG } from "@/config/app_config";
 
 export const hotel_login = createAsyncThunk(
   "hotel_login",
@@ -20,7 +21,7 @@ export const hotel_login = createAsyncThunk(
       };
 
       const response = await fetch(
-        `https://dev.phloii.com/api/v1/hotel/signIn`,
+        `${API_CONFIG.BASE_URL}/hotel/signIn`,
         requestOptions
       );
 

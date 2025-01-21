@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 "use client"
+=======
+"use client";
+>>>>>>> 1cdcc9cabb38721720549e7f334a52d553cde8cc
 import localFont from "next/font/local";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -26,10 +30,15 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <link rel="shortcut icon" href="/black.svg" type="image/svg+xml" />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={AppStore}>
           {children}
-          <Toaster />
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+            toastOptions={{ duration: 700 }}
+          />
         </Provider>
       </body>
     </html>

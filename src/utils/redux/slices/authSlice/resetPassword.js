@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_CONFIG } from "@/config/app_config";
 
 export const reset_password = createAsyncThunk("reset_password", async ({ password, confirmPassword, token }, thunkAPI) => {
     try {
@@ -18,7 +19,7 @@ export const reset_password = createAsyncThunk("reset_password", async ({ passwo
             redirect: "follow"
         };
 
-        const response = await fetch("https://dev.phloii.com/api/v1/hotel/resetPassword", requestOptions)
+        const response = await fetch(`${API_CONFIG.BASE_URL}/hotel/resetPassword`, requestOptions)
         if (!response.ok) {
             const errorMessage = await response.json();
             console.log("Error response:", errorMessage);

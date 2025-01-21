@@ -1,14 +1,13 @@
 import Image from "next/image";
-import styles from "./page.module.css"
+import styles from "./page.module.css";
 import Testimonials from "@/Component/Testimonials";
-
-
+import Link from "next/link";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 export default function HomeComponent() {
   return (
     <div className={styles.homeWrapper}>
-      <header className={styles.header}>
-        <Image src="/assets/logo.png" width={139} height={57} alt="logo" />
-      </header>
+     <Header/>
       <div className={`${styles.mainBanner}`}>
         <div className="container position-relative">
           <h1>
@@ -39,29 +38,48 @@ export default function HomeComponent() {
               <img src="assets/imagetwo.png" className="floating" alt="" />
             </li>
             <li className="mt-5">
-              <img src="assets/imagethree.png" className="floating mb-3" alt="" />
+              <img
+                src="assets/imagethree.png"
+                className="floating mb-3"
+                alt=""
+              />
               <img src="assets/imagefour.png" className="floating" alt="" />
             </li>
             <li>
-              <img src="assets/imagefive.png" className="floating mb-3" alt="" />
+              <img
+                src="assets/imagefive.png"
+                className="floating mb-3"
+                alt=""
+              />
               <img src="assets/imgeone.png" className="floating mb-3" alt="" />
               <img src="assets/imagesix.png" className="floating" alt="" />
             </li>
             <li className="mt-5">
-              <img src="assets/imageseven.png" className="floating mb-3" alt="" />
+              <img
+                src="assets/imageseven.png"
+                className="floating mb-3"
+                alt=""
+              />
               <img src="assets/imageeight.png" className="floating" alt="" />
             </li>
             <li>
-              <img src="assets/imagenine.png" className="floating mb-3" alt="" />
+              <img
+                src="assets/imagenine.png"
+                className="floating mb-3"
+                alt=""
+              />
               <img src="assets/imageten.png" className="floating" alt="" />
             </li>
             <li className="mt-5">
-              <img src="assets/imagetweleve.png" className="floating mb-3" alt="" />
+              <img
+                src="assets/imagetweleve.png"
+                className="floating mb-3"
+                alt=""
+              />
               <img src="assets/imgeone.png" className="floating" alt="" />
             </li>
           </ul>
         </div>
-
       </div>
       <div
         className={`${styles.about} ${styles.bg_black} ${styles.padding} overflow-hidden`}
@@ -76,17 +94,28 @@ export default function HomeComponent() {
                 <span>Dating</span> Made Simple, Connections Made Real
               </h2>
               <p className={styles.cmn_desc}>
-                In publishing and graphic design, Lorem ipsum is text commonly
-                used to demonstrate the visual form of a document or a without
-                relying on meaningful content.
+                At Phloii, we believe that meaningful connections should be
+                easy, safe, and genuine. Our mission is to redefine modern
+                dating by creating a space where real people can build real
+                relationships.
               </p>
               <p className={styles.cmn_desc}>
-                In publishing and graphic design, Lorem ipsum is text commonly
-                used to demonstrate the visual form of a document or a typeface
-                without relying on meaningful content. In publishing and graphic
-                design, Lorem ipsum is text commonly used to demonstrate the
-                visual form of a document or a typeface without relying on
-                meaningful content.
+                Phloii is designed with your safety and authenticity in mind. We
+                go beyond just swipes and matches, providing features that
+                ensure every connection is as secure as it is promising. From
+                verified profiles to approved meeting locations, Phloii takes
+                the guesswork out of meeting new people and gives you the
+                confidence to explore relationships in a safe, trusted
+                environment.
+              </p>
+              <p className={styles.cmn_desc}>
+                Whether you&apos;re looking for friendship, love, or something in
+                between, Phloii is here to make your dating experience simple,
+                seamless, and enjoyable.
+              </p>
+              <p className={styles.cmn_desc}>
+                Join us and discover a better way to connect. With Phloii, your
+                next great connection is just a tap away.
               </p>
             </div>
             <div className="col-lg-6">
@@ -112,14 +141,14 @@ export default function HomeComponent() {
           >
             Secret Feature
           </span>
-          <h2
+          {/* <h2
             className={`${styles.cmn_heading} text-center position-relative z-2`}
           >
-            A <span>Private</span> Way to Meet Someone Special
-          </h2>
+             A discreet and secure way to connect and meet someone special, ensuring your privacy every step of the way.<span>Private</span> Way to Meet Someone Special
+          </h2> */}
           <p className={`${styles.cmn_desc} text-center mb-5 pt-2`}>
-            We shall never deny a guest, even the most ridiculous request. We
-            provide excellent features from us
+            A discreet and secure way to connect and meet someone special, <br/>
+            ensuring your privacy every step of the way.
           </p>
           <div className="row row-gap-4 position-relative z-2 row-gap-3">
             <div className="col-lg-6">
@@ -142,11 +171,10 @@ export default function HomeComponent() {
                     />
                   </svg>
                 </div>
-                <h3>Lorem Ipsum</h3>
+                <h3>Anonymous Profiles</h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Kerjarodi.com is an application for job seekers and workers
-                  who prioritize user comfort and the quality of services
-                  provided by our team
+                  Interact with potential matches using limited-profile
+                  visibility, ensuring privacy until you’re ready to share more.
                 </p>
               </div>
             </div>
@@ -170,11 +198,10 @@ export default function HomeComponent() {
                     />
                   </svg>
                 </div>
-                <h3>Lorem Ipsum</h3>
+                <h3>Secure Messaging</h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Kerjarodi.com is an application for job seekers and workers
-                  who prioritize user comfort and the quality of services
-                  provided by our team
+                  Communicate through end-to-end encrypted chats, keeping your
+                  conversations private and secure.
                 </p>
               </div>
             </div>
@@ -209,11 +236,10 @@ export default function HomeComponent() {
                     </g>
                   </svg>
                 </div>
-                <h3>Lorem Ipsum</h3>
+                <h3>Safe Meet Locations</h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Kerjarodi.com is an application for job seekers and workers
-                  who prioritize user comfort and the quality of services
-                  provided by our team
+                  Plan your first meetings at pre-approved, trusted locations to
+                  ensure a comfortable and secure experience.
                 </p>
               </div>
             </div>
@@ -235,11 +261,10 @@ export default function HomeComponent() {
                     />
                   </svg>
                 </div>
-                <h3>Lorem Ipsum</h3>
+                <h3>Selective Match Visibility</h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Kerjarodi.com is an application for job seekers and workers
-                  who prioritize user comfort and the quality of services
-                  provided by our team
+                  Your profile is only visible to those you choose to connect
+                  with, ensuring a curated and private dating experience.
                 </p>
               </div>
             </div>
@@ -254,15 +279,17 @@ export default function HomeComponent() {
             What Makes <span>Phloii the Right</span> <br /> Dating App for You?
           </h2>
           <p className={`${styles.cmn_desc} mt-5 m-auto text-center`}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            Phloii is more than just a dating app – it’s your trusted partner in
+            finding genuine connections. We combine innovative features with a
+            commitment to safety, privacy, and authenticity, ensuring every
+            interaction feels secure and meaningful. Whether you’re exploring
+            new relationships or looking for someone special, Phloii’s unique
+            approach prioritizes real connections, verified profiles, and
+            approved meeting locations. With tools like anonymous browsing,
+            secure messaging, and curated matches, we make it easy for you to
+            meet the right person, on your terms, in a safe and supportive
+            environment. At Phloii, dating isn’t just simplified – it’s
+            redefined.
           </p>
         </div>
       </div>
@@ -277,11 +304,11 @@ export default function HomeComponent() {
             Real love <span>stories</span> last forever
           </h2>
           <p
-            className={`${styles.cmn_desc} text-center mb-5 position-relative z-2`}
+            className={`${styles.cmn_desc} text-center mb-5 position-relative z-2 px-2`}
           >
-            Kerjarodi.com is an application for job seekers and workers who
-            prioritize <br /> user comfort and the quality of services provided
-            by our team
+            Real love stories last forever because they’re built on genuine
+            connections, trust, and shared <br /> moments that stand the test of
+            time.
           </p>
           <div className="container pt-2 position-relative z-2">
             <div className={`${styles.stories_grid}`}>
@@ -290,13 +317,18 @@ export default function HomeComponent() {
                   <img src="assets/jacob.png" alt="jacob" />
                 </div>
                 <h3>
-                  Jakob <span className="text-white">/</span> <span>Rayna</span>
+                  Emily <span className="text-white">/</span> <span>Ryan</span>
                 </h3>
 
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Kerjarodi.com is an application for job seekers and workers
-                  who prioritize user comfort and the quality of services
-                  provided by our team
+                  Emily and Ryan&apos;s love story began on Phloii, where their
+                  shared love for hiking and adventure brought them together.
+                  After weeks of meaningful conversations and getting to know
+                  each other through the app, they decided to meet at a
+                  Phloii-approved café. What started as a casual coffee date
+                  soon turned into a lifelong connection. Today, they often
+                  reflect on how Phloii’s focus on safety and authenticity gave
+                  them the confidence to take that first step toward forever.
                 </p>
               </div>
 
@@ -305,13 +337,15 @@ export default function HomeComponent() {
                   <img src="assets/angel.png" alt="jacob" />
                 </div>
                 <h3>
-                  Angel <span className="text-white">/</span>{" "}
-                  <span>kierra</span>
+                  Emma <span className="text-white">/</span> <span>Chris</span>
                 </h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Kerjarodi.com is an application for job seekers and workers
-                  who prioritize user comfort and the quality of services
-                  provided by our team
+                  Emma was hesitant about online dating until she joined Phloii
+                  and matched with Chris, whose thoughtful messages stood out.
+                  Their first date at a Phloii-approved park turned into hours
+                  of easy conversation. Now happily engaged, they credit the
+                  app’s focus on genuine connections for helping them discover
+                  their perfect match.
                 </p>
               </div>
 
@@ -320,28 +354,34 @@ export default function HomeComponent() {
                   <img src="assets/jaxson.png" alt="jacob" />
                 </div>
                 <h3>
-                  Jaxson <span className="text-white">/</span>{" "}
-                  <span>Aspen</span>
+                  Sophia <span className="text-white">/</span>{" "}
+                  <span>James</span>
                 </h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Kerjarodi.com is an application for job seekers and workers
-                  who prioritize user comfort and the quality of services
-                  provided by our team
+                  Sophia and James connected on Phloii over their mutual passion
+                  for cooking. Their first meeting, at a cozy Phloii-approved
+                  restaurant, was filled with laughter and shared dreams of
+                  traveling the world. Now, they enjoy creating new recipes
+                  together in their kitchen, grateful that Phloii helped them
+                  find a bond they never thought possible.
                 </p>
               </div>
 
               <div className={styles.features_card}>
                 <div className={`${styles.private_image} overflow-hidden mb-4`}>
-                  <img src="assets/jacob.png" alt="jacob" />
+                  <img src="assets/mia.png" alt="jacob" />
                 </div>
                 <h3>
-                  Cristofer <span className="text-white">/</span>{" "}
-                  <span>Dulce</span>
+                  Mia <span className="text-white">/</span> <span>Alex</span>
                 </h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Kerjarodi.com is an application for job seekers and workers
-                  who prioritize user comfort and the quality of services
-                  provided by our team
+                  Mia and Alex met on Phloii after discovering their shared love
+                  for photography. Their conversations quickly turned into
+                  shared photo walks, starting with a safe meeting at a
+                  Phloii-approved art gallery. What began as a friendship rooted
+                  in creativity blossomed into a beautiful relationship. Today,
+                  they travel together, capturing the world and each other, all
+                  thanks to Phloii.
                 </p>
               </div>
             </div>
@@ -352,36 +392,44 @@ export default function HomeComponent() {
         className={`${styles.padding} ${styles.bg_black} ${styles.appDownload} position-relative`}
       >
         <div className="container z-2 position-relative">
-         <h2
+          <h2
             className={`${styles.cmn_heading} text-start position-relative z-2`}
           >
-            Phloii is Just a Download Away – Get it on <br />{" "}
-            <span>Google Play or the App Store</span>
+           Start your journey to meaningful connections today <br/>
+           <span> download Phloii and let your love story begin! </span>
           </h2>
-        <div className={`${styles.appwraper} position-relative`}>
-        <div className={`${styles.floatingtext}`}>
-          <p
-            className={`${styles.cmn_desc} text-start mb-3 position-relative z-2 pt-md-2 pt-lg-3`}
-          >
-            Kerjarodi.com is an application for job seekers and workers who
-            prioritize <br />
-            user comfort and the quality of services provided by our team
-          </p>
-          <div className={styles.navImmages}>
-            <img width={180} src="assets/playstoreMb-dark.png" alt="" />
-            <img
-              width={180}
-              src="assets/appstoreMb-dark.png"
-              className="ms-2"
-              alt=""
-            />
+          <div className={`${styles.appwraper} position-relative`}>
+            <div className={`${styles.floatingtext} mt-2`}>
+              {/* <p
+                className={`${styles.cmn_desc} text-start mb-3 position-relative z-2 pt-md-2 pt-lg-3`}
+              >
+                Kerjarodi.com is an application for job seekers and workers who
+                prioritize <br />
+                user comfort and the quality of services provided by our team
+              </p> */}
+              <div className={styles.navImmages}>
+                <img width={180} src="assets/playstoreMb-dark.png" alt="" />
+                <img
+                  width={180}
+                  src="assets/appstoreMb-dark.png"
+                  className="ms-2"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className={`${styles.screenimage}`}>
+              <img
+                src="assets/floii.png"
+                alt=""
+                className="img-fluid d-none d-md-block"
+              />
+              <img
+                src="assets/phlioo-mobile.png"
+                alt=""
+                className="img-fluid d-block d-md-none mt-4"
+              />
+            </div>
           </div>
-         </div>
-          <div className={`${styles.screenimage}`}>
-            <img src="assets/floii.png" alt="" className="img-fluid d-none d-md-block" />
-            <img src="assets/phlioo-mobile.png" alt="" className="img-fluid d-block d-md-none mt-4" />
-          </div>
-        </div>
         </div>
       </div>
       <div
@@ -392,7 +440,7 @@ export default function HomeComponent() {
             <div className="col-lg-6">
               <div className={`${styles.about_image} position-relative `}>
                 <Image
-                  src="/assets/aboutImage.png"
+                  src="/assets/veirfied_image.png"
                   height={524}
                   width={596}
                   className="img-fluid position-relative z-2"
@@ -417,17 +465,18 @@ export default function HomeComponent() {
                 enjoyable meetups. By becoming a Phloii Verified location, your
                 business can benefit from increased foot traffic, as it helps
                 drive more customers to your establishment. The service is
-                available for $99 a month, offering a great opportunity to boost
+                offering a great opportunity to boost
                 sales while promoting safety for all users.
               </p>
+             <div className="">
+             <Link href={'/establishment/login'} className={styles.rister_est}>Register Establishment</Link>
+             </div>
             </div>
           </div>
         </div>
       </div>
       <Testimonials />
-      <footer className={styles.footer}>
-        <p className="text-center mb-0">© Copyright 2022 phloii.com</p>
-      </footer>
+      <Footer/>
     </div>
   );
 }
