@@ -31,7 +31,7 @@ const SlugDetails = ({ slugName }) => {
     }, [])
     return (
         <div className="min-vh-100 single_page d-flex flex-column">
-           <Header/>
+           <Header/> 
             <div className="bg-black  pt-5 pb-5 flex-grow-1">
                 <div
                     className="container mx-auto text-white"
