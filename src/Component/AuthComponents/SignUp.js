@@ -54,7 +54,7 @@ const SignUP = () => {
       return;
     }
     if (!isTerms) {
-      toast.error("Please agree with terms of service")
+      toast.error("Please review and accept the Terms of Service.")
       return
     }
     dispatch(hotel_signup({ username, email, password }));
