@@ -6,7 +6,7 @@ import Multiselect from 'multiselect-react-dropdown';
 import { delete_hotel_image, clear_delete_hotel_image } from "@/utils/redux/slices/hotelOnboardingSlice/deleteHotelimage";
 import { useDispatch, useSelector } from "react-redux";
 
-const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setFoodValues, foodValues, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel, is_hotel_updated }) => {
+const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setFoodValues, foodValues, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel, is_hotel_updated,setAtmosphere_description,atmosphere_description }) => {
   console.log(customerServiceNumber, "customerServiceNumber customerServiceNumber")
   const dispatch = useDispatch()
   const [errors, setErrors] = useState("");
@@ -24,12 +24,16 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
   const [selectedService, setSelectedService] = useState([])
   const [selectedAtmosphere, setSelectedAtmosphere] = useState([])
   const [serviceNumberError, setServiceNumberError] = useState('')
+  const [atmosphereDescriptionError, setAtmosphereDescriptionError] = useState('')
 
   const handleBackword = () => {
     setStep(2)
   }
 
   const handleForward = () => {
+    if(is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading"){
+      return
+    }
     if (!whyphloii && !inpersonvisit) {
       setWhyPhloiiError("Please enter why do you want to be on phloii")
       setInPersonError("Please enter are you open to in-person visit")
@@ -46,16 +50,8 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       setInPersonError("Please enter are you open to in-person visit")
       return
     }
-    if (foodValues?.length === 0) {
-      setFoodError("Please select the food prefrences")
-      return
-    }
-    if (serviceValues?.length === 0) {
-      setServiceError("Please select the Service Prefrences")
-      return
-    }
-    if (atmosphere?.length === 0) {
-      setAtmosphereError("Please select the Service Prefrences")
+    if(!atmosphere_description){
+      setAtmosphereDescriptionError("Please enter the atmosphere description")
       return
     }
     if (!openTiming) {
@@ -381,7 +377,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
             )}
           </div>
         </div>
-        <div className={col}>
+        {/* <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
               Food Prefrences
@@ -421,9 +417,9 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               </span>
             )}
           </div>
-        </div>
+        </div> */}
         <div className={col}>
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
               Atmosphere
             </label>
@@ -440,6 +436,25 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                 {atmosphereError}
               </span>
             )}
+          </div> */}
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label cmn_label">
+            Please describe your atmosphere in great detail.
+            </label>
+            <textarea
+              rows={5}
+              type="text"
+              className="form-control cmn_input"
+              placeholder="Write message"
+              value={atmosphere_description}
+              onChange={(e) => { setAtmosphere_description(e.target.value); setAtmosphereDescriptionError('') }}
+              style={atmosphereDescriptionError ? { border: "1px solid red" } : {}}
+            />
+            {atmosphereDescriptionError && (
+              <span style={atmosphereDescriptionError ? { color: "red", fontSize: "12px" } : {}}>
+                {atmosphereDescriptionError}
+              </span>
+            )}
           </div>
         </div>
         <div className={col}>
@@ -448,20 +463,19 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               Customer Service Number
             </label>
             <input
-              type="tel"  // Using 'tel' allows for mobile number input with a better user experience.
+              type="tel" 
               className="form-control cmn_input"
               placeholder="Customer Service Number"
               value={customerServiceNumber}
               onChange={(e) => {
                 const value = e.target.value;
-                // Only set the value if it is a number and contains 10 digits
                 if (/^\d{0,10}$/.test(value)) {
                   setCustomerServiceNumber(value);
                 }
                 setServiceNumberError('');
               }}
               style={serviceNumberError ? { border: "1px solid red" } : {}}
-              maxLength={10}  // Limit to 10 digits
+              maxLength={10}  
             />
             {serviceNumberError && (
               <span style={serviceNumberError ? { color: "red", fontSize: "12px" } : {}}>
@@ -483,7 +497,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               placeholder="00:00"
               onChange={(e) => {
                 const inputTime = e.target.value.trim();
-                const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i; // Regex to check 12-hour format
+                const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i;
                 const match = inputTime.match(timeRegex);
 
                 if (match) {
@@ -491,7 +505,6 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   hours = parseInt(hours, 10);
                   minutes = parseInt(minutes, 10);
 
-                  // Convert to 24-hour format if AM/PM is provided
                   if (period?.toUpperCase() === "PM" && hours < 12) {
                     hours += 12;
                   } else if (period?.toUpperCase() === "AM" && hours === 12) {
@@ -501,12 +514,11 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   const militaryTime = `${hours.toString().padStart(2, "0")}:${minutes
                     .toString()
                     .padStart(2, "0")}`;
-                  setOpenTiming(militaryTime); // Set the time in 24-hour format
-                  setOpenError(""); // Clear any existing error
+                  setOpenTiming(militaryTime); 
+                  setOpenError("");
                 } else if (/^\d{2}:\d{2}$/.test(inputTime)) {
-                  // If user enters valid 24-hour format, accept it directly
                   setOpenTiming(inputTime);
-                  setOpenError(""); // Clear the error
+                  setOpenError("");
                 } else {
                   setOpenError("Invalid time format. Use HH:MM AM/PM or 24-hour format.");
                 }
@@ -534,7 +546,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               value={closeTiming}
               onChange={(e) => {
                 const inputTime = e.target.value.trim();
-                const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i; // Regex to check 12-hour format
+                const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i; 
                 const match = inputTime.match(timeRegex);
 
                 if (match) {
@@ -542,7 +554,6 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   hours = parseInt(hours, 10);
                   minutes = parseInt(minutes, 10);
 
-                  // Convert to 24-hour format if AM/PM is provided
                   if (period?.toUpperCase() === "PM" && hours < 12) {
                     hours += 12;
                   } else if (period?.toUpperCase() === "AM" && hours === 12) {
@@ -552,12 +563,11 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   const militaryTime = `${hours.toString().padStart(2, "0")}:${minutes
                     .toString()
                     .padStart(2, "0")}`;
-                  setCloseTiming(militaryTime); // Set the time in 24-hour format
-                  setCloseError(""); // Clear any existing error
+                  setCloseTiming(militaryTime); 
+                  setCloseError("");
                 } else if (/^\d{2}:\d{2}$/.test(inputTime)) {
-                  // If user enters valid 24-hour format, accept it directly
                   setCloseTiming(inputTime);
-                  setCloseError(""); // Clear the error
+                  setCloseError("")
                 } else {
                   setCloseError("Invalid time format. Use HH:MM AM/PM or 24-hour format.");
                 }
@@ -576,7 +586,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       </div>
       <div className="d-flex justify-content-end gap-3">
         <Button buttonClick={handleBackword} text="Previous" className="grey_btn" />
-        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : hotelId ? "Update" : "Done"} />
+        <Button buttonClick={handleForward}  text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : hotelId ? "Update" : "Done"} />
       </div>
     </div>
   );

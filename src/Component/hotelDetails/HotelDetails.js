@@ -20,7 +20,6 @@ const HotelDetailsComponent = ({ hotelId }) => {
     }
     const dispatch = useDispatch()
     const [hotel_details, setHotel_details] = useState()
-    console.log(hotel_details, "this is the hotel details component")
     const [show_image_preview, setShow_image_preview] = useState()
     const [images, setImages] = useState()
     const [index, setIndex] = useState(null)
@@ -148,7 +147,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                             </li>}
                         </ul>
                         <ul className='dash-list p-0 mb-4'>
-                            {hotel_details?.hotel?.food?.length > 0 && <li>
+                            {/* {hotel_details?.hotel?.food?.length > 0 && <li>
                                 <span className='d-block'>Food</span>
                                 <strong>{hotel_details?.hotel?.food?.join(", ")}</strong>
                             </li>}
@@ -159,7 +158,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                             {hotel_details?.hotel?.services && <li>
                                 <span className='d-block'>Services</span>
                                 <strong>{hotel_details?.hotel?.services?.join(", ")}</strong>
-                            </li>}
+                            </li>} */}
                             {hotel_details?.hotel?.openCloseTimings && <li>
                                 <span className='d-block'>Open & Close Timing</span>
                                 <strong>{formatTime(hotel_details?.hotel?.openCloseTimings?.open)} - {formatTime(hotel_details?.hotel?.openCloseTimings?.close)}</strong>
@@ -172,6 +171,10 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         {hotel_details?.hotel?.why_want_phloi && <div className='info'>
                             <label htmlFor="" className='info_label'>Why do you want to be on Phloii Verified?</label>
                             <p>{hotel_details?.hotel?.why_want_phloi}</p>
+                        </div>}
+                        {hotel_details?.hotel?.atmosphere_description && <div className='info'>
+                            <label htmlFor="" className='info_label'>Please describe your atmosphere in great detail.</label>
+                            <p>{hotel_details?.hotel?.atmosphere_description}</p>
                         </div>}
                         {hotel_details?.hotel?.uniqueFeatures && <div className='info'>
                             <label htmlFor="" className='info_label'>What makes your restaurant unique?</label>

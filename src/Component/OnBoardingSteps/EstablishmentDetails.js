@@ -14,7 +14,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   const handleForward = () => {
     if (!establishmentname && !establishedtype && !streetaddress && !country && !state && !pincode) {
       setEstablishmentError("Please enter the establishment name")
-      setEstablishmentTypeError("Please Select the establishment type")
+      // setEstablishmentTypeError("Please Select the establishment type")
       setAddressError("Please enter the street address")
       setUnitNumberError("Please enter the unit number")
       setCountryError("Please select the country")
@@ -25,10 +25,10 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
       setEstablishmentError("Please enter the establishment name")
       return
     }
-    if (!establishedtype) {
-      setEstablishmentTypeError("Please Select the establishment type")
-      return
-    }
+    // if (!establishedtype) {
+    //   setEstablishmentTypeError("Please Select the establishment type")
+    //   return
+    // }
     if (!streetaddress) {
       setAddressError("Please enter the street address")
       return
@@ -82,7 +82,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
             )}
           </div>
         </div>
-        <div className={col}>
+        {/* <div className={col}>
           <div className="mb-3">
             <label for="type" className="form-label cmn_label">
               What type of establishment are you?
@@ -105,7 +105,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               </span>
             )}
           </div>
-        </div>
+        </div> */}
         <div className={col}>
           <div className="mb-3">
             <label for="email" className="form-label cmn_label">

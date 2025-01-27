@@ -41,6 +41,11 @@ ul.step_counter {
     margin-bottom: 30px;
 }
 
+.not-allowed {
+    pointer-events: auto! important;
+    cursor: not-allowed! important;
+}
+
 ul.step_counter li {
     list-style: none;
     text-align: center;

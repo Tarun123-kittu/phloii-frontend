@@ -87,10 +87,10 @@ const Establishment = () => {
 
                       </span>
                     </li>
-                    {hotel?.establishmentType && <li>
+                    {/* {hotel?.establishmentType && <li>
                       <span className='d-block'>Establishment Type</span>
                       <strong>{hotel?.establishmentType}</strong>
-                    </li>}
+                    </li>} */}
                     {/* {hotel?.address?.country && <li>
                       <span className='d-block'>Country</span>
                       <strong>{hotel?.address?.country}</strong>

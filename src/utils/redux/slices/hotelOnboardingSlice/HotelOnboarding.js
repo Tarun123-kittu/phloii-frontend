@@ -2,6 +2,7 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API_CONFIG } from "@/config/app_config";
+import React from "react";
 
 export const onboard_hotel = createAsyncThunk(
   "onboard_hotel",
@@ -22,9 +23,7 @@ export const onboard_hotel = createAsyncThunk(
       uniquefeatures,
       inpersonvisit,
       safeWord,
-      food,
-      atmosphere,
-      services,
+      atmosphere_description,
       opentiming,
       closetiming,
       customerservicenumber,
@@ -52,11 +51,12 @@ export const onboard_hotel = createAsyncThunk(
       formdata.append("uniqueFeatures", uniquefeatures);
       formdata.append("inPersonVisitAvailability", inpersonvisit);
       formdata.append("safeWord", safeWord);
+      formdata.append("atmosphere_description", atmosphere_description);
 
-      // Add array fields
-      food.forEach((item) => formdata.append("food", item));
-      atmosphere.forEach((item) => formdata.append("atmosphere", item));
-      services.forEach((item) => formdata.append("services", item));
+      // // Add array fields
+      // food.forEach((item) => formdata.append("food", item));
+      // atmosphere.forEach((item) => formdata.append("atmosphere", item));
+      // services.forEach((item) => formdata.append("services", item));
 
       // Add additional fields
       formdata.append("openTiming", opentiming);
