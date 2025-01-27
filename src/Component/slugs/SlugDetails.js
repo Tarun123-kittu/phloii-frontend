@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { API_CONFIG } from "@/config/app_config";
+import Link from "next/link";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 const SlugDetails = ({ slugName }) => {
     const [slug_data, setSlug_data] = useState();
 
@@ -15,10 +18,10 @@ const SlugDetails = ({ slugName }) => {
             return null;
         }
 
-        const data = await response.json();
+        const data = await response?.json();
         if (data.type === "success") {
             setSlug_data(data?.data)
-            return data.data;
+            return data?.data;
         }
         return null;
     }
@@ -27,22 +30,15 @@ const SlugDetails = ({ slugName }) => {
         getData()
     }, [])
     return (
-        <div>
-            <div className="cardBg p-2  text-center">
-                <Image
-                    src="/assets/phloii_logo.png"
-                    className="m-auto"
-                    alt="logo"
-                    width={100}
-                    height={59}
-                />
-            </div>
-            <div className="min-vh-100 bg-black  pt-5 pb-5">
+        <div className="min-vh-100 single_page d-flex flex-column">
+           <Header/> 
+            <div className="bg-black  pt-5 pb-5 flex-grow-1">
                 <div
                     className="container mx-auto text-white"
                     dangerouslySetInnerHTML={{ __html: slug_data?.content || "" }}
                 ></div>
             </div>
+            <Footer/>
         </div>
     );
 };

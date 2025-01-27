@@ -2,17 +2,12 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Testimonials from "@/Component/Testimonials";
 import Link from "next/link";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 export default function HomeComponent() {
   return (
     <div className={styles.homeWrapper}>
-      <header className={styles.header}>
-        <div className="container">
-
-       <div className="d-flex justify-content-between align-items-center">
-       <Image src="/assets/logo.svg" width={139} height={57} alt="logo" /> <Link href={'/establishment/login'} className={styles.rister_est}>Register Establishment</Link>
-       </div>
-        </div>
-      </header>
+     <Header/>
       <div className={`${styles.mainBanner}`}>
         <div className="container position-relative">
           <h1>
@@ -474,16 +469,14 @@ export default function HomeComponent() {
                 sales while promoting safety for all users.
               </p>
              <div className="">
-             <Link href={'/establishment/login'} className={styles.rister_est}>Register Establishment</Link>
+             <Link href={'/establishment/login'} className={'rister_est'}>Register Establishment</Link>
              </div>
             </div>
           </div>
         </div>
       </div>
       <Testimonials />
-      <footer className={styles.footer}>
-        <p className="text-center mb-0">© Copyright 2024 phloii.com</p>
-      </footer>
+      <Footer/>
     </div>
   );
 }

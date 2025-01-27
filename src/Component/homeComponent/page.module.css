@@ -1,21 +1,4 @@
-.header {
-  text-align: center;
-  background: #000000;
-  padding: 1rem 10px;
-  border-bottom: 1px solid #FFFFFF4D;
-}
-.rister_est {
-  border: 2px solid #fbb90d;
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 15px;
-  font-weight: 400;
-  border-radius: 6px;
-  color: #fbb90d;
-  background-color: transparent;
-  text-decoration: none;
-  cursor: pointer;
-}
+
 .mainBanner{
   background-color: #000000;
   padding-top: 5rem;
@@ -229,12 +212,8 @@ color: var(--bs-white);
   display: flex;
   gap: 20px;
 }
-.footer{
-  background-color: #202020;
-  color: #ffffff;
-  padding: 1.2rem 0;
 
-}
+
 .image_grid ul{
   display: flex;
   padding: 0;
@@ -250,6 +229,7 @@ width: 100%;
  /* flex: 0 0 200px; */
  width: 100%;
 }
+
 .appDownload::before,.appDownload::after{
   position: absolute;
   content: "";
@@ -375,13 +355,5 @@ bottom: -300px;
 }
 .image_grid{
   transform: translateY(88px);
-}
-.rister_est {
- 
-  padding: 10px;
-  font-size: 12px;
-}
-.header img{
-  width: 100px;
 }
 }
