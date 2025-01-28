@@ -7,7 +7,7 @@ import Header from "../Header/Header";
 export default function HomeComponent() {
   return (
     <div className={styles.homeWrapper}>
-     <Header/>
+      <Header />
       <div className={`${styles.mainBanner}`}>
         <div className="container position-relative">
           <h1>
@@ -19,10 +19,11 @@ export default function HomeComponent() {
             Discreet Relationships Starts Here
           </p>
           <div className={styles.navImmages}>
-            <img width={180} src="assets/playstoreMb.png" alt="" />
+            <a href="https://play.google.com/store/apps/details?id=com.phloii" target="_blank"><img title="Download Android App" width={180} src="assets/playstoreMb.png" alt="" /></a>
             <img
+              title="Ios App Coming Soon"
               width={180}
-              src="assets/appstoreMb.png"
+              src="assets/app_store_coming_soon.png"
               className="ms-4"
               alt=""
             />
@@ -147,7 +148,7 @@ export default function HomeComponent() {
              A discreet and secure way to connect and meet someone special, ensuring your privacy every step of the way.<span>Private</span> Way to Meet Someone Special
           </h2> */}
           <p className={`${styles.cmn_desc} text-center mb-5 pt-2`}>
-            A discreet and secure way to connect and meet someone special, <br/>
+            A discreet and secure way to connect and meet someone special, <br />
             ensuring your privacy every step of the way.
           </p>
           <div className="row row-gap-4 position-relative z-2 row-gap-3">
@@ -395,8 +396,8 @@ export default function HomeComponent() {
           <h2
             className={`${styles.cmn_heading} text-start position-relative z-2`}
           >
-           Start your journey to meaningful connections today <br/>
-           <span> download Phloii and let your love story begin! </span>
+            Start your journey to meaningful connections today <br />
+            <span> download Phloii and let your love story begin! </span>
           </h2>
           <div className={`${styles.appwraper} position-relative`}>
             <div className={`${styles.floatingtext} mt-2`}>
@@ -408,10 +409,11 @@ export default function HomeComponent() {
                 user comfort and the quality of services provided by our team
               </p> */}
               <div className={styles.navImmages}>
-                <img width={180} src="assets/playstoreMb-dark.png" alt="" />
+                <a href="https://play.google.com/store/apps/details?id=com.phloii" target="_blank"><img title="Download Android App" width={180} src="assets/playstoreMb-dark.png" alt="" /></a>
                 <img
+                  title="Ios App Coming Soon"
                   width={180}
-                  src="assets/appstoreMb-dark.png"
+                  src="assets/app_store_coming_soon.png"
                   className="ms-2"
                   alt=""
                 />
@@ -468,15 +470,15 @@ export default function HomeComponent() {
                 offering a great opportunity to boost
                 sales while promoting safety for all users.
               </p>
-             <div className="">
-             <Link href={'/establishment/login'} className={'rister_est'}>Register Establishment</Link>
-             </div>
+              <div className="">
+                <Link href={'/establishment/login'} className={'rister_est'}>Register Establishment</Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <Testimonials />
-      <Footer/>
+      <Footer />
     </div>
   );
 }
