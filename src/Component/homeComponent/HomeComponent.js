@@ -142,11 +142,6 @@ export default function HomeComponent() {
           >
             Secret Feature
           </span>
-          {/* <h2
-            className={`${styles.cmn_heading} text-center position-relative z-2`}
-          >
-             A discreet and secure way to connect and meet someone special, ensuring your privacy every step of the way.<span>Private</span> Way to Meet Someone Special
-          </h2> */}
           <p className={`${styles.cmn_desc} text-center mb-5 pt-2`}>
             A discreet and secure way to connect and meet someone special, <br />
             ensuring your privacy every step of the way.
@@ -401,13 +396,6 @@ export default function HomeComponent() {
           </h2>
           <div className={`${styles.appwraper} position-relative`}>
             <div className={`${styles.floatingtext} mt-2`}>
-              {/* <p
-                className={`${styles.cmn_desc} text-start mb-3 position-relative z-2 pt-md-2 pt-lg-3`}
-              >
-                Kerjarodi.com is an application for job seekers and workers who
-                prioritize <br />
-                user comfort and the quality of services provided by our team
-              </p> */}
               <div className={styles.navImmages}>
                 <a href="https://play.google.com/store/apps/details?id=com.phloii" target="_blank"><img title="Download Android App" width={180} src="assets/playstoreMb-dark.png" alt="" /></a>
                 <img

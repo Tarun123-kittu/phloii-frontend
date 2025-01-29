@@ -6,8 +6,7 @@ import Multiselect from 'multiselect-react-dropdown';
 import { delete_hotel_image, clear_delete_hotel_image } from "@/utils/redux/slices/hotelOnboardingSlice/deleteHotelimage";
 import { useDispatch, useSelector } from "react-redux";
 
-const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setFoodValues, foodValues, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel, is_hotel_updated,setAtmosphere_description,atmosphere_description }) => {
-  console.log(customerServiceNumber, "customerServiceNumber customerServiceNumber")
+const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel, is_hotel_updated, setAtmosphere_description, atmosphere_description,setFood,food,setAdditional_information,additional_information }) => {
   const dispatch = useDispatch()
   const [errors, setErrors] = useState("");
   const [whyPhloiiError, setWhyPhloiiError] = useState('')
@@ -31,7 +30,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
   }
 
   const handleForward = () => {
-    if(is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading"){
+    if (is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading") {
       return
     }
     if (!whyphloii && !inpersonvisit) {
@@ -50,7 +49,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       setInPersonError("Please enter are you open to in-person visit")
       return
     }
-    if(!atmosphere_description){
+    if (!atmosphere_description) {
       setAtmosphereDescriptionError("Please enter the atmosphere description")
       return
     }
@@ -121,77 +120,6 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
   const getPreviewSrc = (image) => {
     return image instanceof File ? URL.createObjectURL(image) : image;
   };
-
-  const FoodOptions = [
-    { name: 'veg' },
-    { name: 'Non-veg' },
-    { name: 'vegan' },
-  ]
-  const Services = [
-    { name: 'wifi' },
-    { name: 'parking' },
-  ]
-  const atmosphereOption = [
-    { name: 'cozy' },
-    { name: 'romantic' },
-  ]
-
-  const handleSelect = (selectedList) => {
-    setFoodError('')
-    const food = selectedList.map((item) => item.name);
-    setSelectedFood(selectedList);
-    setFoodValues(food)
-  };
-
-
-  const handleRemove = (selectedList) => {
-    const food = selectedList.map((item) => item.name);
-    setSelectedFood(selectedList);
-    setFoodValues(food)
-  };
-
-  const handleSelectService = (selectedList) => {
-    setServiceError('')
-    const service = selectedList.map((item) => item.name);
-    setSelectedService(selectedList);
-    setServiceValues(service)
-  };
-
-
-  const handleRemoveService = (selectedList) => {
-    const service = selectedList.map((item) => item.name);
-    setSelectedService(selectedList);
-    setServiceValues(service)
-  };
-
-  const handleSelectAtmosphere = (selectedList) => {
-    setAtmosphereError('')
-    const atmo = selectedList.map((item) => item.name);
-    setSelectedAtmosphere(selectedList);
-    setAtmosphere(atmo)
-  };
-
-
-  const handleRemoveAtmosphere = (selectedList) => {
-    const atmo = selectedList.map((item) => item.name);
-    setSelectedAtmosphere(selectedList);
-    setAtmosphere(atmo)
-  };
-
-  useEffect(() => {
-    const formattedFoodValues = foodValues.map(food => ({ name: food }));
-    setSelectedFood(formattedFoodValues)
-  }, [foodValues])
-
-  useEffect(() => {
-    const formattedFoodValues = serviceValues.map(food => ({ name: food }));
-    setSelectedService(formattedFoodValues)
-  }, [serviceValues])
-
-  useEffect(() => {
-    const formattedFoodValues = atmosphere.map(food => ({ name: food }));
-    setSelectedAtmosphere(formattedFoodValues)
-  }, [atmosphere])
 
 
   return (
@@ -377,69 +305,36 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
             )}
           </div>
         </div>
-        {/* <div className={col}>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label cmn_label">
-              Food Prefrences
-            </label>
-            <Multiselect
-
-              options={FoodOptions}
-              selectedValues={selectedFood}
-              onSelect={handleSelect}
-              onRemove={handleRemove}
-              displayValue="name"
-              className="custom-multiselect"
-            />
-            {foodError && (
-              <span style={foodError ? { color: "red", fontSize: "12px" } : {}}>
-                {foodError}
-              </span>
-            )}
-          </div>
-        </div>
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
-              Services
+              Please explain what kind of food you serve (if you serve food)
             </label>
-            <Multiselect
-              options={Services}
-              selectedValues={selectedService}
-              onSelect={handleSelectService}
-              onRemove={handleRemoveService}
-              displayValue="name"
-              className="custom-multiselect"
+            <textarea
+              rows={5}
+              type="text"
+              className="form-control cmn_input"
+              placeholder="Write message"
+              value={food}
+              onChange={(e) => { setFood(e.target.value)}}
             />
-            {serviceError && (
-              <span style={serviceError ? { color: "red", fontSize: "12px" } : {}}>
-                {serviceError}
-              </span>
-            )}
           </div>
-        </div> */}
-        <div className={col}>
-          {/* <div className="mb-3">
-            <label htmlFor="email" className="form-label cmn_label">
-              Atmosphere
-            </label>
-            <Multiselect
-              options={atmosphereOption}
-              selectedValues={selectedAtmosphere}
-              onSelect={handleSelectAtmosphere}
-              onRemove={handleRemoveAtmosphere}
-              displayValue="name"
-              className="custom-multiselect"
-            />
-            {atmosphereError && (
-              <span style={atmosphereError ? { color: "red", fontSize: "12px" } : {}}>
-                {atmosphereError}
-              </span>
-            )}
-          </div> */}
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
-            Please describe your atmosphere in great detail.
+              Additional Information (Optional)
+            </label>
+            <textarea
+              rows={5}
+              type="text"
+              className="form-control cmn_input"
+              placeholder="Write message"
+              value={additional_information}
+              onChange={(e) => { setAdditional_information(e.target.value)}}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label cmn_label">
+              Please describe your atmosphere in great detail.
             </label>
             <textarea
               rows={5}
@@ -463,7 +358,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               Customer Service Number
             </label>
             <input
-              type="tel" 
+              type="tel"
               className="form-control cmn_input"
               placeholder="Customer Service Number"
               value={customerServiceNumber}
@@ -475,7 +370,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                 setServiceNumberError('');
               }}
               style={serviceNumberError ? { border: "1px solid red" } : {}}
-              maxLength={10}  
+              maxLength={10}
             />
             {serviceNumberError && (
               <span style={serviceNumberError ? { color: "red", fontSize: "12px" } : {}}>
@@ -514,7 +409,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   const militaryTime = `${hours.toString().padStart(2, "0")}:${minutes
                     .toString()
                     .padStart(2, "0")}`;
-                  setOpenTiming(militaryTime); 
+                  setOpenTiming(militaryTime);
                   setOpenError("");
                 } else if (/^\d{2}:\d{2}$/.test(inputTime)) {
                   setOpenTiming(inputTime);
@@ -546,7 +441,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               value={closeTiming}
               onChange={(e) => {
                 const inputTime = e.target.value.trim();
-                const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i; 
+                const timeRegex = /^(\d{1,2}):(\d{2})\s?(AM|PM)?$/i;
                 const match = inputTime.match(timeRegex);
 
                 if (match) {
@@ -563,7 +458,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   const militaryTime = `${hours.toString().padStart(2, "0")}:${minutes
                     .toString()
                     .padStart(2, "0")}`;
-                  setCloseTiming(militaryTime); 
+                  setCloseTiming(militaryTime);
                   setCloseError("");
                 } else if (/^\d{2}:\d{2}$/.test(inputTime)) {
                   setCloseTiming(inputTime);
@@ -586,7 +481,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       </div>
       <div className="d-flex justify-content-end gap-3">
         <Button buttonClick={handleBackword} text="Previous" className="grey_btn" />
-        <Button buttonClick={handleForward}  text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : hotelId ? "Update" : "Done"} />
+        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : hotelId ? "Update" : "Done"} />
       </div>
     </div>
   );

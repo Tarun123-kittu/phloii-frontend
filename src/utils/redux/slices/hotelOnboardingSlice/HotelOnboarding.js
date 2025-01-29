@@ -23,6 +23,8 @@ export const onboard_hotel = createAsyncThunk(
       uniquefeatures,
       inpersonvisit,
       safeWord,
+      food,
+      additional_information,
       atmosphere_description,
       opentiming,
       closetiming,
@@ -52,6 +54,8 @@ export const onboard_hotel = createAsyncThunk(
       formdata.append("inPersonVisitAvailability", inpersonvisit);
       formdata.append("safeWord", safeWord);
       formdata.append("atmosphere_description", atmosphere_description);
+      formdata.append("food", food);
+      formdata.append("additional_information", additional_information);
 
       // // Add array fields
       // food.forEach((item) => formdata.append("food", item));

@@ -176,6 +176,14 @@ const HotelDetailsComponent = ({ hotelId }) => {
                             <label htmlFor="" className='info_label'>Please describe your atmosphere in great detail.</label>
                             <p>{hotel_details?.hotel?.atmosphere_description}</p>
                         </div>}
+                        {hotel_details?.hotel?.food && <div className='info'>
+                            <label htmlFor="" className='info_label'>Please explain what kind of food you serve (if you serve food)</label>
+                            <p>{hotel_details?.hotel?.food}</p>
+                        </div>}
+                        {hotel_details?.hotel?.additional_information && <div className='info'>
+                            <label htmlFor="" className='info_label'>Additional Information (Optional)</label>
+                            <p>{hotel_details?.hotel?.additional_information}</p>
+                        </div>}
                         {hotel_details?.hotel?.uniqueFeatures && <div className='info'>
                             <label htmlFor="" className='info_label'>What makes your restaurant unique?</label>
                             <p>{hotel_details?.hotel?.uniqueFeatures}</p>
