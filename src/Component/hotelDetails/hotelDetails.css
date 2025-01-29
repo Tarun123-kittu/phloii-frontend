@@ -341,6 +341,7 @@ img.user_profile_image{
     }
     .owner_info{
         width: 100%;
+        border: unset;
     }
     .dashboard_wrapper{
         display: block;
