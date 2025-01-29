@@ -55,6 +55,8 @@ span.dot {
     width: var(--sidebar-width);
     border-right: 1px solid rgba(31, 31, 34, 1);
     padding: 1rem;
+    top: 0;
+    left: 0;
 }
 
 .side_bar ul li {
@@ -100,7 +102,6 @@ li.logout_btn span {
 
 li.logout_btn {
     padding-left: 10px;
-    position: absolute;
     bottom: 6px;
     cursor: pointer;
 }
@@ -147,9 +148,7 @@ ul.notify_list.position-relative {
     .side_bar{
         display: none;
     }
-    .wrapper{
-        padding-left: 20px;
-    }
+  
     header{
         width: 100%;
     }
@@ -163,9 +162,7 @@ ul.notify_list.position-relative {
         display: block;
         z-index: 99999;
     }
-    li.logout_btn{
-        bottom: 50px;
-    }
+   
 }
 @media(max-width:767px){
     .user_image {

@@ -110,14 +110,19 @@ ul.step_counter p {
     top: -9px;
     cursor: pointer;
 }
-ul.step_counter li.step_item.done span,li.line.done {
+ul.step_counter li.step_item.done span,li.line.done, ul.step_counter li:first-child span {
     background: linear-gradient(90deg, #FBB90D 0%, #22EBFF 100%);
 }
 
-ul.step_counter li.step_item.done p {
+ul.step_counter li.step_item.done p, ul.step_counter li:first-child p {
     color: rgba(251, 185, 13, 1);
 }
 
+@media(max-width:991px){
+    .steps_form {
+        padding: 1rem;
+    }
+}
 @media(max-width:767px){
     ul.step_counter li.line  {
         display: none;

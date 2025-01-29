@@ -109,74 +109,76 @@ const SideBar = ({ children }) => {
           </div>
         </div>}
       </header>
-      <div className={`${sidebarState && "mobile_toggle"} side_bar`}>
-        <div className={`${sidebarState ? 'd-block' : "d-none"} text-end`}>
+      <div className={`${sidebarState ? "mobile_toggle" : ""} side_bar`}>
+       <div className="d-flex flex-column h-100">
+       <div className={`${sidebarState ? 'd-block' : "d-none"} text-end`}>
 
-          <svg onClick={() => handleToogle(false)} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="white" fill-opacity="0.72" />
-            <path d="M13.2929 1.41L8.05645 6.64645L7.70289 7L8.05645 7.35355L13.2929 12.59L12.59 13.2929L7.35355 8.05645L7 7.70289L6.64645 8.05645L1.41 13.2929L0.707107 12.59L5.94355 7.35355L6.29711 7L5.94355 6.64645L0.707107 1.41L1.41 0.707107L6.64645 5.94355L7 6.29711L7.35355 5.94355L12.59 0.707107L13.2929 1.41Z" stroke="white" stroke-opacity="0.72" />
-          </svg>
+<svg onClick={() => handleToogle(false)} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="white" fill-opacity="0.72" />
+  <path d="M13.2929 1.41L8.05645 6.64645L7.70289 7L8.05645 7.35355L13.2929 12.59L12.59 13.2929L7.35355 8.05645L7 7.70289L6.64645 8.05645L1.41 13.2929L0.707107 12.59L5.94355 7.35355L6.29711 7L5.94355 6.64645L0.707107 1.41L1.41 0.707107L6.64645 5.94355L7 6.29711L7.35355 5.94355L12.59 0.707107L13.2929 1.41Z" stroke="white" stroke-opacity="0.72" />
+</svg>
 
-        </div>
-        <div className="text-center mt-3 mb-5">
-          <img
-            onClick={handleLogo}
-            src="/assets/logo.svg"
-            alt="Logo"
-            className="m-auto"
-          />
-        </div>
-        <ul className="m-0">
-          {SidebarMenuItems &&
-            SidebarMenuItems.map((menu, index) => {
-              const isActive = activeIndex === index;
-              return (
-                <li
-                  key={index}
-                  className={isActive ? "sidebar_active" : ""}
-                  onClick={() => handleMenuClick(index)}
-                >
-                  <Link href={menu.path}>
-                    {menu.icon} <span>{menu.name}</span>
-                  </Link>
-                </li>
-              );
-            })}
+</div>
+<div className="text-center mt-3 mb-5">
+<img
+  onClick={handleLogo}
+  src="/assets/logo.svg"
+  alt="Logo"
+  className="m-auto"
+/>
+</div>
+<ul className="m-0 h-100 d-flex flex-column flex-grow-1">
+{SidebarMenuItems &&
+  SidebarMenuItems.map((menu, index) => {
+    const isActive = activeIndex === index;
+    return (
+      <li
+        key={index}
+        className={isActive ? "sidebar_active" : ""}
+        onClick={() => handleMenuClick(index)}
+      >
+        <Link href={menu.path}>
+          {menu.icon} <span>{menu.name}</span>
+        </Link>
+      </li>
+    );
+  })}
+<li className="flex-grow-1"></li>
+<li className="logout_btn" onClick={handleLogout}>
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M8.8999 7.55999C9.2099 3.95999 11.0599 2.48999 15.1099 2.48999H15.2399C19.7099 2.48999 21.4999 4.27999 21.4999 8.74999V15.27C21.4999 19.74 19.7099 21.53 15.2399 21.53H15.1099C11.0899 21.53 9.2399 20.08 8.9099 16.54"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M15.0001 12H3.62012"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M5.85 8.65002L2.5 12L5.85 15.35"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+  <span>Logout</span>
+</li>
 
-          <li className="logout_btn" onClick={handleLogout}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.8999 7.55999C9.2099 3.95999 11.0599 2.48999 15.1099 2.48999H15.2399C19.7099 2.48999 21.4999 4.27999 21.4999 8.74999V15.27C21.4999 19.74 19.7099 21.53 15.2399 21.53H15.1099C11.0899 21.53 9.2399 20.08 8.9099 16.54"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M15.0001 12H3.62012"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M5.85 8.65002L2.5 12L5.85 15.35"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span>Logout</span>
-          </li>
-
-        </ul>
+</ul>
+       </div>
       </div>
       {children}
     </div>
