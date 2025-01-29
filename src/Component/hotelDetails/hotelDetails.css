@@ -308,6 +308,11 @@ img.user_profile_image{
     display: flex;
     gap: 10px;
 }
+.owner_info {
+    flex: 0 0 350px;
+    padding: 1.2rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
 @media(max-width:1199px){
     .dash-list{
         flex-wrap: wrap;

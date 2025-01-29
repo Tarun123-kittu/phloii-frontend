@@ -24,7 +24,7 @@ const[toggle,setToggle] = useState(false)
     router.push("/establishment/login");
   };
   const handleLogo = () => {
-    router.push("establishment");
+    router.push("/establishment");
   };
 
   useEffect(() => {
