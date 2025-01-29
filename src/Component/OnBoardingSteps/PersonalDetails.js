@@ -68,10 +68,10 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               placeholder="Enter owner name"
               value={ownername}
               onChange={(e) => { setOwnername(e.target.value); setNameError('') }}
-              style={nameError ? { border: "1px solid red" } : {}}
+              style={nameError ? { border: "1px solid #ff00009c" } : {}}
             />
             {nameError && (
-              <span style={nameError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={nameError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {nameError}
               </span>
             )}
@@ -92,12 +92,12 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
             setWebsiteError(''); // Clear the error while typing
           }}
           onBlur={handleBlur} // Validate on blur
-          style={websiteError ? { border: '1px solid red' } : {}}
+          style={websiteError ? { border: '1px solid #ff00009c' } : {}}
           pattern="https://.*" // Regex to match URLs starting with "https://"
           title="Please enter a valid URL starting with https://"
         />
         {websiteError && (
-          <span style={{ color: 'red', fontSize: '12px' }}>{websiteError}</span>
+          <span style={{ color: '#ff00009c', fontSize: '12px' }}>{websiteError}</span>
         )}
       </div>
     </div>
@@ -122,10 +122,10 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
                   setPhoneError('');
                 }
               }}
-              style={phoneError ? { border: "1px solid red" } : {}}
+              style={phoneError ? { border: "1px solid #ff00009c" } : {}}
             />
             {phoneError && (
-              <span style={{ color: "red", fontSize: "12px" }}>
+              <span style={{ color: "#ff00009c", fontSize: "12px" }}>
                 {phoneError}
               </span>
             )}
@@ -143,10 +143,10 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               placeholder="Enter email"
               value={owneremail}
               onChange={(e) => { setOwnerEmail(e.target.value); setEmailError('') }}
-              style={emailError ? { border: "1px solid red" } : {}}
+              style={emailError ? { border: "1px solid #ff00009c" } : {}}
             />
             {emailError && (
-              <span style={emailError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={emailError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {emailError}
               </span>
             )}

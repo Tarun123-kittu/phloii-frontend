@@ -142,10 +142,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               placeholder="Write message"
               value={whyphloii}
               onChange={(e) => { setWhyphloii(e.target.value); setWhyPhloiiError('') }}
-              style={whyPhloiiError ? { border: "1px solid red" } : {}}
+              style={whyPhloiiError ? { border: "1px solid #ff00009c" } : {}}
             />
             {whyPhloiiError && (
-              <span style={whyPhloiiError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={whyPhloiiError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {whyPhloiiError}
               </span>
             )}
@@ -163,10 +163,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               placeholder="Write message"
               value={uniquefeatures}
               onChange={(e) => { setUniqueFeatures(e.target.value); setUniqueError('') }}
-              style={uniqueError ? { border: "1px solid red" } : {}}
+              style={uniqueError ? { border: "1px solid #ff00009c" } : {}}
             />
             {whyPhloiiError && (
-              <span style={uniqueError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={uniqueError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {uniqueError}
               </span>
             )}
@@ -189,7 +189,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   multiple
                   accept="image/jpeg, image/png"
                   onChange={handleFileChange}
-                  style={imagesError ? { border: "1px solid red" } : {}}
+                  style={imagesError ? { border: "1px solid #ff00009c" } : {}}
                 />
                 {images.length === 0 && <div className="flex-grow-1">
                   <p className="px-3 pt-2">
@@ -262,7 +262,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               </div>
             </div>
             {imagesError && (
-              <span style={imagesError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={imagesError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {imagesError}
               </span>
             )}
@@ -280,10 +280,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               placeholder="Write message"
               value={safeWord}
               onChange={(e) => { setSafeWord(e.target.value); setSafeError('') }}
-              style={uniqueError ? { border: "1px solid red" } : {}}
+              style={uniqueError ? { border: "1px solid #ff00009c" } : {}}
             />
             {safeError && (
-              <span style={safeError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={safeError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {safeError}
               </span>
             )}
@@ -301,10 +301,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               placeholder="Write message"
               value={inpersonvisit}
               onChange={(e) => { setInpersonvisit(e.target.value); setInPersonError('') }}
-              style={uniqueError ? { border: "1px solid red" } : {}}
+              style={uniqueError ? { border: "1px solid #ff00009c" } : {}}
             />
             {inpersonError && (
-              <span style={inpersonError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={inpersonError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {inpersonError}
               </span>
             )}
@@ -352,10 +352,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               placeholder="Write message"
               value={atmosphere_description}
               onChange={(e) => { setAtmosphere_description(e.target.value); setAtmosphereDescriptionError('') }}
-              style={atmosphereDescriptionError ? { border: "1px solid red" } : {}}
+              style={atmosphereDescriptionError ? { border: "1px solid #ff00009c" } : {}}
             />
             {atmosphereDescriptionError && (
-              <span style={atmosphereDescriptionError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={atmosphereDescriptionError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {atmosphereDescriptionError}
               </span>
             )}
@@ -378,11 +378,11 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                 }
                 setServiceNumberError('');
               }}
-              style={serviceNumberError ? { border: "1px solid red" } : {}}
+              style={serviceNumberError ? { border: "1px solid #ff00009c" } : {}}
               maxLength={10}
             />
             {serviceNumberError && (
-              <span style={serviceNumberError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={serviceNumberError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {serviceNumberError}
               </span>
             )}
@@ -424,10 +424,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   setOpenError("Invalid time format. Use HH:MM AM/PM or 24-hour format.");
                 }
               }}
-              style={openError ? { border: "1px solid red" } : {}}
+              style={openError ? { border: "1px solid #ff00009c" } : {}}
             />
             {openError && (
-              <span style={{ color: "red", fontSize: "12px" }}>
+              <span style={{ color: "#ff00009c", fontSize: "12px" }}>
                 {openError}
               </span>
             )}
@@ -473,10 +473,10 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                   setCloseError("Invalid time format. Use HH:MM AM/PM or 24-hour format.");
                 }
               }}
-              style={closeError ? { border: "1px solid red" } : {}}
+              style={closeError ? { border: "1px solid #ff00009c" } : {}}
             />
             {closeError && (
-              <span style={{ color: "red", fontSize: "12px" }}>
+              <span style={{ color: "#ff00009c", fontSize: "12px" }}>
                 {closeError}
               </span>
             )}

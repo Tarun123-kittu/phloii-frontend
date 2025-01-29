@@ -81,10 +81,10 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               placeholder="Establishment name"
               value={establishmentname}
               onChange={(e) => { setEstablishmentname(e.target.value); setEstablishmentError("") }}
-              style={establishmentnameError ? { border: "1px solid red" } : {}}
+              style={establishmentnameError ? { border: "1px solid #ff00009c" } : {}}
             />
             {establishmentnameError && (
-              <span style={establishmentnameError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={establishmentnameError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {establishmentnameError}
               </span>
             )}
@@ -125,10 +125,10 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               placeholder="Enter street address"
               value={streetaddress}
               onChange={(e) => { setStreetAddress(e.target.value); setAddressError('') }}
-              style={addressError ? { border: "1px solid red" } : {}}
+              style={addressError ? { border: "1px solid #ff00009c" } : {}}
             />
             {addressError && (
-              <span style={addressError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={addressError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {addressError}
               </span>
             )}
@@ -151,10 +151,10 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
                   setUnitNumberError('');
                 }
               }}
-              style={unitnumberError ? { border: "1px solid red" } : {}}
+              style={unitnumberError ? { border: "1px solid #ff00009c" } : {}}
             />
             {unitnumberError && (
-              <span style={{ color: "red", fontSize: "12px" }}>
+              <span style={{ color: "#ff00009c", fontSize: "12px" }}>
                 {unitnumberError}
               </span>
             )}
@@ -170,7 +170,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               class="form-select cmn-select"
               aria-label="Default select example"
               onChange={(e) => { setCountry(e.target.value); setCountryError('') }}
-              style={countryError ? { border: "1px solid red" } : {}}
+              style={countryError ? { border: "1px solid #ff00009c" } : {}}
               value={country}
             >
               <option>Select country</option>
@@ -180,7 +180,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               ))}
             </select>
             {countryError && (
-              <span style={countryError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={countryError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {countryError}
               </span>
             )}
@@ -195,7 +195,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               class="form-select cmn-select"
               aria-label="Default select example"
               onChange={(e) => { setState(e.target.value); setStateError('') }}
-              style={stateError ? { border: "1px solid red" } : {}}
+              style={stateError ? { border: "1px solid #ff00009c" } : {}}
               value={state}
             >
               <option selected>Select state</option>
@@ -204,7 +204,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               ))}
             </select>
             {stateError && (
-              <span style={stateError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={stateError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {stateError}
               </span>
             )}
@@ -227,10 +227,10 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
                   setPincodeError('');
                 }
               }}
-              style={pincodeError ? { border: "1px solid red" } : {}}
+              style={pincodeError ? { border: "1px solid #ff00009c" } : {}}
             />
             {pincodeError && (
-              <span style={pincodeError ? { color: "red", fontSize: "12px" } : {}}>
+              <span style={pincodeError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {pincodeError}
               </span>
             )}
