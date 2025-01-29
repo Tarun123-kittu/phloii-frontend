@@ -1,10 +1,12 @@
 "use client"; 
 
 import React, { useState } from "react";
-import "./imagePreview.css"
+import "./imagePreview.css";
 
-const ImageGallery = ({images,setShow_image_preview,show_image_preview,index}) => {
+const ImageGallery = ({ images, setShow_image_preview, show_image_preview, index }) => {
   const [currentIndex, setCurrentIndex] = useState(index);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   const openPopup = (index) => {
     setCurrentIndex(index);
@@ -12,7 +14,7 @@ const ImageGallery = ({images,setShow_image_preview,show_image_preview,index}) =
   };
 
   const closePopup = () => {
-    setShow_image_preview(false)
+    setShow_image_preview(false);
   };
 
   const showPreviousImage = () => {
@@ -25,6 +27,23 @@ const ImageGallery = ({images,setShow_image_preview,show_image_preview,index}) =
     setCurrentIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX); // Store the initial touch position
+  };
+
+  const handleTouchEnd = (e) => {
+    setTouchEnd(e.changedTouches[0].clientX); // Store the final touch position
+    if (touchStart - touchEnd > 100) {
+      // Swipe left
+      showNextImage();
+    }
+
+    if (touchStart - touchEnd < -100) {
+      // Swipe right
+      showPreviousImage();
+    }
   };
 
   return (
@@ -62,6 +81,8 @@ const ImageGallery = ({images,setShow_image_preview,show_image_preview,index}) =
             alignItems: "center",
             zIndex: 1000,
           }}
+          onTouchStart={handleTouchStart} // Detect touch start
+          onTouchEnd={handleTouchEnd}     // Detect touch end
         >
           {/* Close Button */}
           <button
