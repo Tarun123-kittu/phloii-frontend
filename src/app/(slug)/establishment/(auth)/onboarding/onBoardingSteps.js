@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { get_selected_hotel_details, clear_selected_hotel_details } from "@/utils/redux/slices/hotelOnboardingSlice/getSelectedHotelDetails";
 import { update_hotel_details, clear_hotel_details_state } from "@/utils/redux/slices/hotelOnboardingSlice/updateHotelDetails";
+import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
 
 
 const OnBoardingSteps = ({ col, hotelId }) => {
@@ -35,7 +36,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const [safeWord, setSafeWord] = useState('')
   const [images, setImages] = useState([])
   const [food, setFood] = useState("")
-  const [additional_information,setAdditional_information] = useState("")
+  const [additional_information, setAdditional_information] = useState("")
   const [serviceValues, setServiceValues] = useState([])
   const [atmosphere, setAtmosphere] = useState([])
   const [openTiming, setOpenTiming] = useState('')
@@ -102,7 +103,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       uniquefeatures: uniquefeatures,
       safeWord: safeWord,
       food: food,
-      additional_information:additional_information,
+      additional_information: additional_information,
       inpersonvisit: inpersonvisit,
       atmosphere_description: atmosphere_description,
       opentiming: openTiming,
@@ -114,31 +115,59 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   const updateHotel = () => {
     if (hotelId) {
-      dispatch(update_hotel_details({
-        hotelId: hotelId,
-        establishmentname: establishmentname,
-        establishedtype: establishedtype,
-        streetaddress: streetaddress,
-        unitNumber: unitNumber,
-        country: country,
-        state: state,
-        pincode: pincode,
-        ownername: ownername,
-        ownerphone: ownerPhone,
-        webSitelink: websiteLink,
-        owneremail: owneremail,
-        whyphloii: whyphloii,
-        uniquefeatures: uniquefeatures,
-        safeWord: safeWord,
-        food: food,
-        additional_information:additional_information,
-        inpersonvisit: inpersonvisit,
-        atmosphere_description: atmosphere_description,
-        opentiming: openTiming,
-        closetiming: closeTiming,
-        customerservicenumber: customerServiceNumber,
-        images: images,
-      }))
+      const hotelDetails = selected_hotel_details?.data?.data?.hotel;
+
+      if (
+        establishmentname === hotelDetails?.establishmentName &&
+        streetaddress === hotelDetails?.address?.streetAddress &&
+        unitNumber === hotelDetails?.address?.suiteUnitNumber &&
+        country === hotelDetails?.address?.country &&
+        state === hotelDetails?.address?.state &&
+        pincode === hotelDetails?.address?.pinCode &&
+        ownername === hotelDetails?.ownerDetails?.ownerName &&
+        ownerPhone === hotelDetails?.ownerDetails?.ownerPhone &&
+        owneremail === hotelDetails?.ownerDetails?.ownerEmail &&
+        whyphloii === hotelDetails?.why_want_phloi &&
+        uniquefeatures === hotelDetails?.uniqueFeatures &&
+        safeWord === hotelDetails?.safeWord &&
+        inpersonvisit === hotelDetails?.inPersonVisitAvailability &&
+        atmosphere_description === hotelDetails?.atmosphere_description &&
+        openTiming === hotelDetails?.openCloseTimings?.open &&
+        closeTiming === hotelDetails?.openCloseTimings?.close &&
+        customerServiceNumber === hotelDetails?.customerServiceNumber &&
+        (food === hotelDetails?.food || hotelDetails?.food === undefined || hotelDetails?.food === null) &&
+        (additional_information === hotelDetails?.additional_information || hotelDetails?.additional_information === undefined || hotelDetails?.additional_information === null) &&
+        (websiteLink === hotelDetails?.website_link || hotelDetails?.website_link === undefined || hotelDetails?.website_link === null)
+      ) {
+        toast.error("It seems you haven't made any changes to update. Please make some changes to update.");
+      }
+      else {
+        dispatch(update_hotel_details({
+          hotelId: hotelId,
+          establishmentname: establishmentname,
+          establishedtype: establishedtype,
+          streetaddress: streetaddress,
+          unitNumber: unitNumber,
+          country: country,
+          state: state,
+          pincode: pincode,
+          ownername: ownername,
+          ownerphone: ownerPhone,
+          webSitelink: websiteLink,
+          owneremail: owneremail,
+          whyphloii: whyphloii,
+          uniquefeatures: uniquefeatures,
+          safeWord: safeWord,
+          food: food,
+          additional_information: additional_information,
+          inpersonvisit: inpersonvisit,
+          atmosphere_description: atmosphere_description,
+          opentiming: openTiming,
+          closetiming: closeTiming,
+          customerservicenumber: customerServiceNumber,
+          images: images,
+        }))
+      }
     }
   }
 
@@ -200,40 +229,48 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       dispatch(clear_hotel_details_state())
     }
   }, [is_hotel_updated])
+
+      const handleToggle = () => {    
+          dispatch(toggle_sidebar(false))
+      }
+
   return (
     <>
-      <ul className={`${col == "col-lg-6" && "justify-content-start"} step_counter`}>
-        {Array.from({ length: 3 }, (_, i) => {
-          const stepNumber = i + 1;
-          const isActive = step === stepNumber;
-          const isDone = step > stepNumber;
+      <div onClick={ () => handleToggle()}>
+        <ul className={`${col == "col-lg-6" && "justify-content-start"} step_counter`}>
+          {Array.from({ length: 3 }, (_, i) => {
+            const stepNumber = i + 1;
+            const isActive = step === stepNumber;
+            const isDone = step > stepNumber;
 
-          return (
-            <React.Fragment key={stepNumber}>
-              <li
-                className={`step_item ${isActive ? "active" : ""} ${isDone ? "done" : ""
-                  }`}
-              >
-                <span>{stepNumber}</span>
-                <p>
-                  {stepNumber === 1 && "Establishment details"}
-                  {stepNumber === 2 && "Personal Details"}
-                  {stepNumber === 3 && "Why Phloii Verified"}
-                </p>
-              </li>
-              {stepNumber < 3 && (
+            return (
+              <React.Fragment key={stepNumber}>
                 <li
-                  className={`line ${isDone ? "done" : ""}`}
-                ></li>
-              )}
-            </React.Fragment>
-          );
-        })}
-      </ul>
+                  className={`step_item ${isActive ? "active" : ""} ${isDone ? "done" : ""
+                    }`}
+                >
+                  <span>{stepNumber}</span>
+                  <p>
+                    {stepNumber === 1 && "Establishment details"}
+                    {stepNumber === 2 && "Personal Details"}
+                    {stepNumber === 3 && "Why Phloii Verified"}
+                  </p>
+                </li>
+                {stepNumber < 3 && (
+                  <li
+                    className={`line ${isDone ? "done" : ""}`}
+                  ></li>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </ul>
+      </div>
+
 
       {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} />}
       {step === 2 && <PersonalDetails col={col} setStep={setStep} ownername={ownername} setOwnername={setOwnername} ownerPhone={ownerPhone} setOwnerPhone={setOwnerPhone} websiteLink={websiteLink} setWebsiteLink={setWebsiteLink} owneremail={owneremail} setOwnerEmail={setOwnerEmail} />}
-      {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} setFood={setFood} food={food} setServiceValues={setServiceValues} serviceValues={serviceValues} atmosphere={atmosphere} setAtmosphere={setAtmosphere} openTiming={openTiming} setOpenTiming={setOpenTiming} closeTiming={closeTiming} setCloseTiming={setCloseTiming} customerServiceNumber={customerServiceNumber} setCustomerServiceNumber={setCustomerServiceNumber} hotelId={hotelId} updateHotel={updateHotel} is_hotel_updated={is_hotel_updated} setAtmosphere_description={setAtmosphere_description} atmosphere_description={atmosphere_description} setAdditional_information={setAdditional_information} additional_information={additional_information}/>}
+      {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} setFood={setFood} food={food} setServiceValues={setServiceValues} serviceValues={serviceValues} atmosphere={atmosphere} setAtmosphere={setAtmosphere} openTiming={openTiming} setOpenTiming={setOpenTiming} closeTiming={closeTiming} setCloseTiming={setCloseTiming} customerServiceNumber={customerServiceNumber} setCustomerServiceNumber={setCustomerServiceNumber} hotelId={hotelId} updateHotel={updateHotel} is_hotel_updated={is_hotel_updated} setAtmosphere_description={setAtmosphere_description} atmosphere_description={atmosphere_description} setAdditional_information={setAdditional_information} additional_information={additional_information} />}
 
     </>
   );

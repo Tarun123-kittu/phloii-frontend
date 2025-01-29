@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get_hotels_details } from '@/utils/redux/slices/hotelOnboardingSlice/getHotelsDetails';
 import ImageGallery from '@/Component/imagePreview/ImagePreview';
 import Link from 'next/link';
+import { toggle_sidebar } from '@/utils/redux/slices/sidebarSlice/manageSidebar';
 const Establishment = () => {
   const dispatch = useDispatch()
   const router = useRouter()
@@ -42,6 +43,10 @@ const Establishment = () => {
     router.push(`/establishment/establishment-details/${id}/${decodeURIComponent(name)}`)
   }
 
+   const handleToggle = () => {    
+        dispatch(toggle_sidebar(false))
+    }
+
   return (
     <>
       <Head>
@@ -49,7 +54,7 @@ const Establishment = () => {
         <meta name="description" content="Find details about hotels. Discover amenities, reviews, and more." />
       </Head>
       <SideBar>
-        <div className="wrapper">
+        <div onClick={ () => handleToggle()} className="wrapper">
           <h5 className='text-white mb-3'>Establishment Information</h5>
           {hotel_details?.length === 0 ? <img src='/noData.svg' /> : hotel_details?.map((hotel, i) => (
             

@@ -11,6 +11,7 @@ import deleteHotelImage from "./slices/hotelOnboardingSlice/deleteHotelimage"
 import hotelDetailsSlice from "./slices/hotelOnboardingSlice/updateHotelDetails"
 import deleteSubscription from "./slices/hotelOnboardingSlice/deleteSubscription"
 import hotelNotifications from "./slices/hotelOnboardingSlice/hotelNotifications"
+import manageSidebar from "./slices/sidebarSlice/manageSidebar"
 
 const AppStore = configureStore({
   reducer: {
@@ -25,7 +26,8 @@ const AppStore = configureStore({
     DELETE_HOTEL_IMAGE: deleteHotelImage,
     UPDATE_HOTEL_DETAILS: hotelDetailsSlice,
     DELETE_SUBSCRIPTION: deleteSubscription,
-    HOTEL_NOTIFICATIONS: hotelNotifications
+    HOTEL_NOTIFICATIONS: hotelNotifications,
+    MANAGE_SIDEBAR: manageSidebar,
   },
 });
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Button from "../Hotel/Button/Button";
+import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
 
 const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries }) => {
-  console.log(country,state,pincode)
   const [states, setStates] = useState([])
   const [establishmentnameError, setEstablishmentError] = useState('')
   const [establishmenttypeError, setEstablishmentTypeError] = useState('')
@@ -12,7 +12,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   const [stateError, setStateError] = useState('')
   const [pincodeError, setPincodeError] = useState('')
   const handleForward = () => {
-    if (!establishmentname && !establishedtype && !streetaddress && !country && !state && !pincode) {
+    if (!establishmentname && !establishedtype && !streetaddress && !unitNumber && !country && !state && !pincode) {
       setEstablishmentError("Please enter the establishment name")
       // setEstablishmentTypeError("Please Select the establishment type")
       setAddressError("Please enter the street address")
@@ -31,6 +31,10 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
     // }
     if (!streetaddress) {
       setAddressError("Please enter the street address")
+      return
+    }
+    if (!unitNumber) {
+      setUnitNumberError("Please enter the unit number")
       return
     }
     if (!country) {
@@ -59,9 +63,13 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
     }
   }, [country]);
 
+  const handleToggle = () => {
+    dispatch(toggle_sidebar(false))
+  }
+
   return (
-    <div className="">
-      <div className="row">
+    <div onClick={() => handleToggle()} className="">
+      <div onClick={() => handleToggle()} className="row">
         <div className={col}>
           <div className="mb-3">
             <label for="email" className="form-label cmn_label">
@@ -128,7 +136,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
         </div>
         <div className={col}>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label cmn_label">
+            <label htmlFor="email" className="form-label cmn_labels">
               Suite/Unit Number (Optional)
             </label>
             <input

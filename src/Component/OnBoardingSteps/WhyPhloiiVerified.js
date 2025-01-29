@@ -5,8 +5,9 @@ import Button from "../Hotel/Button/Button";
 import Multiselect from 'multiselect-react-dropdown';
 import { delete_hotel_image, clear_delete_hotel_image } from "@/utils/redux/slices/hotelOnboardingSlice/deleteHotelimage";
 import { useDispatch, useSelector } from "react-redux";
+import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
 
-const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel, is_hotel_updated, setAtmosphere_description, atmosphere_description,setFood,food,setAdditional_information,additional_information }) => {
+const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel, is_hotel_updated, setAtmosphere_description, atmosphere_description, setFood, food, setAdditional_information, additional_information }) => {
   const dispatch = useDispatch()
   const [errors, setErrors] = useState("");
   const [whyPhloiiError, setWhyPhloiiError] = useState('')
@@ -121,10 +122,14 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
     return image instanceof File ? URL.createObjectURL(image) : image;
   };
 
+  const handleToggle = () => {
+    dispatch(toggle_sidebar(false))
+  }
+
 
   return (
-    <div className="">
-      <div className="row">
+    <div onClick={() => handleToggle()} className="">
+      <div onClick={() => handleToggle()} className="row">
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
@@ -316,11 +321,11 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               className="form-control cmn_input"
               placeholder="Write message"
               value={food}
-              onChange={(e) => { setFood(e.target.value)}}
+              onChange={(e) => { setFood(e.target.value) }}
             />
           </div>
-          </div>
-          <div className={col}>
+        </div>
+        <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
               Additional Information (Optional)
@@ -331,14 +336,14 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               className="form-control cmn_input"
               placeholder="Write message"
               value={additional_information}
-              onChange={(e) => { setAdditional_information(e.target.value)}}
+              onChange={(e) => { setAdditional_information(e.target.value) }}
             />
           </div>
-          </div>
-          <div className={col}>
+        </div>
+        <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
-            Please explain your atmosphere in detail
+              Please explain your atmosphere in detail
             </label>
             <textarea
               rows={5}

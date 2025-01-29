@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "../Hotel/Button/Button";
+import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
 
 const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, setOwnerPhone, websiteLink, setWebsiteLink, owneremail, setOwnerEmail }) => {
   const [nameError, setNameError] = useState('')
@@ -49,9 +50,13 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
     }
   };
 
+    const handleToggle = () => {
+      dispatch(toggle_sidebar(false))
+    }
+
   return (
-    <div className="">
-      <div className="row">
+    <div onClick={() => handleToggle()} className="">
+      <div onClick={() => handleToggle()} className="row">
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
