@@ -61,7 +61,7 @@ const Establishment = () => {
             
             <div className="profile-card m-0  row mb-4" key={i}>
 
-              <div className="col-md-12 col-lg-3  profile-sidebar">
+              <div className="col-md-12 col-lg-3  profile-sidebar d-none">
                 <div className="d-flex justify-content-center hotel_user position-relative">
                   <img src={hotel?.images[0]} alt="Profile" className="profile-img position-relative mt-3 " />
                 </div>
@@ -75,7 +75,7 @@ const Establishment = () => {
               </div>
 
 
-              <div className="col-md-12 col-lg-9 hotel-details-wrapper p-0">
+              <div className="col-md-12 col-lg-12 hotel-details-wrapper p-0">
                 <div className="d-flex hotel-details justify-content-between align-items-center">
 
                   <ul className='dash-list p-0 mb-0 w-100 align-items-center m-0'>

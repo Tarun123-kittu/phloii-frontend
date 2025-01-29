@@ -185,7 +185,7 @@ span.hotel_address {
    padding: 0;
    color: #fff;
    border-bottom: 1px solid #FFFFFF3D;
-   padding: 0 0 20px 20px;
+   padding: 0 0 20px 0px;
 }
 .dash-list span.hotel_name {
     font-size: 16px;
@@ -256,7 +256,7 @@ p.pending_pay {
 
 /* Restaurant Photos */
 .hotel-photo-wrapper{
-    padding: 20px 0 0 20px;
+    padding: 20px 0 0 0px;
 }
 .hotel-photo-wrapper h5{
     color: #fff;

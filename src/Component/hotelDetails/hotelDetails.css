@@ -219,7 +219,7 @@ span.verified svg{
 /* Restaurant Photos */
 
 .hotel-photo-wrapper{
-    padding: 20px 0 0 20px;
+    padding: 20px 0 0 0px;
 }
 .hotel-photo-wrapper h5{
     color: #fff;
