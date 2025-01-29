@@ -319,6 +319,8 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               onChange={(e) => { setFood(e.target.value)}}
             />
           </div>
+          </div>
+          <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
               Additional Information (Optional)
@@ -332,9 +334,11 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               onChange={(e) => { setAdditional_information(e.target.value)}}
             />
           </div>
+          </div>
+          <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
-              Please describe your atmosphere in great detail.
+            Please explain your atmosphere in detail
             </label>
             <textarea
               rows={5}
@@ -378,9 +382,6 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               </span>
             )}
           </div>
-        </div>
-
-        <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
               Open Timings
@@ -426,7 +427,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               </span>
             )}
           </div>
-        </div>;
+        </div>
 
         <div className={col}>
           <div className="mb-3">
