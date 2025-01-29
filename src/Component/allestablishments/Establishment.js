@@ -10,6 +10,7 @@ import { get_hotels_details } from '@/utils/redux/slices/hotelOnboardingSlice/ge
 import ImageGallery from '@/Component/imagePreview/ImagePreview';
 import Link from 'next/link';
 import { toggle_sidebar } from '@/utils/redux/slices/sidebarSlice/manageSidebar';
+import Loader from '../loader/Loader';
 const Establishment = () => {
   const dispatch = useDispatch()
   const router = useRouter()
@@ -54,7 +55,7 @@ const Establishment = () => {
         <meta name="description" content="Find details about hotels. Discover amenities, reviews, and more." />
       </Head>
       <SideBar>
-        <div onClick={ () => handleToggle()} className="wrapper">
+        {all_hotels?.status === "Loading" ? <Loader /> : <div onClick={ () => handleToggle()} className="wrapper">
           <h5 className='text-white mb-3'>Establishment Information</h5>
           {hotel_details?.length === 0 ? <img src='/noData.svg' /> : hotel_details?.map((hotel, i) => (
             
@@ -142,7 +143,7 @@ const Establishment = () => {
 
           ))}
           {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
-        </div>
+        </div>}
       </SideBar>
     </>
   );
