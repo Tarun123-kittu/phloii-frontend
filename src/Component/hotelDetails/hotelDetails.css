@@ -293,6 +293,7 @@ img.user_profile_image{
     object-fit: cover;
     object-position: center center;
     flex: 0 0 56px;
+    border: 1px solid #fdc546;
 
 }
 .hotel_cta {
