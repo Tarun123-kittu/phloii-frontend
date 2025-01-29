@@ -136,7 +136,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
         </div>
         <div className={col}>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label cmn_labels">
+            <label htmlFor="email" className="form-label cmn_label">
               Suite/Unit Number (Optional)
             </label>
             <input
