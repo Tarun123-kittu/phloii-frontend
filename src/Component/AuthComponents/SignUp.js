@@ -163,7 +163,7 @@ const SignUP = () => {
               className="position-absolute end-0 me-3 mt-1"
               onClick={togglePasswordVisibility}
             >
-              {showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
+              {!showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
             </div>
           </div>
           <span className="password_input d-block pt-1">Password must contain atleast 8 chracter,including a number and letter</span>

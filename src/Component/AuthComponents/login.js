@@ -147,7 +147,7 @@ const Login = () => {
               className="position-absolute end-0 me-3 mt-1 top-0"
               onClick={togglePasswordVisibility}
             >
-              {showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
+              {!showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
             </div>
             <span
               onClick={() => setShowPassword(!showPassword)}
