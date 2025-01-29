@@ -164,7 +164,7 @@ ul.notify_list.position-relative {
         z-index: 99999;
     }
     li.logout_btn{
-        bottom: 40px;
+        bottom: 50px;
     }
 }
 @media(max-width:767px){
