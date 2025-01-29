@@ -173,4 +173,7 @@ ul.notify_list.position-relative {
         padding-right: 10px;
         padding-left: 10px;
     }
+    .side_bar ul li.logout_btn {
+       margin-bottom: 30px;
+    }
 }

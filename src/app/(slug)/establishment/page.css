@@ -207,13 +207,14 @@ span.hotel_address {
     margin-top: 2px;
     align-items: center;
 }
-.profile-img {
+img.profile-img {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 15px;
     background-color: #333;
+    border:2px solid #fdc546;
 }
 
 
@@ -332,10 +333,10 @@ p.pending_pay {
         }
         .profile-sidebar{
             margin-bottom: 12px;
+
         }
        .hotel-details{
             padding-left: 0;
-            padding-top: 10px;
         }
         .profile-img {
             width: 80px;
@@ -344,6 +345,13 @@ p.pending_pay {
         ul.dash-list strong {
             font-size: 12px;
             white-space: nowrap;
+        }
+        .profile-card{
+            flex-direction: column-reverse;
+        }
+        div.profile-sidebar{
+            margin-top: 15px;
+            margin-bottom: 0;
         }
     }
     @media(max-width:576px){

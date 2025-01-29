@@ -62,7 +62,7 @@ const Establishment = () => {
 
               <div className="col-md-12 col-lg-3  profile-sidebar">
                 <div className="d-flex justify-content-center hotel_user position-relative">
-                  <img src={hotel?.images[0]} alt="Profile" className="profile-img position-relative mt-3" />
+                  <img src={hotel?.images[0]} alt="Profile" className="profile-img position-relative mt-3 " />
                 </div>
                 <h5 className="mb-1">{hotel?.ownerDetails?.ownerName}</h5>
                 <p className="pending_pay mb-3">payment {hotel?.hotelPayments?.paymentStatus}</p>

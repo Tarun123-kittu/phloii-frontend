@@ -129,6 +129,20 @@ ul.step_counter li.step_item.done p, ul.step_counter li:first-child p {
     }
     ul.step_counter{
         flex-wrap: wrap;
-        gap: 20px;
+        gap: 10px;
+        justify-content: space-between !important;
+    }
+    ul.step_counter li{
+        display: block;
+    }
+    ul.step_counter p{
+        width: 80px;
+        text-align: center;
+        font-weight: 400;
+        margin-top: 10px;
+
+    }
+    ul.step_counter p{
+        font-size: 11px;
     }
 }
