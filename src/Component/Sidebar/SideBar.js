@@ -52,6 +52,7 @@ const SideBar = ({ children }) => {
   }, [pathname, SidebarMenuItems]);
 
   const handleMenuClick = (index) => {
+    dispatch(toggle_sidebar(false))
     setActiveIndex(index);
   };
 
