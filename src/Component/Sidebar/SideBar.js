@@ -24,7 +24,7 @@ const SideBar = ({ children }) => {
     router.push("/establishment/login");
   };
   const handleLogo = () => {
-    router.push("establishment");
+    router.push("/establishment");
   };
 
   useEffect(() => {
