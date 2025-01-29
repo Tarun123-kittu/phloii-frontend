@@ -59,7 +59,8 @@ span.dot {
 
 .side_bar ul li {
     list-style: none;
-    margin-bottom:10px
+    margin-bottom:10px;
+    width: 100%;
 }
 
 .side_bar ul {
@@ -163,7 +164,7 @@ ul.notify_list.position-relative {
         z-index: 99999;
     }
     li.logout_btn{
-        bottom: 25px;
+        bottom: 40px;
     }
 }
 @media(max-width:767px){
