@@ -1,9 +1,4 @@
-.dashboard_wrapper {
-    background: rgba(14, 14, 14, 1);
-    min-height: 100vh;
-    border-radius: 10px;
-    display: flex;
-}
+
 .payment_info {
     display: flex;
     align-items: center;
@@ -108,12 +103,7 @@ ul.owner_details li {
 
 ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);word-break: break-all; font-size: 13px;}
 
-.owner_info {
-    flex: 0 0 350px;
-    padding: 1.2rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    width: 350px;
-}
+
 
 
 .hotel_image img.imge_one {
