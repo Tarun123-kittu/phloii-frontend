@@ -8,7 +8,7 @@ const Header = () => {
     <div className="container">
 
    <div className="d-flex justify-content-between align-items-center">
-   <Link href="/" className="cursor-pointer"><Image src="/assets/logo.svg" width={139} height={57} alt="logo" /></Link> <Link href={'/establishment/login'} className={"rister_est"}>Register Establishment</Link>
+   <Link href="/" className="cursor-pointer"><Image src="/assets/logo.svg" width={139} height={57} alt="logo" /></Link> <Link href={'/establishment/login'} target='_blank' className={"rister_est"}>Register Establishment</Link>
    </div>
     </div>
   </header>

@@ -459,7 +459,7 @@ export default function HomeComponent() {
                 sales while promoting safety for all users.
               </p>
               <div className="">
-                <Link href={'/establishment/login'} className={'rister_est'}>Register Establishment</Link>
+                <Link href={'/establishment/login'} target="_blank" className={'rister_est'}>Register Establishment</Link>
               </div>
             </div>
           </div>
