@@ -46,10 +46,11 @@
 }
 
 .info span {
-    font-size: 14px;
+    font-size: 12px;
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 0px;
+    font-weight: 300;
 }
 
 .dash-list li {
@@ -64,7 +65,7 @@
 }
 
 .dash-list span {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .info p {
@@ -211,10 +212,14 @@ ul.image-grid li {
 }
 span.verified {
     font-size: 14px;
-    display: flex
-;
+    display: flex;
     align-items: center;
     gap: 5px;
+}
+span.verified svg{
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
 }
 /* Restaurant Photos */
 
@@ -318,7 +323,7 @@ img.user_profile_image{
         flex-wrap: wrap;
     }
     .dash-list li{
-        width: 45%;
+        width: 48%;
     }
     .hotel-details .dash-list li {
         width: auto;
@@ -385,5 +390,9 @@ img.user_profile_image{
     .dashboard_info {
         position: relative;
         padding-top: 70px;
+    }
+    .dash-list strong{
+        font-size: 12px;
+        white-space: nowrap;
     }
 }

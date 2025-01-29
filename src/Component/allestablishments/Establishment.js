@@ -125,7 +125,7 @@ const Establishment = () => {
 
 
                 <div className='hotel-photo-wrapper'>
-                  <h5>Restaurant Photos</h5>
+                  <h5>Establishment Photos</h5>
                   <div className=" hotel-photos ">
                     <div onClick={() => { setImages(hotel?.images); setShow_image_preview(true); setIndex(0) }} className="- p-0">
                       <img src={hotel?.images[0]} alt="Hotel 1" />

@@ -245,4 +245,11 @@ outline: 1px solid slategrey;
   br{
     display: none;
   }
+  .wrapper {
+    padding: 15px;
+    padding-top: calc(50px + 30px);
+  }
+  .wrapper{
+    padding-left: 20px;
+}
 }
