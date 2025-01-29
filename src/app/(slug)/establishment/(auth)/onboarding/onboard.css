@@ -117,3 +117,13 @@ ul.step_counter li.step_item.done span,li.line.done {
 ul.step_counter li.step_item.done p {
     color: rgba(251, 185, 13, 1);
 }
+
+@media(max-width:767px){
+    ul.step_counter li.line  {
+        display: none;
+    }
+    ul.step_counter{
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+}
