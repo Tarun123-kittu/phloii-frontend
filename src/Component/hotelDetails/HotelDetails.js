@@ -108,7 +108,8 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     }
                                 </span>
                             </div>
-                            <div className={hotel_details?.paymentDetails?.paymentStatus === "completed" ? "payment_info payment_success" : 'payment_info '}>
+                          <div className='hotel_cta'>
+                          <div className={hotel_details?.paymentDetails?.paymentStatus === "completed" ? "payment_info payment_success" : 'payment_info '}>
                                 <img src="/assets/card-remove.svg" alt="payment type" /> Payment {hotel_details?.paymentDetails?.paymentStatus === "completed" ? "Completed" : hotel_details?.paymentDetails?.paymentStatus === "canceled" ? "Canceled " : "Pending"}
                             </div>
                             {hotel_details?.paymentDetails?.paymentStatus === "completed" && (
@@ -122,6 +123,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                    
                                 </button>
                             )}
+                          </div>
 
                         </div>
                         <ul className='dash-list p-0 mb-4'>
