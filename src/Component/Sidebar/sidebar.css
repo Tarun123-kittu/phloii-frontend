@@ -70,6 +70,7 @@ li.sidebar_active  svg path {
 }
 .side_bar img[alt="Logo"]{
     cursor: pointer;
+    width: 100%;
 }
 .side_bar ul li a {
     padding: 10px;
@@ -132,4 +133,43 @@ ul.notify_list {
 ul.notify_list.position-relative {
     padding: 0px;
     margin: 0;
+}
+.hamburger {
+    display: none;
+}
+@media(min-width:1024px){
+    .d-block.hamburger, .mobile_toggle  .d-block{
+        display: none !important;
+    }
+}
+@media(max-width:1024px){
+    .side_bar{
+        display: none;
+    }
+    .wrapper{
+        padding-left: 20px;
+    }
+    header{
+        width: 100%;
+    }
+    .hamburger {
+        display: block;
+    }
+    header.toggle_header {
+        width: calc(100% - var(--sidebar-width));
+    }
+    .mobile_toggle.side_bar{
+        display: block;
+        z-index: 99999;
+    }
+}
+@media(max-width:767px){
+    .user_image {
+        flex: 0 0 30px;
+        height: 30px;
+    }
+    header{
+        padding-right: 10px;
+        padding-left: 10px;
+    }
 }

@@ -45,17 +45,17 @@ const Establishment = () => {
   return (
     <>
       <Head>
-        <title>Hotel Information</title>
+        <title>Establishment Information</title>
         <meta name="description" content="Find details about hotels. Discover amenities, reviews, and more." />
       </Head>
       <SideBar>
         <div className="wrapper">
-          <h5 className='text-white mb-3'>Hotel Information</h5>
+          <h5 className='text-white mb-3'>Establishment Information</h5>
           {hotel_details?.length === 0 ? <img src='/noData.svg' /> : hotel_details?.map((hotel, i) => (
             
             <div className="profile-card m-0  row mb-4" key={i}>
 
-              <div className="col-md-3 profile-sidebar">
+              <div className="col-md-12 col-lg-3  profile-sidebar">
                 <div className="d-flex justify-content-center hotel_user position-relative">
                   <img src={hotel?.images[0]} alt="Profile" className="profile-img position-relative mt-3" />
                 </div>
@@ -69,7 +69,7 @@ const Establishment = () => {
               </div>
 
 
-              <div className="col-md-9 hotel-details-wrapper p-0">
+              <div className="col-md-12 col-lg-9 hotel-details-wrapper p-0">
                 <div className="d-flex hotel-details justify-content-between align-items-center">
 
                   <ul className='dash-list p-0 mb-0 w-100 align-items-center m-0'>

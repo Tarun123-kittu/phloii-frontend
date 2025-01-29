@@ -10,7 +10,7 @@ const SideBar = ({ children }) => {
   const router = useRouter();
   const [userName, setUserName] = useState(null);
   const [activeIndex, setActiveIndex] = useState(null);
-  console.log(activeIndex,"active index")
+const[toggle,setToggle] = useState(false)
   const [user, setUser] = useState(null);
   const pathname = usePathname();
 
@@ -51,7 +51,14 @@ const SideBar = ({ children }) => {
   };
   return (
     <div className="side_bar_wrapper">
-      <header className="d-flex justify-content-end">
+      <header className={`${toggle && 'toggle_header'} d-flex justify-content-end align-items-center`}>
+      <div className={`${toggle? 'd-none' : "d-block"} hamburger flex-grow-1`}>
+      <svg onClick={()=>setToggle(!toggle)} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2.8504 4.8002C2.8504 4.64107 2.91362 4.48845 3.02614 4.37593C3.13866 4.26341 3.29127 4.2002 3.4504 4.2002H16.2504C16.4095 4.2002 16.5621 4.26341 16.6747 4.37593C16.7872 4.48845 16.8504 4.64107 16.8504 4.8002C16.8504 4.95933 16.7872 5.11194 16.6747 5.22446C16.5621 5.33698 16.4095 5.4002 16.2504 5.4002H3.4504C3.29127 5.4002 3.13866 5.33698 3.02614 5.22446C2.91362 5.11194 2.8504 4.95933 2.8504 4.8002ZM2.8504 14.4002C2.8504 14.2411 2.91362 14.0885 3.02614 13.9759C3.13866 13.8634 3.29127 13.8002 3.4504 13.8002H16.2504C16.4095 13.8002 16.5621 13.8634 16.6747 13.9759C16.7872 14.0885 16.8504 14.2411 16.8504 14.4002C16.8504 14.5593 16.7872 14.7119 16.6747 14.8245C16.5621 14.937 16.4095 15.0002 16.2504 15.0002H3.4504C3.29127 15.0002 3.13866 14.937 3.02614 14.8245C2.91362 14.7119 2.8504 14.5593 2.8504 14.4002ZM3.4504 9.0002C3.29127 9.0002 3.13866 9.06341 3.02614 9.17593C2.91362 9.28845 2.8504 9.44107 2.8504 9.6002C2.8504 9.75933 2.91362 9.91194 3.02614 10.0245C3.13866 10.137 3.29127 10.2002 3.4504 10.2002H16.2504C16.4095 10.2002 16.5621 10.137 16.6747 10.0245C16.7872 9.91194 16.8504 9.75933 16.8504 9.6002C16.8504 9.44107 16.7872 9.28845 16.6747 9.17593C16.5621 9.06341 16.4095 9.0002 16.2504 9.0002H3.4504Z" fill="white" fill-opacity="0.701961"/>
+      </svg>
+
+      </div>
+
         <div className="notify d-flex align-items-center justify-content-center position-relative">
           <span className="dot position-absolute"></span>
           <img src="/assets/notify.svg" alt="Notification Icon" />
@@ -66,7 +73,15 @@ const SideBar = ({ children }) => {
           </div>
         </div>
       </header>
-      <div className="side_bar">
+      <div className={`${toggle && "mobile_toggle"} side_bar`}>
+        <div className={`${toggle ? 'd-block' : "d-none"} text-end`}>
+       
+      <svg onClick={()=>setToggle(!toggle)} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="white" fill-opacity="0.72"/>
+      <path d="M13.2929 1.41L8.05645 6.64645L7.70289 7L8.05645 7.35355L13.2929 12.59L12.59 13.2929L7.35355 8.05645L7 7.70289L6.64645 8.05645L1.41 13.2929L0.707107 12.59L5.94355 7.35355L6.29711 7L5.94355 6.64645L0.707107 1.41L1.41 0.707107L6.64645 5.94355L7 6.29711L7.35355 5.94355L12.59 0.707107L13.2929 1.41Z" stroke="white" stroke-opacity="0.72"/>
+      </svg>
+
+        </div>
         <div className="text-center mt-3 mb-5">
           <img
             onClick={handleLogo}
