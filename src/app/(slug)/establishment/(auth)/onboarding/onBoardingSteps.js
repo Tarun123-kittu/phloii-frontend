@@ -34,7 +34,8 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const [inpersonvisit, setInpersonvisit] = useState('')
   const [safeWord, setSafeWord] = useState('')
   const [images, setImages] = useState([])
-  const [foodValues, setFoodValues] = useState([])
+  const [food, setFood] = useState("")
+  const [additional_information,setAdditional_information] = useState("")
   const [serviceValues, setServiceValues] = useState([])
   const [atmosphere, setAtmosphere] = useState([])
   const [openTiming, setOpenTiming] = useState('')
@@ -64,7 +65,6 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setWhyphloii('')
       setSafeWord('')
       setImages([])
-      setFoodValues([])
       setServiceValues([])
       setAtmosphere([])
       setOpenTiming('')
@@ -101,6 +101,8 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       whyphloii: whyphloii,
       uniquefeatures: uniquefeatures,
       safeWord: safeWord,
+      food: food,
+      additional_information:additional_information,
       inpersonvisit: inpersonvisit,
       atmosphere_description: atmosphere_description,
       opentiming: openTiming,
@@ -128,6 +130,8 @@ const OnBoardingSteps = ({ col, hotelId }) => {
         whyphloii: whyphloii,
         uniquefeatures: uniquefeatures,
         safeWord: safeWord,
+        food: food,
+        additional_information:additional_information,
         inpersonvisit: inpersonvisit,
         atmosphere_description: atmosphere_description,
         opentiming: openTiming,
@@ -174,13 +178,14 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setWhyphloii(selected_hotel_details?.data?.data?.hotel?.why_want_phloi)
       setSafeWord(selected_hotel_details?.data?.data?.hotel?.safeWord)
       setImages(selected_hotel_details?.data?.data?.hotel?.images)
-      setFoodValues(selected_hotel_details?.data?.data?.hotel?.food)
       setServiceValues(selected_hotel_details?.data?.data?.hotel?.services)
       setAtmosphere(selected_hotel_details?.data?.data?.hotel?.atmosphere)
       setOpenTiming(selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.open)
       setCloseTiming(selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.close)
       setCustomerServiceNumber(selected_hotel_details?.data?.data?.hotel?.customerServiceNumber)
       setAtmosphere_description(selected_hotel_details?.data?.data?.hotel?.atmosphere_description)
+      setFood(selected_hotel_details?.data?.data?.hotel?.food)
+      setAdditional_information(selected_hotel_details?.data?.data?.hotel?.additional_information)
     }
   }, [])
 
@@ -228,7 +233,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
       {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} />}
       {step === 2 && <PersonalDetails col={col} setStep={setStep} ownername={ownername} setOwnername={setOwnername} ownerPhone={ownerPhone} setOwnerPhone={setOwnerPhone} websiteLink={websiteLink} setWebsiteLink={setWebsiteLink} owneremail={owneremail} setOwnerEmail={setOwnerEmail} />}
-      {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} setFoodValues={setFoodValues} foodValues={foodValues} setServiceValues={setServiceValues} serviceValues={serviceValues} atmosphere={atmosphere} setAtmosphere={setAtmosphere} openTiming={openTiming} setOpenTiming={setOpenTiming} closeTiming={closeTiming} setCloseTiming={setCloseTiming} customerServiceNumber={customerServiceNumber} setCustomerServiceNumber={setCustomerServiceNumber} hotelId={hotelId} updateHotel={updateHotel} is_hotel_updated={is_hotel_updated} setAtmosphere_description={setAtmosphere_description} atmosphere_description={atmosphere_description} />}
+      {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} setFood={setFood} food={food} setServiceValues={setServiceValues} serviceValues={serviceValues} atmosphere={atmosphere} setAtmosphere={setAtmosphere} openTiming={openTiming} setOpenTiming={setOpenTiming} closeTiming={closeTiming} setCloseTiming={setCloseTiming} customerServiceNumber={customerServiceNumber} setCustomerServiceNumber={setCustomerServiceNumber} hotelId={hotelId} updateHotel={updateHotel} is_hotel_updated={is_hotel_updated} setAtmosphere_description={setAtmosphere_description} atmosphere_description={atmosphere_description} setAdditional_information={setAdditional_information} additional_information={additional_information}/>}
 
     </>
   );
