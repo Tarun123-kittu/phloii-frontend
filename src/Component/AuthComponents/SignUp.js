@@ -22,10 +22,11 @@ const SignUP = () => {
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [phone,setPhone] = useState("")
-  const [phoneError,setPhoneError] = useState("")
-  const [profileImage,setProfileImage] = useState("")
-  const [previewImage,setPreviewImage] = useState("")
+  const [phone, setPhone] = useState("")
+  const [phoneError, setPhoneError] = useState("")
+  const [profileImage, setProfileImage] = useState("")
+  const [profileImageError, setProfileImageError] = useState("")
+  const [previewImage, setPreviewImage] = useState("")
   const [showPassword, setShowPassword] = useState(false);
   const [isTerms, setIsTerms] = useState(false);
   const is_signed_up = useSelector((store) => store.HOTEL_SIGNUP)
@@ -34,18 +35,23 @@ const SignUP = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    if (!username && !email && !password) {
+    if (!username && !email && !password && !phone && !profileImage) {
       setUsernameError("Username is required");
       setEmailError("Email is required");
       setPasswordError("Password is required");
+      setPhoneError("Phone is required")
+      setProfileImageError("Profile Image is required")
       return
     }
-
+    if (!profileImage) {
+      setProfileImageError("Profile Image is required")
+      return
+    }
     if (!username) {
       setUsernameError("Username is required");
       return;
     }
-    if(!phone){
+    if (!phone) {
       setPhoneError("Phone is required")
       return
     }
@@ -65,7 +71,7 @@ const SignUP = () => {
       toast.error("Please review and accept the Terms of Service.")
       return
     }
-    dispatch(hotel_signup({ username, email, password }));
+    dispatch(hotel_signup({ username, email, password, phone, profileImage }));
   };
 
   useEffect(() => {
@@ -86,6 +92,8 @@ const SignUP = () => {
       localStorage.setItem("phloii_token_auth", is_loggedIn?.data?.data);
       localStorage.setItem("phloii_user", is_loggedIn?.data?.email);
       localStorage.setItem("phloii_user_name", is_loggedIn?.data?.username);
+      localStorage.setItem("phloii_user_phone", is_loggedIn?.data?.phone);
+      localStorage.setItem("phloii_user_image", is_loggedIn?.data?.profileImage);
       localStorage.setItem("phloii_onboarding_done", is_loggedIn?.data?.isOnboradingDone);
       if (is_loggedIn?.data?.isOnboradingDone) {
         router.push("/establishment");
@@ -105,6 +113,32 @@ const SignUP = () => {
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const fileType = file.type;
+      const fileSize = file.size;
+
+      if (!fileType.includes("image/png") && !fileType.includes("image/jpeg")) {
+        toast.error("Only PNG and JPG images are allowed.");
+        setProfileImage("");
+        return;
+      }
+      if (fileSize > 2 * 1024 * 1024) {
+        toast.error("File size must be less than 2MB.");
+        setProfileImage("");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(file);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="auth-wrapper d-flex align-items-center justify-content-center">
       <div className="auth_form">
@@ -115,6 +149,15 @@ const SignUP = () => {
         <p className="sort_desc text-center">
           Please fill out this form with the required information
         </p>
+        <div className="mb-3">
+          <label className="form-label cmn_label">Profile Image</label>
+          <input
+            type="file"
+            className="form-control cmn_input"
+            placeholder="Enter your name"
+            onChange={handleFileChange}
+          />
+        </div>
         <div className="mb-3">
           <label className="form-label cmn_label">Name</label>
           <input

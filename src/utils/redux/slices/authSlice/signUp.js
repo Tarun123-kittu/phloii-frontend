@@ -4,7 +4,7 @@ import { API_CONFIG } from "@/config/app_config";
 // Async thunk for hotel signup
 export const hotel_signup = createAsyncThunk(
   "hotel_signup",
-  async ({ username, email, password }, thunkAPI) => {
+  async ({ username, email, password,phone,profileImage }, thunkAPI) => {
     try {
       if (!username || !email || !password) {
         return thunkAPI.rejectWithValue({
@@ -12,19 +12,16 @@ export const hotel_signup = createAsyncThunk(
         });
       }
 
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-
-      const raw = JSON.stringify({
-        username: username,
-        email: email,
-        password: password,
-      });
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("phone", phone);
+      formData.append("profileImage", profileImage);
 
       const requestOptions = {
         method: "POST",
-        headers: myHeaders,
-        body: raw,
+        body: formData,
         redirect: "follow",
       };
 
@@ -64,7 +61,7 @@ const hotelSignup = createSlice({
       state.status = null;
       state.data = null;
       state.error = null;
-      return state
+      return state;
     },
   },
   extraReducers: (builder) => {
