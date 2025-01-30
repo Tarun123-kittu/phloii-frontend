@@ -162,14 +162,8 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
               className="form-control cmn_input"
               placeholder="Write message"
               value={uniquefeatures}
-              onChange={(e) => { setUniqueFeatures(e.target.value); setUniqueError('') }}
-              style={uniqueError ? { border: "1px solid #ff00009c" } : {}}
+              onChange={(e) => { setUniqueFeatures(e.target.value) }}
             />
-            {whyPhloiiError && (
-              <span style={uniqueError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
-                {uniqueError}
-              </span>
-            )}
           </div>
         </div>
         <div className="col-12">

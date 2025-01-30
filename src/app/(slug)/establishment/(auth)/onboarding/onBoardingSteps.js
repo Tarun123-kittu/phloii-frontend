@@ -125,7 +125,6 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const updateHotel = () => {
     if (hotelId) {
       const hotelDetails = selected_hotel_details?.data?.data?.hotel;
-
       if (
         establishmentname === hotelDetails?.establishmentName &&
         streetaddress === hotelDetails?.address?.streetAddress &&

@@ -22,6 +22,10 @@ const SignUP = () => {
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [phone,setPhone] = useState("")
+  const [phoneError,setPhoneError] = useState("")
+  const [profileImage,setProfileImage] = useState("")
+  const [previewImage,setPreviewImage] = useState("")
   const [showPassword, setShowPassword] = useState(false);
   const [isTerms, setIsTerms] = useState(false);
   const is_signed_up = useSelector((store) => store.HOTEL_SIGNUP)
@@ -30,16 +34,20 @@ const SignUP = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    if(!username && !email && !password){
+    if (!username && !email && !password) {
       setUsernameError("Username is required");
       setEmailError("Email is required");
       setPasswordError("Password is required");
       return
     }
-   
+
     if (!username) {
       setUsernameError("Username is required");
       return;
+    }
+    if(!phone){
+      setPhoneError("Phone is required")
+      return
     }
     if (!email) {
       setEmailError("Email is required");
@@ -123,6 +131,25 @@ const SignUP = () => {
           {usernameError && (
             <span style={usernameError ? { color: "red", fontSize: "12px" } : {}}>
               {usernameError}
+            </span>
+          )}
+        </div>
+        <div className="mb-3">
+          <label className="form-label cmn_label">Mobile Number</label>
+          <input
+            type="text"
+            className="form-control cmn_input"
+            placeholder="Enter your phone number"
+            value={username}
+            onChange={(e) => {
+              setPhone(e.target.value);
+              setPhoneError("");
+            }}
+            style={phoneError ? { border: "1px solid red" } : {}}
+          />
+          {phoneError && (
+            <span style={phoneError ? { color: "red", fontSize: "12px" } : {}}>
+              {phoneError}
             </span>
           )}
         </div>
