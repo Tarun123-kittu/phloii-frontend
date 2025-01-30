@@ -197,6 +197,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               onChange={(e) => { setState(e.target.value); setStateError('') }}
               style={stateError ? { border: "1px solid #ff00009c" } : {}}
               value={state}
+              disabled={country === ""}
             >
               <option selected>Select state</option>
               {states?.map((state, i) => (

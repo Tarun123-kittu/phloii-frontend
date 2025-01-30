@@ -16,8 +16,8 @@ export const hotel_signup = createAsyncThunk(
       formData.append("username", username);
       formData.append("email", email);
       formData.append("password", password);
-      formData.append("phone", phone);
-      formData.append("profileImage", profileImage);
+      formData.append("phoneNumber", phone);
+      formData.append("image", profileImage);
 
       const requestOptions = {
         method: "POST",
