@@ -214,6 +214,33 @@ textarea::-webkit-scrollbar-thumb {
 background-color: darkgrey;
 outline: 1px solid slategrey;
 }
+.react-international-phone-input-container {
+  width: 100%;
+}
+
+input.react-international-phone-input {
+  width: 100%;
+  background: #0e0e0e !important;
+  color: #fff !important;
+  border: unset !important;
+}
+.steps_form input.react-international-phone-input {
+  width: 100%;
+  background: #000 !important;
+  color: #fff !important;
+  border: unset !important;
+}
+
+button.react-international-phone-country-selector-button, button.react-international-phone-country-selector-button:hover {
+  background: #0e0e0e;
+  border: unset;
+  border-right: 1px solid #464646;
+}
+.steps_form button.react-international-phone-country-selector-button, .steps_form button.react-international-phone-country-selector-button:hover {
+  background: #000;
+  border: unset;
+  border-right: 1px solid #464646;
+}
 /* Add to your CSS file or module */
 
 @keyframes floatLeftToRight {
@@ -240,6 +267,11 @@ outline: 1px solid slategrey;
   html {
     color-scheme: dark;
   }
+}
+@media(max-width:991px){
+  .wrapper {
+    padding-left: 20px;
+}
 }
 @media(max-width:767px){
   br{

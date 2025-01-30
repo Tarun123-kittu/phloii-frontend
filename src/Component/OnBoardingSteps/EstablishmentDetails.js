@@ -1,9 +1,14 @@
+'use client'
+
 import React, { useState, useEffect } from "react";
 import Button from "../Hotel/Button/Button";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
+import { useDispatch } from "react-redux";
+
 
 const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries }) => {
   const [states, setStates] = useState([])
+  const dispatch = useDispatch()
   const [establishmentnameError, setEstablishmentError] = useState('')
   const [establishmenttypeError, setEstablishmentTypeError] = useState('')
   const [addressError, setAddressError] = useState('')

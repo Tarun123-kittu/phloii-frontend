@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import Button from "../Hotel/Button/Button";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
+import { PhoneInput } from 'react-international-phone';
+import { useDispatch } from "react-redux";
 
 const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, setOwnerPhone, websiteLink, setWebsiteLink, owneremail, setOwnerEmail }) => {
+  console.log(ownerPhone,"this is the owner phone")
+  const dispatch = useDispatch()
   const [nameError, setNameError] = useState('')
   const [emailError, setEmailError] = useState('')
   const [websiteError, setWebsiteError] = useState('')
@@ -21,7 +25,7 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
       setPhoneError("Please enter owner phone number")
       return
     }
-    if(websiteError){
+    if (websiteError) {
       setWebsiteError("Please input a valid url!")
       return
     }
@@ -50,9 +54,9 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
     }
   };
 
-    const handleToggle = () => {
-      dispatch(toggle_sidebar(false))
-    }
+  const handleToggle = () => {
+    dispatch(toggle_sidebar(false))
+  }
 
   return (
     <div onClick={() => handleToggle()} className="">
@@ -79,30 +83,48 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
           </div>
         </div>
         <div className="col">
-      <div className="mb-3">
-        <label htmlFor="type" className="form-label cmn_label">
-          Establishment Website Link (Optional)
-        </label>
-        <input
-          type="url"
-          className="form-control cmn_input"
-          placeholder="Enter website link"
-          value={websiteLink}
-          onChange={(e) => {
-            setWebsiteLink(e.target.value);
-            setWebsiteError(''); // Clear the error while typing
-          }}
-          onBlur={handleBlur} // Validate on blur
-          style={websiteError ? { border: '1px solid #ff00009c' } : {}}
-          pattern="https://.*" // Regex to match URLs starting with "https://"
-          title="Please enter a valid URL starting with https://"
-        />
-        {websiteError && (
-          <span style={{ color: '#ff00009c', fontSize: '12px' }}>{websiteError}</span>
-        )}
-      </div>
-    </div>
-        <div className={col}>
+          <div className="mb-3">
+            <label htmlFor="type" className="form-label cmn_label">
+              Establishment Website Link (Optional)
+            </label>
+            <input
+              type="url"
+              className="form-control cmn_input"
+              placeholder="Enter website link"
+              value={websiteLink}
+              onChange={(e) => {
+                setWebsiteLink(e.target.value);
+                setWebsiteError(''); // Clear the error while typing
+              }}
+              onBlur={handleBlur} // Validate on blur
+              style={websiteError ? { border: '1px solid #ff00009c' } : {}}
+              pattern="https://.*" // Regex to match URLs starting with "https://"
+              title="Please enter a valid URL starting with https://"
+            />
+            {websiteError && (
+              <span style={{ color: '#ff00009c', fontSize: '12px' }}>{websiteError}</span>
+            )}
+          </div>
+        </div>
+        {/* <div className={col}>
+          <div className="mb-3">
+            <label htmlFor="phone" className="form-label cmn_label">
+              Establishment/Owner Phone
+            </label>
+            <PhoneInput
+              defaultCountry="ua"
+              value={ownerPhone}
+              onChange={(phone) => { setOwnerPhone(phone); setPhoneError(""); }}
+              style={phoneError ? { border: "1px solid #ff00009c" } : {}}
+            />
+            {phoneError && (
+              <span style={{ color: "#ff00009c", fontSize: "12px" }}>
+                {phoneError}
+              </span>
+            )}
+          </div>
+        </div> */}
+            <div className={col}>
           <div className="mb-3">
             <label htmlFor="phone" className="form-label cmn_label">
               Establishment/Owner Phone
@@ -112,7 +134,6 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               className="form-control cmn_input"
               placeholder="Enter phone number"
               value={ownerPhone}
-              readOnly
               onChange={(e) => {
                 const value = e.target.value;
                 if (/^\d{0,10}$/.test(value)) {
@@ -143,7 +164,6 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               type="email"
               className="form-control cmn_input"
               placeholder="Enter email"
-              readOnly
               value={owneremail}
               onChange={(e) => { setOwnerEmail(e.target.value); setEmailError('') }}
               style={emailError ? { border: "1px solid #ff00009c" } : {}}

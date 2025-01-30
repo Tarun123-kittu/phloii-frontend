@@ -88,22 +88,7 @@ input.form-control.cmn_input p {
     font-size: 11px;
     color: #c8c8d0;
 }
-.react-international-phone-input-container {
-    width: 100%;
-}
 
-input.react-international-phone-input {
-    width: 100%;
-    background: #0e0e0e !important;
-    color: #fff !important;
-    border: unset !important;
-}
-
-button.react-international-phone-country-selector-button,button.react-international-phone-country-selector-button:hover {
-    background: #0e0e0e;
-    border: unset;
-    border-right: 1px solid #464646;
-}
 @media(max-width:1299px){
     .auth-wrapper {
         padding-left:0;

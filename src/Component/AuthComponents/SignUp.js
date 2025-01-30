@@ -30,6 +30,9 @@ const SignUP = () => {
   const [profileImageError, setProfileImageError] = useState("")
   const [previewImage, setPreviewImage] = useState("")
   const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  const [confirmPasswrdError, setConfirmPasswrdError] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [isTerms, setIsTerms] = useState(false);
   const is_signed_up = useSelector((store) => store.HOTEL_SIGNUP)
   const is_loggedIn = useSelector((store) => store.HOTEL_LOGIN);
@@ -68,6 +71,10 @@ const SignUP = () => {
     if (!password) {
       setPasswordError("Password is required");
       return;
+    }
+    if (password !== confirmPassword) {
+      setConfirmPasswrdError("Confirm password doesn't matched with password")
+      return
     }
     if (!isTerms) {
       toast.error("Please review and accept the Terms of Service.")
@@ -112,6 +119,9 @@ const SignUP = () => {
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
+  const togglePasswordVisibilityConfirm = () => {
+    setShowPasswordConfirm((prevState) => !prevState);
+  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -140,68 +150,121 @@ const SignUP = () => {
   };
   const handleRemoveImage = () => {
     setProfileImage("");
-        setPreviewImage("");
+    setPreviewImage("");
 
     const fileInput = document.getElementById("fileInput");
     if (fileInput) {
-        fileInput.value = "";
+      fileInput.value = "";
     }
-};
+  };
   return (
     <div className="auth-wrapper d-flex  align-items-center justify-content-center">
       <div className="h-100 overflow-auto w-100">
-      <div className="auth_form h-100 pt-4">
-        <div className="text-center">
-          <Image src="/assets/logo.svg" width={139} height={57} alt="logo" />
-        </div>
-        <h2 className="main_heading text-center mt-4">Create Account</h2>
-        <p className="sort_desc text-center">
-          Please fill out this form with the required information
-        </p>
-        <div className="mb-3 ">
-          <label className="form-label cmn_label">Profile Image</label>
-         <div className="d-flex gap-2">
-           {previewImage && <div className="position-relative">
-            <svg onClick={()=>handleRemoveImage()} className="doscard_image position-absolute end-0 cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="14" height="14" rx="7" fill="#FF9900"/>
-            <path d="M10.71 11.5383L7 7.8225L3.29 11.5383L2.46167 10.71L6.1775 7L2.46167 3.29L3.29 2.46167L7 6.1775L10.71 2.4675L11.5325 3.29L7.8225 7L11.5325 10.71L10.71 11.5383Z" fill="black"/>
-            </svg>
-
-            <Image src={previewImage} width={40} height={40} className="upload_profile" alt="logo" />
-            </div>}
-            <div className="position-relative add_profile flex-grow-1">
-          <input
-            type="file"
-            className="form-control cmn_input"
-            placeholder="Enter your name"
-            onChange={handleFileChange}
-          />
-          <p>Upload Image</p>
+        <div className="auth_form h-100 pt-4">
+          <div className="text-center">
+            <Image src="/assets/logo.svg" width={139} height={57} alt="logo" />
           </div>
-         </div>
-        </div>
-        <div className="mb-3">
-          <label className="form-label cmn_label">Name</label>
-          <input
-            type="text"
-            className="form-control cmn_input"
-            placeholder="Enter your name"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-              setUsernameError("");
-            }}
-            style={usernameError ? { border: "1px solid red" } : {}}
-          />
-          {usernameError && (
-            <span style={usernameError ? { color: "red", fontSize: "12px" } : {}}>
-              {usernameError}
-            </span>
-          )}
-        </div>
-        <div className="mb-3">
-          <label className="form-label cmn_label">Mobile Number</label>
-          {/* <input
+          <h2 className="main_heading text-center mt-4">Create Account</h2>
+          <p className="sort_desc text-center">
+            Please fill out this form with the required information
+          </p>
+
+          <div className="mb-3">
+            <label className="form-label cmn_label">Name</label>
+            <input
+              type="text"
+              className="form-control cmn_input"
+              placeholder="Enter your name"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                setUsernameError("");
+              }}
+              style={usernameError ? { border: "1px solid red" } : {}}
+            />
+            {usernameError && (
+              <span style={usernameError ? { color: "red", fontSize: "12px" } : {}}>
+                {usernameError}
+              </span>
+            )}
+          </div>
+          <div className="mb-3">
+            <label className="form-label cmn_label">Email</label>
+            <input
+              type="email"
+              className="form-control cmn_input"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value.toLowerCase());
+                setEmailError("");
+              }}
+              style={emailError ? { border: "1px solid red" } : {}}
+            />
+            {emailError && (
+              <span style={emailError ? { color: "red", fontSize: "12px" } : {}}>
+                {emailError}
+              </span>
+            )}
+          </div>
+          <div className="mb-3">
+            <label className="form-label cmn_label">Password</label>
+            <div className="input-group">
+              <input
+                type={showPassword ? "text" : "password"} // Toggle input type based on state
+                className="form-control cmn_input"
+                placeholder="Please enter your password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setPasswordError("");
+                }}
+                style={passwordError ? { border: "1px solid red" } : {}}
+              />
+              <div
+                className="position-absolute end-0 me-3 mt-1"
+                onClick={togglePasswordVisibility}
+              >
+                {!showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
+              </div>
+            </div>
+            <span className="password_input d-block pt-1">Password must contain atleast 8 chracter,including a number and letter</span>
+            {passwordError && (
+              <span style={passwordError ? { color: "red", fontSize: "12px" } : {}}>
+                {passwordError}
+              </span>
+            )}
+          </div>
+          <div className="mb-3">
+            <label className="form-label cmn_label">Confirm Password</label>
+            <div className="input-group">
+              <input
+                type={showPasswordConfirm ? "text" : "password"} // Toggle input type based on state
+                className="form-control cmn_input"
+                placeholder="Please enter your password"
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  setConfirmPasswrdError("");
+                }}
+                style={confirmPasswrdError ? { border: "1px solid red" } : {}}
+              />
+              <div
+                className="position-absolute end-0 me-3 mt-1"
+                onClick={togglePasswordVisibilityConfirm}
+              >
+                {!showPasswordConfirm ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
+              </div>
+            </div>
+            {confirmPasswrdError && (
+              <span style={confirmPasswrdError ? { color: "red", fontSize: "12px" } : {}}>
+                {confirmPasswrdError}
+              </span>
+            )}
+          </div>
+          <div className="mb-3">
+            <label className="form-label cmn_label">Mobile Number</label>
+            {/* <input
             type="text"
             className="form-control cmn_input"
             placeholder="Enter your phone number"
@@ -212,89 +275,66 @@ const SignUP = () => {
             }}
             style={phoneError ? { border: "1px solid red" } : {}}
           /> */}
-           <PhoneInput
-        defaultCountry="ua"
-        value={phone}
-        onChange={(phone) => {setPhone(phone); setPhoneError("");}}
-      />
-          {phoneError && (
-            <span style={phoneError ? { color: "red", fontSize: "12px" } : {}}>
-              {phoneError}
-            </span>
-          )}
-        </div>
-        <div className="mb-3">
-          <label className="form-label cmn_label">Email</label>
-          <input
-            type="email"
-            className="form-control cmn_input"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value.toLowerCase());
-              setEmailError("");
-            }}
-            style={emailError ? { border: "1px solid red" } : {}}
-          />
-          {emailError && (
-            <span style={emailError ? { color: "red", fontSize: "12px" } : {}}>
-              {emailError}
-            </span>
-          )}
-        </div>
-        <div className="mb-3">
-          <label className="form-label cmn_label">Password</label>
-          <div className="input-group">
-            <input
-              type={showPassword ? "text" : "password"} // Toggle input type based on state
-              className="form-control cmn_input"
-              placeholder="Please enter your password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setPasswordError("");
-              }}
-              style={passwordError ? { border: "1px solid red" } : {}}
+            <PhoneInput
+              defaultCountry="ua"
+              value={phone}
+              onChange={(phone) => { setPhone(phone); setPhoneError(""); }}
             />
-            <div
-              className="position-absolute end-0 me-3 mt-1"
-              onClick={togglePasswordVisibility}
-            >
-              {!showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
+            {phoneError && (
+              <span style={phoneError ? { color: "red", fontSize: "12px" } : {}}>
+                {phoneError}
+              </span>
+            )}
+          </div>
+
+
+          <div className="mb-3 ">
+            <label className="form-label cmn_label">Profile Image</label>
+            <div className="d-flex gap-2">
+              {previewImage && <div className="position-relative">
+                <svg onClick={() => handleRemoveImage()} className="doscard_image position-absolute end-0 cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="14" height="14" rx="7" fill="#FF9900" />
+                  <path d="M10.71 11.5383L7 7.8225L3.29 11.5383L2.46167 10.71L6.1775 7L2.46167 3.29L3.29 2.46167L7 6.1775L10.71 2.4675L11.5325 3.29L7.8225 7L11.5325 10.71L10.71 11.5383Z" fill="black" />
+                </svg>
+
+                <Image src={previewImage} width={40} height={40} className="upload_profile" alt="logo" />
+              </div>}
+              <div className="position-relative add_profile flex-grow-1">
+                <input
+                  type="file"
+                  className="form-control cmn_input"
+                  placeholder="Enter your name"
+                  onChange={handleFileChange}
+                />
+                <p>Upload Image</p>
+              </div>
             </div>
           </div>
-          <span className="password_input d-block pt-1">Password must contain atleast 8 chracter,including a number and letter</span>
-          {passwordError && (
-            <span style={passwordError ? { color: "red", fontSize: "12px" } : {}}>
-              {passwordError}
-            </span>
-          )}
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              checked={isTerms}
+              id="flexCheckDefault"
+              onChange={() => setIsTerms(!isTerms)}
+            />
+            <label className="form-check-label sub-text fadeColor">
+              I have read and agree to the{" "}
+              <span className="text-hightLight text-decoration-underline">
+                <a className="text-hightLight text-decoration-underline" href="https://phloii.com/privacy-policy" target="_bkank">Terms of Service</a>
+              </span>
+            </label>
+          </div>
+          <div className="mt-4">
+            <Button buttonClick={handleSignUp} text={is_signed_up?.status !== "Loading" ? "Signup" : "Loading"} className="w-100" />
+          </div>
+          <p className="text-center loginAlready fadeColor mt-2 mb-0 pb-4">
+            {"Already have an account?"}{" "}
+            <Link href="/establishment/login" className="text-white">
+              Login
+            </Link>
+          </p>
         </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            checked={isTerms}
-            id="flexCheckDefault"
-            onChange={() => setIsTerms(!isTerms)}
-          />
-          <label className="form-check-label sub-text fadeColor">
-            I have read and agree to the{" "}
-            <span className="text-hightLight text-decoration-underline">
-              <a className="text-hightLight text-decoration-underline" href="https://phloii.com/privacy-policy" target="_bkank">Terms of Service</a>
-            </span>
-          </label>
-        </div>
-        <div className="mt-4">
-          <Button buttonClick={handleSignUp} text={is_signed_up?.status !== "Loading" ? "Signup" : "Loading"} className="w-100" />
-        </div>
-        <p className="text-center loginAlready fadeColor mt-2 mb-0 pb-4">
-          {"Already have an account?"}{" "}
-          <Link href="/establishment/login" className="text-white">
-            Login
-          </Link>
-        </p>
-      </div>
       </div>
     </div>
   );

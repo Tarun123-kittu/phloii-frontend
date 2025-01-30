@@ -68,5 +68,5 @@ const ChangePassword = createSlice({
             })
     }
 })
-export const { clear_delete_hotel_image } = ChangePassword.actions
+export const { clear_change_password_state } = ChangePassword.actions
 export default ChangePassword.reducer

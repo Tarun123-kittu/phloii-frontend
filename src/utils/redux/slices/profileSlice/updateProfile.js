@@ -10,7 +10,9 @@ export const updateProfile = createAsyncThunk("updateProfile", async ({ username
         formdata.append("username", username);
         formdata.append("email", email);
         formdata.append("phoneNumber", phone);
-        formdata.append("image", image);
+        if(image){
+            formdata.append("image", image);
+        }
 
         const requestOptions = {
             method: "PUT",

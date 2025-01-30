@@ -32,6 +32,7 @@ span.dot {
     height: 40px;
     border-radius: 50%;
     background: linear-gradient(90deg, #FBB90D 0%, #22EBFF 100%);
+    border: 1px solid #FBB90D ;
 }
 
 .user {
@@ -45,7 +46,7 @@ span.dot {
 }
 
 .user span {
-    font-size: 12px;
+    font-size: 14px;
 }
 .side_bar {
     position: fixed;
@@ -139,12 +140,16 @@ ul.notify_list.position-relative {
 .hamburger {
     display: none;
 }
+.dropdown-item{
+    cursor: pointer;
+}
 .dropdown button.btn, .dropdown button.btn:focus {
-    padding: 0;
-    background: unset;
+    background: #000;
     border: unset;
     outline: unset;
     box-shadow: unset;
+    padding: 10px;
+    border-radius: 6px;
 }
 
 .dropdown button.btn::after {
@@ -153,14 +158,22 @@ ul.notify_list.position-relative {
 
 .dropdown button.btn {
     display: flex;
-    gap: 20px;
+    gap: 10px;
+    align-items: center;
 }
 ul.dropdown-menu {
     background: #000000;
     color: #fff;
     padding: 0;
+    width: 100%;
 }
 
+button.btn.btn-secondary.dropdown-toggle svg {
+    transform: rotate(90deg);
+}
+button.btn.btn-secondary.dropdown-toggle.show svg {
+    transform: rotate(270deg);
+}
 ul.dropdown-menu li a, ul.dropdown-menu li a:hover, ul.dropdown-menu li a:focus {
     color: #fff;
     font-size: 14px;
