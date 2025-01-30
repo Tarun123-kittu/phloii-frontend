@@ -47,6 +47,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const is_hotel_verified = useSelector((store) => store.ONBOARD_HOTEl)
   const selected_hotel_details = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
   const is_hotel_updated = useSelector((store) => store.UPDATE_HOTEL_DETAILS)
+  const profileDetails = useSelector((state) => state.PROFILE?.data);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -56,6 +57,14 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (profileDetails?.type === "success") {
+      setOwnerEmail(profileDetails?.data?.email)
+      setOwnername(profileDetails?.data?.username)
+      setOwnerPhone(profileDetails?.data?.phoneNumber)
+    }
+  }, [profileDetails])
 
   useEffect(() => {
     return () => {
@@ -206,10 +215,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setCountry(selected_hotel_details?.data?.data?.hotel?.address?.country)
       setState(selected_hotel_details?.data?.data?.hotel?.address?.state)
       setPincode(selected_hotel_details?.data?.data?.hotel?.address?.pinCode)
-      setOwnername(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerName)
-      setOwnerPhone(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerPhone)
       setWebsiteLink(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.websiteLink)
-      setOwnerEmail(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerEmail)
       setUniqueFeatures(selected_hotel_details?.data?.data?.hotel?.uniqueFeatures)
       setInpersonvisit(selected_hotel_details?.data?.data?.hotel?.inPersonVisitAvailability)
       setWhyphloii(selected_hotel_details?.data?.data?.hotel?.why_want_phloi)
@@ -238,13 +244,13 @@ const OnBoardingSteps = ({ col, hotelId }) => {
     }
   }, [is_hotel_updated])
 
-      const handleToggle = () => {    
-          dispatch(toggle_sidebar(false))
-      }
+  const handleToggle = () => {
+    dispatch(toggle_sidebar(false))
+  }
 
   return (
     <>
-      <div onClick={ () => handleToggle()}>
+      <div onClick={() => handleToggle()}>
         <ul className={`${col == "col-lg-6" && "justify-content-start"} step_counter`}>
           {Array.from({ length: 3 }, (_, i) => {
             const stepNumber = i + 1;

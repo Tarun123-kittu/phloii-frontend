@@ -67,6 +67,7 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               className="form-control cmn_input"
               placeholder="Enter owner name"
               value={ownername}
+              readOnly
               onChange={(e) => { setOwnername(e.target.value); setNameError('') }}
               style={nameError ? { border: "1px solid #ff00009c" } : {}}
             />
@@ -111,6 +112,7 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               className="form-control cmn_input"
               placeholder="Enter phone number"
               value={ownerPhone}
+              readOnly
               onChange={(e) => {
                 const value = e.target.value;
                 if (/^\d{0,10}$/.test(value)) {
@@ -141,6 +143,7 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               type="email"
               className="form-control cmn_input"
               placeholder="Enter email"
+              readOnly
               value={owneremail}
               onChange={(e) => { setOwnerEmail(e.target.value); setEmailError('') }}
               style={emailError ? { border: "1px solid #ff00009c" } : {}}

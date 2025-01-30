@@ -7,9 +7,16 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
-
+import ResetModal from "../Modal/resetModal";
+import { getProfile } from "@/utils/redux/slices/profileSlice/profile";
 const useDeviceType = () => {
+  const dispatch = useDispatch()
   const [deviceType, setDeviceType] = useState("Desktop");
+  
+
+  useEffect(() => {
+    dispatch(getProfile());
+    },[])
 
   useEffect(() => {
     const checkDevice = () => {
@@ -32,7 +39,9 @@ const useDeviceType = () => {
   return deviceType;
 };
 
+
 const SideBar = ({ children }) => {
+  const [showModal, setShowModal] = useState(false);
   const [currentPath, setCurrentPath] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
@@ -43,6 +52,8 @@ const SideBar = ({ children }) => {
   const pathname = usePathname();
   const sidebarState = useSelector((state) => state.MANAGE_SIDEBAR.isSidebarOpen);
   const deviceType = useDeviceType();
+  const profileDetails = useSelector((state) => state.PROFILE?.data);
+  console.log(profileDetails)
   console.log(deviceType);
 
   useEffect(() => {
@@ -87,6 +98,10 @@ const SideBar = ({ children }) => {
   }
   return (
     <div className="side_bar_wrapper">
+      {showModal && <ResetModal  show={showModal}
+          title="Modal Title"
+          body="This is the modal content."
+          onClose={() => setShowModal(false)}/>}
       <header className={`${sidebarState && 'toggle_header'} d-flex justify-content-end align-items-center`}>
         <div className={`${sidebarState ? 'd-none' : "d-block"} hamburger flex-grow-1`}>
           <svg onClick={() => handleToogle(true)} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,24 +114,29 @@ const SideBar = ({ children }) => {
           <span className="dot position-absolute"></span>
           <img src="/assets/notify.svg" alt="Notification Icon" />
         </div>}
-        {deviceType === "Desktop" &&<div className="user">
+      <div className="user">
+         
+          <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           <div className="user_image d-flex align-items-center justify-content-center">
-            <img src="/assets/profile-circle.svg" alt="" />
+            <img src={profileDetails?.data?.image || "/assets/profile-circle.svg"} width={40} height={40} className="profile_image_sidebar" alt="" />
           </div>
-          <div className="d-inline-grid">
-            <h4 className="mb-0">{userName}</h4>
-            <span>{user}</span>
-          </div>
-        </div>}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item cursor-pointer" onClick={() => setShowModal(true)}>Change Password</a></li>
+            <li><a class="dropdown-item cursor-pointer" href="#">Profile</a></li>
+          </ul>
+        </div>
+        </div>
       </header>
       <div className={`${sidebarState ? "mobile_toggle" : ""} side_bar`}>
        <div className="d-flex flex-column h-100">
        <div className={`${sidebarState ? 'd-block' : "d-none"} text-end`}>
 
-<svg onClick={() => handleToogle(false)} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="white" fill-opacity="0.72" />
-  <path d="M13.2929 1.41L8.05645 6.64645L7.70289 7L8.05645 7.35355L13.2929 12.59L12.59 13.2929L7.35355 8.05645L7 7.70289L6.64645 8.05645L1.41 13.2929L0.707107 12.59L5.94355 7.35355L6.29711 7L5.94355 6.64645L0.707107 1.41L1.41 0.707107L6.64645 5.94355L7 6.29711L7.35355 5.94355L12.59 0.707107L13.2929 1.41Z" stroke="white" stroke-opacity="0.72" />
-</svg>
+    <svg onClick={() => handleToogle(false)} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="white" fill-opacity="0.72" />
+      <path d="M13.2929 1.41L8.05645 6.64645L7.70289 7L8.05645 7.35355L13.2929 12.59L12.59 13.2929L7.35355 8.05645L7 7.70289L6.64645 8.05645L1.41 13.2929L0.707107 12.59L5.94355 7.35355L6.29711 7L5.94355 6.64645L0.707107 1.41L1.41 0.707107L6.64645 5.94355L7 6.29711L7.35355 5.94355L12.59 0.707107L13.2929 1.41Z" stroke="white" stroke-opacity="0.72" />
+    </svg>
 
 </div>
 <div className="text-center mt-3 mb-5">

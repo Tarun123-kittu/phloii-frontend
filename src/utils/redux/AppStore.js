@@ -12,6 +12,9 @@ import hotelDetailsSlice from "./slices/hotelOnboardingSlice/updateHotelDetails"
 import deleteSubscription from "./slices/hotelOnboardingSlice/deleteSubscription"
 import hotelNotifications from "./slices/hotelOnboardingSlice/hotelNotifications"
 import manageSidebar from "./slices/sidebarSlice/manageSidebar"
+import GetProfile from "./slices/profileSlice/profile"
+import ChangePassword from "./slices/authSlice/changePassword"
+import UpdateProfile from "./slices/profileSlice/updateProfile"
 
 const AppStore = configureStore({
   reducer: {
@@ -28,6 +31,9 @@ const AppStore = configureStore({
     DELETE_SUBSCRIPTION: deleteSubscription,
     HOTEL_NOTIFICATIONS: hotelNotifications,
     MANAGE_SIDEBAR: manageSidebar,
+    PROFILE: GetProfile,
+    CHANGE_PASSWORD: ChangePassword,
+    UPDATE_PROFILE: UpdateProfile
   },
 });
 
