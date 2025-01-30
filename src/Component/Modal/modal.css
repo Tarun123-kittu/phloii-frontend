@@ -2,3 +2,9 @@
 div.cmn_modal .modal-content {
     background: #0e0e0e;
 }
+div.cmn_modal button.btn-close {
+    z-index: 99;
+    filter: invert(1);
+    right: 12px;
+    top: 10px;
+}

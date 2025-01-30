@@ -241,6 +241,11 @@ outline: 1px solid slategrey;
     color-scheme: dark;
   }
 }
+@media(max-width:991px){
+  .wrapper {
+    padding-left: 20px;
+}
+}
 @media(max-width:767px){
   br{
     display: none;

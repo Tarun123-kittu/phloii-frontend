@@ -7,7 +7,9 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
-import ResetModal from "../Modal/resetModal";
+import CommonModal from "../Modal/commonModal";
+import ResetContent from "../ModalContent/resetContent";
+import ProfileContent from "../ModalContent/profileContent";
 const useDeviceType = () => {
   const [deviceType, setDeviceType] = useState("Desktop");
 
@@ -34,6 +36,7 @@ const useDeviceType = () => {
 
 const SideBar = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   const [currentPath, setCurrentPath] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
@@ -88,10 +91,10 @@ const SideBar = ({ children }) => {
   }
   return (
     <div className="side_bar_wrapper">
-      {showModal && <ResetModal  show={showModal}
-          title="Modal Title"
-          body="This is the modal content."
-          onClose={() => setShowModal(false)}/>}
+      {showModal && <ResetContent  show={showModal}
+              onClose={() => setShowModal(false)}/>}
+      {showProfile && <ProfileContent  show={showProfile}
+          onClose={() => setShowProfile(false)}/>}
       <header className={`${sidebarState && 'toggle_header'} d-flex justify-content-end align-items-center`}>
         <div className={`${sidebarState ? 'd-none' : "d-block"} hamburger flex-grow-1`}>
           <svg onClick={() => handleToogle(true)} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -114,7 +117,7 @@ const SideBar = ({ children }) => {
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item cursor-pointer" onClick={() => setShowModal(true)}>Change Password</a></li>
-            <li><a class="dropdown-item cursor-pointer" href="#">Profile</a></li>
+            <li><a class="dropdown-item cursor-pointer" onClick={() => setShowProfile(true)}>Profile</a></li>
           </ul>
         </div>
         </div>
