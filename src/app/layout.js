@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import AppStore from "@/utils/redux/AppStore";
 import { Toaster } from "react-hot-toast";
-import 'react-phone-number-input/style.css'
+import 'react-international-phone/style.css';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

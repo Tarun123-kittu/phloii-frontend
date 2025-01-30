@@ -14,7 +14,6 @@ import validator from "validator";
 import toast from "react-hot-toast";
 import { hotel_login, clear_hotel_login_state } from "@/utils/redux/slices/authSlice/login";
 import { PhoneInput } from 'react-international-phone';
-import 'react-phone-number-input/style.css'
 
 const SignUP = () => {
   const dispatch = useDispatch();
@@ -153,11 +152,9 @@ const SignUP = () => {
     setProfileImage("");
     setPreviewImage("");
 
-    if (typeof document !== 'undefined') {
-      const fileInput = document.getElementById("fileInput");
-      if (fileInput) {
-        fileInput.value = "";
-      }
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput) {
+      fileInput.value = "";
     }
   };
   return (
