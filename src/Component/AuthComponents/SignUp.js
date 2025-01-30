@@ -152,9 +152,11 @@ const SignUP = () => {
     setProfileImage("");
     setPreviewImage("");
 
-    const fileInput = document.getElementById("fileInput");
-    if (fileInput) {
-      fileInput.value = "";
+    if (typeof document !== 'undefined') {
+      const fileInput = document.getElementById("fileInput");
+      if (fileInput) {
+        fileInput.value = "";
+      }
     }
   };
   return (

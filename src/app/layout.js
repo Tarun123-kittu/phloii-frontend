@@ -1,12 +1,12 @@
 "use client";
+import { useEffect } from "react";
 import localFont from "next/font/local";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import AppStore from "@/utils/redux/AppStore";
 import { Toaster } from "react-hot-toast";
-import 'react-international-phone/style.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-poppins",
@@ -19,6 +19,10 @@ const geistMono = localFont({
 });
 
 export default function RootLayout({ children }) {
+  useEffect(() => {
+    require("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
+
   return (
     <html lang="en">
       <link rel="shortcut icon" href="/black.svg" type="image/svg+xml" />
