@@ -19,7 +19,7 @@ const page = ({params}) => {
   const {token} = params
   return (
     <div className='mh-100-vh'> 
-    <div className='row'>
+    <div className='row m-0'>
         <div className="col-md-6 p-0 mobile_blank">
         <SideImage/>
         </div>

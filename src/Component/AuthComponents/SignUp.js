@@ -13,6 +13,8 @@ import {
 import validator from "validator";
 import toast from "react-hot-toast";
 import { hotel_login, clear_hotel_login_state } from "@/utils/redux/slices/authSlice/login";
+import { PhoneInput } from 'react-international-phone';
+
 const SignUP = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -134,14 +136,24 @@ const SignUP = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setProfileImage(file);
+        setPreviewImage(reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
+  const handleRemoveImage = () => {
+    setProfileImage("");
+        setPreviewImage("");
 
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput) {
+        fileInput.value = "";
+    }
+};
   return (
-    <div className="auth-wrapper d-flex align-items-center justify-content-center">
-      <div className="auth_form">
+    <div className="auth-wrapper d-flex  align-items-center justify-content-center">
+      <div className="h-100 overflow-auto w-100">
+      <div className="auth_form h-100 pt-4">
         <div className="text-center">
           <Image src="/assets/logo.svg" width={139} height={57} alt="logo" />
         </div>
@@ -149,14 +161,27 @@ const SignUP = () => {
         <p className="sort_desc text-center">
           Please fill out this form with the required information
         </p>
-        <div className="mb-3">
+        <div className="mb-3 ">
           <label className="form-label cmn_label">Profile Image</label>
+         <div className="d-flex gap-2">
+           {previewImage && <div className="position-relative">
+            <svg onClick={()=>handleRemoveImage()} className="doscard_image position-absolute end-0 cursor-pointer" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="14" height="14" rx="7" fill="#FF9900"/>
+            <path d="M10.71 11.5383L7 7.8225L3.29 11.5383L2.46167 10.71L6.1775 7L2.46167 3.29L3.29 2.46167L7 6.1775L10.71 2.4675L11.5325 3.29L7.8225 7L11.5325 10.71L10.71 11.5383Z" fill="black"/>
+            </svg>
+
+            <Image src={previewImage} width={40} height={40} className="upload_profile" alt="logo" />
+            </div>}
+            <div className="position-relative add_profile flex-grow-1">
           <input
             type="file"
             className="form-control cmn_input"
             placeholder="Enter your name"
             onChange={handleFileChange}
           />
+          <p>Upload Image</p>
+          </div>
+         </div>
         </div>
         <div className="mb-3">
           <label className="form-label cmn_label">Name</label>
@@ -179,7 +204,7 @@ const SignUP = () => {
         </div>
         <div className="mb-3">
           <label className="form-label cmn_label">Mobile Number</label>
-          <input
+          {/* <input
             type="text"
             className="form-control cmn_input"
             placeholder="Enter your phone number"
@@ -189,7 +214,12 @@ const SignUP = () => {
               setPhoneError("");
             }}
             style={phoneError ? { border: "1px solid red" } : {}}
-          />
+          /> */}
+           <PhoneInput
+        defaultCountry="ua"
+        value={phone}
+        onChange={(phone) => {setPhone(phone); setPhoneError("");}}
+      />
           {phoneError && (
             <span style={phoneError ? { color: "red", fontSize: "12px" } : {}}>
               {phoneError}
@@ -261,12 +291,13 @@ const SignUP = () => {
         <div className="mt-4">
           <Button buttonClick={handleSignUp} text={is_signed_up?.status !== "Loading" ? "Signup" : "Loading"} className="w-100" />
         </div>
-        <p className="text-center loginAlready fadeColor mt-2 mb-0">
+        <p className="text-center loginAlready fadeColor mt-2 mb-0 pb-4">
           {"Already have an account?"}{" "}
           <Link href="/establishment/login" className="text-white">
             Login
           </Link>
         </p>
+      </div>
       </div>
     </div>
   );

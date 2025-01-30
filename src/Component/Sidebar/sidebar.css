@@ -139,6 +139,38 @@ ul.notify_list.position-relative {
 .hamburger {
     display: none;
 }
+.dropdown button.btn, .dropdown button.btn:focus {
+    padding: 0;
+    background: unset;
+    border: unset;
+    outline: unset;
+    box-shadow: unset;
+}
+
+.dropdown button.btn::after {
+    display: none;
+}
+
+.dropdown button.btn {
+    display: flex;
+    gap: 20px;
+}
+ul.dropdown-menu {
+    background: #000000;
+    color: #fff;
+    padding: 0;
+}
+
+ul.dropdown-menu li a, ul.dropdown-menu li a:hover, ul.dropdown-menu li a:focus {
+    color: #fff;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    background: unset;
+}
+ul.dropdown-menu li:last-child a {
+    border: unset;
+}
 @media(min-width:1024px){
     .d-block.hamburger, .mobile_toggle  .d-block{
         display: none !important;
