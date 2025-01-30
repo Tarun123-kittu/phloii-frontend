@@ -49,6 +49,15 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const is_hotel_updated = useSelector((store) => store.UPDATE_HOTEL_DETAILS)
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem('phloii_user_name') && localStorage.getItem('phloii_user')) {
+        setOwnername((localStorage.getItem('phloii_user_name')))
+        setOwnerEmail((localStorage.getItem('phloii_user')))
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     return () => {
       setEstablishmentname('')
       setEstablishedtype('')
