@@ -50,13 +50,13 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const is_hotel_updated = useSelector((store) => store.UPDATE_HOTEL_DETAILS)
   const profileDetails = useSelector((state) => state.PROFILE?.data);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (localStorage.getItem('phloii_user_name') && localStorage.getItem('phloii_user')) {
-        setOwnername((localStorage.getItem('phloii_user_name')))
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     if (localStorage.getItem('phloii_user_name') && localStorage.getItem('phloii_user')) {
+  //       setOwnername((localStorage.getItem('phloii_user_name')))
+  //     }
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (profileDetails?.type === "success") {
@@ -113,7 +113,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       city: city,
       pincode: pincode,
       ownername: ownername,
-      ownerphone: ownerPhone?.includes("+") ? ownerPhone.replace("+", "") : ownerPhone,
+      ownerphone: ownerPhone,
       webSitelink: websiteLink,
       owneremail: owneremail,
       whyphloii: whyphloii,
@@ -154,7 +154,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
         customerServiceNumber === hotelDetails?.customerServiceNumber &&
         (food === hotelDetails?.food || hotelDetails?.food === undefined || hotelDetails?.food === null) &&
         (additional_information === hotelDetails?.additional_information || hotelDetails?.additional_information === undefined || hotelDetails?.additional_information === null) &&
-        (websiteLink === hotelDetails?.website_link || hotelDetails?.website_link === undefined || hotelDetails?.website_link === null)
+        (websiteLink === hotelDetails?.website_link || hotelDetails?.website_link === "" || hotelDetails?.website_link === null)
       ) {
         toast.error("It seems you haven't made any changes to update. Please make some changes to update.");
       }
@@ -170,7 +170,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
           city: city,
           pincode: pincode,
           ownername: ownername,
-          ownerphone: ownerPhone?.includes("+") ? ownerPhone.replace("+", "") : ownerPhone,
+          ownerphone: ownerPhone,
           webSitelink: websiteLink,
           owneremail: owneremail,
           whyphloii: whyphloii,

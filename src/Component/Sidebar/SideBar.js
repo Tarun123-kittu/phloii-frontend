@@ -118,19 +118,19 @@ const SideBar = ({ children }) => {
         </div>} */}
         <div className="user">
 
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <div className="dropdown">
+            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               <div className="user_image d-flex align-items-center justify-content-center">
                 <img src={profileDetails?.data?.image || "/assets/profile-circle.svg"} className="rounded-5 object-fit-cover" width={40} height={40} alt="" />  
               </div>
               <span>{profileDetails?.data?.username}</span> 
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.57684 17.2811L14.7512 10.9563L8.4264 4.78197" stroke="#DDDDDD" strokeLinecap="round" stroke-linejoin="round"/>
+            <path d="M8.57684 17.2811L14.7512 10.9563L8.4264 4.78197" stroke="#DDDDDD" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item cursor-pointer" onClick={() => setShowModal(true)}>Change Password</a></li>
-              <li><a class="dropdown-item cursor-pointer" onClick={() => setShowProfile(true)}>Profile</a></li>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a className="dropdown-item cursor-pointer" onClick={() => setShowModal(true)}>Change Password</a></li>
+              <li><a className="dropdown-item cursor-pointer" onClick={() => setShowProfile(true)}>Profile</a></li>
             </ul>
        
           </div>
@@ -142,7 +142,7 @@ const SideBar = ({ children }) => {
 
             <svg onClick={() => handleToogle(false)} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="white" fillOpacity="0.72" />
-              <path d="M13.2929 1.41L8.05645 6.64645L7.70289 7L8.05645 7.35355L13.2929 12.59L12.59 13.2929L7.35355 8.05645L7 7.70289L6.64645 8.05645L1.41 13.2929L0.707107 12.59L5.94355 7.35355L6.29711 7L5.94355 6.64645L0.707107 1.41L1.41 0.707107L6.64645 5.94355L7 6.29711L7.35355 5.94355L12.59 0.707107L13.2929 1.41Z" stroke="white" stroke-opacity="0.72" />
+              <path d="M13.2929 1.41L8.05645 6.64645L7.70289 7L8.05645 7.35355L13.2929 12.59L12.59 13.2929L7.35355 8.05645L7 7.70289L6.64645 8.05645L1.41 13.2929L0.707107 12.59L5.94355 7.35355L6.29711 7L5.94355 6.64645L0.707107 1.41L1.41 0.707107L6.64645 5.94355L7 6.29711L7.35355 5.94355L12.59 0.707107L13.2929 1.41Z" stroke="white" strokeOpacity="0.72" />
             </svg>
 
           </div>

@@ -202,7 +202,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               State
             </label>
             <select
-              class="form-select cmn-select"
+              className="form-select cmn-select"
               aria-label="Default select example"
               onChange={(e) => { setState(e.target.value); setStateError('') }}
               style={stateError ? { border: "1px solid #ff00009c" } : {}}

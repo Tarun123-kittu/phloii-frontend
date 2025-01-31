@@ -40,18 +40,18 @@ const SignUP = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    if (!username && !email && !password && !phone && !profileImage) {
+    if (!username && !email && !password && !phone) {
       setUsernameError("Username is required");
       setEmailError("Email is required");
       setPasswordError("Password is required");
       setPhoneError("Phone is required")
-      setProfileImageError("Profile Image is required")
+      // setProfileImageError("Profile Image is required")
       return
     }
-    if (!profileImage) {
-      setProfileImageError("Profile Image is required")
-      return
-    }
+    // if (!profileImage) {
+    //   setProfileImageError("Profile Image is required")
+    //   return
+    // }
     if (!username) {
       setUsernameError("Username is required");
       return;
@@ -157,6 +157,29 @@ const SignUP = () => {
       fileInput.value = "";
     }
   };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setPasswordError("");
+    
+    if (confirmPassword && e.target.value !== confirmPassword) {
+      setConfirmPasswrdError("Confirm password doesn't matched with password");
+    } else {
+      setConfirmPasswrdError("");
+    }
+  };
+  
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    setConfirmPasswrdError("");
+  
+    if (password && e.target.value !== password) {
+      setConfirmPasswrdError("Confirm password doesn't matched with password");
+    } else {
+      setConfirmPasswrdError("");
+    }
+  };
+
   return (
     <div className="auth-wrapper d-flex  align-items-center justify-content-center">
       <div className="h-100 overflow-auto w-100">
@@ -216,10 +239,7 @@ const SignUP = () => {
                 className="form-control cmn_input"
                 placeholder="Please enter your password"
                 value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setPasswordError("");
-                }}
+                onChange={handlePasswordChange}
                 style={passwordError ? { border: "1px solid red" } : {}}
                 autoComplete="new-password"
               />
@@ -227,42 +247,34 @@ const SignUP = () => {
                 className="position-absolute end-0 me-3 mt-1"
                 onClick={togglePasswordVisibility}
               >
-                {!showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
+                {!showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />}
               </div>
             </div>
-            <span className="password_input d-block pt-1">Password must contain atleast 8 chracter,including a number and letter</span>
-            {passwordError && (
-              <span style={passwordError ? { color: "red", fontSize: "12px" } : {}}>
-                {passwordError}
-              </span>
-            )}
+            <span className="password_input d-block pt-1">
+              Password must contain at least 8 characters, including a number and letter
+            </span>
+            {passwordError && <span style={{ color: "red", fontSize: "12px" }}>{passwordError}</span>}
           </div>
+
           <div className="mb-3">
             <label className="form-label cmn_label">Confirm Password</label>
             <div className="input-group">
               <input
-                type={showPasswordConfirm ? "text" : "password"} // Toggle input type based on state
+                type={showPasswordConfirm ? "text" : "password"}
                 className="form-control cmn_input"
                 placeholder="Please enter your password"
                 value={confirmPassword}
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                  setConfirmPasswrdError("");
-                }}
+                onChange={handleConfirmPasswordChange}
                 style={confirmPasswrdError ? { border: "1px solid red" } : {}}
               />
               <div
                 className="position-absolute end-0 me-3 mt-1"
                 onClick={togglePasswordVisibilityConfirm}
               >
-                {!showPasswordConfirm ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />} {/* Toggle text */}
+                {!showPasswordConfirm ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />}
               </div>
             </div>
-            {confirmPasswrdError && (
-              <span style={confirmPasswrdError ? { color: "red", fontSize: "12px" } : {}}>
-                {confirmPasswrdError}
-              </span>
-            )}
+            {confirmPasswrdError && <span style={{ color: "red", fontSize: "12px" }}>{confirmPasswrdError}</span>}
           </div>
           <div className="mb-3">
             <label className="form-label cmn_label">Mobile Number</label>
@@ -290,7 +302,7 @@ const SignUP = () => {
           </div>
 
 
-          <div className="mb-3 ">
+          {/* <div className="mb-3 ">
             <label className="form-label cmn_label">Profile Image</label>
             <div className="d-flex gap-2">
               {previewImage && <div className="position-relative">
@@ -311,7 +323,7 @@ const SignUP = () => {
                 <p>Upload Image</p>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="form-check">
             <input
               className="form-check-input"
