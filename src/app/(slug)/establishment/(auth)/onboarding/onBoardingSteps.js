@@ -36,6 +36,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const [safeWord, setSafeWord] = useState('')
   const [images, setImages] = useState([])
   const [food, setFood] = useState("")
+  const [city, setCity] = useState("")
   const [additional_information, setAdditional_information] = useState("")
   const [serviceValues, setServiceValues] = useState([])
   const [atmosphere, setAtmosphere] = useState([])
@@ -109,6 +110,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       unitNumber: unitNumber,
       country: country,
       state: state,
+      city: city,
       pincode: pincode,
       ownername: ownername,
       ownerphone: ownerPhone?.includes("+") ? ownerPhone.replace("+", "") : ownerPhone,
@@ -137,6 +139,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
         unitNumber === hotelDetails?.address?.suiteUnitNumber &&
         country === hotelDetails?.address?.country &&
         state === hotelDetails?.address?.state &&
+        city === hotelDetails?.address?.city &&
         pincode === hotelDetails?.address?.pinCode &&
         ownername === hotelDetails?.ownerDetails?.ownerName &&
         ownerPhone === hotelDetails?.ownerDetails?.ownerPhone &&
@@ -164,6 +167,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
           unitNumber: unitNumber,
           country: country,
           state: state,
+          city: city,
           pincode: pincode,
           ownername: ownername,
           ownerphone: ownerPhone?.includes("+") ? ownerPhone.replace("+", "") : ownerPhone,
@@ -211,6 +215,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setUnitNumber(selected_hotel_details?.data?.data?.hotel?.address?.suiteUnitNumber)
       setCountry(selected_hotel_details?.data?.data?.hotel?.address?.country)
       setState(selected_hotel_details?.data?.data?.hotel?.address?.state)
+      setCity(selected_hotel_details?.data?.data?.hotel?.address?.city)
       setPincode(selected_hotel_details?.data?.data?.hotel?.address?.pinCode)
       setWebsiteLink(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.websiteLink)
       setUniqueFeatures(selected_hotel_details?.data?.data?.hotel?.uniqueFeatures)
@@ -218,6 +223,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setWhyphloii(selected_hotel_details?.data?.data?.hotel?.why_want_phloi)
       setSafeWord(selected_hotel_details?.data?.data?.hotel?.safeWord)
       setImages(selected_hotel_details?.data?.data?.hotel?.images)
+      setCity(selected_hotel_details?.data?.data?.hotel?.city)
       setServiceValues(selected_hotel_details?.data?.data?.hotel?.services)
       setAtmosphere(selected_hotel_details?.data?.data?.hotel?.atmosphere)
       setOpenTiming(selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.open)
@@ -279,7 +285,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       </div>
 
 
-      {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} />}
+      {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} setCity={setCity} city={city} />}
       {step === 2 && <PersonalDetails col={col} setStep={setStep} ownername={ownername} setOwnername={setOwnername} ownerPhone={ownerPhone} setOwnerPhone={setOwnerPhone} websiteLink={websiteLink} setWebsiteLink={setWebsiteLink} owneremail={owneremail} setOwnerEmail={setOwnerEmail} />}
       {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} setFood={setFood} food={food} setServiceValues={setServiceValues} serviceValues={serviceValues} atmosphere={atmosphere} setAtmosphere={setAtmosphere} openTiming={openTiming} setOpenTiming={setOpenTiming} closeTiming={closeTiming} setCloseTiming={setCloseTiming} customerServiceNumber={customerServiceNumber} setCustomerServiceNumber={setCustomerServiceNumber} hotelId={hotelId} updateHotel={updateHotel} is_hotel_updated={is_hotel_updated} setAtmosphere_description={setAtmosphere_description} atmosphere_description={atmosphere_description} setAdditional_information={setAdditional_information} additional_information={additional_information} />}
 

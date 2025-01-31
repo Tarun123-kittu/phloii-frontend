@@ -220,14 +220,14 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                             d="M9.16992 14.83L14.8299 9.17004"
                             stroke="white"
                             stroke-width="1.5"
-                            stroke-linecap="round"
+                            strokeLinecap="round"
                             stroke-linejoin="round"
                           />
                           <path
                             d="M14.8299 14.83L9.16992 9.17004"
                             stroke="white"
                             stroke-width="1.5"
-                            stroke-linecap="round"
+                            strokeLinecap="round"
                             stroke-linejoin="round"
                           />
                           <defs>

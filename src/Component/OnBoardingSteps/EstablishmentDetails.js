@@ -6,7 +6,7 @@ import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar"
 import { useDispatch } from "react-redux";
 
 
-const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries }) => {
+const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries, setCity, city }) => {
   const [states, setStates] = useState([])
   const dispatch = useDispatch()
   const [establishmentnameError, setEstablishmentError] = useState('')
@@ -15,6 +15,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   const [unitnumberError, setUnitNumberError] = useState('')
   const [countryError, setCountryError] = useState('')
   const [stateError, setStateError] = useState('')
+  const [cityError,setCityError] = useState('')
   const [pincodeError, setPincodeError] = useState('')
   const handleForward = () => {
     if (!establishmentname && !establishedtype && !streetaddress && !unitNumber && !country && !state && !pincode) {
@@ -50,6 +51,10 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
       setStateError("Please select the state")
       return
     }
+    if (!city) {
+      setCityError("Please enter the city name")
+      return
+    }
     if (!pincode) {
       setPincodeError("Please enter the pincode")
       return
@@ -77,7 +82,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
       <div onClick={() => handleToggle()} className="row">
         <div className={col}>
           <div className="mb-3">
-            <label for="email" className="form-label cmn_label">
+            <label htmlFor="email" className="form-label cmn_label">
               Establishment Name
             </label>
             <input
@@ -121,7 +126,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
         </div> */}
         <div className={col}>
           <div className="mb-3">
-            <label for="email" className="form-label cmn_label">
+            <label htmlFor="email" className="form-label cmn_label">
               Street Address
             </label>
             <input
@@ -168,7 +173,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
 
         <div className={col}>
           <div className="mb-3">
-            <label for="type" className="form-label cmn_label">
+            <label htmlFor="type" className="form-label cmn_label">
               Country
             </label>
             <select
@@ -193,7 +198,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
         </div>
         <div className={col}>
           <div className="mb-3">
-            <label for="type" className="form-label cmn_label">
+            <label htmlFor="type" className="form-label cmn_label">
               State
             </label>
             <select
@@ -218,7 +223,27 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
         </div>
         <div className={col}>
           <div className="mb-3">
-            <label for="type" className="form-label cmn_label">
+            <label htmlFor="type" className="form-label cmn_label">
+              City
+            </label>
+            <input
+              type="text"
+              className="form-control cmn_input"
+              placeholder="Enter pin code"
+              value={city}
+              onChange={(e) => {setCity(e.target.value);setCityError("")}}
+              style={cityError ? { border: "1px solid #ff00009c" } : {}}
+            />
+            {pincodeError && (
+              <span style={cityError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
+                {cityError}
+              </span>
+            )}
+          </div>
+        </div>
+        <div className={col}>
+          <div className="mb-3">
+            <label htmlFor="type" className="form-label cmn_label">
               Pin/Zip Code
             </label>
             <input

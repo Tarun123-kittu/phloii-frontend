@@ -14,6 +14,7 @@ export const update_hotel_details = createAsyncThunk(
       unitNumber,
       country,
       state,
+      city,
       pincode,
       ownername,
       ownerphone,
@@ -45,6 +46,7 @@ export const update_hotel_details = createAsyncThunk(
       formdata.append("suiteUnitNumber", unitNumber);
       formdata.append("country", country);
       formdata.append("state", state);
+      formdata.append("city", city);
       formdata.append("pinCode", pincode);
       formdata.append("ownerName", ownername);
       formdata.append("ownerPhone", ownerphone);

@@ -199,6 +199,7 @@ const SignUP = () => {
                 setEmail(e.target.value.toLowerCase());
                 setEmailError("");
               }}
+              autoComplete="false"
               style={emailError ? { border: "1px solid red" } : {}}
             />
             {emailError && (
@@ -211,7 +212,7 @@ const SignUP = () => {
             <label className="form-label cmn_label">Password</label>
             <div className="input-group">
               <input
-                type={showPassword ? "text" : "password"} // Toggle input type based on state
+                type={showPassword ? "text" : "password"}
                 className="form-control cmn_input"
                 placeholder="Please enter your password"
                 value={password}
@@ -220,6 +221,7 @@ const SignUP = () => {
                   setPasswordError("");
                 }}
                 style={passwordError ? { border: "1px solid red" } : {}}
+                autoComplete="new-password"
               />
               <div
                 className="position-absolute end-0 me-3 mt-1"

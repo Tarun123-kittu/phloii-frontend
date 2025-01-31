@@ -107,7 +107,7 @@ const Login = () => {
           Welcome back! Please log in to access your account
         </p>
         <div className="mb-3">
-          <label for="email" className="form-label cmn_label">
+          <label htmlFor="email" className="form-label cmn_label">
             Email
           </label>
           <input
@@ -214,7 +214,7 @@ const Login = () => {
           />
           <label
             className="form-check-label sub-text fadeColor mt-1 "
-            for="flexCheckDefault"
+            htmlFor="flexCheckDefault"
           >
             Remember me
           </label>
