@@ -251,7 +251,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setAtmosphere(selected_hotel_details?.data?.data?.hotel?.atmosphere)
       setOpenTiming(selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.open)
       setCloseTiming(selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.close)
-      setCustomerServiceNumber(selected_hotel_details?.data?.data?.hotel?.customerServiceNumber)
+      setCustomerServiceNumber("+1"+selected_hotel_details?.data?.data?.hotel?.customerServiceNumber)
       setAtmosphere_description(selected_hotel_details?.data?.data?.hotel?.atmosphere_description)
       setFood(selected_hotel_details?.data?.data?.hotel?.food)
       setAdditional_information(selected_hotel_details?.data?.data?.hotel?.additional_information)
