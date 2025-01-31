@@ -15,6 +15,7 @@ import manageSidebar from "./slices/sidebarSlice/manageSidebar"
 import GetProfile from "./slices/profileSlice/profile"
 import ChangePassword from "./slices/authSlice/changePassword"
 import UpdateProfile from "./slices/profileSlice/updateProfile"
+import GetCities from "./slices/countriesSlice/getCities"
 
 const AppStore = configureStore({
   reducer: {
@@ -33,7 +34,8 @@ const AppStore = configureStore({
     MANAGE_SIDEBAR: manageSidebar,
     PROFILE: GetProfile,
     CHANGE_PASSWORD: ChangePassword,
-    UPDATE_PROFILE: UpdateProfile
+    UPDATE_PROFILE: UpdateProfile,
+    ALL_CITIES: GetCities
   },
 });
 

@@ -6,7 +6,7 @@ import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar"
 import { useDispatch } from "react-redux";
 
 
-const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries, setCity, city }) => {
+const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries, setCity, city,citiesList }) => {
   const [states, setStates] = useState([])
   const dispatch = useDispatch()
   const [establishmentnameError, setEstablishmentError] = useState('')
@@ -226,14 +226,20 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
             <label htmlFor="type" className="form-label cmn_label">
               City
             </label>
-            <input
-              type="text"
-              className="form-control cmn_input"
-              placeholder="Enter city name"
-              value={city}
-              onChange={(e) => {setCity(e.target.value);setCityError("")}}
+            <select
+              class="form-select cmn-select"
+              aria-label="Default select example"
+              onChange={(e) => { setCity(e.target.value); setCityError('') }}
               style={cityError ? { border: "1px solid #ff00009c" } : {}}
-            />
+              value={city}
+              disabled={citiesList?.length === 0}
+            >
+              <option>Select city</option>
+              {citiesList?.map((city, i) => (
+                <option key={i} value={city}>{city}</option>
+
+              ))}
+            </select>
             {pincodeError && (
               <span style={cityError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {cityError}

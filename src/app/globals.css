@@ -217,7 +217,9 @@ outline: 1px solid slategrey;
 .react-international-phone-input-container {
   width: 100%;
 }
-
+.form-control.cmn_input::placeholder {
+  color: #878787c4;
+}
 input.react-international-phone-input {
   width: 100%;
   background: #0e0e0e !important;
