@@ -6,6 +6,7 @@ import Multiselect from 'multiselect-react-dropdown';
 import { delete_hotel_image, clear_delete_hotel_image } from "@/utils/redux/slices/hotelOnboardingSlice/deleteHotelimage";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
+import { PhoneInput } from 'react-international-phone';
 
 const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel, is_hotel_updated, setAtmosphere_description, atmosphere_description, setFood, food, setAdditional_information, additional_information }) => {
   const dispatch = useDispatch()
@@ -357,6 +358,24 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
         </div>
         <div className={col}>
           <div className="mb-3">
+            <label htmlFor="phone" className="form-label cmn_label">
+            Customer Service Number
+            </label>
+            <PhoneInput
+              defaultCountry="ua"
+              value={customerServiceNumber}
+              onChange={(phone) => { setCustomerServiceNumber(phone); setServiceNumberError(""); }}
+              style={serviceNumberError ? { border: "1px solid #ff00009c" } : {}}
+            />
+            {serviceNumberError && (
+              <span style={{ color: "#ff00009c", fontSize: "12px" }}>
+                {serviceNumberError}
+              </span>
+            )}
+          </div>
+        </div>
+        <div className={col}>
+          {/* <div className="mb-3">
             <label htmlFor="customerServiceNumber" className="form-label cmn_label">
               Customer Service Number
             </label>
@@ -380,7 +399,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
                 {serviceNumberError}
               </span>
             )}
-          </div>
+          </div> */}
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
               Open Timings

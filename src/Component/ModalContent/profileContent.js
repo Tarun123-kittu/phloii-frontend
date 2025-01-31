@@ -23,10 +23,10 @@ const ProfileContent = ({ show, onClose }) => {
   const [profileImage, setProfileImage] = useState("")
   const [profileImageError, setProfileImageError] = useState("")
   const [previewImage, setPreviewImage] = useState("")
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isImageChanged, setIsImageChanged] = useState(false)
   const profileDetails = useSelector((state) => state.PROFILE?.data);
   const isProfileUpdated = useSelector((store) => store.UPDATE_PROFILE)
-  console.log(isProfileUpdated, "isProfileUpdated isProfileUpdated")
 
 
   useEffect(() => {

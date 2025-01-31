@@ -113,7 +113,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       city: city,
       pincode: pincode,
       ownername: ownername,
-      ownerphone: ownerPhone,
+      ownerphone: ownerPhone.replace('+', ''),
       webSitelink: websiteLink,
       owneremail: owneremail,
       whyphloii: whyphloii,
@@ -125,7 +125,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       atmosphere_description: atmosphere_description,
       opentiming: openTiming,
       closetiming: closeTiming,
-      customerservicenumber: customerServiceNumber,
+      customerservicenumber: customerServiceNumber.replace('+', ''),
       images: images,
     }))
   }
@@ -170,7 +170,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
           city: city,
           pincode: pincode,
           ownername: ownername,
-          ownerphone: ownerPhone,
+          ownerphone: ownerPhone.replace('+', ''),
           webSitelink: websiteLink,
           owneremail: owneremail,
           whyphloii: whyphloii,
@@ -182,7 +182,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
           atmosphere_description: atmosphere_description,
           opentiming: openTiming,
           closetiming: closeTiming,
-          customerservicenumber: customerServiceNumber,
+          customerservicenumber: customerServiceNumber.replace('+', ''),
           images: images,
         }))
       }

@@ -5,7 +5,7 @@ import { PhoneInput } from 'react-international-phone';
 import { useDispatch } from "react-redux";
 
 const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, setOwnerPhone, websiteLink, setWebsiteLink, owneremail, setOwnerEmail }) => {
-  console.log(ownerPhone,"this is the owner phone")
+  console.log(ownerPhone, "this is the owner phone")
   const dispatch = useDispatch()
   const [nameError, setNameError] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -106,10 +106,10 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
             )}
           </div>
         </div>
-        {/* <div className={col}>
+        <div className={col}>
           <div className="mb-3">
             <label htmlFor="phone" className="form-label cmn_label">
-              Establishment/Owner Phone
+              Owner Phone
             </label>
             <PhoneInput
               defaultCountry="ua"
@@ -123,8 +123,8 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               </span>
             )}
           </div>
-        </div> */}
-            <div className={col}>
+        </div>
+        {/* <div className={col}>
           <div className="mb-3">
             <label htmlFor="phone" className="form-label cmn_label">
               Establishment/Owner Phone
@@ -153,12 +153,12 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               </span>
             )}
           </div>
-        </div>
+        </div> */}
 
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
-              Establishment/Owner Email
+              Owner Email
             </label>
             <input
               type="email"
