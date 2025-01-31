@@ -241,7 +241,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setPincode(selected_hotel_details?.data?.data?.hotel?.address?.pinCode)
       setWebsiteLink(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.websiteLink)
       setOwnerEmail(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerEmail)
-      setOwnerPhone(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerPhone)
+      setOwnerPhone("+1"+selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerPhone)
       setUniqueFeatures(selected_hotel_details?.data?.data?.hotel?.uniqueFeatures)
       setInpersonvisit(selected_hotel_details?.data?.data?.hotel?.inPersonVisitAvailability)
       setWhyphloii(selected_hotel_details?.data?.data?.hotel?.why_want_phloi)
