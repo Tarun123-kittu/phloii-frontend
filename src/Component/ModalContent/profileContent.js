@@ -146,7 +146,7 @@ const ProfileContent = ({ show, onClose }) => {
 
 
               <input onChange={handleFileChange} type="file" className="form-control cmn_input" />
-              <img src={previewImage} width={100} height={100} alt="profile_image" />
+              <img src={previewImage || "/assets/profile-circle.svg"} width={100} height={100} alt="profile_image" />
             </div>
           </div>
           <div className="profile_content">
@@ -190,7 +190,7 @@ const ProfileContent = ({ show, onClose }) => {
                 )}
               </div>
 
-              <div className="mb-3">
+              <div className="mb-3 steps_form">
                 <label htmlFor="phone" className="form-label cmn_label">
                   Phone
                 </label>

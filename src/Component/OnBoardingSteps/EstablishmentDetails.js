@@ -229,7 +229,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
             <input
               type="text"
               className="form-control cmn_input"
-              placeholder="Enter pin code"
+              placeholder="Enter city name"
               value={city}
               onChange={(e) => {setCity(e.target.value);setCityError("")}}
               style={cityError ? { border: "1px solid #ff00009c" } : {}}

@@ -50,13 +50,13 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const is_hotel_updated = useSelector((store) => store.UPDATE_HOTEL_DETAILS)
   const profileDetails = useSelector((state) => state.PROFILE?.data);
 
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     if (localStorage.getItem('phloii_user_name') && localStorage.getItem('phloii_user')) {
-  //       setOwnername((localStorage.getItem('phloii_user_name')))
-  //     }
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem('phloii_user_name') && localStorage.getItem('phloii_user')) {
+        setOwnername((localStorage.getItem('phloii_user_name')))
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (profileDetails?.type === "success") {
