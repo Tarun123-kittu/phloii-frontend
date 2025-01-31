@@ -362,8 +362,8 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
             Customer Service Number
             </label>
             <PhoneInput
-              defaultCountry="ua"
-              value={customerServiceNumber}
+              defaultCountry="us"
+              value={customerServiceNumber ? String(customerServiceNumber) : ''}
               onChange={(phone) => { setCustomerServiceNumber(phone); setServiceNumberError(""); }}
               style={serviceNumberError ? { border: "1px solid #ff00009c" } : {}}
             />

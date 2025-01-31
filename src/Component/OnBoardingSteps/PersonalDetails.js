@@ -5,7 +5,7 @@ import { PhoneInput } from 'react-international-phone';
 import { useDispatch } from "react-redux";
 
 const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, setOwnerPhone, websiteLink, setWebsiteLink, owneremail, setOwnerEmail }) => {
-  console.log(ownerPhone, "this is the owner phone")
+  console.log(typeof (ownerPhone, "this is the owner phone"))
   const dispatch = useDispatch()
   const [nameError, setNameError] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -112,9 +112,12 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
               Owner Phone
             </label>
             <PhoneInput
-              defaultCountry="ua"
-              value={ownerPhone}
-              onChange={(phone) => { setOwnerPhone(phone); setPhoneError(""); }}
+              defaultCountry="us"
+              value={ownerPhone ? String(ownerPhone) : ''}
+              onChange={(phone) => {
+                setOwnerPhone(phone);
+                setPhoneError("");
+              }}
               style={phoneError ? { border: "1px solid #ff00009c" } : {}}
             />
             {phoneError && (

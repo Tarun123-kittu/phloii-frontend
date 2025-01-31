@@ -213,6 +213,7 @@ ul.dropdown-menu li:last-child a {
     .user_image {
         flex: 0 0 30px;
         height: 30px;
+        width: 30px;
     }
     header{
         padding-right: 10px;

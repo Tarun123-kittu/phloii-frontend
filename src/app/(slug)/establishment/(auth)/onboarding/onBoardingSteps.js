@@ -28,7 +28,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const [state, setState] = useState('')
   const [pincode, setPincode] = useState('')
   const [ownername, setOwnername] = useState('')
-  const [ownerPhone, setOwnerPhone] = useState('')
+  const [ownerPhone, setOwnerPhone] = useState("")
   const [websiteLink, setWebsiteLink] = useState('')
   const [owneremail, setOwnerEmail] = useState('')
   const [whyphloii, setWhyphloii] = useState('')
@@ -72,6 +72,12 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       dispatch(getCities({ country, state }))
     }
   }, [country, state])
+
+  useEffect(() => {
+    if (country !== "") {
+      dispatch(get_countries())
+    }
+  }, [country])
 
   useEffect(() => {
     if (all_cities?.status === "Success") {
@@ -225,7 +231,6 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   useEffect(() => {
     if (selected_hotel_details?.status === "Success" && hotelId) {
-      console.log(selected_hotel_details, "this is the selected hotel details")
       setEstablishmentname(selected_hotel_details?.data?.data?.hotel?.establishmentName)
       setEstablishedtype(selected_hotel_details?.data?.data?.hotel?.establishmentType)
       setStreetAddress(selected_hotel_details?.data?.data?.hotel?.address?.streetAddress)
@@ -251,7 +256,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setFood(selected_hotel_details?.data?.data?.hotel?.food)
       setAdditional_information(selected_hotel_details?.data?.data?.hotel?.additional_information)
     }
-  }, [])
+  }, [selected_hotel_details])
 
   useEffect(() => {
     if (is_hotel_updated?.status === "Success") {
@@ -303,7 +308,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       </div>
 
 
-      {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} setCity={setCity} city={city} setCitiesList={setCitiesList} citiesList={citiesList} />}
+      {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} setCity={setCity} city={city} setCitiesList={setCitiesList} citiesList={citiesList} selected_hotel_details={selected_hotel_details}/>}
       {step === 2 && <PersonalDetails col={col} setStep={setStep} ownername={ownername} setOwnername={setOwnername} ownerPhone={ownerPhone} setOwnerPhone={setOwnerPhone} websiteLink={websiteLink} setWebsiteLink={setWebsiteLink} owneremail={owneremail} setOwnerEmail={setOwnerEmail} />}
       {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} setFood={setFood} food={food} setServiceValues={setServiceValues} serviceValues={serviceValues} atmosphere={atmosphere} setAtmosphere={setAtmosphere} openTiming={openTiming} setOpenTiming={setOpenTiming} closeTiming={closeTiming} setCloseTiming={setCloseTiming} customerServiceNumber={customerServiceNumber} setCustomerServiceNumber={setCustomerServiceNumber} hotelId={hotelId} updateHotel={updateHotel} is_hotel_updated={is_hotel_updated} setAtmosphere_description={setAtmosphere_description} atmosphere_description={atmosphere_description} setAdditional_information={setAdditional_information} additional_information={additional_information} />}
 

@@ -6,8 +6,9 @@ import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar"
 import { useDispatch } from "react-redux";
 
 
-const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries, setCity, city,citiesList }) => {
+const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries, setCity, city,citiesList,selected_hotel_details}) => {
   const [states, setStates] = useState([])
+  console.log(state,"this is the state value from the second value")
   const dispatch = useDispatch()
   const [establishmentnameError, setEstablishmentError] = useState('')
   const [establishmenttypeError, setEstablishmentTypeError] = useState('')
@@ -67,11 +68,12 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   useEffect(() => {
     if (country) {
       const countryData = all_countries?.find((el) => el.name === country);
+      console.log(countryData,"countryDatacountryDatacountryData")
       if (countryData?.states?.length > 0) {
         setStates(countryData.states);
       }
     }
-  }, [country]);
+  }, [country,selected_hotel_details]);
 
   const handleToggle = () => {
     dispatch(toggle_sidebar(false))
