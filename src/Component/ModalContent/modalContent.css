@@ -22,6 +22,15 @@
     position: relative;
     background: linear-gradient(90deg, #fbb90d 0%, #22ebff 100%);
 }
+.editor_modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+button.btn_editor {
+    padding: 7px;
+    margin-top: 7px;
+}
 .profile_image_upload img {
     width: 100%;
     height: 100%;

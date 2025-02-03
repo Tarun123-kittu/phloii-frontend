@@ -4,8 +4,8 @@ import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar"
 import { PhoneInput } from 'react-international-phone';
 import { useDispatch } from "react-redux";
 
+
 const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, setOwnerPhone, websiteLink, setWebsiteLink, owneremail, setOwnerEmail }) => {
-  console.log(typeof (ownerPhone, "this is the owner phone"))
   const dispatch = useDispatch()
   const [nameError, setNameError] = useState('')
   const [emailError, setEmailError] = useState('')

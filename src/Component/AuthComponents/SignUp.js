@@ -96,8 +96,7 @@ const SignUP = () => {
 
   useEffect(() => {
     if (is_loggedIn?.status === "Success") {
-      console.log(is_loggedIn, "is_loggedIn");
-      toast.success("Logged in");
+      toast.success("Your Account has been created..");
       localStorage.setItem("phloii_token_auth", is_loggedIn?.data?.data);
       localStorage.setItem("phloii_user", is_loggedIn?.data?.email);
       localStorage.setItem("phloii_user_name", is_loggedIn?.data?.username);

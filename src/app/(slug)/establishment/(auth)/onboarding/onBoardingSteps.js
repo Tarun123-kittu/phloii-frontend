@@ -52,6 +52,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const selected_hotel_details = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
   const is_hotel_updated = useSelector((store) => store.UPDATE_HOTEL_DETAILS)
   const profileDetails = useSelector((state) => state.PROFILE?.data);
+  let toastId
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -124,6 +125,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   }, [])
 
   const handleOnboardHotel = () => {
+    toastId = toast.loading('Creating new establishment....');
     dispatch(onboard_hotel({
       establishmentname: establishmentname,
       establishedtype: establishedtype,
@@ -180,6 +182,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
         toast.error("It seems you haven't made any changes to update. Please make some changes to update.");
       }
       else {
+        toastId = toast.loading('Updating establishment...');
         dispatch(update_hotel_details({
           hotelId: hotelId,
           establishmentname: establishmentname,
@@ -212,13 +215,13 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   useEffect(() => {
     if (is_hotel_verified.status === "Success") {
-      toast.success(is_hotel_verified?.data?.message)
+      toast.success(is_hotel_verified?.data?.message, { id: toastId })
       router.push("/establishment")
       setCitiesList([])
       dispatch(clear_onboard_hotel_state())
     }
     if (is_hotel_verified.status === "Error") {
-      toast.error(is_hotel_verified.error.message)
+      toast.error(is_hotel_verified.error.message, { id: toastId })
       dispatch(clear_onboard_hotel_state())
     }
   }, [is_hotel_verified])
@@ -241,7 +244,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setPincode(selected_hotel_details?.data?.data?.hotel?.address?.pinCode)
       setWebsiteLink(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.websiteLink)
       setOwnerEmail(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerEmail)
-      setOwnerPhone("+1"+selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerPhone)
+      setOwnerPhone(selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerPhone)
       setUniqueFeatures(selected_hotel_details?.data?.data?.hotel?.uniqueFeatures)
       setInpersonvisit(selected_hotel_details?.data?.data?.hotel?.inPersonVisitAvailability)
       setWhyphloii(selected_hotel_details?.data?.data?.hotel?.why_want_phloi)
@@ -251,7 +254,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setAtmosphere(selected_hotel_details?.data?.data?.hotel?.atmosphere)
       setOpenTiming(selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.open)
       setCloseTiming(selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.close)
-      setCustomerServiceNumber("+1"+selected_hotel_details?.data?.data?.hotel?.customerServiceNumber)
+      setCustomerServiceNumber(selected_hotel_details?.data?.data?.hotel?.customerServiceNumber)
       setAtmosphere_description(selected_hotel_details?.data?.data?.hotel?.atmosphere_description)
       setFood(selected_hotel_details?.data?.data?.hotel?.food)
       setAdditional_information(selected_hotel_details?.data?.data?.hotel?.additional_information)
@@ -260,12 +263,12 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   useEffect(() => {
     if (is_hotel_updated?.status === "Success") {
-      toast.success(is_hotel_updated?.data?.message)
+      toast.success(is_hotel_updated?.data?.message, { id: toastId })
       dispatch(clear_hotel_details_state())
       router.push(`/establishment/establishment-details/${hotelId}/${establishmentname}`)
     }
     if (is_hotel_updated?.status === "Error") {
-      toast.error(is_hotel_updated?.error?.message)
+      toast.error(is_hotel_updated?.error?.message, { id: toastId })
       dispatch(clear_hotel_details_state())
     }
   }, [is_hotel_updated])
@@ -308,7 +311,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       </div>
 
 
-      {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} setCity={setCity} city={city} setCitiesList={setCitiesList} citiesList={citiesList} selected_hotel_details={selected_hotel_details}/>}
+      {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} setCity={setCity} city={city} setCitiesList={setCitiesList} citiesList={citiesList} selected_hotel_details={selected_hotel_details} />}
       {step === 2 && <PersonalDetails col={col} setStep={setStep} ownername={ownername} setOwnername={setOwnername} ownerPhone={ownerPhone} setOwnerPhone={setOwnerPhone} websiteLink={websiteLink} setWebsiteLink={setWebsiteLink} owneremail={owneremail} setOwnerEmail={setOwnerEmail} />}
       {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} setFood={setFood} food={food} setServiceValues={setServiceValues} serviceValues={serviceValues} atmosphere={atmosphere} setAtmosphere={setAtmosphere} openTiming={openTiming} setOpenTiming={setOpenTiming} closeTiming={closeTiming} setCloseTiming={setCloseTiming} customerServiceNumber={customerServiceNumber} setCustomerServiceNumber={setCustomerServiceNumber} hotelId={hotelId} updateHotel={updateHotel} is_hotel_updated={is_hotel_updated} setAtmosphere_description={setAtmosphere_description} atmosphere_description={atmosphere_description} setAdditional_information={setAdditional_information} additional_information={additional_information} />}
 

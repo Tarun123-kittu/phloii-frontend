@@ -215,7 +215,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     {hotel_details?.hotel?.customerServiceNumber && (
                                         <>
                                             <span className='d-block'>Customer Service Number</span>
-                                            <strong className='mb-2 d-block'> {hotel_details?.hotel?.customerServiceNumber}</strong>
+                                            <strong className='mb-2 d-block'> {"+"+hotel_details?.hotel?.customerServiceNumber}</strong>
                                         </>
                                     )}
                                 </li>
@@ -275,7 +275,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                             </button>
                         </div>
                         <ul className='owner_details'>
-                            <li><img src="/assets/mobile_icon.svg" alt="" /> <a href={`tel:${hotel_details?.hotel?.ownerDetails?.ownerPhone}`}>{hotel_details?.hotel?.ownerDetails?.ownerPhone}</a></li>
+                            <li><img src="/assets/mobile_icon.svg" alt="" /> <a href={`tel:${hotel_details?.hotel?.ownerDetails?.ownerPhone}`}>{"+"+hotel_details?.hotel?.ownerDetails?.ownerPhone}</a></li>
                             <li><img src="/assets/message_icon.svg" alt="" /> <a href={`mailto:${hotel_details?.hotel?.ownerDetails?.ownerEmail}`}>{hotel_details?.hotel?.ownerDetails?.ownerEmail}</a></li>
                             {hotel_details?.hotel?.ownerDetails?.websiteLink && <li><img src="/assets/globe_icon.svg" alt="" /> <Link
                                 target="_blank"

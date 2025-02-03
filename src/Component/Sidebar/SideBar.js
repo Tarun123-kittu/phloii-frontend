@@ -103,6 +103,7 @@ const SideBar = ({ children }) => {
         body="This is the modal content."
         onClose={() => setShowModal(false)} />}
       {showProfile && <ProfileContent show={showProfile}
+        setShowProfile={setShowProfile}
         onClose={() => setShowProfile(false)} />}
       <header className={`${sidebarState && 'toggle_header'} d-flex justify-content-end align-items-center`}>
         <div className={`${sidebarState ? 'd-none' : "d-block"} hamburger flex-grow-1`}>
@@ -121,18 +122,18 @@ const SideBar = ({ children }) => {
           <div className="dropdown">
             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               <div className="user_image d-flex align-items-center justify-content-center">
-                <img src={profileDetails?.data?.image || "/assets/profile-circle.svg"} className="rounded-5 object-fit-cover" width={40} height={40} alt="" />  
+                <img src={profileDetails?.data?.image || "/assets/profile-circle.svg"} className="rounded-5 object-fit-cover" width={40} height={40} alt="" />
               </div>
-              <span>{profileDetails?.data?.username}</span> 
+              <span>{profileDetails?.data?.username}</span>
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.57684 17.2811L14.7512 10.9563L8.4264 4.78197" stroke="#DDDDDD" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+                <path d="M8.57684 17.2811L14.7512 10.9563L8.4264 4.78197" stroke="#DDDDDD" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a className="dropdown-item cursor-pointer" onClick={() => setShowModal(true)}>Change Password</a></li>
               <li><a className="dropdown-item cursor-pointer" onClick={() => setShowProfile(true)}>Profile</a></li>
             </ul>
-       
+
           </div>
         </div>
       </header>
