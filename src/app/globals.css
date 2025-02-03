@@ -284,7 +284,7 @@ button.react-international-phone-country-selector-button, button.react-internati
     color-scheme: dark;
   }
 }
-@media(max-width:991px){
+@media(max-width:1024px){
   .wrapper {
     padding-left: 20px;
 }
