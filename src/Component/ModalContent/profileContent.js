@@ -250,7 +250,7 @@ return (
             width={200}
             height={200}
             border={10}
-            color={[255, 255, 255, 0.6]} // Transparent background
+            color={[255, 255, 255, 0.6]}
             scale={scale}
             className="avatar_image"
           />
