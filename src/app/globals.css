@@ -64,6 +64,7 @@ color: rgba(117, 129, 143, 1);
   label.form-label.cmn_label {
       color: rgba(255, 255, 255, 1);
       font-size: 14px;
+      display: block;
   }
   button.upload_btn.cmn_btn {
     height: 34px;

@@ -243,23 +243,25 @@ return (
       </div>
         :
         <div className="editor_modal">
+          <h3 className="text-center m-4 text-white">Edit your profile image</h3>
           <AvatarEditor
             ref={editorRef}
             image={profileImage}
             width={200}
             height={200}
-            border={50}
+            border={10}
             color={[255, 255, 255, 0.6]} // Transparent background
             scale={scale}
             className="avatar_image"
           />
           <input
             type="range"
-            min="1"
+            min="-1"
             max="3"
             step="0.1"
             value={scale}
             onChange={(e) => setScale(parseFloat(e.target.value))}
+            className="image_editor_input"
           />
           <button className="btn_editor cmn_btn px-4" onClick={handleUpload}>Upload Image</button>
         </div>}
