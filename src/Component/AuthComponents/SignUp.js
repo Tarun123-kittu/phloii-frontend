@@ -260,10 +260,11 @@ const SignUP = () => {
                 {!showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />}
               </div>
             </div>
-            <span className="password_input d-block pt-1">
+            {passwordError ? <span className="password_input d-block pt-1 text-danger">
+              {passwordError}
+            </span> : <span className="password_input d-block pt-1">
               Password must contain at least 8 characters, including a number and  capital letter
-            </span>
-            {passwordError && <span style={{ color: "red", fontSize: "12px" }}>{passwordError}</span>}
+            </span>}
           </div>
 
           <div className="mb-3">
