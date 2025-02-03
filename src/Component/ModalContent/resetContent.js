@@ -15,8 +15,11 @@ const ResetContent = ({ show, onClose }) => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [newPasswordError, setNewPasswordError] = useState('')
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState('')
   const isPasswordChanged = useSelector((store) => store.CHANGE_PASSWORD)
+   const [confirmPasswrdError, setConfirmPasswrdError] = useState('')
   console.log(isPasswordChanged, "isPasswordChanged isPasswordChanged")
 
   const handleChangePassword = () => {
@@ -58,6 +61,49 @@ const ResetContent = ({ show, onClose }) => {
       toast.error(isPasswordChanged?.error?.message)
     }
   }, [isPasswordChanged])
+
+  const handlePasswordChange = (e) => {
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const newPassword = e.target.value;
+    
+    setNewPassword(newPassword);
+    setNewPasswordError(""); // Corrected the reset for error message
+  
+    if (!passwordPattern.test(newPassword)) {
+      setNewPasswordError(
+        "Password must be at least 8 characters long, include one uppercase letter, one number, and one special character."
+      );
+      return;
+    }
+  
+    if (confirmPassword && newPassword !== confirmPassword) {
+      setConfirmPasswrdError("Confirm password doesn't match with password");
+    } else {
+      setConfirmPasswrdError("");
+    }
+  };
+  
+  const handleConfirmPasswordChange = (e) => {
+    const newConfirmPassword = e.target.value;
+    
+    setConfirmPassword(newConfirmPassword);
+    setConfirmPasswrdError("");
+  
+    if (newPassword && newConfirmPassword !== newPassword) {
+      setConfirmPasswrdError("Confirm password doesn't match with password");
+    } else {
+      setConfirmPasswrdError("");
+    }
+  };
+  
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+  const togglePasswordVisibilityConfirm = () => {
+    setShowPasswordConfirm((prevState) => !prevState);
+  };
+
   return (
     <CommonModal show={show} onClose={onClose}>
       <div className="auth_form">
@@ -88,45 +134,54 @@ const ResetContent = ({ show, onClose }) => {
           )}
         </div>
         <div className="mb-3">
-          <label htmlFor="newPassword" className="form-label cmn_label">
-            New Password
-          </label>
-          <input
-            type="password"
-            className="form-control cmn_input"
-            placeholder="New password"
-            value={newPassword}
-            onChange={(e) => { setNewPassword(e.target.value); setNewPasswordError('') }}
-            style={newPasswordError ? { border: "1px solid #ff00009c" } : {}}
-          />
-          {newPasswordError && (
-            <span style={newPasswordError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
-              {newPasswordError}
-            </span>
-          )}
+          <label className="form-label cmn_label">New Password</label>
+          <div className="input-group">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="form-control cmn_input"
+              placeholder="Please enter your password"
+              value={newPassword}
+              onChange={handlePasswordChange}
+              style={newPasswordError ? { border: "1px solid red" } : {}}
+              autoComplete="new-password"
+            />
+            <div
+              className="position-absolute end-0 me-3 mt-1"
+              onClick={togglePasswordVisibility}
+            >
+              {!showPassword ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />}
+            </div>
+          </div>
+          {newPasswordError ? <span className="password_input d-block pt-1 text-danger">
+            {newPasswordError}
+          </span> : <span className="password_input d-block pt-1">
+          </span>}
         </div>
+
         <div className="mb-3">
-          <label htmlFor="ConfirmPassword" className="form-label cmn_label">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            className="form-control cmn_input"
-            placeholder="Re-enter password"
-            value={confirmPassword}
-            onChange={(e) => { setConfirmPassword(e.target.value); setConfirmPasswordError('') }}
-            style={confirmPasswordError ? { border: "1px solid #ff00009c" } : {}}
-          />
-          {confirmPasswordError && (
-            <span style={confirmPasswordError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
-              {confirmPasswordError}
-            </span>
-          )}
+          <label className="form-label cmn_label">Confirm Password</label>
+          <div className="input-group">
+            <input
+              type={showPasswordConfirm ? "text" : "password"}
+              className="form-control cmn_input"
+              placeholder="Please enter your password"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              style={confirmPasswrdError ? { border: "1px solid red" } : {}}
+            />
+            <div
+              className="position-absolute end-0 me-3 mt-1"
+              onClick={togglePasswordVisibilityConfirm}
+            >
+              {!showPasswordConfirm ? <img src="/hide.svg" alt="hide" /> : <img src="/view.svg" alt="hide" />}
+            </div>
+          </div>
+          {confirmPasswrdError && <span style={{ color: "red", fontSize: "12px" }}>{confirmPasswrdError}</span>}
         </div>
 
 
         <div className="mt-4">
-          <Button text={'Change Password'} className={"w-100"} buttonClick={handleChangePassword} loading={isPasswordChanged}/>
+          <Button text={'Change Password'} className={"w-100"} buttonClick={handleChangePassword} loading={isPasswordChanged} />
         </div>
       </div>
     </CommonModal>

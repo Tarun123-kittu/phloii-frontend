@@ -183,7 +183,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               style={countryError ? { border: "1px solid #ff00009c" } : {}}
               value={country}
             >
-              <option>Select country</option>
+              <option selected value="">Select country</option>
               {all_countries?.map((country, i) => (
                 <option key={i} value={country?.name}>{country?.name}</option>
 

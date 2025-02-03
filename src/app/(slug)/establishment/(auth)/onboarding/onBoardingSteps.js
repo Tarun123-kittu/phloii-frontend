@@ -54,6 +54,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const profileDetails = useSelector((state) => state.PROFILE?.data);
   let toastId
 
+
   useEffect(() => {
     return () => {
       setCountry("")
