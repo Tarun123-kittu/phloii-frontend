@@ -41,6 +41,14 @@ const GetCities = createSlice({
         data: null,
         error: null
     },
+    reducers: {
+        clear_cities_data: (state) => {
+            state.status = null
+            state.data = null
+            state.error = null
+            return state
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getCities.pending, (state) => {
@@ -57,4 +65,5 @@ const GetCities = createSlice({
     }
 })
 
+export const {clear_cities_data} = GetCities.actions
 export default GetCities.reducer

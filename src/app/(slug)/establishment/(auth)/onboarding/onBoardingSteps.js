@@ -7,7 +7,7 @@ import PersonalDetails from "@/Component/OnBoardingSteps/PersonalDetails";
 import WhyPhloiiVerified from "@/Component/OnBoardingSteps/WhyPhloiiVerified";
 import { useDispatch, useSelector } from "react-redux";
 import { get_countries } from "@/utils/redux/slices/countriesSlice/getCountries";
-import { getCities } from "@/utils/redux/slices/countriesSlice/getCities";
+import { getCities, clear_cities_data } from "@/utils/redux/slices/countriesSlice/getCities";
 import { onboard_hotel, clear_onboard_hotel_state } from "@/utils/redux/slices/hotelOnboardingSlice/HotelOnboarding";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -53,6 +53,16 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const is_hotel_updated = useSelector((store) => store.UPDATE_HOTEL_DETAILS)
   const profileDetails = useSelector((state) => state.PROFILE?.data);
   let toastId
+
+  useEffect(() => {
+    return () => {
+      setCountry("")
+      setState("")
+      setCity("")
+      setCitiesList([])
+      dispatch(clear_cities_data())
+    }
+  }, [])
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -213,6 +223,11 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       router.push("/establishment")
       setCitiesList([])
       dispatch(clear_onboard_hotel_state())
+      setCountry("")
+      setState("")
+      setCity("") 
+      setCitiesList([])
+      dispatch(clear_cities_data())
     }
     if (is_hotel_verified.status === "Error") {
       toast.error(is_hotel_verified.error.message, { id: toastId })
@@ -259,6 +274,11 @@ const OnBoardingSteps = ({ col, hotelId }) => {
     if (is_hotel_updated?.status === "Success") {
       toast.success("Establishment Updated Successfully", { id: toastId })
       dispatch(clear_hotel_details_state())
+      setCountry("")
+      setState("")
+      setCity("") 
+      setCitiesList([])
+      dispatch(clear_cities_data())
       router.push(`/establishment/establishment-details/${hotelId}/${establishmentname}`)
     }
     if (is_hotel_updated?.status === "Error") {
