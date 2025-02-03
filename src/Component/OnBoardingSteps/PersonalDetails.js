@@ -109,7 +109,7 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="phone" className="form-label cmn_label">
-              Owner Phone
+            Establishment Phone
             </label>
             <PhoneInput
               defaultCountry="us"
@@ -161,7 +161,7 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label cmn_label">
-              Owner Email
+            Establishment Email
             </label>
             <input
               type="email"

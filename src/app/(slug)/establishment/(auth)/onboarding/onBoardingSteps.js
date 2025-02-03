@@ -209,7 +209,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   useEffect(() => {
     if (is_hotel_verified.status === "Success") {
-      toast.success(is_hotel_verified?.data?.message, { id: toastId })
+      toast.success("Establishment Created Successfully", { id: toastId })
       router.push("/establishment")
       setCitiesList([])
       dispatch(clear_onboard_hotel_state())
@@ -257,7 +257,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   useEffect(() => {
     if (is_hotel_updated?.status === "Success") {
-      toast.success(is_hotel_updated?.data?.message, { id: toastId })
+      toast.success("Establishment Updated Successfully", { id: toastId })
       dispatch(clear_hotel_details_state())
       router.push(`/establishment/establishment-details/${hotelId}/${establishmentname}`)
     }
@@ -288,7 +288,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
                 >
                   <span>{stepNumber}</span>
                   <p>
-                    {stepNumber === 1 && "Establishment details"}
+                    {stepNumber === 1 && "Establishment Details"}
                     {stepNumber === 2 && "Personal Details"}
                     {stepNumber === 3 && "Why Phloii Verified"}
                   </p>

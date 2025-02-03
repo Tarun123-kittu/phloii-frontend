@@ -51,12 +51,12 @@ const Establishment = () => {
   return (
     <>
       <Head>
-        <title>Establishment Information</title>
+        <title>My Establishment</title>
         <meta name="description" content="Find details about hotels. Discover amenities, reviews, and more." />
       </Head>
       <SideBar>
         {all_hotels?.status === "Loading" ? <Loader /> : <div onClick={ () => handleToggle()} className="wrapper">
-          <h5 className='text-white mb-3'>Establishment Information</h5>
+          <h5 className='text-white mb-3'>My Establishment</h5>
           {hotel_details?.length === 0 ? <img src='/noData.svg' /> : hotel_details?.map((hotel, i) => (
             
             <div className="profile-card m-0  row mb-4" key={i}>

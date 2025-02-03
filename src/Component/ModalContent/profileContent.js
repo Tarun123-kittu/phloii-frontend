@@ -219,7 +219,7 @@ return (
               )}
             </div>
 
-            <div className="mb-3 steps_form">
+            <div className="mb-3 steps_form p-0">
               <label htmlFor="phone" className="form-label cmn_label">
                 Phone
               </label>

@@ -271,7 +271,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     <path d="M6.1499 2.70898C6.34647 3.9707 7.37047 4.93527 8.64133 5.06327" stroke="white" strokeWidth="0.914286" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                                     <path d="M2.08569 10.4572H10.3143" stroke="white" strokeWidth="0.914286" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-                                <span className='text-light ms-2' >Edit</span>
+                                <span className='text-light ms-2' >Edit Establishment</span>
                             </button>
                         </div>
                         <ul className='owner_details'>
