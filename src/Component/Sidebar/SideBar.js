@@ -124,7 +124,7 @@ const SideBar = ({ children }) => {
               <div className="user_image d-flex align-items-center justify-content-center">
                 <img src={profileDetails?.data?.image || "/assets/profile-circle.svg"} className="rounded-5 object-fit-cover" width={40} height={40} alt="" />
               </div>
-              <span>{profileDetails?.data?.username}</span>
+              <span>{profileDetails?.data?.username?.split(" ")?.length > 1 ? profileDetails?.data?.username?.split(" ")[0] : profileDetails?.data?.username}</span>
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.57684 17.2811L14.7512 10.9563L8.4264 4.78197" stroke="#DDDDDD" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
