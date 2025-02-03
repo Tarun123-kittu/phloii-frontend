@@ -63,12 +63,6 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   }, []);
 
   useEffect(() => {
-    if (profileDetails?.type === "success") {
-      setOwnername(profileDetails?.data?.username)
-    }
-  }, [profileDetails])
-
-  useEffect(() => {
     if (country !== "" && state !== "") {
       dispatch(getCities({ country, state }))
     }

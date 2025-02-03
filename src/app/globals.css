@@ -227,7 +227,7 @@ input.react-international-phone-input {
   color: #fff !important;
   border: unset !important;
 }
-.steps_form input.react-international-phone-input {
+.steps_form input.react-international-phone-input, .board_form input.react-international-phone-input {
   width: 100%;
   background: #000 !important;
   color: #fff !important;
@@ -239,7 +239,8 @@ button.react-international-phone-country-selector-button, button.react-internati
   border: unset;
   border-right: 1px solid #464646;
 }
-.steps_form button.react-international-phone-country-selector-button, .steps_form button.react-international-phone-country-selector-button:hover {
+.steps_form button.react-international-phone-country-selector-button, .steps_form button.react-international-phone-country-selector-button:hover,
+.board_form button.react-international-phone-country-selector-button, .board_form button.react-international-phone-country-selector-button:hover {
   background: #000;
   border: unset;
   border-right: 1px solid #464646;

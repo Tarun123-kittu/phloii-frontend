@@ -158,15 +158,26 @@ const SignUP = () => {
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const newPassword = e.target.value;
+    setPassword(newPassword);
     setPasswordError("");
-    
-    if (confirmPassword && e.target.value !== confirmPassword) {
-      setConfirmPasswrdError("Confirm password doesn't matched with password");
+  
+  
+    if (!passwordPattern.test(newPassword)) {
+      setPasswordError(
+        "Password must be at least 8 characters long, include one uppercase letter, one number, and one special character."
+      );
+      return
+    }
+  
+    if (confirmPassword && newPassword !== confirmPassword) {
+      setConfirmPasswrdError("Confirm password doesn't match with password");
     } else {
       setConfirmPasswrdError("");
     }
   };
+  
   
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
@@ -250,7 +261,7 @@ const SignUP = () => {
               </div>
             </div>
             <span className="password_input d-block pt-1">
-              Password must contain at least 8 characters, including a number and letter
+              Password must contain at least 8 characters, including a number and  capital letter
             </span>
             {passwordError && <span style={{ color: "red", fontSize: "12px" }}>{passwordError}</span>}
           </div>
@@ -289,7 +300,7 @@ const SignUP = () => {
             style={phoneError ? { border: "1px solid red" } : {}}
           /> */}
             <PhoneInput
-              defaultCountry="ua"
+              defaultCountry="us"
               value={phone}
               onChange={(phone) => { setPhone(phone); setPhoneError(""); }}
             />

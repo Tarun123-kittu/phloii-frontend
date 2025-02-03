@@ -120,6 +120,7 @@ const ProfileContent = ({ show, onClose }) => {
   useEffect(() => {
     if (isProfileUpdated?.status === "Success") {
       toast.success("Profile updated successfully")
+      localStorage.setItem("phloii_user_name",username)
       dispatch(getProfile())
       dispatch(clear_profile_update_slice())
       onClose()
