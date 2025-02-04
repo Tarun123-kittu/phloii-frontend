@@ -359,7 +359,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
         <div className={col}>
           <div className="mb-3">
             <label htmlFor="phone" className="form-label cmn_label">
-            Customer Service Number
+              Customer Service Number
             </label>
             <PhoneInput
               defaultCountry="us"
@@ -500,7 +500,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       </div>
       <div className="d-flex justify-content-end gap-3">
         <Button buttonClick={handleBackword} text="Previous" className="grey_btn" />
-        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : hotelId ? "Update" : "Done"} />
+        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : hotelId ? "Update" : "Create"} loading={is_hotel_verified || is_hotel_updated} />
       </div>
     </div>
   );

@@ -275,8 +275,11 @@ button.react-international-phone-country-selector-button, button.react-internati
 }
 
 .floating {
-  animation: floatLeftToRight 4s ease-in-out infinite; /* Adjust duration as needed */
+  animation: floatLeftToRight 4s ease-in-out infinite; 
   display: inline-block;
+}
+.image_cursor{
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: dark) {

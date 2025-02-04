@@ -61,20 +61,13 @@
 }
 .owner_head h3 {
     font-size: 22px;
+    text-transform: capitalize;
 }
 
 .owner_head {
     color: rgba(255, 255, 255, 1);
 }
-.owner_head  button {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    min-width: 64px;
-    height: 24px;
-    font-size: 13px;
-    font-weight: 400;
-    border-radius: 3px;
-}
+
 ul.owner_details {
     padding: 0;
     margin-top: 19px;

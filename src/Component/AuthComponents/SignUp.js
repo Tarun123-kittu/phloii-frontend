@@ -263,7 +263,7 @@ const SignUP = () => {
             {passwordError ? <span className="password_input d-block pt-1 text-danger">
               {passwordError}
             </span> : <span className="password_input d-block pt-1">
-              Password must contain at least 8 characters, including a number and  capital letter
+       
             </span>}
           </div>
 

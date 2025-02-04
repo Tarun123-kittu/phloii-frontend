@@ -128,12 +128,12 @@ const Establishment = () => {
                   <h5>Establishment Photos</h5>
                   <div className=" hotel-photos ">
                     <div onClick={() => { setImages(hotel?.images); setShow_image_preview(true); setIndex(0) }} className="- p-0">
-                      <img src={hotel?.images[0]} alt="Hotel 1" />
+                      <img className='image_cursor' src={hotel?.images[0]} alt="Hotel 1" />
                     </div>
                     <div onClick={() => { setImages(hotel?.images); setShow_image_preview(true); setIndex(1) }} className=" p-0">
-                      <img src={hotel?.images[1]} alt="Hotel 2" />
+                      <img className='image_cursor' src={hotel?.images[1]} alt="Hotel 2" />
                     </div>
-                    <div onClick={() => { setImages(hotel?.images); setShow_image_preview(true); setIndex(0) }} className="p-0 view-more">
+                    <div onClick={() => { setImages(hotel?.images); setShow_image_preview(true); setIndex(2) }} className="p-0 view-more">
                       <img src={hotel?.images[2]} alt="Hotel 3" className="view-more-img" />
                     </div>
                   </div>
