@@ -158,59 +158,32 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   const updateHotel = () => {
     if (hotelId) {
-      if (
-        establishmentname === selected_hotel_details?.data?.data?.hotel?.establishmentName &&
-        streetaddress === selected_hotel_details?.data?.data?.hotel?.address?.streetAddress &&
-        unitNumber === selected_hotel_details?.data?.data?.hotel?.address?.suiteUnitNumber &&
-        country === selected_hotel_details?.data?.data?.hotel?.address?.country &&
-        state === selected_hotel_details?.data?.data?.hotel?.address?.state &&
-        city === selected_hotel_details?.data?.data?.hotel?.address?.city &&
-        pincode === selected_hotel_details?.data?.data?.hotel?.address?.pinCode &&
-        ownername === selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerName &&
-        ownerPhone === selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerPhone &&
-        owneremail === selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerEmail &&
-        whyphloii === selected_hotel_details?.data?.data?.hotel?.why_want_phloi &&
-        uniquefeatures === selected_hotel_details?.data?.data?.hotel?.uniqueFeatures &&
-        safeWord === selected_hotel_details?.data?.data?.hotel?.safeWord &&
-        inpersonvisit === selected_hotel_details?.data?.data?.hotel?.inPersonVisitAvailability &&
-        atmosphere_description === selected_hotel_details?.data?.data?.hotel?.atmosphere_description &&
-        openTiming === selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.open &&
-        closeTiming === selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.close &&
-        customerServiceNumber === selected_hotel_details?.data?.data?.hotel?.customerServiceNumber &&
-        (food === (selected_hotel_details?.data?.data?.hotel?.food ?? "")) &&
-        (additional_information === (selected_hotel_details?.data?.data?.hotel?.additional_information ?? "")) &&
-        (websiteLink === (selected_hotel_details?.data?.data?.hotel?.ownerDetails?.websiteLink ?? ""))
-      ) {
-        toast.error("It seems you haven't made any changes to update. Please make some changes to update.");
-      }
-      else {
-        dispatch(update_hotel_details({
-          hotelId: hotelId,
-          establishmentname: establishmentname,
-          establishedtype: establishedtype,
-          streetaddress: streetaddress,
-          unitNumber: unitNumber,
-          country: country,
-          state: state,
-          city: city,
-          pincode: pincode,
-          ownername: ownername,
-          ownerphone: ownerPhone.replace('+', ''),
-          webSitelink: websiteLink,
-          owneremail: owneremail,
-          whyphloii: whyphloii,
-          uniquefeatures: uniquefeatures,
-          safeWord: safeWord,
-          food: food,
-          additional_information: additional_information,
-          inpersonvisit: inpersonvisit,
-          atmosphere_description: atmosphere_description,
-          opentiming: openTiming,
-          closetiming: closeTiming,
-          customerservicenumber: customerServiceNumber.replace('+', ''),
-          images: images,
-        }))
-      }
+      dispatch(update_hotel_details({
+        hotelId: hotelId,
+        establishmentname: establishmentname,
+        establishedtype: establishedtype,
+        streetaddress: streetaddress,
+        unitNumber: unitNumber,
+        country: country,
+        state: state,
+        city: city,
+        pincode: pincode,
+        ownername: ownername,
+        ownerphone: ownerPhone.replace('+', ''),
+        webSitelink: websiteLink,
+        owneremail: owneremail,
+        whyphloii: whyphloii,
+        uniquefeatures: uniquefeatures,
+        safeWord: safeWord,
+        food: food,
+        additional_information: additional_information,
+        inpersonvisit: inpersonvisit,
+        atmosphere_description: atmosphere_description,
+        opentiming: openTiming,
+        closetiming: closeTiming,
+        customerservicenumber: customerServiceNumber.replace('+', ''),
+        images: images,
+      }))
     }
   }
 
