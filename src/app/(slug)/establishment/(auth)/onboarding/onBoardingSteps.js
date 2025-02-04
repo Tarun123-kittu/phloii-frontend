@@ -51,8 +51,6 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const is_hotel_verified = useSelector((store) => store.ONBOARD_HOTEl)
   const selected_hotel_details = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
   const is_hotel_updated = useSelector((store) => store.UPDATE_HOTEL_DETAILS)
-  const profileDetails = useSelector((state) => state.PROFILE?.data);
-  let toastId
 
 
   useEffect(() => {
@@ -62,6 +60,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setCity("")
       setCitiesList([])
       dispatch(clear_cities_data())
+      dispatch(clear_selected_hotel_details())
     }
   }, [])
 
@@ -130,7 +129,6 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   }, [])
 
   const handleOnboardHotel = () => {
-    toastId = toast.loading('Creating new establishment....');
     dispatch(onboard_hotel({
       establishmentname: establishmentname,
       establishedtype: establishedtype,
@@ -160,34 +158,32 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   const updateHotel = () => {
     if (hotelId) {
-      const hotelDetails = selected_hotel_details?.data?.data?.hotel;
       if (
-        establishmentname === hotelDetails?.establishmentName &&
-        streetaddress === hotelDetails?.address?.streetAddress &&
-        unitNumber === hotelDetails?.address?.suiteUnitNumber &&
-        country === hotelDetails?.address?.country &&
-        state === hotelDetails?.address?.state &&
-        city === hotelDetails?.address?.city &&
-        pincode === hotelDetails?.address?.pinCode &&
-        ownername === hotelDetails?.ownerDetails?.ownerName &&
-        ownerPhone === hotelDetails?.ownerDetails?.ownerPhone &&
-        owneremail === hotelDetails?.ownerDetails?.ownerEmail &&
-        whyphloii === hotelDetails?.why_want_phloi &&
-        uniquefeatures === hotelDetails?.uniqueFeatures &&
-        safeWord === hotelDetails?.safeWord &&
-        inpersonvisit === hotelDetails?.inPersonVisitAvailability &&
-        atmosphere_description === hotelDetails?.atmosphere_description &&
-        openTiming === hotelDetails?.openCloseTimings?.open &&
-        closeTiming === hotelDetails?.openCloseTimings?.close &&
-        customerServiceNumber === hotelDetails?.customerServiceNumber &&
-        (food === hotelDetails?.food || hotelDetails?.food === undefined || hotelDetails?.food === null) &&
-        (additional_information === hotelDetails?.additional_information || hotelDetails?.additional_information === undefined || hotelDetails?.additional_information === null) &&
-        (websiteLink === hotelDetails?.website_link || hotelDetails?.website_link === "" || hotelDetails?.website_link === null)
+        establishmentname === selected_hotel_details?.data?.data?.hotel?.establishmentName &&
+        streetaddress === selected_hotel_details?.data?.data?.hotel?.address?.streetAddress &&
+        unitNumber === selected_hotel_details?.data?.data?.hotel?.address?.suiteUnitNumber &&
+        country === selected_hotel_details?.data?.data?.hotel?.address?.country &&
+        state === selected_hotel_details?.data?.data?.hotel?.address?.state &&
+        city === selected_hotel_details?.data?.data?.hotel?.address?.city &&
+        pincode === selected_hotel_details?.data?.data?.hotel?.address?.pinCode &&
+        ownername === selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerName &&
+        ownerPhone === selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerPhone &&
+        owneremail === selected_hotel_details?.data?.data?.hotel?.ownerDetails?.ownerEmail &&
+        whyphloii === selected_hotel_details?.data?.data?.hotel?.why_want_phloi &&
+        uniquefeatures === selected_hotel_details?.data?.data?.hotel?.uniqueFeatures &&
+        safeWord === selected_hotel_details?.data?.data?.hotel?.safeWord &&
+        inpersonvisit === selected_hotel_details?.data?.data?.hotel?.inPersonVisitAvailability &&
+        atmosphere_description === selected_hotel_details?.data?.data?.hotel?.atmosphere_description &&
+        openTiming === selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.open &&
+        closeTiming === selected_hotel_details?.data?.data?.hotel?.openCloseTimings?.close &&
+        customerServiceNumber === selected_hotel_details?.data?.data?.hotel?.customerServiceNumber &&
+        (food === (selected_hotel_details?.data?.data?.hotel?.food ?? "")) &&
+        (additional_information === (selected_hotel_details?.data?.data?.hotel?.additional_information ?? "")) &&
+        (websiteLink === (selected_hotel_details?.data?.data?.hotel?.ownerDetails?.websiteLink ?? ""))
       ) {
         toast.error("It seems you haven't made any changes to update. Please make some changes to update.");
       }
       else {
-        toastId = toast.loading('Updating establishment...');
         dispatch(update_hotel_details({
           hotelId: hotelId,
           establishmentname: establishmentname,
@@ -220,18 +216,16 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   useEffect(() => {
     if (is_hotel_verified.status === "Success") {
-      toast.success("Establishment Created Successfully", { id: toastId })
       router.push("/establishment")
       setCitiesList([])
       dispatch(clear_onboard_hotel_state())
       setCountry("")
       setState("")
-      setCity("") 
+      setCity("")
       setCitiesList([])
       dispatch(clear_cities_data())
     }
     if (is_hotel_verified.status === "Error") {
-      toast.error(is_hotel_verified.error.message, { id: toastId })
       dispatch(clear_onboard_hotel_state())
     }
   }, [is_hotel_verified])
@@ -273,17 +267,15 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   useEffect(() => {
     if (is_hotel_updated?.status === "Success") {
-      toast.success("Establishment Updated Successfully", { id: toastId })
       dispatch(clear_hotel_details_state())
       setCountry("")
       setState("")
-      setCity("") 
+      setCity("")
       setCitiesList([])
       dispatch(clear_cities_data())
       router.push(`/establishment/establishment-details/${hotelId}/${establishmentname}`)
     }
     if (is_hotel_updated?.status === "Error") {
-      toast.error(is_hotel_updated?.error?.message, { id: toastId })
       dispatch(clear_hotel_details_state())
     }
   }, [is_hotel_updated])

@@ -22,7 +22,7 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [loggedinError,setLoggedInError] = useState('')
+  const [loggedinError, setLoggedInError] = useState('')
   const is_loggedIn = useSelector((store) => store.HOTEL_LOGIN);
 
   useEffect(() => {
@@ -120,6 +120,7 @@ const Login = () => {
               setemailError("");
             }}
             style={emailError ? { border: "1px solid red" } : {}}
+            autoComplete="false"
           />
           {emailError && (
             <span style={emailError ? { color: "red", fontSize: "12px" } : {}}>
@@ -142,6 +143,7 @@ const Login = () => {
                 setPasswordError("");
               }}
               style={passwordError ? { border: "1px solid red" } : {}}
+              autoComplete="new-password"
             />
             <div
               className="position-absolute end-0 me-3 mt-1 top-0"
@@ -191,7 +193,6 @@ const Login = () => {
               )}
             </span>
           </div>
-          <span className="password_input d-block pt-1">Password must contain atleast 8 chracter,including a number and letter</span>
           {passwordError && (
             <span
               style={passwordError ? { color: "red", fontSize: "12px" } : {}}

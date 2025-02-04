@@ -1,7 +1,8 @@
-'use client'
+'use client';
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API_CONFIG } from "@/config/app_config";
+import toast from 'react-hot-toast';
 
 export const update_hotel_details = createAsyncThunk(
   "update_hotel_details",
@@ -59,15 +60,9 @@ export const update_hotel_details = createAsyncThunk(
       formdata.append("atmosphere_description", atmosphere_description);
       formdata.append("food", food);
       formdata.append("additional_information", additional_information);
-
-      // food.forEach((item) => formdata.append("food", item));
-      // atmosphere.forEach((item) => formdata.append("atmosphere", item));
-      // services.forEach((item) => formdata.append("services", item));
-
       formdata.append("openTiming", opentiming);
       formdata.append("closeTiming", closetiming);
       formdata.append("customerServiceNumber", customerservicenumber);
-
       images.forEach((image) => {
         formdata.append("images", image);
       });
@@ -79,17 +74,22 @@ export const update_hotel_details = createAsyncThunk(
         redirect: "follow",
       };
 
-      const response = await fetch(
-        `${API_CONFIG.BASE_URL}/hotel/update_hotel_details`,
-        requestOptions
-      );
+      const responsePromise = fetch(`${API_CONFIG.BASE_URL}/hotel/update_hotel_details`, requestOptions)
+        .then(async (response) => {
+          if (!response.ok) {
+            const errorMessage = await response.json();
+            throw new Error(errorMessage.message || "Failed to update hotel details");
+          }
+          return response.json();
+        });
 
-      if (!response.ok) {
-        const errorMessage = await response.json();
-        throw new Error(errorMessage.message || "Failed to update hotel details");
-      }
+      toast.promise(responsePromise, {
+        loading: "Updating Establishment details...",
+        success: "Establishment details updated successfully!",
+        error: "Failed to update Establishment details.",
+      });
 
-      const result = await response.json();
+      const result = await responsePromise;
       return result;
     } catch (error) {
       return thunkAPI.rejectWithValue({

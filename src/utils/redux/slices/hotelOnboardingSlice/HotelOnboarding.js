@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API_CONFIG } from "@/config/app_config";
-import React from "react";
+import toast from 'react-hot-toast';
 
 export const onboard_hotel = createAsyncThunk(
   "onboard_hotel",
@@ -30,7 +30,7 @@ export const onboard_hotel = createAsyncThunk(
       opentiming,
       closetiming,
       customerservicenumber,
-      images, // Array of images
+      images,
     },
     thunkAPI
   ) => {
@@ -58,18 +58,9 @@ export const onboard_hotel = createAsyncThunk(
       formdata.append("atmosphere_description", atmosphere_description);
       formdata.append("food", food);
       formdata.append("additional_information", additional_information);
-
-      // // Add array fields
-      // food.forEach((item) => formdata.append("food", item));
-      // atmosphere.forEach((item) => formdata.append("atmosphere", item));
-      // services.forEach((item) => formdata.append("services", item));
-
-      // Add additional fields
       formdata.append("openTiming", opentiming);
       formdata.append("closeTiming", closetiming);
       formdata.append("customerServiceNumber", customerservicenumber);
-
-      // Add images
       images.forEach((image) => {
         formdata.append("images", image);
       });
@@ -81,19 +72,22 @@ export const onboard_hotel = createAsyncThunk(
         redirect: "follow",
       };
 
-      const response = await fetch(
-        `${API_CONFIG.BASE_URL}/hotel/saveHotelDetails`,
-        requestOptions
-      );
+      const responsePromise = fetch(`${API_CONFIG.BASE_URL}/hotel/saveHotelDetails`, requestOptions)
+        .then(async (response) => {
+          if (!response.ok) {
+            const errorMessage = await response.json();
+            throw new Error(errorMessage.message || "Failed to onboard hotel");
+          }
+          return response.json();
+        });
 
-      if (!response.ok) {
-        const errorMessage = await response.json();
-        if (errorMessage) {
-          throw new Error(errorMessage.message);
-        }
-      }
+      toast.promise(responsePromise, {
+        loading: "Onboarding Establishment...",
+        success: "Establishment onboarded successfully!",
+        error: "Failed to onboard Establishment.",
+      });
 
-      const result = await response.json();
+      const result = await responsePromise;
       return result;
     } catch (error) {
       return thunkAPI.rejectWithValue({
