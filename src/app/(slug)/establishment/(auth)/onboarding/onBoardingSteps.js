@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { get_countries } from "@/utils/redux/slices/countriesSlice/getCountries";
 import { getCities, clear_cities_data } from "@/utils/redux/slices/countriesSlice/getCities";
 import { onboard_hotel, clear_onboard_hotel_state } from "@/utils/redux/slices/hotelOnboardingSlice/HotelOnboarding";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { get_selected_hotel_details, clear_selected_hotel_details } from "@/utils/redux/slices/hotelOnboardingSlice/getSelectedHotelDetails";
 import { update_hotel_details, clear_hotel_details_state } from "@/utils/redux/slices/hotelOnboardingSlice/updateHotelDetails";

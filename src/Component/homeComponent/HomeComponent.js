@@ -9,7 +9,7 @@ export default function HomeComponent() {
     <div className={styles.homeWrapper}>
       <Header />
       <div className={`${styles.mainBanner}`}>
-        <div className="container position-relative">
+        <div className="container position-relative z-3">
           <h1>
             Experience <span>Safe</span> <br />
             Dating with <span>Phloii</span>
