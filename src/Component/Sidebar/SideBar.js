@@ -48,7 +48,7 @@ const SideBar = ({ children }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [userName, setUserName] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [toggle, setToggle] = useState(false)
   const [user, setUser] = useState(null);
   const pathname = usePathname();
@@ -61,6 +61,17 @@ const SideBar = ({ children }) => {
       setCurrentPath(window.location.pathname);
     }
   }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem("sidebar_index")) {
+        setActiveIndex(localStorage.getItem('sidebar_index'))
+      }
+      else {
+        localStorage.setItem("sidebar_index", JSON.stringify(index));
+      }
+    }
+  }, [])
   const handleLogout = () => {
     localStorage.clear();
     router.push("/establishment/login");
@@ -89,7 +100,8 @@ const SideBar = ({ children }) => {
   }, [pathname, SidebarMenuItems]);
 
   const handleMenuClick = (index) => {
-    dispatch(toggle_sidebar(false))
+    localStorage.setItem("sidebar_index", JSON.stringify(index));
+    dispatch(toggle_sidebar(false));
     setActiveIndex(index);
   };
 
@@ -158,7 +170,7 @@ const SideBar = ({ children }) => {
           <ul className="m-0 h-100 d-flex flex-column flex-grow-1">
             {SidebarMenuItems &&
               SidebarMenuItems.map((menu, index) => {
-                const isActive = activeIndex === index;
+                const isActive = localStorage.getItem('sidebar_index') == index;
                 return (
                   <li
                     key={index}
