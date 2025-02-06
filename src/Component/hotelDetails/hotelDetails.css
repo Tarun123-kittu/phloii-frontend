@@ -103,15 +103,13 @@
     margin-top: 3rem;
 }
 
-button.event_button {
-    background: #ffffff1a;
-    border: 1px solid #ffffff1a;
+button.event_button.cmn_btn {
     min-width: 64px;
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 500;
     border-radius: 3px;
     padding: 3px 10px;
-    color: #fff;
+    height: unset;
 }
 
 ul.owner_details {
@@ -132,21 +130,57 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);word
 .events_list_outer {
     border-radius: 10px;
     margin-top: 10px;
-    box-shadow: 2px 1px;
+    padding: 0;
 }
 
 .events_list_inner {
     display: flex;
-    justify-content: space-between;
-    margin: 5px;
-    padding: 5px;
-    align-items: center;
-    border-bottom: 1px solid #3a3434;
+        padding: 8px;
+        align-items: center;
+        border-bottom: 1px solid #222222;
+        background: #000;
+        align-items: center;
+        justify-content: space-between;
+}
+.no_event img {
+    width: 230px;
+    margin: auto;
 }
 
+.no_event {
+    text-align: center;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+}
+.add_event_image {
+    position: relative;
+    height: 38px;
+    border-radius: 5px;
+    background: #000000;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.add_event_image p {
+    color: #fff;
+    font-size: 13px;
+    margin: 0;
+}
+
+
+.no_event h6 {
+    color: #fff;
+    padding: 1rem 0px;
+    font-weight: 400;
+    font-size: 14px;
+}
 h3.event_list_title {
     color: #fff;
-    font-size: 15px;
+    font-size: 13px;
+    margin: 0;
+    font-weight: 300;
+
 }
 
 .events_list_inner:last-child {
