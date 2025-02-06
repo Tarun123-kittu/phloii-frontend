@@ -281,19 +281,19 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         </ul>
                         <div className='hotel_image'>
                             <h5>Restaurant Photos</h5>
-                            <img onClick={() => { setShow_image_preview(true); setImages(hotel_details?.hotel?.images); setIndex(0) }} src={hotel_details?.hotel?.images[0]} className='imge_one' style={{ cursor: "pointer" }} alt="" />
+                            {/* <img onClick={() => { setShow_image_preview(true); setImages(hotel_details?.hotel?.images); setIndex(0) }} src={hotel_details?.hotel?.images[0]} className='imge_one' style={{ cursor: "pointer" }} alt="" /> */}
                             <ul className="image-grid mt-3">
-                                {hotel_details?.hotel?.images?.slice(1, 5).map((image, i) => (
+                                {hotel_details?.hotel?.images?.slice(0, 4).map((image, i) => (
                                     <li
                                         onClick={() => {
                                             setShow_image_preview(true);
                                             setImages(hotel_details?.hotel?.images);
-                                            setIndex(i + 1);
+                                            setIndex(i);
                                         }}
                                         key={i}
                                         className="position-relative"
                                     >
-                                        {i === 3 && hotel_details?.hotel?.images?.length > 5 && (
+                                        {i === 3 &&  (
                                             <div className="view-more-overlay">
                                                 <p className="view-more-text">View More</p>
                                             </div>
