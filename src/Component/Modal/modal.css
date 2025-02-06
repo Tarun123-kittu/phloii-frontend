@@ -8,3 +8,7 @@ div.cmn_modal button.btn-close {
     right: 12px;
     top: 10px;
 }
+
+.eventModal .modal-dialog {
+    max-width: 750px;
+}

@@ -37,6 +37,9 @@ button.btn_editor {
     object-fit: cover;
     border-radius: 50%;
 }
+label.label_events_fields {
+    color: #fff;
+}
 @media(max-width:576px){
     .profile_wrapper{
         flex-direction: column; 

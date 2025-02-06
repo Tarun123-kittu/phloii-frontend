@@ -16,6 +16,7 @@ import GetProfile from "./slices/profileSlice/profile"
 import ChangePassword from "./slices/authSlice/changePassword"
 import UpdateProfile from "./slices/profileSlice/updateProfile"
 import GetCities from "./slices/countriesSlice/getCities"
+import DeleteEstablishment from "./slices/hotelOnboardingSlice/deleteEstablishment"
 
 const AppStore = configureStore({
   reducer: {
@@ -35,7 +36,8 @@ const AppStore = configureStore({
     PROFILE: GetProfile,
     CHANGE_PASSWORD: ChangePassword,
     UPDATE_PROFILE: UpdateProfile,
-    ALL_CITIES: GetCities
+    ALL_CITIES: GetCities,
+    DELETE_ESTABLISHMENT: DeleteEstablishment
   },
 });
 

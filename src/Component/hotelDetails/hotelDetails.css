@@ -97,6 +97,23 @@
     padding: 3px 10px;
 }
 
+.event_button_outer {
+    display: flex;
+    justify-content: end;
+    margin-top: 3rem;
+}
+
+button.event_button {
+    background: #ffffff1a;
+    border: 1px solid #ffffff1a;
+    min-width: 64px;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 3px;
+    padding: 3px 10px;
+    color: #fff;
+}
+
 ul.owner_details {
     padding: 0;
     margin-top: 19px;
@@ -112,6 +129,41 @@ ul.owner_details li {
 
 ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);word-break: break-all; font-size: 13px;}
 
+.events_list_outer {
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 2px 1px;
+}
+
+.events_list_inner {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    padding: 5px;
+    align-items: center;
+    border-bottom: 1px solid #3a3434;
+}
+
+h3.event_list_title {
+    color: #fff;
+    font-size: 15px;
+}
+
+.events_list_inner:last-child {
+    border: none;
+}
+
+button.events_list_button {
+    padding: 2px;
+    background: #ffffff1a;
+    border: 1px solid #ffffff1a;
+    min-width: 64px;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 3px;
+    padding: 3px 10px;
+    color: #fff;
+}
 
 
 

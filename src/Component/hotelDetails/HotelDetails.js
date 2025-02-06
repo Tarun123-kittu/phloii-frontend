@@ -13,6 +13,8 @@ import toast from 'react-hot-toast'
 import DeleteModal from '../deleteModal/DeleteModal'
 import Link from 'next/link'
 import { toggle_sidebar } from '@/utils/redux/slices/sidebarSlice/manageSidebar'
+import EventModal from '../ModalContent/eventModal'
+import { delete_establishment, clear_delete_establishment_state } from '@/utils/redux/slices/hotelOnboardingSlice/deleteEstablishment'
 
 const HotelDetailsComponent = ({ hotelId }) => {
     const router = useRouter()
@@ -24,11 +26,18 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [show_image_preview, setShow_image_preview] = useState()
     const [images, setImages] = useState()
     const [index, setIndex] = useState(null)
+    const [editable, setEditable] = useState(false)
+    const [ShowEventModal, setShowEventModal] = useState(false);
     const [viewDeleteModal, setViewDeleteModal] = useState(false)
+    const [viewEstablishmentDeleteModal, setViewEstablishmentDeleteModal] = useState(false)
+    const [establishmentId, setEstablishmentId] = useState("")
+
     const [customer_id, setCoustmer_id] = useState(null)
     const hotelDetails = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
     const is_subscription_deleted = useSelector((store) => store.DELETE_SUBSCRIPTION)
     const sidebarState = useSelector((state) => state.MANAGE_SIDEBAR.isSidebarOpen);
+    const is_establishment_deleted = useSelector((state) => state.DELETE_ESTABLISHMENT);
+    console.log(is_establishment_deleted, "is_establishment_deleted is_establishment_deleted is_establishment_deleted is_establishment_deleted")
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -87,11 +96,36 @@ const HotelDetailsComponent = ({ hotelId }) => {
         dispatch(delete_subscription({ subscriptionId: customer_id }))
     }
 
-    const closeModal = () => setViewDeleteModal(false)
+    const closeModal = () => {
+        setViewDeleteModal(false)
+        setViewEstablishmentDeleteModal(false)
+    }
 
     const handleToggle = () => {
         dispatch(toggle_sidebar(false))
     }
+
+    const handleDelete = (id) => {
+        setViewEstablishmentDeleteModal(true)
+        setEstablishmentId(id)
+    }
+
+    const handleDeleteEstablishmentData = () => {
+        console.log("i am here")
+        dispatch(delete_establishment({ establishmentId }))
+    }
+
+    useEffect(() => {
+        if (is_establishment_deleted?.status === "Success") {
+            toast.success("Establishment deleted successfully")
+            router.back()
+            dispatch(clear_delete_establishment_state())
+        }
+        if (is_establishment_deleted?.status === "Error") {
+            toast.Error("Error while deleting establishment.Please try again later")
+            dispatch(clear_delete_establishment_state())
+        }
+    }, [is_establishment_deleted])
 
     return (
         <SideBar>
@@ -250,14 +284,20 @@ const HotelDetailsComponent = ({ hotelId }) => {
                     </div>
                     <div className='owner_info'>
                         <div className='owner_head'>
-                            <div className='d-flex justify-content-end mb-2'>
+                            <div className='d-flex justify-content-end mb-2 gap-2'>
                                 <button onClick={handleEdit}>
                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M6.77748 2.04544L3.02434 6.01801C2.88263 6.16887 2.74548 6.46601 2.71806 6.67173L2.54891 8.15287C2.48948 8.68773 2.87348 9.05344 3.40377 8.96201L4.87577 8.71058C5.08148 8.67401 5.36948 8.52315 5.5112 8.36773L9.26434 4.39515C9.91348 3.70944 10.2061 2.92773 9.19577 1.9723C8.19006 1.02601 7.42663 1.35973 6.77748 2.04544Z" stroke="white" strokeWidth="0.914286" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                                         <path d="M6.1499 2.70898C6.34647 3.9707 7.37047 4.93527 8.64133 5.06327" stroke="white" strokeWidth="0.914286" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                                         <path d="M2.08569 10.4572H10.3143" stroke="white" strokeWidth="0.914286" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
-                                    <span className='text-light ms-2' >Edit Establishment</span>
+                                    <span className='text-light ms-2' >Edit</span>
+                                </button>
+                                <button onClick={() => handleDelete(hotel_details?.hotel?._id)}>
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.16683 5.41667V8.91667M4.8335 5.41667V8.91667M2.50016 3.08333V10.0833C2.50016 10.3928 2.62308 10.6895 2.84187 10.9083C3.06066 11.1271 3.35741 11.25 3.66683 11.25H8.3335C8.64292 11.25 8.93966 11.1271 9.15845 10.9083C9.37725 10.6895 9.50016 10.3928 9.50016 10.0833V3.08333M1.3335 3.08333H10.6668M3.0835 3.08333L4.25016 0.75H7.75016L8.91683 3.08333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <span className='text-light ms-2' >Delete</span>
                                 </button>
                             </div>
                             <div className='flex-grow-1'>
@@ -293,7 +333,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                         key={i}
                                         className="position-relative"
                                     >
-                                        {i === 3 &&  (
+                                        {i === 3 && (
                                             <div className="view-more-overlay">
                                                 <p className="view-more-text">View More</p>
                                             </div>
@@ -306,12 +346,44 @@ const HotelDetailsComponent = ({ hotelId }) => {
 
 
                         </div>
+                        <div>
+                            <div className='event_button_outer'>
+                                <button onClick={() => setShowEventModal(true)} className='event_button'>Add Event</button>
+                            </div>
+                            <div className='events_list_outer'>
+                                <div className='events_list_inner'>
+                                    <h3 className='event_list_title'>Display Name</h3>
+                                    <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
+                                </div>
+                                <div className='events_list_inner'>
+                                    <h3 className='event_list_title'>Display Name</h3>
+                                    <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
+                                </div>
+                                <div className='events_list_inner'>
+                                    <h3 className='event_list_title'>Display Name</h3>
+                                    <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
+                                </div>
+                                <div className='events_list_inner'>
+                                    <h3 className='event_list_title'>Display Name</h3>
+                                    <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
+                                </div>
+                                <div className='events_list_inner'>
+                                    <h3 className='event_list_title'>Display Name</h3>
+                                    <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
+                    {ShowEventModal && <EventModal show={ShowEventModal}
+                        setShowProfile={setShowEventModal}
+                        onClose={() => { setShowEventModal(false); setEditable(false) }} editable={editable} />}
                 </div>
                 {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
                 {viewDeleteModal && <DeleteModal isVisible={viewDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to cancel your subscription ?"} onConfirm={handleCancelPlan} is_subscription_deleted={is_subscription_deleted} />}
+                {viewEstablishmentDeleteModal && <DeleteModal isVisible={viewEstablishmentDeleteModal} onClose={closeModal} title={"Are You Sure"} message={`Do you want to Delete ${hotel_details?.hotel?.establishmentName}`} onConfirm={handleDeleteEstablishmentData} is_subscription_deleted={is_establishment_deleted} />}
             </div>}
-        </SideBar>
+        </SideBar >
     )
 }
 

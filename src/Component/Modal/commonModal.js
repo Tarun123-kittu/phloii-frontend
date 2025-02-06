@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "./modal.css";
 
-const CommonModal = ({ show, onClose, children }) => {
+const CommonModal = ({ show, onClose, children, className }) => {
   const modalRef = useRef(null);
 
   // Close modal when clicking outside
@@ -23,7 +23,7 @@ const CommonModal = ({ show, onClose, children }) => {
 
   return (
     <div
-      className={`cmn_modal modal fade ${show ? "show d-block" : ""}`}
+      className={`cmn_modal ${className} modal fade ${show ? "show d-block" : ""}`}
       tabIndex="-1"
       role="dialog"
       style={{
