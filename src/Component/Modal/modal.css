@@ -12,3 +12,6 @@ div.cmn_modal button.btn-close {
 .eventModal .modal-dialog {
     max-width: 750px;
 }
+.eventModal h2.main_heading {
+    font-size: 18px;
+}

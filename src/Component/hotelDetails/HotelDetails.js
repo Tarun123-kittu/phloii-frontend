@@ -347,32 +347,38 @@ const HotelDetailsComponent = ({ hotelId }) => {
 
                         </div>
                         <div>
-                            <div className='event_button_outer'>
-                                <button onClick={() => setShowEventModal(true)} className='event_button'>Add Event</button>
+                            <div className='event_button_outer d-flex gap-3 justify-content-between hotel_image mt-4 border-top pt-4 align-items-center'>
+                             <h5 className='mb-0'>Events</h5>   <button onClick={() => setShowEventModal(true)} className='event_button cmn_btn'>Add Event</button>
                             </div>
-                            <div className='events_list_outer'>
-                                <div className='events_list_inner'>
+                            <div className='no_event'>
+                                {/* <img src="/assets/add_event.svg" alt="no event image" className='img-fluid'/> */}
+                                <h6>
+                                   No events yet
+                                    </h6> 
+                            </div>
+                            <ul className='events_list_outer d-none'>
+                                <li className='events_list_inner'>
                                     <h3 className='event_list_title'>Display Name</h3>
                                     <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
-                                </div>
-                                <div className='events_list_inner'>
+                                </li>
+                                <li className='events_list_inner'>
                                     <h3 className='event_list_title'>Display Name</h3>
                                     <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
-                                </div>
-                                <div className='events_list_inner'>
+                                </li>
+                                <li className='events_list_inner'>
                                     <h3 className='event_list_title'>Display Name</h3>
                                     <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
-                                </div>
-                                <div className='events_list_inner'>
+                                </li>
+                                <li className='events_list_inner'>
                                     <h3 className='event_list_title'>Display Name</h3>
                                     <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
-                                </div>
-                                <div className='events_list_inner'>
+                                </li>
+                                <li className='events_list_inner'>
                                     <h3 className='event_list_title'>Display Name</h3>
                                     <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
-                                </div>
+                                </li>
 
-                            </div>
+                            </ul>
                         </div>
                     </div>
                     {ShowEventModal && <EventModal show={ShowEventModal}
