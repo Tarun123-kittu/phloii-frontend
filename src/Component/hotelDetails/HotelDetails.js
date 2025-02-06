@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { toggle_sidebar } from '@/utils/redux/slices/sidebarSlice/manageSidebar'
 import EventModal from '../ModalContent/eventModal'
 import { delete_establishment, clear_delete_establishment_state } from '@/utils/redux/slices/hotelOnboardingSlice/deleteEstablishment'
+import { get_all_events, clear_get_all_events_state } from '@/utils/redux/slices/eventsSlice/getAllEvents'
 
 const HotelDetailsComponent = ({ hotelId }) => {
     const router = useRouter()
@@ -28,7 +29,9 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [index, setIndex] = useState(null)
     const [editable, setEditable] = useState(false)
     const [ShowEventModal, setShowEventModal] = useState(false);
+    const [events, setEvents] = useState([])
     const [viewDeleteModal, setViewDeleteModal] = useState(false)
+    const [eventId, setEventId] = useState('')
     const [viewEstablishmentDeleteModal, setViewEstablishmentDeleteModal] = useState(false)
     const [establishmentId, setEstablishmentId] = useState("")
 
@@ -37,7 +40,8 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const is_subscription_deleted = useSelector((store) => store.DELETE_SUBSCRIPTION)
     const sidebarState = useSelector((state) => state.MANAGE_SIDEBAR.isSidebarOpen);
     const is_establishment_deleted = useSelector((state) => state.DELETE_ESTABLISHMENT);
-    console.log(is_establishment_deleted, "is_establishment_deleted is_establishment_deleted is_establishment_deleted is_establishment_deleted")
+    const all_events_list = useSelector((store) => store.GET_ALL_EVENTS)
+    console.log(all_events_list, "this is the all events list")
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -54,6 +58,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
     useEffect(() => {
         if (hotelId) {
             dispatch(get_selected_hotel_details({ id: hotelId }));
+            dispatch(get_all_events({ hotelId }))
         }
     }, [dispatch, hotelId]);
 
@@ -126,6 +131,15 @@ const HotelDetailsComponent = ({ hotelId }) => {
             dispatch(clear_delete_establishment_state())
         }
     }, [is_establishment_deleted])
+
+    useEffect(() => {
+        if (all_events_list?.status === "Success") {
+            setEvents(all_events_list?.data?.data)
+        }
+        if (all_events_list?.status === "Error") {
+            setEvents([])
+        }
+    }, [all_events_list])
 
     return (
         <SideBar>
@@ -348,42 +362,30 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         </div>
                         <div>
                             <div className='event_button_outer d-flex gap-3 justify-content-between hotel_image mt-4 border-top pt-4 align-items-center'>
-                             <h5 className='mb-0'>Events</h5>   <button onClick={() => setShowEventModal(true)} className='event_button cmn_btn'>Add Event</button>
+                                <h5 className='mb-0'>Events</h5>   <button onClick={() => { setShowEventModal(true);setEditable(false);setEventId('') }} className='event_button cmn_btn'>Add Event</button>
                             </div>
-                            <div className='no_event'>
-                                {/* <img src="/assets/add_event.svg" alt="no event image" className='img-fluid'/> */}
+                            {events?.length === 0 && <div className='no_event'>
                                 <h6>
-                                   No events yet
-                                    </h6> 
-                            </div>
-                            <ul className='events_list_outer d-none'>
-                                <li className='events_list_inner'>
-                                    <h3 className='event_list_title'>Display Name</h3>
-                                    <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
-                                </li>
-                                <li className='events_list_inner'>
-                                    <h3 className='event_list_title'>Display Name</h3>
-                                    <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
-                                </li>
-                                <li className='events_list_inner'>
-                                    <h3 className='event_list_title'>Display Name</h3>
-                                    <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
-                                </li>
-                                <li className='events_list_inner'>
-                                    <h3 className='event_list_title'>Display Name</h3>
-                                    <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
-                                </li>
-                                <li className='events_list_inner'>
-                                    <h3 className='event_list_title'>Display Name</h3>
-                                    <button onClick={() => { setShowEventModal(true); setEditable(true) }} className='events_list_button'>View</button>
-                                </li>
-
+                                    No events yet
+                                </h6>
+                            </div>}
+                            <ul className='events_list_outer'>
+                                {Array.isArray(events) && events?.length > 0 && events?.map((event, i) => {
+                                    return (
+                                        <>
+                                            <li key={i} className='events_list_inner'>
+                                                <h3 className='event_list_title'>{event?.eventTitle}</h3>
+                                                <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id) }} className='events_list_button'>View</button>
+                                            </li>
+                                        </>
+                                    )
+                                })}
                             </ul>
                         </div>
                     </div>
                     {ShowEventModal && <EventModal show={ShowEventModal}
                         setShowProfile={setShowEventModal}
-                        onClose={() => { setShowEventModal(false); setEditable(false) }} editable={editable} />}
+                        onClose={() => { setShowEventModal(false); setEditable(false) }} editable={editable} hotelId={hotel_details?.hotel?._id} eventId={eventId}/>}
                 </div>
                 {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
                 {viewDeleteModal && <DeleteModal isVisible={viewDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to cancel your subscription ?"} onConfirm={handleCancelPlan} is_subscription_deleted={is_subscription_deleted} />}

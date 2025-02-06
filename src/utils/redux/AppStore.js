@@ -17,6 +17,11 @@ import ChangePassword from "./slices/authSlice/changePassword"
 import UpdateProfile from "./slices/profileSlice/updateProfile"
 import GetCities from "./slices/countriesSlice/getCities"
 import DeleteEstablishment from "./slices/hotelOnboardingSlice/deleteEstablishment"
+import CreateEvent from "./slices/eventsSlice/createEvent"
+import GetAllEvents from "./slices/eventsSlice/getAllEvents"
+import GetSingleEvent from "./slices/eventsSlice/getSingleEvent"
+import UpdateEvent from "./slices/eventsSlice/updateEvent"
+import DeleteEvent from "./slices/eventsSlice/deleteEvents"
 
 const AppStore = configureStore({
   reducer: {
@@ -37,7 +42,12 @@ const AppStore = configureStore({
     CHANGE_PASSWORD: ChangePassword,
     UPDATE_PROFILE: UpdateProfile,
     ALL_CITIES: GetCities,
-    DELETE_ESTABLISHMENT: DeleteEstablishment
+    DELETE_ESTABLISHMENT: DeleteEstablishment,
+    CREATE_EVENT: CreateEvent,
+    GET_ALL_EVENTS: GetAllEvents,
+    GET_SINGLE_EVENT: GetSingleEvent,
+    UPDATE_EVENT: UpdateEvent,
+    DELETE_EVENT: DeleteEvent
   },
 });
 

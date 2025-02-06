@@ -1,18 +1,30 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API_CONFIG } from "@/config/app_config";
 
-export const delete_event = createAsyncThunk("delete_event", async ({ eventId }, thunkAPI) => {
+export const create_new_event = createAsyncThunk("create_new_event", async ({ title, startDate, endDate, startTime, endTime, image, hotelId, description }, thunkAPI) => {
     try {
         const myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + localStorage.getItem("phloii_token_auth"));
 
+        const formdata = new FormData();
+        formdata.append("eventTitle", title);
+        formdata.append("eventStartDate", startDate);
+        formdata.append("eventStartTime", startTime);
+        formdata.append("eventEndDate", endDate);
+        formdata.append("eventEndTime", endTime);
+        formdata.append("eventDescription", description);
+        formdata.append("hotelId", hotelId);
+        formdata.append("image", image);
+
         const requestOptions = {
-            method: "DELETE",
+            method: "POST",
             headers: myHeaders,
+            body: formdata,
             redirect: "follow"
         };
 
-        const response = await fetch(`${API_CONFIG.BASE_URL}/hotel/deleteEvent?eventId=${eventId}`, requestOptions)
+        const response = await fetch(`${API_CONFIG.BASE_URL}/hotel/createEvent`, requestOptions)
+
         if (!response.ok) {
             const errorMessage = await response.json();
             if (errorMessage) {
@@ -29,15 +41,15 @@ export const delete_event = createAsyncThunk("delete_event", async ({ eventId },
     }
 })
 
-const DeleteEvent = createSlice({
-    name: "DeleteEvent",
+const CreateEvent = createSlice({
+    name: "CreateEvent",
     initialState: {
         status: null,
         data: null,
         error: null
     },
     reducers: {
-        clear_delete_event_state: (state) => {
+        clear_create_event_state: (state) => {
             state.status = null
             state.data = null
             state.error = null
@@ -46,19 +58,18 @@ const DeleteEvent = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(delete_event.pending, (state) => {
+            .addCase(create_new_event.pending, (state) => {
                 state.status = "Loading"
             })
-            .addCase(delete_event.fulfilled, (state, action) => {
+            .addCase(create_new_event.fulfilled, (state, action) => {
                 state.status = "Success"
                 state.data = action.payload
             })
-            .addCase(delete_event.rejected, (state, action) => {
+            .addCase(create_new_event.rejected, (state, action) => {
                 state.status = "Error"
                 state.error = action.payload
             })
     }
 })
-
-export const { clear_delete_event_state } = DeleteEvent.actions
-export default DeleteEvent.reducer
+export const { clear_create_event_state } = CreateEvent.actions
+export default CreateEvent.reducer
