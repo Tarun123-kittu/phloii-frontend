@@ -47,6 +47,8 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
 
 
     const handleFileChange = (e) => {
+        setImageError("")
+        setImagePreviewError("")
         const file = e.target.files[0];
         if (file) {
             const fileType = file.type;
@@ -78,6 +80,8 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                 }
                 setImage(file);
                 setImagePreview(reader.result);
+                setImageError("")
+                setImagePreviewError("")
             };
 
             reader.readAsDataURL(file);

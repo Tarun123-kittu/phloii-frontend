@@ -16,6 +16,7 @@ import { toggle_sidebar } from '@/utils/redux/slices/sidebarSlice/manageSidebar'
 import EventModal from '../ModalContent/eventModal'
 import { delete_establishment, clear_delete_establishment_state } from '@/utils/redux/slices/hotelOnboardingSlice/deleteEstablishment'
 import { get_all_events, clear_get_all_events_state } from '@/utils/redux/slices/eventsSlice/getAllEvents'
+import PreviewModal from '../ModalContent/previewModal'
 
 const HotelDetailsComponent = ({ hotelId }) => {
     const router = useRouter()
@@ -34,6 +35,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [eventId, setEventId] = useState('')
     const [viewEstablishmentDeleteModal, setViewEstablishmentDeleteModal] = useState(false)
     const [establishmentId, setEstablishmentId] = useState("")
+    const [viewPreviewModal,setViewPreviewModal] = useState(false)
 
     const [customer_id, setCoustmer_id] = useState(null)
     const hotelDetails = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
@@ -202,9 +204,9 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                         }
                                     >
                                         Cancel Subscription
-
                                     </button>
                                 )}
+                                <button title='Preview Establishment' onClick={() => setViewPreviewModal(true)} className="payment_info  d-flex align-items-center justify-content-center gap-2">Preview<img width={20} height={20} src="/support.png" alt="preview" /></button>
                             </div>
 
                         </div>
@@ -386,6 +388,9 @@ const HotelDetailsComponent = ({ hotelId }) => {
                     {ShowEventModal && <EventModal show={ShowEventModal}
                         setShowProfile={setShowEventModal}
                         onClose={() => { setShowEventModal(false); setEditable(false) }} editable={editable} hotelId={hotel_details?.hotel?._id} eventId={eventId}/>}
+                    {viewPreviewModal && <PreviewModal show={viewPreviewModal}
+                        setShowProfile={setViewPreviewModal}
+                        onClose={() => { setViewPreviewModal(false)}} hotel_details={hotel_details}/>}
                 </div>
                 {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
                 {viewDeleteModal && <DeleteModal isVisible={viewDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to cancel your subscription ?"} onConfirm={handleCancelPlan} is_subscription_deleted={is_subscription_deleted} />}
