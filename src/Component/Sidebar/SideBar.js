@@ -100,7 +100,7 @@ const SideBar = ({ children }) => {
   }, [pathname, SidebarMenuItems]);
 
   const handleMenuClick = (index) => {
-    localStorage.setItem("sidebar_index", JSON.stringify(index));
+    // localStorage.setItem("sidebar_index", JSON.stringify(index));
     dispatch(toggle_sidebar(false));
     setActiveIndex(index);
   };
@@ -170,7 +170,7 @@ const SideBar = ({ children }) => {
           <ul className="m-0 h-100 d-flex flex-column flex-grow-1">
             {SidebarMenuItems &&
               SidebarMenuItems.map((menu, index) => {
-                const isActive = localStorage.getItem('sidebar_index') == index;
+                const isActive = typeof window !== "undefined" && localStorage.getItem('sidebar_index') == index;
                 return (
                   <li
                     key={index}
