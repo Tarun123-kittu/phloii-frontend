@@ -16,7 +16,7 @@ const PreviewModal = ({ show, onClose, hotel_details }) => {
                     <div className="d-flex gap-4">
                         {hotel_details?.hotel?.images?.map((image,i) => {
                             return(
-                                <img src={image} alt="support" width={70} height={70}/>
+                                <img key={i} src={image} alt="support" width={70} height={70}/>
                             )
                         })}
                        
