@@ -55,19 +55,22 @@ button.btn_editor {
 
 .title_image svg {
     position: absolute;
-    right: 13px;
+    right: -10px;
     cursor: pointer;
+    top: -10px;
+    width: 18px;
+    height: 18px;
 }
 
 .title_image {
-    flex: 0 0 57px;
-    height: 57px;
-    width: 57px;
-    border-radius: 50%;
+    height: 120px;
     border: 1px solid #FBC42E;
+    border-radius: 6px;
+    margin-top: 15px;
+    position: relative;
 }
 .title_image img{
-    border-radius: 50%;
+  
     width: 100%;
     height: 100%;
     object-fit: cover;

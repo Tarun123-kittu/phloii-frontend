@@ -152,21 +152,7 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);word
     margin-top: 1rem;
     padding-bottom: 1rem;
 }
-.add_event_image {
-    position: relative;
-    height: 38px;
-    border-radius: 5px;
-    background: #000000;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-}
 
-.add_event_image p {
-    color: #fff;
-    font-size: 13px;
-    margin: 0;
-}
 
 
 .no_event h6 {

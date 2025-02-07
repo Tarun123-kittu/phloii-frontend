@@ -349,7 +349,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                             </div>
                         </div>
                         <div className="col-md-12">
-                            <div className="d-flex align-items-end gap-3">
+                            <div className="">
                                 <div className="form-group mt-2 flex-grow-1">
                                     <label
                                         className="form-label cmn_label"
