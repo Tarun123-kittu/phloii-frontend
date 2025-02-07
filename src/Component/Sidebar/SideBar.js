@@ -68,7 +68,7 @@ const SideBar = ({ children }) => {
         setActiveIndex(localStorage.getItem('sidebar_index'))
       }
       else {
-        localStorage.setItem("sidebar_index", JSON.stringify(index));
+        localStorage.setItem("sidebar_index", JSON.stringify(activeIndex));
       }
     }
   }, [])
@@ -100,9 +100,11 @@ const SideBar = ({ children }) => {
   }, [pathname, SidebarMenuItems]);
 
   const handleMenuClick = (index) => {
-    // localStorage.setItem("sidebar_index", JSON.stringify(index));
-    dispatch(toggle_sidebar(false));
-    setActiveIndex(index);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("sidebar_index", JSON.stringify(index));
+      dispatch(toggle_sidebar(false));
+      setActiveIndex(index);
+    }
   };
 
   const handleToogle = (val) => {
