@@ -352,9 +352,9 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                 )}
                             </div>
                         </div>
-                        <div className="col-md-12">
+                        <div className="col-md-6">
                             <div className="">
-                                <div className="form-group mt-2 flex-grow-1">
+                                <div className="form-group mt-3 flex-grow-1">
                                     <label
                                         className="form-label cmn_label"
                                         htmlFor="exampleInputEmail1"
@@ -363,8 +363,8 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                     </label>
 
                                     <div class="add_event_image" style={imageError ? { border: "1px solid red" } : {}}>
-                                        <p>Upload Image</p>
-                                        <input
+                                        {!imagePreview && <p>Upload Image</p>}
+                                       { !imagePreview && <input
                                             type="file"
                                             className="form-control cmn_input"
                                             id="exampleInputEmail1"
@@ -372,7 +372,15 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                             placeholder="Enter title"
                                             onChange={handleFileChange}
 
-                                        />
+                                        />}
+                                        {imagePreview &&  <div className="title_image">
+                                    <svg onClick={handleRemoveImage} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="16" height="16" rx="8" fill="#FBC42E" />
+                                        <path d="M11.25 5L5 11.25M5 5L11.25 11.25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+
+                                    <img src={imagePreview || "/assets/globe_icon.svg"} alt="" />
+                                </div>}
                                     </div>
                                     {imageError && (
                                         <span style={imageError ? { color: "red", fontSize: "12px" } : {}}>
@@ -380,17 +388,10 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                         </span>
                                     )}
                                 </div>
-                                <div className="title_image">
-                                    {imagePreview && <svg onClick={handleRemoveImage} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="16" height="16" rx="8" fill="#FBC42E" />
-                                        <path d="M11.25 5L5 11.25M5 5L11.25 11.25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>}
-
-                                    <img src={imagePreview || "/assets/globe_icon.svg"} alt="" />
-                                </div>
+                               
                             </div>
                         </div>
-                        <div className="col-md-12">
+                        <div className="col-md-6">
                             <div className="form-group mt-3">
                                 <label
                                     className="form-label cmn_label"
@@ -400,6 +401,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                 </label>
                                 <textarea
                                     className="form-control cmn_input"
+                                    rows={3}
                                     name=""
                                     id=""
                                     placeholder="Add Description"
