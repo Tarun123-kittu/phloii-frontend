@@ -51,7 +51,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
         if (file) {
             const fileType = file.type;
             const fileSize = file.size;
-    
+
             if (!fileType.includes("image/png") && !fileType.includes("image/jpeg")) {
                 toast.error("Only PNG and JPG images are allowed.");
                 setImage("");
@@ -62,14 +62,14 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                 setImage("");
                 return;
             }
-    
+
             const img = new window.Image(); // ✅ Ensure using native Image object
             const reader = new FileReader();
-            
+
             reader.onloadend = () => {
                 img.src = reader.result;
             };
-            
+
             img.onload = () => {
                 if (img.width !== 640 || img.height !== 360) {
                     toast.error("Image must be exactly 640x360 pixels.");
@@ -79,11 +79,11 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                 setImage(file);
                 setImagePreview(reader.result);
             };
-            
+
             reader.readAsDataURL(file);
         }
     };
-    
+
 
     const handleRemoveImage = () => {
         setImage("");
@@ -217,8 +217,8 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
     return (
         <CommonModal className={"eventModal"} show={show} onClose={onClose}>
             <div className="">
-                <div className="outer_events_fields">
-                    <h2 className="main_heading text-left mt-2">Add Event</h2>
+                <div className="outer_events_fields" style={single_event_details?.status === "Loading" ? {height:"150px"} : {}}>
+                    <h2 className="main_heading text-left mt-2">{eventId && editable ? "Edit Event" : "Add Event"}</h2>
                     {single_event_details?.status === "Loading" && editable && eventId ? <Loader /> : <div className="row">
                         <div className="col-md-12">
                             <div className="form-group mt-2">
@@ -377,10 +377,10 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                     )}
                                 </div>
                                 <div className="title_image">
-                                    <svg onClick={handleRemoveImage} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    {imagePreview && <svg onClick={handleRemoveImage} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect width="16" height="16" rx="8" fill="#FBC42E" />
                                         <path d="M11.25 5L5 11.25M5 5L11.25 11.25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
+                                    </svg>}
 
                                     <img src={imagePreview || "/assets/globe_icon.svg"} alt="" />
                                 </div>
@@ -419,7 +419,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                             </div>}
                         </button>
                     </div>}
-                    {eventId && editable && <div className="events_fields_button text-end mt-3">
+                    {eventId && editable && single_event_details?.status !== "Loading" && <div className="events_fields_button text-end mt-3">
                         <button onClick={() => handleDelete()} type="submit" className="cmn_btn m-3" disabled={is_event_deleted?.status === "Loading"}>
                             Delete{is_event_deleted?.status === "Loading" && <div className="spinner-border spinner-border-sm" role="status">
                                 <span className="sr-only"></span>
