@@ -34,6 +34,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [events, setEvents] = useState([])
     const [viewDeleteModal, setViewDeleteModal] = useState(false)
     const [viewEventDeleteModal, setViewEventDeleteModal] = useState(false)
+    console.log(viewEventDeleteModal,"this is view event delete modal")
     const [eventId, setEventId] = useState('')
     const [viewEstablishmentDeleteModal, setViewEstablishmentDeleteModal] = useState(false)
     const [establishmentId, setEstablishmentId] = useState("")
@@ -437,7 +438,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                                         </div>
                                                         <div className="event-content">
                                                             <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id) }} className='events_list_button'>View</button>
-                                                            <button onClick={() => { setViewDeleteModal(true); setEventId(event?._id) }} className='events_list_button'>Delete</button>
+                                                            <button onClick={() => { setViewEventDeleteModal(true); setEventId(event?._id) }} className='events_list_button'>Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -458,7 +459,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                 {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
                 {viewDeleteModal && <DeleteModal isVisible={viewDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to cancel your subscription ?"} onConfirm={handleCancelPlan} is_subscription_deleted={is_subscription_deleted} />}
                 {viewEstablishmentDeleteModal && <DeleteModal isVisible={viewEstablishmentDeleteModal} onClose={closeModal} title={"Are You Sure"} message={`Do you want to Delete ${hotel_details?.hotel?.establishmentName}`} onConfirm={handleDeleteEstablishmentData} is_subscription_deleted={is_establishment_deleted} />}
-                {viewDeleteModal && <DeleteModal isVisible={viewEventDeleteModal} onClose={closeEventModal} title={"Are You Sure"} message={"Do you want to delete this event ?"} onConfirm={handleDeleteEvent} is_subscription_deleted={is_event_deleted} />}
+                {viewEventDeleteModal && <DeleteModal isVisible={viewEventDeleteModal} onClose={closeEventModal} title={"Are You Sure"} message={"Do you want to delete this event ?"} onConfirm={handleDeleteEvent} is_subscription_deleted={is_event_deleted} />}
             </div>}
         </SideBar >
     )
