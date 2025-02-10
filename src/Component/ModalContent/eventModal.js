@@ -47,47 +47,49 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
 
 
     const handleFileChange = (e) => {
-        setImageError("")
-        setImagePreviewError("")
+        setImageError("");
+        setImagePreviewError("");
         const file = e.target.files[0];
+    
         if (file) {
             const fileType = file.type;
             const fileSize = file.size;
-
+    
             if (!fileType.includes("image/png") && !fileType.includes("image/jpeg")) {
                 toast.error("Only PNG and JPG images are allowed.");
                 setImage("");
                 return;
             }
+    
             if (fileSize > 2 * 1024 * 1024) {
                 toast.error("File size must be less than 2MB.");
                 setImage("");
                 return;
             }
-
-            const img = new window.Image(); // ✅ Ensure using native Image object
+    
+            const img = new window.Image();
             const reader = new FileReader();
-
+    
             reader.onloadend = () => {
                 img.src = reader.result;
             };
-
+    
             img.onload = () => {
-                if (img.width !== 640 || img.height !== 360) {
-                    toast.error("Image must be exactly 640x360 pixels.");
+                if (img.width <= img.height) {
+                    toast.error("Image must be in landscape orientation");
                     setImage("");
                     return;
                 }
+    
                 setImage(file);
                 setImagePreview(reader.result);
-                setImageError("")
-                setImagePreviewError("")
+                setImageError("");
+                setImagePreviewError("");
             };
-
+    
             reader.readAsDataURL(file);
         }
     };
-
 
     const handleRemoveImage = () => {
         setImage("");

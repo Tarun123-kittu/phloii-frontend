@@ -39,18 +39,20 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     setLoggedInError('')
-    if (!email && !password) {
+
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail && !password) {
       setemailError("Email is required");
       setPasswordError("Password is required");
       return
     }
 
-    if (!email) {
+    if (!trimmedEmail) {
       setemailError("Email is required");
       return;
     }
 
-    if (!validator.isEmail(email)) {
+    if (!validator.isEmail(trimmedEmail)) {
       setemailError("Email is not valid");
       return;
     }
@@ -59,7 +61,7 @@ const Login = () => {
       setPasswordError("Password is required");
       return;
     }
-    dispatch(hotel_login({ email, password }));
+    dispatch(hotel_login({ email : trimmedEmail, password }));
   };
 
   useEffect(() => {

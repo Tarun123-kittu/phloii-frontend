@@ -40,7 +40,8 @@ const SignUP = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    if (!username && !email && !password && !phone) {
+    const trimmedEmail = email.trim();
+    if (!username && !trimmedEmail && !password && !phone) {
       setUsernameError("Username is required");
       setEmailError("Email is required");
       setPasswordError("Password is required");
@@ -60,11 +61,11 @@ const SignUP = () => {
       setPhoneError("Phone is required")
       return
     }
-    if (!email) {
+    if (!trimmedEmail) {
       setEmailError("Email is required");
       return;
     }
-    if (!validator.isEmail) {
+    if (!validator.isEmail(trimmedEmail)) {
       setEmailError("Email is not valid");
       return;
     }
@@ -80,7 +81,7 @@ const SignUP = () => {
       toast.error("Please review and accept the Terms of Service.")
       return
     }
-    dispatch(hotel_signup({ username, email, password, phone, profileImage }));
+    dispatch(hotel_signup({ username, email:trimmedEmail, password, phone, profileImage }));
   };
 
   useEffect(() => {
@@ -162,27 +163,27 @@ const SignUP = () => {
     const newPassword = e.target.value;
     setPassword(newPassword);
     setPasswordError("");
-  
-  
+
+
     if (!passwordPattern.test(newPassword)) {
       setPasswordError(
         "Password must be at least 8 characters long, include one uppercase letter, one number, and one special character."
       );
       return
     }
-  
+
     if (confirmPassword && newPassword !== confirmPassword) {
       setConfirmPasswrdError("Confirm password doesn't match with password");
     } else {
       setConfirmPasswrdError("");
     }
   };
-  
-  
+
+
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     setConfirmPasswrdError("");
-  
+
     if (password && e.target.value !== password) {
       setConfirmPasswrdError("Confirm password doesn't matched with password");
     } else {
@@ -263,7 +264,7 @@ const SignUP = () => {
             {passwordError ? <span className="password_input d-block pt-1 text-danger">
               {passwordError}
             </span> : <span className="password_input d-block pt-1">
-       
+
             </span>}
           </div>
 

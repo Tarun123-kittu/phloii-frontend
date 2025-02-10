@@ -135,7 +135,7 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);word
 
 .events_list_inner {
     display: flex;
-        padding: 8px;
+        padding: 2px;
         align-items: center;
         border-bottom: 1px solid #222222;
         background: #000;
@@ -147,12 +147,58 @@ ul.owner_details li a {text-decoration: unset;color: rgba(255, 255, 255, 1);word
     margin: auto;
 }
 
+
+.event-card {
+    display: flex;
+    padding: 73px;
+}
 .no_event {
     text-align: center;
     margin-top: 1rem;
     padding-bottom: 1rem;
 }
 
+.event-card {
+    display: flex;
+    align-items: center;
+    background: #595555;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 5px;
+}
+.event-date {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    width: 60px;
+}
+.event-date .day {
+    font-size: 24px;
+    font-weight: bold;
+}
+.event-date .month {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.event-content {
+    flex: 1;
+    padding-left: 15px;
+}
+.event-title {
+    color: #f4f7f9;
+    font-weight: 400;
+    font-size: 12px;
+}
+.event-time {
+    background: #ffeeba;
+    color: #856404;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 14px;
+}
 
 
 .no_event h6 {

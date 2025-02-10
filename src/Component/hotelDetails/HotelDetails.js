@@ -17,6 +17,7 @@ import EventModal from '../ModalContent/eventModal'
 import { delete_establishment, clear_delete_establishment_state } from '@/utils/redux/slices/hotelOnboardingSlice/deleteEstablishment'
 import { get_all_events, clear_get_all_events_state } from '@/utils/redux/slices/eventsSlice/getAllEvents'
 import PreviewModal from '../ModalContent/previewModal'
+import { delete_event, clear_delete_event_state } from '@/utils/redux/slices/eventsSlice/deleteEvents'
 
 const HotelDetailsComponent = ({ hotelId }) => {
     const router = useRouter()
@@ -35,7 +36,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [eventId, setEventId] = useState('')
     const [viewEstablishmentDeleteModal, setViewEstablishmentDeleteModal] = useState(false)
     const [establishmentId, setEstablishmentId] = useState("")
-    const [viewPreviewModal,setViewPreviewModal] = useState(false)
+    const [viewPreviewModal, setViewPreviewModal] = useState(false)
 
     const [customer_id, setCoustmer_id] = useState(null)
     const hotelDetails = useSelector((store) => store.SELECTED_HOTEL_DETAILS)
@@ -43,7 +44,13 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const sidebarState = useSelector((state) => state.MANAGE_SIDEBAR.isSidebarOpen);
     const is_establishment_deleted = useSelector((state) => state.DELETE_ESTABLISHMENT);
     const all_events_list = useSelector((store) => store.GET_ALL_EVENTS)
-    console.log(all_events_list, "this is the all events list")
+    const is_event_deleted = useSelector((store) => store.DELETE_EVENT)
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    const eventStart = {
+        date: "2025-02-13T00:00:00.000+00:00",
+        time: "01:00"
+    };
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -143,6 +150,39 @@ const HotelDetailsComponent = ({ hotelId }) => {
         }
     }, [all_events_list])
 
+    const convertTo12HourFormat = (time24) => {
+        let [hours, minutes] = time24.split(':');
+        hours = parseInt(hours);
+
+        const period = hours >= 12 ? 'PM' : 'AM';
+
+        hours = hours % 12 || 12;
+
+        return `${hours}:${minutes} ${period}`;
+    };
+
+    const closeEventModal = () => {
+        setViewDeleteModal(false)
+    }
+
+    const handleDeleteEvent = () => {
+        dispatch(delete_event({ eventId }))
+    }
+
+    useEffect(() => {
+        if (is_event_deleted?.status === "Success") {
+            toast.success("Event deleted successfully")
+            dispatch(get_all_events({ hotelId }))
+            dispatch(clear_delete_event_state())
+            setViewDeleteModal()
+            onClose()
+        }
+        if (is_event_deleted?.status === "Error") {
+            toast.error("Error while deleting event.please try again later")
+            dispatch(clear_delete_event_state())
+        }
+    }, [is_event_deleted])
+
     return (
         <SideBar>
             {hotelDetails?.status === "Loading" ? <Loader /> : <div className='wrapper'>
@@ -206,7 +246,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                         Cancel Subscription
                                     </button>
                                 )}
-                                <button title='Preview Establishment' onClick={() => setViewPreviewModal(true)} className="payment_info  d-flex align-items-center justify-content-center gap-2">Preview<img width={20} height={20} src="/support.png" alt="preview" /></button>
+                                {/* <button title='Preview Establishment' onClick={() => setViewPreviewModal(true)} className="payment_info  d-flex align-items-center justify-content-center gap-2">Preview<img width={20} height={20} src="/support.png" alt="preview" /></button> */}
                             </div>
 
                         </div>
@@ -364,7 +404,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         </div>
                         <div>
                             <div className='event_button_outer d-flex gap-3 justify-content-between hotel_image mt-4 border-top pt-4 align-items-center'>
-                                <h5 className='mb-0'>Events</h5>   <button onClick={() => { setShowEventModal(true);setEditable(false);setEventId('') }} className='event_button cmn_btn'>Add Event</button>
+                                <h5 className='mb-0'>Events</h5>   <button onClick={() => { setShowEventModal(true); setEditable(false); setEventId('') }} className='event_button cmn_btn'>Add Event</button>
                             </div>
                             {events?.length === 0 && <div className='no_event'>
                                 <h6>
@@ -373,11 +413,33 @@ const HotelDetailsComponent = ({ hotelId }) => {
                             </div>}
                             <ul className='events_list_outer'>
                                 {Array.isArray(events) && events?.length > 0 && events?.map((event, i) => {
+                                    console.log(event, "this is the event")
+                                    const datePart = eventStart.date.split("T")[0]; // "2025-02-13"
+
+                                    // Extracting the year, month, and day
+                                    const [year, month, day] = datePart.split("-");
                                     return (
                                         <>
                                             <li key={i} className='events_list_inner'>
-                                                <h3 className='event_list_title'>{event?.eventTitle}</h3>
-                                                <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id) }} className='events_list_button'>View</button>
+                                                {/* <h3 className='event_list_title'>{event?.eventTitle}</h3>
+                                                <button>Delete</button>
+                                                <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id) }} className='events_list_button'>View</button> */}
+                                                <div className="container">
+                                                    <div className="event-card d-flex align-items-center">
+                                                        <div className="event-date">
+                                                            <div className="day">{day}</div>
+                                                            <div className="month">{months[month - 1]}</div>
+                                                        </div>
+                                                        <div className="event-content">
+                                                            <div className="event-title">{event?.eventTitle}</div>
+                                                            <span className="event-time">{convertTo12HourFormat(eventStart.time)}</span>
+                                                        </div>
+                                                        <div className="event-content">
+                                                            <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id) }} className='events_list_button'>View</button>
+                                                            <button onClick={() => { setViewDeleteModal(true); setEventId(event?._id) }} className='events_list_button'>Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </li>
                                         </>
                                     )
@@ -387,14 +449,15 @@ const HotelDetailsComponent = ({ hotelId }) => {
                     </div>
                     {ShowEventModal && <EventModal show={ShowEventModal}
                         setShowProfile={setShowEventModal}
-                        onClose={() => { setShowEventModal(false); setEditable(false) }} editable={editable} hotelId={hotel_details?.hotel?._id} eventId={eventId}/>}
+                        onClose={() => { setShowEventModal(false); setEditable(false) }} editable={editable} hotelId={hotel_details?.hotel?._id} eventId={eventId} />}
                     {viewPreviewModal && <PreviewModal show={viewPreviewModal}
                         setShowProfile={setViewPreviewModal}
-                        onClose={() => { setViewPreviewModal(false)}} hotel_details={hotel_details}/>}
+                        onClose={() => { setViewPreviewModal(false) }} hotel_details={hotel_details} />}
                 </div>
                 {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
                 {viewDeleteModal && <DeleteModal isVisible={viewDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to cancel your subscription ?"} onConfirm={handleCancelPlan} is_subscription_deleted={is_subscription_deleted} />}
                 {viewEstablishmentDeleteModal && <DeleteModal isVisible={viewEstablishmentDeleteModal} onClose={closeModal} title={"Are You Sure"} message={`Do you want to Delete ${hotel_details?.hotel?.establishmentName}`} onConfirm={handleDeleteEstablishmentData} is_subscription_deleted={is_establishment_deleted} />}
+                {viewDeleteModal && <DeleteModal isVisible={viewEventDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to delete this event ?"} onConfirm={handleDeleteEvent} is_subscription_deleted={is_event_deleted} />}
             </div>}
         </SideBar >
     )
