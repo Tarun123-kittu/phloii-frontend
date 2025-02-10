@@ -14,8 +14,10 @@ import { update_event, clear_update_event_state } from "@/utils/redux/slices/eve
 import DeleteModal from "../deleteModal/DeleteModal";
 import { delete_event, clear_delete_event_state } from "@/utils/redux/slices/eventsSlice/deleteEvents";
 import Loader from "../loader/Loader";
+import ImageGallery from "../imagePreview/ImagePreview";
 
-const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
+const EventModal = ({ show, onClose, editable, hotelId, eventId, view, setView }) => {
+    console.log(view, "this is the view")
     const dispatch = useDispatch();
     const [title, setTitle] = useState("")
     const [startDate, setStartDate] = useState("")
@@ -32,6 +34,9 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
     const [endTimeError, setEndTimeError] = useState("")
     const [imageError, setImageError] = useState("")
     const [imagePreviewError, setImagePreviewError] = useState("")
+    const [index, setIndex] = useState(0)
+    const [show_image_preview, setShow_image_preview] = useState()
+    const [images, setImages] = useState()
     const [viewDeleteModal, setViewDeleteModal] = useState(false)
     const [descriptionError, setDescriptionError] = useState("")
     const is_event_created = useSelector((store) => store.CREATE_EVENT)
@@ -50,43 +55,43 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
         setImageError("");
         setImagePreviewError("");
         const file = e.target.files[0];
-    
+
         if (file) {
             const fileType = file.type;
             const fileSize = file.size;
-    
+
             if (!fileType.includes("image/png") && !fileType.includes("image/jpeg")) {
                 toast.error("Only PNG and JPG images are allowed.");
                 setImage("");
                 return;
             }
-    
+
             if (fileSize > 2 * 1024 * 1024) {
                 toast.error("File size must be less than 2MB.");
                 setImage("");
                 return;
             }
-    
+
             const img = new window.Image();
             const reader = new FileReader();
-    
+
             reader.onloadend = () => {
                 img.src = reader.result;
             };
-    
+
             img.onload = () => {
                 if (img.width <= img.height) {
                     toast.error("Image must be in landscape orientation");
                     setImage("");
                     return;
                 }
-    
+
                 setImage(file);
                 setImagePreview(reader.result);
                 setImageError("");
                 setImagePreviewError("");
             };
-    
+
             reader.readAsDataURL(file);
         }
     };
@@ -220,10 +225,14 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
         }
     }, [is_event_deleted])
 
+    const handleEdit = () => {
+        setView(!view)
+    }
+
     return (
-        <CommonModal className={"eventModal"} show={show} onClose={onClose}>
+        <CommonModal className={"eventModal"} show={show} onClose={onClose} closeOnOutsideClick={false}>
             <div className="">
-                <div className="outer_events_fields" style={single_event_details?.status === "Loading" ? {height:"150px"} : {}}>
+                <div className="outer_events_fields" style={single_event_details?.status === "Loading" ? { height: "150px" } : {}}>
                     <h2 className="main_heading text-left mt-2">{eventId && editable ? "Edit Event" : "Add Event"}</h2>
                     {single_event_details?.status === "Loading" && editable && eventId ? <Loader /> : <div className="row">
                         <div className="col-md-12">
@@ -243,6 +252,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                     value={title}
                                     onChange={(e) => { setTitle(e.target.value); setTitleError("") }}
                                     style={titleError ? { border: "1px solid red" } : {}}
+                                    readOnly={view}
                                 />
                                 {titleError && (
                                     <span style={titleError ? { color: "red", fontSize: "12px" } : {}}>
@@ -270,6 +280,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                     min={new Date().toISOString().split("T")[0]}
                                     onChange={(e) => { setStartDate(e.target.value); setStartDateError("") }}
                                     style={startDateError ? { border: "1px solid red" } : {}}
+                                    readOnly={view}
                                 />
                                 {startDateError && (
                                     <span style={startDateError ? { color: "red", fontSize: "12px" } : {}}>
@@ -296,6 +307,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                     min={new Date().toISOString().split("T")[0]}
                                     onChange={(e) => { setEndDate(e.target.value);; setEndDateError("") }}
                                     style={endDateError ? { border: "1px solid red" } : {}}
+                                    readOnly={view}
                                 />
                                 {endDateError && (
                                     <span style={endDateError ? { color: "red", fontSize: "12px" } : {}}>
@@ -321,6 +333,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                     value={startTime}
                                     onChange={(e) => { setStartTime(e.target.value); setStartTimeError('') }}
                                     style={startTimeError ? { border: "1px solid red" } : {}}
+                                    readOnly={view}
                                 />
                                 {startTimeError && (
                                     <span style={startTimeError ? { color: "red", fontSize: "12px" } : {}}>
@@ -346,6 +359,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                     value={endTime}
                                     onChange={(e) => { setEndTime(e.target.value); setEndTimeError('') }}
                                     style={endTimeError ? { border: "1px solid red" } : {}}
+                                    readOnly={view}
                                 />
                                 {endTimeError && (
                                     <span style={endTimeError ? { color: "red", fontSize: "12px" } : {}}>
@@ -366,23 +380,24 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
 
                                     <div class="add_event_image" style={imageError ? { border: "1px solid red" } : {}}>
                                         {!imagePreview && <p>Upload Image</p>}
-                                       { !imagePreview && <input
+                                        {!imagePreview && <input
                                             type="file"
                                             className="form-control cmn_input"
                                             id="exampleInputEmail1"
                                             aria-describedby="emailHelp"
                                             placeholder="Enter title"
                                             onChange={handleFileChange}
+                                            readOnly={view}
 
                                         />}
-                                        {imagePreview &&  <div className="title_image">
-                                    <svg onClick={handleRemoveImage} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="16" height="16" rx="8" fill="#FBC42E" />
-                                        <path d="M11.25 5L5 11.25M5 5L11.25 11.25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
+                                        {imagePreview && <div className="title_image">
+                                            {!view && <svg onClick={handleRemoveImage} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="16" height="16" rx="8" fill="#FBC42E" />
+                                                <path d="M11.25 5L5 11.25M5 5L11.25 11.25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>}
 
-                                    <img src={imagePreview || "/assets/globe_icon.svg"} alt="" />
-                                </div>}
+                                            <img onClick={() => { setImages(imagePreview); setShow_image_preview(true) }} src={imagePreview || "/assets/globe_icon.svg"} alt="" />
+                                        </div>}
                                     </div>
                                     {imageError && (
                                         <span style={imageError ? { color: "red", fontSize: "12px" } : {}}>
@@ -390,7 +405,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                         </span>
                                     )}
                                 </div>
-                               
+
                             </div>
                         </div>
                         <div className="col-md-6">
@@ -410,6 +425,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                                     value={description}
                                     onChange={(e) => { setDescription(e.target.value); setDescriptionError('') }}
                                     style={descriptionError ? { border: "1px solid red" } : {}}
+                                    readOnly={view}
                                 />
                                 {descriptionError && (
                                     <span style={descriptionError ? { color: "red", fontSize: "12px" } : {}}>
@@ -428,6 +444,9 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                         </button>
                     </div>}
                     {eventId && editable && single_event_details?.status !== "Loading" && <div className="events_fields_button text-end mt-3">
+                        {view && <button onClick={() => handleEdit()} className="cmn_btn m-3" >
+                            Edit
+                        </button>}
                         <button onClick={() => handleDelete()} type="submit" className="cmn_btn m-3" disabled={is_event_deleted?.status === "Loading"}>
                             Delete{is_event_deleted?.status === "Loading" && <div className="spinner-border spinner-border-sm" role="status">
                                 <span className="sr-only"></span>
@@ -441,6 +460,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId }) => {
                     </div>}
                 </div>
                 {viewDeleteModal && <DeleteModal isVisible={viewDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to delete this event ?"} onConfirm={handleDeleteEvent} is_subscription_deleted={is_event_deleted} />}
+                {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
             </div>
         </CommonModal>
     );

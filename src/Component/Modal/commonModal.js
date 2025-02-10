@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import "./modal.css";
 
-const CommonModal = ({ show, onClose, children, className }) => {
+const CommonModal = ({ show, onClose, children, className, closeOnOutsideClick = false }) => {
   const modalRef = useRef(null);
 
-  // Close modal when clicking outside
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+      if (closeOnOutsideClick && modalRef.current && !modalRef.current.contains(event.target)) {
         onClose?.();
       }
     };
@@ -19,7 +18,7 @@ const CommonModal = ({ show, onClose, children, className }) => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [show, onClose]);
+  }, [show, onClose, closeOnOutsideClick]);
 
   return (
     <div

@@ -34,7 +34,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [events, setEvents] = useState([])
     const [viewDeleteModal, setViewDeleteModal] = useState(false)
     const [viewEventDeleteModal, setViewEventDeleteModal] = useState(false)
-    console.log(viewEventDeleteModal, "this is view event delete modal")
+    const [view, setView] = useState(false)
     const [eventId, setEventId] = useState('')
     const [viewEstablishmentDeleteModal, setViewEstablishmentDeleteModal] = useState(false)
     const [establishmentId, setEstablishmentId] = useState("")
@@ -403,7 +403,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         </div>
                         <div>
                             <div className='event_button_outer d-flex gap-3 justify-content-between hotel_image mt-4 border-top pt-4 align-items-center'>
-                                <h5 className='mb-0'>Events</h5>   <button onClick={() => { setShowEventModal(true); setEditable(false); setEventId('') }} className='event_button cmn_btn'>Add Event</button>
+                                <h5 className='mb-0'>Events</h5>   <button onClick={() => { setShowEventModal(true); setEditable(false); setEventId(''); setView(false)  }} className='event_button cmn_btn'>Add Event</button>
                             </div>
                             {events?.length === 0 && <div className='no_event'>
                                 <h6>
@@ -413,8 +413,8 @@ const HotelDetailsComponent = ({ hotelId }) => {
                             <ul className='events_list_outer'>
                                 {Array.isArray(events) && events?.length > 0 && events?.map((event, i) => {
                                     console.log(event, "this is the event")
-                                    const datePart = event?.eventEnd.date.split("T")[0]; 
-                                    const dateStart = event?.eventStart.date.split("T")[0]; 
+                                    const datePart = event?.eventEnd.date.split("T")[0];
+                                    const dateStart = event?.eventStart.date.split("T")[0];
 
                                     const [year, month, day] = datePart.split("-");
                                     const [yearStart, monthStart, dayStart] = datePart.split("-");
@@ -432,8 +432,9 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                                             <span className="event-time">{convertTo12HourFormat(event?.eventStart.time)}</span>
                                                         </div>
                                                         <div className="event-content d-flex">
-                                                            <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id) }} className='events_list_button'>View</button>
-                                                             <button onClick={() => { setViewEventDeleteModal(true); setEventId(event?._id) }} className='events_list_button_delete'><svg
+                                                            <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(true) }} className='events_list_button'>View</button>
+                                                            {/* <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(false) }} className='events_list_button'>Edit</button> */}
+                                                            <button onClick={() => { setViewEventDeleteModal(true); setEventId(event?._id) }} className='events_list_button_delete'><svg
                                                                 width="18"
                                                                 height="20"
                                                                 viewBox="0 0 18 20"
@@ -460,7 +461,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                     </div>
                     {ShowEventModal && <EventModal show={ShowEventModal}
                         setShowProfile={setShowEventModal}
-                        onClose={() => { setShowEventModal(false); setEditable(false) }} editable={editable} hotelId={hotel_details?.hotel?._id} eventId={eventId} />}
+                        onClose={() => { setShowEventModal(false); setEditable(false) }} editable={editable} hotelId={hotel_details?.hotel?._id} eventId={eventId} view={view} setView={setView}/>}
                     {viewPreviewModal && <PreviewModal show={viewPreviewModal}
                         setShowProfile={setViewPreviewModal}
                         onClose={() => { setViewPreviewModal(false) }} hotel_details={hotel_details} />}
