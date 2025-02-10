@@ -33,6 +33,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [ShowEventModal, setShowEventModal] = useState(false);
     const [events, setEvents] = useState([])
     const [viewDeleteModal, setViewDeleteModal] = useState(false)
+    const [viewEventDeleteModal, setViewEventDeleteModal] = useState(false)
     const [eventId, setEventId] = useState('')
     const [viewEstablishmentDeleteModal, setViewEstablishmentDeleteModal] = useState(false)
     const [establishmentId, setEstablishmentId] = useState("")
@@ -162,7 +163,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
     };
 
     const closeEventModal = () => {
-        setViewDeleteModal(false)
+        setViewEventDeleteModal(false)
     }
 
     const handleDeleteEvent = () => {
@@ -174,7 +175,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
             toast.success("Event deleted successfully")
             dispatch(get_all_events({ hotelId }))
             dispatch(clear_delete_event_state())
-            setViewDeleteModal()
+            setViewEventDeleteModal()
             onClose()
         }
         if (is_event_deleted?.status === "Error") {
@@ -457,7 +458,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                 {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
                 {viewDeleteModal && <DeleteModal isVisible={viewDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to cancel your subscription ?"} onConfirm={handleCancelPlan} is_subscription_deleted={is_subscription_deleted} />}
                 {viewEstablishmentDeleteModal && <DeleteModal isVisible={viewEstablishmentDeleteModal} onClose={closeModal} title={"Are You Sure"} message={`Do you want to Delete ${hotel_details?.hotel?.establishmentName}`} onConfirm={handleDeleteEstablishmentData} is_subscription_deleted={is_establishment_deleted} />}
-                {viewDeleteModal && <DeleteModal isVisible={viewEventDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to delete this event ?"} onConfirm={handleDeleteEvent} is_subscription_deleted={is_event_deleted} />}
+                {viewDeleteModal && <DeleteModal isVisible={viewEventDeleteModal} onClose={closeEventModal} title={"Are You Sure"} message={"Do you want to delete this event ?"} onConfirm={handleDeleteEvent} is_subscription_deleted={is_event_deleted} />}
             </div>}
         </SideBar >
     )
