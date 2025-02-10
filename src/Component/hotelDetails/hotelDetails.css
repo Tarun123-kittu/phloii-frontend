@@ -223,11 +223,21 @@ button.events_list_button {
     padding: 2px;
     background: #ffffff1a;
     border: 1px solid #ffffff1a;
-    min-width: 64px;
+    min-width: 40px;
     font-size: 13px;
     font-weight: 400;
     border-radius: 3px;
     padding: 3px 10px;
+    color: #fff;
+    margin-right: 5px;
+}
+button.events_list_button_delete {
+    padding: 2px;
+    background: #ffffff1a;
+    border: 1px solid #ffffff1a;
+    font-size: 13px;
+    border-radius: 3px;
+    padding: 3px 2px;
     color: #fff;
 }
 
@@ -398,6 +408,7 @@ span.verified svg{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .view-more-text {
@@ -405,6 +416,7 @@ span.verified svg{
     font-size: 10px;
     font-weight: bold;
     text-align: center;
+    cursor: pointer;
 }
 img.user_profile_image{
     width: 56px;

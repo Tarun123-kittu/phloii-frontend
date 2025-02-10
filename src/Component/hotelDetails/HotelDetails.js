@@ -34,7 +34,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const [events, setEvents] = useState([])
     const [viewDeleteModal, setViewDeleteModal] = useState(false)
     const [viewEventDeleteModal, setViewEventDeleteModal] = useState(false)
-    console.log(viewEventDeleteModal,"this is view event delete modal")
+    console.log(viewEventDeleteModal, "this is view event delete modal")
     const [eventId, setEventId] = useState('')
     const [viewEstablishmentDeleteModal, setViewEstablishmentDeleteModal] = useState(false)
     const [establishmentId, setEstablishmentId] = useState("")
@@ -48,11 +48,11 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const all_events_list = useSelector((store) => store.GET_ALL_EVENTS)
     const is_event_deleted = useSelector((store) => store.DELETE_EVENT)
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const currentDate = new Date();
+    const CurrentDay = currentDate.getDate();
+    const CurrentMonth = currentDate.getMonth() + 1
 
-    const eventStart = {
-        date: "2025-02-13T00:00:00.000+00:00",
-        time: "01:00"
-    };
+    console.log(CurrentDay, CurrentMonth, "this is the current date and current month")
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -415,29 +415,41 @@ const HotelDetailsComponent = ({ hotelId }) => {
                             <ul className='events_list_outer'>
                                 {Array.isArray(events) && events?.length > 0 && events?.map((event, i) => {
                                     console.log(event, "this is the event")
-                                    const datePart = eventStart.date.split("T")[0]; // "2025-02-13"
+                                    const datePart = event?.eventEnd.date.split("T")[0]; 
+                                    const dateStart = event?.eventStart.date.split("T")[0]; 
 
-                                    // Extracting the year, month, and day
                                     const [year, month, day] = datePart.split("-");
+                                    const [yearStart, monthStart, dayStart] = datePart.split("-");
                                     return (
                                         <>
                                             <li key={i} className='events_list_inner'>
-                                                {/* <h3 className='event_list_title'>{event?.eventTitle}</h3>
-                                                <button>Delete</button>
-                                                <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id) }} className='events_list_button'>View</button> */}
-                                                <div className="container">
-                                                    <div className="event-card d-flex align-items-center">
+                                                <div className="container" title={(day < CurrentDay && month !== CurrentMonth) ? `Event Expired at ${day} ${months[month-1]}` : `Event Valid till ${dayStart} ${months[monthStart-1]}}`}>
+                                                    <div className="event-card d-flex align-items-center" style={day < CurrentDay ? { opacity: 0.8, border: "1px solid #896262" } : {}}>
                                                         <div className="event-date">
                                                             <div className="day">{day}</div>
                                                             <div className="month">{months[month - 1]}</div>
                                                         </div>
                                                         <div className="event-content">
                                                             <div className="event-title">{event?.eventTitle}</div>
-                                                            <span className="event-time">{convertTo12HourFormat(eventStart.time)}</span>
+                                                            <span className="event-time">{convertTo12HourFormat(event?.eventStart.time)}</span>
                                                         </div>
-                                                        <div className="event-content">
+                                                        <div className="event-content d-flex">
                                                             <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id) }} className='events_list_button'>View</button>
-                                                            <button onClick={() => { setViewEventDeleteModal(true); setEventId(event?._id) }} className='events_list_button'>Delete</button>
+                                                            {day < CurrentDay && month !== CurrentMonth && <button onClick={() => { setViewEventDeleteModal(true); setEventId(event?._id) }} className='events_list_button_delete'><svg
+                                                                width="18"
+                                                                height="20"
+                                                                viewBox="0 0 18 20"
+                                                                fill="white"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                            >
+                                                                <path
+                                                                    d="M1 5H17M7 9V15M11 9V15M2 5L3 17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19H13C13.5304 19 14.0391 18.7893 14.4142 18.4142C14.7893 18.0391 15 17.5304 15 17L16 5M6 5V2C6 1.73478 6.10536 1.48043 6.29289 1.29289C6.48043 1.10536 6.73478 1 7 1H11C11.2652 1 11.5196 1.10536 11.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V5"
+                                                                    stroke="#666C78"
+                                                                    strokeWidth="2"
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                />
+                                                            </svg></button>}
                                                         </div>
                                                     </div>
                                                 </div>
