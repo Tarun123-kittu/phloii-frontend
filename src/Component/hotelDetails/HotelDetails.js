@@ -176,8 +176,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
             toast.success("Event deleted successfully")
             dispatch(get_all_events({ hotelId }))
             dispatch(clear_delete_event_state())
-            setViewEventDeleteModal()
-            onClose()
+            setViewEventDeleteModal(false)
         }
         if (is_event_deleted?.status === "Error") {
             toast.error("Error while deleting event.please try again later")
