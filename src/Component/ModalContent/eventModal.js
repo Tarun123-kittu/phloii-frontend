@@ -396,7 +396,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId, view, setView }
                                                 <path d="M11.25 5L5 11.25M5 5L11.25 11.25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>}
 
-                                            <img onClick={() => { setImages(imagePreview); setShow_image_preview(true) }} src={imagePreview || "/assets/globe_icon.svg"} alt="" />
+                                            <img onClick={() => { setImages(imagePreview); setShow_image_preview(true) }} src={imagePreview || "/assets/globe_icon.svg"} alt="" style={{cursor:"pointer"}}/>
                                         </div>}
                                     </div>
                                     {imageError && (
@@ -447,16 +447,14 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId, view, setView }
                         {view && <button onClick={() => handleEdit()} className="cmn_btn m-3" >
                             Edit
                         </button>}
-                        <button onClick={() => handleDelete()} type="submit" className="cmn_btn m-3" disabled={is_event_deleted?.status === "Loading"}>
-                            Delete{is_event_deleted?.status === "Loading" && <div className="spinner-border spinner-border-sm" role="status">
-                                <span className="sr-only"></span>
-                            </div>}
+                        {!view && <><button onClick={() => handleEdit()} type="submit" className="cmn_btn m-3">
+                            Cancel
                         </button>
                         <button onClick={() => handleSubmit()} type="submit" className="cmn_btn" disabled={is_event_updated?.status === "Loading"}>
                             Update{is_event_updated?.status === "Loading" && <div className="spinner-border spinner-border-sm" role="status">
                                 <span className="sr-only"></span>
                             </div>}
-                        </button>
+                        </button></>}
                     </div>}
                 </div>
                 {viewDeleteModal && <DeleteModal isVisible={viewDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to delete this event ?"} onConfirm={handleDeleteEvent} is_subscription_deleted={is_event_deleted} />}
