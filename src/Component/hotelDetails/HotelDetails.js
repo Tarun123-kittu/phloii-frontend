@@ -52,8 +52,6 @@ const HotelDetailsComponent = ({ hotelId }) => {
     const CurrentDay = currentDate.getDate();
     const CurrentMonth = currentDate.getMonth() + 1
 
-    console.log(CurrentDay, CurrentMonth, "this is the current date and current month")
-
     useEffect(() => {
         if (typeof window !== "undefined") {
             if (!localStorage.getItem('phloii_token_auth')) {
@@ -423,7 +421,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     return (
                                         <>
                                             <li key={i} className='events_list_inner'>
-                                                <div className="container" title={(day < CurrentDay && month !== CurrentMonth) ? `Event Expired at ${day} ${months[month-1]}` : `Event Valid till ${dayStart} ${months[monthStart-1]}}`}>
+                                                <div className="container">
                                                     <div className="event-card d-flex align-items-center" style={day < CurrentDay ? { opacity: 0.8, border: "1px solid #896262" } : {}}>
                                                         <div className="event-date">
                                                             <div className="day">{day}</div>
@@ -435,7 +433,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                                         </div>
                                                         <div className="event-content d-flex">
                                                             <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id) }} className='events_list_button'>View</button>
-                                                            {day < CurrentDay && month !== CurrentMonth && <button onClick={() => { setViewEventDeleteModal(true); setEventId(event?._id) }} className='events_list_button_delete'><svg
+                                                             <button onClick={() => { setViewEventDeleteModal(true); setEventId(event?._id) }} className='events_list_button_delete'><svg
                                                                 width="18"
                                                                 height="20"
                                                                 viewBox="0 0 18 20"
@@ -449,7 +447,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                                                     strokeLinecap="round"
                                                                     strokeLinejoin="round"
                                                                 />
-                                                            </svg></button>}
+                                                            </svg></button>
                                                         </div>
                                                     </div>
                                                 </div>
