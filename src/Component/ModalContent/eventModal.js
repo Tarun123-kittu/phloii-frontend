@@ -184,7 +184,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId, view, setView }
             setImagePreview(single_event_details?.data?.data?.image)
             setDescription(single_event_details?.data?.data?.eventDescription)
         }
-    }, [single_event_details])
+    }, [single_event_details,view])
 
     useEffect(() => {
         if (is_event_updated?.status === "Success") {
