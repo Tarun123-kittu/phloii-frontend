@@ -45,7 +45,7 @@ const DeleteModal = ({ isVisible, onClose, onConfirm, title, message,is_subscrip
            className='cmn_btn'
             onClick={onConfirm}
           >
-            {is_subscription_deleted?.status === "Loading" ? "Deleting" : "Submit"}
+            {is_subscription_deleted?.status === "Loading" ? "Deleting" : "Delete"}
           </button>
         </div>
       </div>
