@@ -450,6 +450,11 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId, view, setView }
                         {!view && <><button onClick={() => handleEdit()} type="submit" className="cmn_btn m-3">
                             Cancel
                         </button>
+                        {/* <button onClick={() => handleDelete()} type="submit" className="cmn_btn m-3" disabled={is_event_deleted?.status === "Loading"}>
+                            Delete{is_event_deleted?.status === "Loading" && <div className="spinner-border spinner-border-sm" role="status">
+                                <span className="sr-only"></span>
+                            </div>}
+                        </button> */}
                         <button onClick={() => handleSubmit()} type="submit" className="cmn_btn" disabled={is_event_updated?.status === "Loading"}>
                             Update{is_event_updated?.status === "Loading" && <div className="spinner-border spinner-border-sm p-1 mt-2 mx-2" role="status">
                                 <span className="sr-only"></span>

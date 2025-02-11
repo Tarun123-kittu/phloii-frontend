@@ -425,7 +425,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     return (
                                         <>
                                             <li key={i} className='events_list_inner'>
-                                                <div onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(true) }} className="container" style={{cursor:"pointer"}}>
+                                                {/* <div onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(true) }} className="container" style={{cursor:"pointer"}}>
                                                     <div className="event-card d-flex align-items-center" style={day < CurrentDay ? { opacity: 0.8, border: "1px solid #896262" } : {}}>
                                                         <div className="event-date">
                                                             <div className="day">{dayStart}</div>
@@ -453,6 +453,28 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                                             </svg></button>
                                                         </div>
                                                     </div>
+                                                </div> */}
+                                                <div class="event-card" onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(true) }} style={day < CurrentDay ? { opacity: 0.8, border: "1px solid #896262",cursor: "pointer" } : {cursor: "pointer"}}>
+                                                    <img src={event?.image} alt="Event" width={30} height={30} />
+                                                    <div class="event-info">
+                                                        <div class="event-title">{event?.eventTitle}</div>
+                                                        <div class="event-location">📅 {`${dayStart} ${months[monthStart - 1]} at ${convertTo12HourFormat(event?.eventStart.time)}`}</div>
+                                                    </div>
+                                                    {/* <div onClick={() => { setViewEventDeleteModal(true); setEventId(event?._id) }} class="event-price"><svg
+                                                        width="18"
+                                                        height="20"
+                                                        viewBox="0 0 18 20"
+                                                        fill="transparent"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        <path
+                                                            d="M1 5H17M7 9V15M11 9V15M2 5L3 17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19H13C13.5304 19 14.0391 18.7893 14.4142 18.4142C14.7893 18.0391 15 17.5304 15 17L16 5M6 5V2C6 1.73478 6.10536 1.48043 6.29289 1.29289C6.48043 1.10536 6.73478 1 7 1H11C11.2652 1 11.5196 1.10536 11.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V5"
+                                                            stroke="#666C78"
+                                                            strokeWidth="2"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />
+                                                    </svg></div> */}
                                                 </div>
                                             </li>
                                         </>
@@ -470,7 +492,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                 </div>
                 {show_image_preview && <ImageGallery images={images} setShow_image_preview={setShow_image_preview} show_image_preview={show_image_preview} index={index} />}
                 {viewDeleteModal && <DeleteModal isVisible={viewDeleteModal} onClose={closeModal} title={"Are You Sure"} message={"Do you want to cancel your subscription ?"} onConfirm={handleCancelPlan} is_subscription_deleted={is_subscription_deleted} />}
-                {viewEstablishmentDeleteModal && <DeleteModal isVisible={viewEstablishmentDeleteModal} onClose={closeModal} title={"Are You Sure"} message={`Do you want to Delete ${hotel_details?.hotel?.establishmentName}`} onConfirm={handleDeleteEstablishmentData} is_subscription_deleted={is_establishment_deleted} />}
+                {viewEstablishmentDeleteModal && <DeleteModal isVisible={viewEstablishmentDeleteModal} onClose={closeModal} title={"Are You Sure"} message={`Do you want to Delete ${hotel_details?.hotel?.establishmentName} ?`} onConfirm={handleDeleteEstablishmentData} is_subscription_deleted={is_establishment_deleted} />}
                 {viewEventDeleteModal && <DeleteModal isVisible={viewEventDeleteModal} onClose={closeEventModal} title={"Are You Sure"} message={"Do you want to delete this event ?"} onConfirm={handleDeleteEvent} is_subscription_deleted={is_event_deleted} />}
             </div>}
         </SideBar >
