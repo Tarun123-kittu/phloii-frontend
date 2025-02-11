@@ -425,7 +425,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     return (
                                         <>
                                             <li key={i} className='events_list_inner'>
-                                                <div onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(true) }} className="container">
+                                                <div onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(true) }} className="container" style={{cursor:"pointer"}}>
                                                     <div className="event-card d-flex align-items-center" style={day < CurrentDay ? { opacity: 0.8, border: "1px solid #896262" } : {}}>
                                                         <div className="event-date">
                                                             <div className="day">{dayStart}</div>
