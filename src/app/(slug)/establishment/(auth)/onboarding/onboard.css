@@ -21,6 +21,11 @@
     right: -730px;
     background: rgba(34, 235, 255, 0.3);
 }
+
+.border-class{
+    border: none;
+    background: transparent;
+}
 .board_form {
     max-width: 600px;
     margin:3rem  auto;

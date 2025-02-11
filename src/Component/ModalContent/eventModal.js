@@ -438,7 +438,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId, view, setView }
 
                     {!eventId && !editable && <div className="events_fields_button text-end mt-3">
                         <button onClick={() => handleSubmit()} type="submit" className="cmn_btn" disabled={is_event_created?.status === "Loading"}>
-                            Submit{is_event_created?.status === "Loading" && <div className="spinner-border spinner-border-sm" role="status">
+                            Submit{is_event_created?.status === "Loading" && <div className="spinner-border spinner-border-sm p-1 mt-2 mx-2" role="status">
                                 <span className="sr-only"></span>
                             </div>}
                         </button>
@@ -451,7 +451,7 @@ const EventModal = ({ show, onClose, editable, hotelId, eventId, view, setView }
                             Cancel
                         </button>
                         <button onClick={() => handleSubmit()} type="submit" className="cmn_btn" disabled={is_event_updated?.status === "Loading"}>
-                            Update{is_event_updated?.status === "Loading" && <div className="spinner-border spinner-border-sm" role="status">
+                            Update{is_event_updated?.status === "Loading" && <div className="spinner-border spinner-border-sm p-1 mt-2 mx-2" role="status">
                                 <span className="sr-only"></span>
                             </div>}
                         </button></>}

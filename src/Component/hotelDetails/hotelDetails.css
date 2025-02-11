@@ -426,7 +426,10 @@ img.user_profile_image{
     object-position: center center;
     flex: 0 0 56px;
     border: 1px solid #fdc546;
-
+}
+.border-class{
+    border: none;
+    background: transparent;
 }
 .hotel_cta {
     display: flex;

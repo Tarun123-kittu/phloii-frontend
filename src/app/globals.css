@@ -265,15 +265,22 @@ button.react-international-phone-country-selector-button, button.react-internati
 
 @keyframes floatLeftToRight {
   0% {
-    transform: translateX(0);
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(50px) rotate(15deg);
   }
   50% {
-    transform: translateX(100px); /* Adjust as needed */
+    transform: translateX(100px) rotate(0deg);
+  }
+  75% {
+    transform: translateX(50px) rotate(-15deg);
   }
   100% {
-    transform: translateX(0);
+    transform: translateX(0) rotate(0deg);
   }
 }
+
 .cardBg{
  background-color: rgb(14 14 14);
 }

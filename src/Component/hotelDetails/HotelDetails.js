@@ -187,6 +187,10 @@ const HotelDetailsComponent = ({ hotelId }) => {
             {hotelDetails?.status === "Loading" ? <Loader /> : <div className='wrapper'>
                 <div onClick={() => handleToggle()} className='dashboard_wrapper'>
                     <div className={`${hotel_details?.paymentDetails?.paymentStatus != "completed" && "pt-3"} dashboard_info`}>
+                        <button className='mb-3 border-class' title='Back' onClick={() => router.back()}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect width="24" height="24" rx="12" fill="#FBC42E" />
+                            <path d="M13.6799 17.7068C13.4266 17.7068 13.1732 17.6134 12.9732 17.4134L8.26656 12.7068C7.8799 12.3201 7.8799 11.6801 8.26656 11.2934L12.9732 6.58675C13.3599 6.20009 13.9999 6.20009 14.3866 6.58675C14.7732 6.97342 14.7732 7.61342 14.3866 8.00009L10.3866 12.0001L14.3866 16.0001C14.7732 16.3868 14.7732 17.0268 14.3866 17.4134C14.1999 17.6134 13.9466 17.7068 13.6799 17.7068Z" fill="black" />
+                        </svg></button>
                         <div className={`dashboard_head d-flex gap-3 align-items-center`}>
                             <img src={hotel_details?.hotel?.images[0]} alt="user" className='user_profile_image' />
                             <div className='info flex-grow-1'>
@@ -403,7 +407,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                         </div>
                         <div>
                             <div className='event_button_outer d-flex gap-3 justify-content-between hotel_image mt-4 border-top pt-4 align-items-center'>
-                                <h5 className='mb-0'>Events</h5>   <button onClick={() => { setShowEventModal(true); setEditable(false); setEventId(''); setView(false)  }} className='event_button cmn_btn'>Add Event</button>
+                                <h5 className='mb-0'>Events</h5>   <button onClick={() => { setShowEventModal(true); setEditable(false); setEventId(''); setView(false) }} className='event_button cmn_btn'>Add Event</button>
                             </div>
                             {events?.length === 0 && <div className='no_event'>
                                 <h6>
@@ -421,19 +425,17 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                     return (
                                         <>
                                             <li key={i} className='events_list_inner'>
-                                                <div className="container">
+                                                <div onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(true) }} className="container">
                                                     <div className="event-card d-flex align-items-center" style={day < CurrentDay ? { opacity: 0.8, border: "1px solid #896262" } : {}}>
                                                         <div className="event-date">
-                                                            <div className="day">{day}</div>
-                                                            <div className="month">{months[month - 1]}</div>
+                                                            <div className="day">{dayStart}</div>
+                                                            <div className="month">{months[monthStart - 1]}</div>
                                                         </div>
                                                         <div className="event-content">
                                                             <div className="event-title">{event?.eventTitle}</div>
                                                             <span className="event-time">{convertTo12HourFormat(event?.eventStart.time)}</span>
                                                         </div>
-                                                        <div className="event-content d-flex">
-                                                            <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(true) }} className='events_list_button'>View</button>
-                                                            {/* <button onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(false) }} className='events_list_button'>Edit</button> */}
+                                                        <div className="event-content d-flex justify-content-end">
                                                             <button onClick={() => { setViewEventDeleteModal(true); setEventId(event?._id) }} className='events_list_button_delete'><svg
                                                                 width="18"
                                                                 height="20"
@@ -461,7 +463,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                     </div>
                     {ShowEventModal && <EventModal show={ShowEventModal}
                         setShowProfile={setShowEventModal}
-                        onClose={() => { setShowEventModal(false); setEditable(false) }} editable={editable} hotelId={hotel_details?.hotel?._id} eventId={eventId} view={view} setView={setView}/>}
+                        onClose={() => { setShowEventModal(false); setEditable(false) }} editable={editable} hotelId={hotel_details?.hotel?._id} eventId={eventId} view={view} setView={setView} />}
                     {viewPreviewModal && <PreviewModal show={viewPreviewModal}
                         setShowProfile={setViewPreviewModal}
                         onClose={() => { setViewPreviewModal(false) }} hotel_details={hotel_details} />}

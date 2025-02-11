@@ -13,10 +13,12 @@ import { useRouter } from "next/navigation";
 import { get_selected_hotel_details, clear_selected_hotel_details } from "@/utils/redux/slices/hotelOnboardingSlice/getSelectedHotelDetails";
 import { update_hotel_details, clear_hotel_details_state } from "@/utils/redux/slices/hotelOnboardingSlice/updateHotelDetails";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
+import { usePathname } from "next/navigation";
 
 
 const OnBoardingSteps = ({ col, hotelId }) => {
   const dispatch = useDispatch()
+  const pathname = usePathname()
   const router = useRouter()
   const [step, setStep] = useState(1)
   const [establishmentname, setEstablishmentname] = useState('')
@@ -256,9 +258,20 @@ const OnBoardingSteps = ({ col, hotelId }) => {
     dispatch(toggle_sidebar(false))
   }
 
+  const handleBack = () => {
+    router.back()
+    if (typeof window !== "undefined") {
+      localStorage.setItem("sidebar_index", JSON.stringify(0))
+    }
+  }
+
   return (
     <>
       <div onClick={() => handleToggle()}>
+        {pathname !== "/establishment/onboarding" && <button className="mb-3 border-class" title="Back" onClick={() => handleBack()}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <rect width="24" height="24" rx="12" fill="#FBC42E" />
+          <path d="M13.6799 17.7068C13.4266 17.7068 13.1732 17.6134 12.9732 17.4134L8.26656 12.7068C7.8799 12.3201 7.8799 11.6801 8.26656 11.2934L12.9732 6.58675C13.3599 6.20009 13.9999 6.20009 14.3866 6.58675C14.7732 6.97342 14.7732 7.61342 14.3866 8.00009L10.3866 12.0001L14.3866 16.0001C14.7732 16.3868 14.7732 17.0268 14.3866 17.4134C14.1999 17.6134 13.9466 17.7068 13.6799 17.7068Z" fill="black" />
+        </svg></button>}
         <ul className={`${col == "col-lg-6" && "justify-content-start"} step_counter`}>
           {Array.from({ length: 3 }, (_, i) => {
             const stepNumber = i + 1;
