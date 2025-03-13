@@ -2,8 +2,8 @@ import HomeComponent from "@/Component/homeComponent/HomeComponent";
 
 export async function generateMetadata() {
   const metadata = {
-    title: "Phloii - A Dating App",
-    description: "Find your perfect match on Phloii, the leading dating app!",
+    title: "Phloii - A Meet-up App",
+    description: "Find your perfect match on Phloii, the leading meet-up app!",
     image: "/assets/phloii_fav_icon.png",
     url: `${process.env.NODE_ENV === "production" ? "https://www.phloii.com" : "https://staging.phloii.com/"}`, 
   };
@@ -21,7 +21,7 @@ export async function generateMetadata() {
           url: metadata.image,
           width: 1200,
           height: 630,
-          alt: "Phloii Dating App",
+          alt: "Phloii Meet-up App",
         },
       ],
     },

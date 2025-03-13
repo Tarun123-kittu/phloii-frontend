@@ -12,7 +12,7 @@ export default function HomeComponent() {
         <div className="container position-relative z-3">
           <h1>
             Experience <span>Safe</span> <br />
-            Dating with <span>Phloii</span>
+            Meeting with <span>Phloii</span>
           </h1>
           <p className={styles.cmn_desc}>
             Connect Privately, Meet Authentically – Your Journey to <br />{" "}
@@ -92,12 +92,12 @@ export default function HomeComponent() {
                 About Us
               </span>
               <h2 className={`${styles.cmn_heading}`}>
-                <span>Dating</span> Made Simple, Connections Made Real
+                <span>Meeting</span> Made Simple, Connections Made Real
               </h2>
               <p className={styles.cmn_desc}>
                 At Phloii, we believe that meaningful connections should be
                 easy, safe, and genuine. Our mission is to redefine modern
-                dating by creating a space where real people can build real
+                meeting by creating a space where real people can build real
                 relationships.
               </p>
               <p className={styles.cmn_desc}>
@@ -111,7 +111,7 @@ export default function HomeComponent() {
               </p>
               <p className={styles.cmn_desc}>
                 Whether you&apos;re looking for friendship, love, or something in
-                between, Phloii is here to make your dating experience simple,
+                between, Phloii is here to make your meeting experience simple,
                 seamless, and enjoyable.
               </p>
               <p className={styles.cmn_desc}>
@@ -260,7 +260,7 @@ export default function HomeComponent() {
                 <h3>Selective Match Visibility</h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
                   Your profile is only visible to those you choose to connect
-                  with, ensuring a curated and private dating experience.
+                  with, ensuring a curated and private meeting experience.
                 </p>
               </div>
             </div>
@@ -272,10 +272,10 @@ export default function HomeComponent() {
       >
         <div className="container">
           <h2 className={`${styles.cmn_heading} text-center`}>
-            What Makes <span>Phloii the Right</span> <br /> Dating App for You?
+            What Makes <span>Phloii the Right</span> <br /> Meet-up App for You?
           </h2>
           <p className={`${styles.cmn_desc} mt-5 m-auto text-center`}>
-            Phloii is more than just a dating app – it’s your trusted partner in
+            Phloii is more than just a Meet-up app – it’s your trusted partner in
             finding genuine connections. We combine innovative features with a
             commitment to safety, privacy, and authenticity, ensuring every
             interaction feels secure and meaningful. Whether you’re exploring
@@ -284,7 +284,7 @@ export default function HomeComponent() {
             approved meeting locations. With tools like anonymous browsing,
             secure messaging, and curated matches, we make it easy for you to
             meet the right person, on your terms, in a safe and supportive
-            environment. At Phloii, dating isn’t just simplified – it’s
+            environment. At Phloii, meeting isn’t just simplified – it’s
             redefined.
           </p>
         </div>
@@ -321,7 +321,7 @@ export default function HomeComponent() {
                   shared love for hiking and adventure brought them together.
                   After weeks of meaningful conversations and getting to know
                   each other through the app, they decided to meet at a
-                  Phloii-approved café. What started as a casual coffee date
+                  Phloii-approved café. What started as a casual coffee meet
                   soon turned into a lifelong connection. Today, they often
                   reflect on how Phloii’s focus on safety and authenticity gave
                   them the confidence to take that first step toward forever.
@@ -336,9 +336,9 @@ export default function HomeComponent() {
                   Emma <span className="text-white">/</span> <span>Chris</span>
                 </h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Emma was hesitant about online dating until she joined Phloii
+                  Emma was hesitant about online meeting until she joined Phloii
                   and matched with Chris, whose thoughtful messages stood out.
-                  Their first date at a Phloii-approved park turned into hours
+                  Their first meet at a Phloii-approved park turned into hours
                   of easy conversation. Now happily engaged, they credit the
                   app’s focus on genuine connections for helping them discover
                   their perfect match.
@@ -447,7 +447,7 @@ export default function HomeComponent() {
                 <span>Location!</span>
               </h2>
               <p className={styles.cmn_desc}>
-                Phloii is a new dating app designed with a focus on safe dating.
+                Phloii is a new Meet-up app designed with a focus on safe meeting.
                 One of its unique features is Phloii Verified, which allows
                 businesses to become recognized as premium safe locations within
                 the app. When couples match, your verified location will be
