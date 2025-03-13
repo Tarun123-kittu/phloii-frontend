@@ -385,7 +385,7 @@ export default function HomeComponent() {
         </div>
       </div>
       <div
-        className={`${styles.padding} ${styles.bg_black} ${styles.appDownload} position-relative`}
+        className={`${styles.padding} ${styles.bg_black} ${styles.appDownload} position-relative overflow-hidden`}
       >
         <div className="container z-2 position-relative">
           <h2
@@ -409,12 +409,12 @@ export default function HomeComponent() {
             </div>
             <div className={`${styles.screenimage}`}>
               <img
-                src="assets/floii.png"
+                src="assets/pholio_app.svg"
                 alt=""
                 className="img-fluid d-none d-md-block"
               />
               <img
-                src="assets/phlioo-mobile.png"
+                src="assets/pholio_app_mobile.svg"
                 alt=""
                 className="img-fluid d-block d-md-none mt-4"
               />
