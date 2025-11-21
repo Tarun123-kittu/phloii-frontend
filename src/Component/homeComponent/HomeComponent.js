@@ -12,7 +12,7 @@ export default function HomeComponent() {
         <div className="container position-relative z-3">
           <h1>
             Experience <span>Safe</span> <br />
-            Meeting with <span>Phloii</span>
+            Meeting with <span>Phloii Connect</span>
           </h1>
           <p className={styles.cmn_desc}>
             Connect Privately, Meet Authentically – Your Journey to <br />{" "}
@@ -95,27 +95,27 @@ export default function HomeComponent() {
                 <span>Meeting</span> Made Simple, Connections Made Real
               </h2>
               <p className={styles.cmn_desc}>
-                At Phloii, we believe that meaningful connections should be
+                At Phloii connect, we believe that meaningful connections should be
                 easy, safe, and genuine. Our mission is to redefine modern
                 meeting by creating a space where real people can build real
                 relationships.
               </p>
               <p className={styles.cmn_desc}>
-                Phloii is designed with your safety and authenticity in mind. We
+                Phloii connect is designed with your safety and authenticity in mind. We
                 go beyond just swipes and matches, providing features that
                 ensure every connection is as secure as it is promising. From
-                verified profiles to approved meeting locations, Phloii takes
+                verified profiles to approved meeting locations, Phloii connect takes
                 the guesswork out of meeting new people and gives you the
                 confidence to explore relationships in a safe, trusted
                 environment.
               </p>
               <p className={styles.cmn_desc}>
                 Whether you&apos;re looking for friendship, love, or something in
-                between, Phloii is here to make your meeting experience simple,
+                between, Phloii connect is here to make your meeting experience simple,
                 seamless, and enjoyable.
               </p>
               <p className={styles.cmn_desc}>
-                Join us and discover a better way to connect. With Phloii, your
+                Join us and discover a better way to connect. With Phloii connect, your
                 next great connection is just a tap away.
               </p>
             </div>
@@ -272,19 +272,19 @@ export default function HomeComponent() {
       >
         <div className="container">
           <h2 className={`${styles.cmn_heading} text-center`}>
-            What Makes <span>Phloii the Right</span> <br /> Meet-up App for You?
+            What Makes <span>Phloii connect the Right</span> <br /> Meet-up App for You?
           </h2>
           <p className={`${styles.cmn_desc} mt-5 m-auto text-center`}>
-            Phloii is more than just a Meet-up app – it’s your trusted partner in
+            Phloii connect is more than just a Meet-up app – it’s your trusted partner in
             finding genuine connections. We combine innovative features with a
             commitment to safety, privacy, and authenticity, ensuring every
             interaction feels secure and meaningful. Whether you’re exploring
-            new relationships or looking for someone special, Phloii’s unique
+            new relationships or looking for someone special, Phloii connect’s unique
             approach prioritizes real connections, verified profiles, and
             approved meeting locations. With tools like anonymous browsing,
             secure messaging, and curated matches, we make it easy for you to
             meet the right person, on your terms, in a safe and supportive
-            environment. At Phloii, meeting isn’t just simplified – it’s
+            environment. At Phloii connect, meeting isn’t just simplified – it’s
             redefined.
           </p>
         </div>
@@ -317,13 +317,13 @@ export default function HomeComponent() {
                 </h3>
 
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Emily and Ryan&apos;s love story began on Phloii, where their
+                  Emily and Ryan&apos;s love story began on Phloii connect, where their
                   shared love for hiking and adventure brought them together.
                   After weeks of meaningful conversations and getting to know
                   each other through the app, they decided to meet at a
-                  Phloii-approved café. What started as a casual coffee meet
+                  Phloii connect approved café. What started as a casual coffee meet
                   soon turned into a lifelong connection. Today, they often
-                  reflect on how Phloii’s focus on safety and authenticity gave
+                  reflect on how Phloii connect’s focus on safety and authenticity gave
                   them the confidence to take that first step toward forever.
                 </p>
               </div>
@@ -336,9 +336,9 @@ export default function HomeComponent() {
                   Emma <span className="text-white">/</span> <span>Chris</span>
                 </h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Emma was hesitant about online meeting until she joined Phloii
+                  Emma was hesitant about online meeting until she joined Phloii connect
                   and matched with Chris, whose thoughtful messages stood out.
-                  Their first meet at a Phloii-approved park turned into hours
+                  Their first meet at a Phloii connect-approved park turned into hours
                   of easy conversation. Now happily engaged, they credit the
                   app’s focus on genuine connections for helping them discover
                   their perfect match.
@@ -354,11 +354,11 @@ export default function HomeComponent() {
                   <span>James</span>
                 </h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Sophia and James connected on Phloii over their mutual passion
-                  for cooking. Their first meeting, at a cozy Phloii-approved
+                  Sophia and James connected on Phloii connect over their mutual passion
+                  for cooking. Their first meeting, at a cozy Phloii connect-approved
                   restaurant, was filled with laughter and shared dreams of
                   traveling the world. Now, they enjoy creating new recipes
-                  together in their kitchen, grateful that Phloii helped them
+                  together in their kitchen, grateful that Phloii connect helped them
                   find a bond they never thought possible.
                 </p>
               </div>
@@ -371,13 +371,13 @@ export default function HomeComponent() {
                   Mia <span className="text-white">/</span> <span>Alex</span>
                 </h3>
                 <p className={`${styles.cmn_desc} mb-0`}>
-                  Mia and Alex met on Phloii after discovering their shared love
+                  Mia and Alex met on Phloii connect after discovering their shared love
                   for photography. Their conversations quickly turned into
                   shared photo walks, starting with a safe meeting at a
-                  Phloii-approved art gallery. What began as a friendship rooted
+                  Phloii connect-approved art gallery. What began as a friendship rooted
                   in creativity blossomed into a beautiful relationship. Today,
                   they travel together, capturing the world and each other, all
-                  thanks to Phloii.
+                  thanks to Phloii connect.
                 </p>
               </div>
             </div>
@@ -392,7 +392,7 @@ export default function HomeComponent() {
             className={`${styles.cmn_heading} text-start position-relative z-2`}
           >
             Start your journey to meaningful connections today <br />
-            <span> download Phloii and let your love story begin! </span>
+            <span> download Phloii connect and let your love story begin! </span>
           </h2>
           <div className={`${styles.appwraper} position-relative`}>
             <div className={`${styles.floatingtext} mt-2`}>
@@ -443,16 +443,16 @@ export default function HomeComponent() {
                 Verified
               </span>
               <h2 className={`${styles.cmn_heading}`}>
-                Become a Phloii Verified <br />
+                Become a Phloii connect Verified <br />
                 <span>Location!</span>
               </h2>
               <p className={styles.cmn_desc}>
-                Phloii is a new Meet-up app designed with a focus on safe meeting.
-                One of its unique features is Phloii Verified, which allows
+                Phloii connect is a new Meet-up app designed with a focus on safe meeting.
+                One of its unique features is Phloii connect Verified, which allows
                 businesses to become recognized as premium safe locations within
                 the app. When couples match, your verified location will be
                 recommended as a great spot to meet, encouraging safe and
-                enjoyable meetups. By becoming a Phloii Verified location, your
+                enjoyable meetups. By becoming a Phloii connect Verified location, your
                 business can benefit from increased foot traffic, as it helps
                 drive more customers to your establishment. The service is
                 offering a great opportunity to boost
