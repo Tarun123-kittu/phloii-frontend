@@ -7,6 +7,8 @@ import Link from "next/link";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 const SlugDetails = ({ slugName }) => {
+    console.log(slugName,"slugName");
+    
     const [slug_data, setSlug_data] = useState();
 
     const getData = async () => {

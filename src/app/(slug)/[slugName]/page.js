@@ -27,6 +27,7 @@ export async function generateMetadata({ params }) {
     }
 
     const slugData = await fetchSlugData(params?.slugName);
+console.log(slugData,"slugData");
 
     if (!slugData) {
         return {
@@ -41,12 +42,11 @@ export async function generateMetadata({ params }) {
     };
 }
 
-const Page = ({ params }) => {
-    const { slugName } = params;
+const Page = async ({ params }) => {
+  const { slugName } = await params; // ✅ FIX
+  console.log(slugName, "slugName");
 
-    return (
-        <SlugDetails slugName={slugName} />
-    );
+  return <SlugDetails slugName={slugName} />;
 };
 
 export default Page;
