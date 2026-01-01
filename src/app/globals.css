@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
   --highlight: rgba(251, 185, 13, 1);
-  --sidebar-width:230px;
+  --sidebar-width: 230px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,62 +18,75 @@ body {
   max-width: 100vw;
 }
 
-
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Poppins";
+  font-family: var(--font-geist-poppins);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
-
 }
-p,span,a,li,h1,h2,h3,h4,h5,h6,label,input,select,textarea{
-  font-family: 'Poppins';
+p,
+span,
+a,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+input,
+select,
+textarea {
+  font-family: var(--font-geist-poppins);
 }
-.sub-text{
+.sub-text {
   font-size: 12px;
   font-weight: 500;
 }
-.fadeColor{
-color: rgba(117, 129, 143, 1);
+.fadeColor {
+  color: rgba(117, 129, 143, 1);
 }
 .header-card {
   text-align: center;
   background: rgba(14, 14, 14, 1);
   padding: 1rem 10px;
-  border-bottom: 1px solid #FFFFFF4D;
+  border-bottom: 1px solid #ffffff4d;
 }
 
-.form-control.cmn_input:focus,select.form-select.cmn-select:focus {
+.form-control.cmn_input:focus,
+select.form-select.cmn-select:focus {
   box-shadow: unset;
   background-color: rgba(0, 0, 0, 1);
   border: 1px solid rgba(0, 0, 0, 1);
   color: rgba(200, 200, 208, 1);
-  }
-  .form-control.cmn_input,select.form-select.cmn-select {
-      background-color: rgba(0, 0, 0, 1);
-      border: 1px solid rgba(0, 0, 0, 1);
-      color: rgba(200, 200, 208, 1);
-      font-size: 14px;
-      min-height: 38px;
-  }
-  .form-control.cmn_input::placeholder{
-      color: rgba(200, 200, 208, 1);
-  }
-  label.form-label.cmn_label {
-      color: rgba(255, 255, 255, 1);
-      font-size: 14px;
-      display: block;
-  }
-  button.upload_btn.cmn_btn {
-    height: 34px;
+}
+.form-control.cmn_input,
+select.form-select.cmn-select {
+  background-color: rgba(0, 0, 0, 1);
+  border: 1px solid rgba(0, 0, 0, 1);
+  color: rgba(200, 200, 208, 1);
+  font-size: 14px;
+  min-height: 38px;
+}
+.form-control.cmn_input::placeholder {
+  color: rgba(200, 200, 208, 1);
+}
+label.form-label.cmn_label {
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  display: block;
+}
+button.upload_btn.cmn_btn {
+  height: 34px;
 }
 input {
   color-scheme: dark;
 }
-.cmn_btn{
-  background: linear-gradient(90deg, #FBB90D 0%, #22EBFF 100%);
+.cmn_btn {
+  background: linear-gradient(90deg, #fbb90d 0%, #22ebff 100%);
   border: transparent;
   font-size: 14px;
   line-height: 24px;
@@ -91,13 +104,13 @@ button.grey_btn.cmn_btn {
 .add_file {
   border: 1px dashed rgba(211, 211, 211, 1);
   background: rgba(0, 0, 0, 1);
- 
+
   border-radius: 7px;
 }
 .wrapper {
   padding: 20px;
   background: #000;
-  padding-left: calc(var( --sidebar-width) + 30px);
+  padding-left: calc(var(--sidebar-width) + 30px);
   padding-top: calc(76px + 30px);
   min-height: 100vh;
 }
@@ -120,41 +133,41 @@ input.form-control.cmn_input[type="file"] {
 .custom-multiselect::after {
   content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2333393f" class="bi bi-chevron-down" viewBox="0 0 16 16"><path d="M1.293 4.293a1 1 0 0 1 1.414 0L8 9.586l5.293-5.293a1 1 0 0 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414z"/></svg>');
   position: absolute;
-  right: 10px; 
-  top: 10px; 
-  width: 16px; 
-  height: 16px;}
-
+  right: 10px;
+  top: 10px;
+  width: 16px;
+  height: 16px;
+}
 
 .custom-multiselect {
-    position: relative;
+  position: relative;
 }
 
 .custom-multiselect .search-wrapper.searchWrapper {
-    border: unset;
-    background: #000000;
-    font-size: 14px;
-    height: 38px;
-    color: #c8c8d0;
+  border: unset;
+  background: #000000;
+  font-size: 14px;
+  height: 38px;
+  color: #c8c8d0;
 }
 
 .custom-multiselect input#search_input {
-    color: #c8c8d0;
+  color: #c8c8d0;
 }
 
 .custom-multiselect .optionListContainer {
-    background: #000000;
+  background: #000000;
 }
 
 .custom-multiselect .optionListContainer li {
-    font-size: 14px;
-    color:#c8c8d0;
+  font-size: 14px;
+  color: #c8c8d0;
 }
-.custom-multiselect .optionListContainer li.highlightOption{
-background-color: unset;
-color: #c8c8d0;
+.custom-multiselect .optionListContainer li.highlightOption {
+  background-color: unset;
+  color: #c8c8d0;
 }
-.custom-multiselect  .chip img{
+.custom-multiselect .chip img {
   filter: invert(1);
 }
 p.loggederror {
@@ -162,8 +175,9 @@ p.loggederror {
   color: red;
   font-weight: 700;
 }
-.custom-multiselect .optionListContainer li:hover, .custom-multiselect  .chip{
-  background-color: #FBB90D;
+.custom-multiselect .optionListContainer li:hover,
+.custom-multiselect .chip {
+  background-color: #fbb90d;
   color: #000;
 }
 .add_file span {
@@ -191,12 +205,11 @@ a {
   margin-bottom: 1.5rem;
 }
 .form-check input.form-check-input {
-  background-color: rgba(255, 255, 255, 0.16); 
-  border-color: rgba(255, 255, 255, 0.16); 
-
+  background-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.16);
 }
-.text-hightLight{
-color: var( --highlight);
+.text-hightLight {
+  color: var(--highlight);
 }
 
 span.password_input {
@@ -208,12 +221,12 @@ textarea::-webkit-scrollbar {
 }
 
 textarea::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 textarea::-webkit-scrollbar-thumb {
-background-color: darkgrey;
-outline: 1px solid slategrey;
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 .react-international-phone-input-container {
   width: 100%;
@@ -221,8 +234,8 @@ outline: 1px solid slategrey;
 .form-control.cmn_input::placeholder {
   color: #878787c4;
 }
-input.form-control.cmn_input[type="time"], input.form-control.cmn_input[type="date"] {
-
+input.form-control.cmn_input[type="time"],
+input.form-control.cmn_input[type="date"] {
   background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 18C12.1217 18 14.1566 17.1571 15.6569 15.6569C17.1571 14.1566 18 12.1217 18 10C18 7.87827 17.1571 5.84344 15.6569 4.34315C14.1566 2.84285 12.1217 2 10 2C7.87827 2 5.84344 2.84285 4.34315 4.34315C2.84285 5.84344 2 7.87827 2 10C2 12.1217 2.84285 14.1566 4.34315 15.6569C5.84344 17.1571 7.87827 18 10 18ZM10 0C11.3132 0 12.6136 0.258658 13.8268 0.761205C15.0401 1.26375 16.1425 2.00035 17.0711 2.92893C17.9997 3.85752 18.7362 4.95991 19.2388 6.17317C19.7413 7.38642 20 8.68678 20 10C20 12.6522 18.9464 15.1957 17.0711 17.0711C15.1957 18.9464 12.6522 20 10 20C4.47 20 0 15.5 0 10C0 7.34784 1.05357 4.8043 2.92893 2.92893C4.8043 1.05357 7.34784 0 10 0ZM10.5 5V10.25L15 12.92L14.25 14.15L9 11V5H10.5Z' fill='%23EEEEEE'/%3E%3C/svg%3E%0A");
   background-repeat: no-repeat;
   background-position: 98%;
@@ -230,11 +243,10 @@ input.form-control.cmn_input[type="time"], input.form-control.cmn_input[type="da
   -webkit-appearance: none;
 }
 input.form-control.cmn_input[type="date"] {
-
-  background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M8.12903%202C8.38569%202%208.63184%202.08542%208.81333%202.23748C8.99482%202.38954%209.09677%202.59577%209.09677%202.81081V4.16216H14.9032V2.81081C14.9032%202.59577%2015.0052%202.38954%2015.1867%202.23748C15.3682%202.08542%2015.6143%202%2015.871%202C16.1276%202%2016.3738%202.08542%2016.5553%202.23748C16.7368%202.38954%2016.8387%202.59577%2016.8387%202.81081V4.16216H18.4516C19.3927%204.16216%2020.2952%204.47538%2020.9607%205.03293C21.6262%205.59047%2022%206.34665%2022%207.13513V19.027C22%2019.8155%2021.6262%2020.5717%2020.9607%2021.1292C20.2952%2021.6868%2019.3927%2022%2018.4516%2022H5.54839C4.6073%2022%203.70475%2021.6868%203.0393%2021.1292C2.37385%2020.5717%202%2019.8155%202%2019.027V7.13513C2%206.34665%202.37385%205.59047%203.0393%205.03293C3.70475%204.47538%204.6073%204.16216%205.54839%204.16216H7.16129V2.81081C7.16129%202.59577%207.26325%202.38954%207.44474%202.23748C7.62622%202.08542%207.87237%202%208.12903%202ZM14.9032%205.78378V7.13513C14.9032%207.35018%2015.0052%207.55641%2015.1867%207.70846C15.3682%207.86052%2015.6143%207.94595%2015.871%207.94595C16.1276%207.94595%2016.3738%207.86052%2016.5553%207.70846C16.7368%207.55641%2016.8387%207.35018%2016.8387%207.13513V5.78378H18.4516C19.3419%205.78378%2020.0645%206.38919%2020.0645%207.13513V10.1081H3.93548V7.13513C3.93548%206.38919%204.65806%205.78378%205.54839%205.78378H7.16129V7.13513C7.16129%207.35018%207.26325%207.55641%207.44474%207.70846C7.62622%207.86052%207.87237%207.94595%208.12903%207.94595C8.38569%207.94595%208.63184%207.86052%208.81333%207.70846C8.99482%207.55641%209.09677%207.35018%209.09677%207.13513V5.78378H14.9032ZM3.93548%2011.7297V19.027C3.93548%2019.773%204.65806%2020.3784%205.54839%2020.3784H18.4516C19.3419%2020.3784%2020.0645%2019.773%2020.0645%2019.027V11.7297H3.93548Z%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E');
-
+  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M8.12903%202C8.38569%202%208.63184%202.08542%208.81333%202.23748C8.99482%202.38954%209.09677%202.59577%209.09677%202.81081V4.16216H14.9032V2.81081C14.9032%202.59577%2015.0052%202.38954%2015.1867%202.23748C15.3682%202.08542%2015.6143%202%2015.871%202C16.1276%202%2016.3738%202.08542%2016.5553%202.23748C16.7368%202.38954%2016.8387%202.59577%2016.8387%202.81081V4.16216H18.4516C19.3927%204.16216%2020.2952%204.47538%2020.9607%205.03293C21.6262%205.59047%2022%206.34665%2022%207.13513V19.027C22%2019.8155%2021.6262%2020.5717%2020.9607%2021.1292C20.2952%2021.6868%2019.3927%2022%2018.4516%2022H5.54839C4.6073%2022%203.70475%2021.6868%203.0393%2021.1292C2.37385%2020.5717%202%2019.8155%202%2019.027V7.13513C2%206.34665%202.37385%205.59047%203.0393%205.03293C3.70475%204.47538%204.6073%204.16216%205.54839%204.16216H7.16129V2.81081C7.16129%202.59577%207.26325%202.38954%207.44474%202.23748C7.62622%202.08542%207.87237%202%208.12903%202ZM14.9032%205.78378V7.13513C14.9032%207.35018%2015.0052%207.55641%2015.1867%207.70846C15.3682%207.86052%2015.6143%207.94595%2015.871%207.94595C16.1276%207.94595%2016.3738%207.86052%2016.5553%207.70846C16.7368%207.55641%2016.8387%207.35018%2016.8387%207.13513V5.78378H18.4516C19.3419%205.78378%2020.0645%206.38919%2020.0645%207.13513V10.1081H3.93548V7.13513C3.93548%206.38919%204.65806%205.78378%205.54839%205.78378H7.16129V7.13513C7.16129%207.35018%207.26325%207.55641%207.44474%207.70846C7.62622%207.86052%207.87237%207.94595%208.12903%207.94595C8.38569%207.94595%208.63184%207.86052%208.81333%207.70846C8.99482%207.55641%209.09677%207.35018%209.09677%207.13513V5.78378H14.9032ZM3.93548%2011.7297V19.027C3.93548%2019.773%204.65806%2020.3784%205.54839%2020.3784H18.4516C19.3419%2020.3784%2020.0645%2019.773%2020.0645%2019.027V11.7297H3.93548Z%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E");
 }
-input[type="time"]::-webkit-calendar-picker-indicator, input[type="date"]::-webkit-calendar-picker-indicator {
+input[type="time"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-calendar-picker-indicator {
   background: none;
 }
 input.react-international-phone-input {
@@ -243,20 +255,24 @@ input.react-international-phone-input {
   color: #fff !important;
   border: unset !important;
 }
-.steps_form input.react-international-phone-input, .board_form input.react-international-phone-input {
+.steps_form input.react-international-phone-input,
+.board_form input.react-international-phone-input {
   width: 100%;
   background: #000 !important;
   color: #fff !important;
   border: unset !important;
 }
 
-button.react-international-phone-country-selector-button, button.react-international-phone-country-selector-button:hover {
+button.react-international-phone-country-selector-button,
+button.react-international-phone-country-selector-button:hover {
   background: #0e0e0e;
   border: unset;
   border-right: 1px solid #464646;
 }
-.steps_form button.react-international-phone-country-selector-button, .steps_form button.react-international-phone-country-selector-button:hover,
-.board_form button.react-international-phone-country-selector-button, .board_form button.react-international-phone-country-selector-button:hover {
+.steps_form button.react-international-phone-country-selector-button,
+.steps_form button.react-international-phone-country-selector-button:hover,
+.board_form button.react-international-phone-country-selector-button,
+.board_form button.react-international-phone-country-selector-button:hover {
   background: #000;
   border: unset;
   border-right: 1px solid #464646;
@@ -281,15 +297,15 @@ button.react-international-phone-country-selector-button, button.react-internati
   }
 }
 
-.cardBg{
- background-color: rgb(14 14 14);
+.cardBg {
+  background-color: rgb(14 14 14);
 }
 
 .floating {
-  animation: floatLeftToRight 4s ease-in-out infinite; 
+  animation: floatLeftToRight 4s ease-in-out infinite;
   display: inline-block;
 }
-.image_cursor{
+.image_cursor {
   cursor: pointer;
 }
 
@@ -298,20 +314,20 @@ button.react-international-phone-country-selector-button, button.react-internati
     color-scheme: dark;
   }
 }
-@media(max-width:1024px){
+@media (max-width: 1024px) {
   .wrapper {
     padding-left: 20px;
+  }
 }
-}
-@media(max-width:767px){
-  br{
+@media (max-width: 767px) {
+  br {
     display: none;
   }
   .wrapper {
     padding: 15px;
     padding-top: calc(50px + 30px);
   }
-  .wrapper{
+  .wrapper {
     padding-left: 20px;
-}
+  }
 }
