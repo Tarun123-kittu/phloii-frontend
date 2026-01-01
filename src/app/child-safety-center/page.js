@@ -77,7 +77,7 @@ const Page = () => {
                 href="mailto:phloiimanagement@gmail.com"
                 style={{ color: "#fbb90d" }}
               >
-                phloiimanagement@gmail.com
+                phloiimanagement@gmail.com 
               </a>
             </p>
           </div>
