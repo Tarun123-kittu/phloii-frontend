@@ -29,6 +29,10 @@ const Footer = () => {
                     <li>
                     <Link className="mb-0" href={'/privacy-policy'}>Privacy Policy</Link>
                     </li>
+                       <li>
+
+                  <Link href={'/child-safety-center'}>Child Safety Center</Link>
+                    </li>
                     
                   </ul>
                
@@ -45,10 +49,7 @@ const Footer = () => {
 
                   <Link href={'/help-support'}>Support</Link>
                     </li>
-                    <li>
-
-                  <Link href={'/child-safety-center'}>Child Safety Center</Link>
-                    </li>
+                 
                   
                     
                   </ul>
