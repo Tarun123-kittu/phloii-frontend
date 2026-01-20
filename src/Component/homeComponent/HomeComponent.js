@@ -69,7 +69,7 @@ function AppDownloadLinks() {
         width={180}
         src="assets/ios_download.png"
         className="ms-4"
-        alt="App Store Coming Soon"
+        alt="Download iOS App"
       />
       </a>
     </div>
