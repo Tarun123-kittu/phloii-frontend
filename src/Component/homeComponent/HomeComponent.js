@@ -63,13 +63,15 @@ function AppDownloadLinks() {
       <a href="https://play.google.com/store/apps/details?id=com.phloii" target="_blank" rel="noopener noreferrer">
         <img title="Download Android App" width={180} src="assets/playstoreMb.png" alt="Google Play" />
       </a>
+       <a href="https://apps.apple.com/us/app/phloii-connect/id6736832123" target="_blank" rel="noopener noreferrer">
       <img
         title="iOS App Coming Soon"
         width={180}
-        src="assets/app_store_coming_soon.png"
+        src="assets/ios_download.png"
         className="ms-4"
         alt="App Store Coming Soon"
       />
+      </a>
     </div>
   );
 }
