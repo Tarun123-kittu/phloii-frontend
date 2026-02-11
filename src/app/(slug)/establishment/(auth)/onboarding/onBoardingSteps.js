@@ -5,6 +5,7 @@ import "./onboard.css";
 import EstablishmentDetails from "@/Component/OnBoardingSteps/EstablishmentDetails";
 import PersonalDetails from "@/Component/OnBoardingSteps/PersonalDetails";
 import WhyPhloiiVerified from "@/Component/OnBoardingSteps/WhyPhloiiVerified";
+import PaymentDetails from "@/Component/OnBoardingSteps/PaymentDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { get_countries } from "@/utils/redux/slices/countriesSlice/getCountries";
 import { getCities, clear_cities_data } from "@/utils/redux/slices/countriesSlice/getCities";
@@ -265,6 +266,34 @@ const OnBoardingSteps = ({ col, hotelId }) => {
     }
   }
 
+  const totalSteps = hotelId ? 3 : 4
+
+  const hotelFormData = {
+    establishmentname: establishmentname,
+    establishedtype: establishedtype,
+    streetaddress: streetaddress,
+    unitNumber: unitNumber,
+    country: country,
+    state: state,
+    city: city,
+    pincode: pincode,
+    ownername: ownername,
+    ownerphone: ownerPhone.replace('+', ''),
+    webSitelink: websiteLink,
+    owneremail: owneremail,
+    whyphloii: whyphloii,
+    uniquefeatures: uniquefeatures,
+    safeWord: safeWord,
+    food: food,
+    additional_information: additional_information,
+    inpersonvisit: inpersonvisit,
+    atmosphere_description: atmosphere_description,
+    opentiming: openTiming,
+    closetiming: closeTiming,
+    customerservicenumber: customerServiceNumber.replace('+', ''),
+    images: images,
+  }
+
   return (
     <>
       <div onClick={() => handleToggle()}>
@@ -273,7 +302,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
           <path d="M13.6799 17.7068C13.4266 17.7068 13.1732 17.6134 12.9732 17.4134L8.26656 12.7068C7.8799 12.3201 7.8799 11.6801 8.26656 11.2934L12.9732 6.58675C13.3599 6.20009 13.9999 6.20009 14.3866 6.58675C14.7732 6.97342 14.7732 7.61342 14.3866 8.00009L10.3866 12.0001L14.3866 16.0001C14.7732 16.3868 14.7732 17.0268 14.3866 17.4134C14.1999 17.6134 13.9466 17.7068 13.6799 17.7068Z" fill="black" />
         </svg></button>}
         <ul className={`${col == "col-lg-6" && "justify-content-start"} step_counter`}>
-          {Array.from({ length: 3 }, (_, i) => {
+          {Array.from({ length: totalSteps }, (_, i) => {
             const stepNumber = i + 1;
             const isActive = step === stepNumber;
             const isDone = step > stepNumber;
@@ -289,9 +318,10 @@ const OnBoardingSteps = ({ col, hotelId }) => {
                     {stepNumber === 1 && "Establishment Details"}
                     {stepNumber === 2 && "Personal Details"}
                     {stepNumber === 3 && "Why Phloii Verified"}
+                    {stepNumber === 4 && "Payment"}
                   </p>
                 </li>
-                {stepNumber < 3 && (
+                {stepNumber < totalSteps && (
                   <li
                     className={`line ${isDone ? "done" : ""}`}
                   ></li>
@@ -305,7 +335,8 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
       {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} setCity={setCity} city={city} setCitiesList={setCitiesList} citiesList={citiesList} selected_hotel_details={selected_hotel_details} />}
       {step === 2 && <PersonalDetails col={col} setStep={setStep} ownername={ownername} setOwnername={setOwnername} ownerPhone={ownerPhone} setOwnerPhone={setOwnerPhone} websiteLink={websiteLink} setWebsiteLink={setWebsiteLink} owneremail={owneremail} setOwnerEmail={setOwnerEmail} />}
-      {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} setFood={setFood} food={food} setServiceValues={setServiceValues} serviceValues={serviceValues} atmosphere={atmosphere} setAtmosphere={setAtmosphere} openTiming={openTiming} setOpenTiming={setOpenTiming} closeTiming={closeTiming} setCloseTiming={setCloseTiming} customerServiceNumber={customerServiceNumber} setCustomerServiceNumber={setCustomerServiceNumber} hotelId={hotelId} updateHotel={updateHotel} is_hotel_updated={is_hotel_updated} setAtmosphere_description={setAtmosphere_description} atmosphere_description={atmosphere_description} setAdditional_information={setAdditional_information} additional_information={additional_information} />}
+      {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} setFood={setFood} food={food} setServiceValues={setServiceValues} serviceValues={serviceValues} atmosphere={atmosphere} setAtmosphere={setAtmosphere} openTiming={openTiming} setOpenTiming={setOpenTiming} closeTiming={closeTiming} setCloseTiming={setCloseTiming} customerServiceNumber={customerServiceNumber} setCustomerServiceNumber={setCustomerServiceNumber} hotelId={hotelId} updateHotel={updateHotel} is_hotel_updated={is_hotel_updated} setAtmosphere_description={setAtmosphere_description} atmosphere_description={atmosphere_description} setAdditional_information={setAdditional_information} additional_information={additional_information} hasPaymentStep={!hotelId} />}
+      {step === 4 && <PaymentDetails col={col} setStep={setStep} onCompleteSetup={handleOnboardHotel} hotelFormData={hotelFormData} isSubmitting={is_hotel_verified?.status === "Loading"} />}
 
     </>
   );

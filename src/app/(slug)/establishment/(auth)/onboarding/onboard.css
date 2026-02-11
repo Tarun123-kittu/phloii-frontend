@@ -128,6 +128,71 @@ ul.step_counter li.step_item.done p, ul.step_counter li:first-child p {
         padding: 1rem;
     }
 }
+/* Payment step (Stripe) */
+.payment-pricing-box {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+}
+.payment-pricing-row {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    font-size: 1rem;
+}
+.payment-pricing-row.payment-pricing-trial {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+}
+.payment-pricing-badge {
+    background: linear-gradient(90deg, #FBB90D 0%, #22EBFF 100%);
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+.payment-pricing-note {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.875rem;
+    margin: 0.75rem 0 0;
+}
+.payment-element-wrapper {
+    min-height: 120px;
+}
+.payment-element-loading {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 1rem 0;
+}
+.payment-error {
+    color: #ff6b6b;
+    font-size: 0.875rem;
+}
+
+.payment-method-slot .cmn_label {
+    color: rgba(255, 255, 255, 0.9);
+}
+.payment-method-placeholder {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+}
+.payment-method-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.payment-method-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+    margin: 0;
+}
+
 @media(max-width:767px){
     ul.step_counter li.line  {
         display: none;

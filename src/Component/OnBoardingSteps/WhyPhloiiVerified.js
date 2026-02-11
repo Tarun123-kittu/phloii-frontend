@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
 import { PhoneInput } from 'react-international-phone';
 
-const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel, is_hotel_updated, setAtmosphere_description, atmosphere_description, setFood, food, setAdditional_information, additional_information }) => {
+const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatures, setUniqueFeatures, inpersonvisit, setInpersonvisit, safeWord, setSafeWord, images, setImages, handleOnboardHotel, is_hotel_verified, setServiceValues, serviceValues, atmosphere, setAtmosphere, openTiming, setOpenTiming, closeTiming, setCloseTiming, customerServiceNumber, setCustomerServiceNumber, hotelId, updateHotel, is_hotel_updated, setAtmosphere_description, atmosphere_description, setFood, food, setAdditional_information, additional_information, hasPaymentStep }) => {
   const dispatch = useDispatch()
   const [errors, setErrors] = useState("");
   const [whyPhloiiError, setWhyPhloiiError] = useState('')
@@ -67,7 +67,9 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       setServiceNumberError("Please Enter the customer service number")
       return
     }
-    if (hotelId) {
+    if (hasPaymentStep) {
+      setStep(4)
+    } else if (hotelId) {
       updateHotel()
     } else {
       handleOnboardHotel()
@@ -500,7 +502,7 @@ const WhyPhloiiVerified = ({ col, setStep, whyphloii, setWhyphloii, uniquefeatur
       </div>
       <div className="d-flex justify-content-end gap-3">
         <Button buttonClick={handleBackword} text="Previous" className="grey_btn" />
-        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : hotelId ? "Update" : "Create"} loading={is_hotel_verified || is_hotel_updated} />
+        <Button buttonClick={handleForward} text={is_hotel_verified.status === "Loading" || is_hotel_updated?.status === "Loading" ? "Loading" : hasPaymentStep ? "Next" : hotelId ? "Update" : "Create"} loading={is_hotel_verified || is_hotel_updated} />
       </div>
     </div>
   );
