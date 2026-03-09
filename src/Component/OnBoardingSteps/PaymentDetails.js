@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { toggle_sidebar } from '@/utils/redux/slices/sidebarSlice/manageSidebar';
 import { API_CONFIG } from '@/config/app_config';
 
-const PAYMENT_PRICE = 9.99;
+const PAYMENT_PRICE = process.env.NEXT_PUBLIC_PAYMENT_PRICE || 4.99;
 const TRIAL_LABEL = 'First 30 days free for verified hotels';
 const AFTER_TRIAL_LABEL = `Then $${PAYMENT_PRICE}/month — charged automatically each month`;
 
