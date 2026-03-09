@@ -6,7 +6,7 @@ import { toggle_sidebar } from '@/utils/redux/slices/sidebarSlice/manageSidebar'
 import { API_CONFIG } from '@/config/app_config';
 
 const PAYMENT_PRICE = process.env.NEXT_PUBLIC_PAYMENT_PRICE || 4.99;
-const TRIAL_LABEL = 'First 30 days free for verified hotels';
+const TRIAL_LABEL = 'First 30 days free for verified establishments';
 const AFTER_TRIAL_LABEL = `Then $${PAYMENT_PRICE}/month — charged automatically each month`;
 
 const PRICE_IDS = (process.env.NEXT_PUBLIC_PRICE_IDS || '')
