@@ -164,8 +164,8 @@ function PaymentDetails({ col, setStep, onCompleteSetup, hotelFormData, isSubmit
                     htmlFor={`subscription-plan-${index}`}
                   >
                     {PRICE_IDS.length === 1
-                      ? 'Phloii Verified – first 30 days free, then $9.99/month'
-                      : `Plan ${index + 1} – first 30 days free, then $9.99/month`}
+                      ? 'Phloii Verified – first 30 days free, then $4.99/month'
+                      : `Plan ${index + 1} – first 30 days free, then $4.99/month`}
                   </label>
                 </div>
               ))}
