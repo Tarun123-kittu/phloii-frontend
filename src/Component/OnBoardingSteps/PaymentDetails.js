@@ -8,11 +8,79 @@ import { API_CONFIG } from '@/config/app_config';
 const PAYMENT_PRICE = process.env.NEXT_PUBLIC_PAYMENT_PRICE || 4.99;
 const TRIAL_LABEL = 'First 30 days free for verified establishments';
 const AFTER_TRIAL_LABEL = `Then $${PAYMENT_PRICE}/month — charged automatically each month`;
+const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
 
 const PRICE_IDS = (process.env.NEXT_PUBLIC_PRICE_IDS || '')
   .split(',')
   .map((id) => id.trim())
   .filter(Boolean);
+
+const normalizeForKey = (value) =>
+  String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+
+const buildIdempotencySource = (hotelFormData, selectedPriceId) => {
+  const parts = [
+    'checkout-v1',
+    normalizeForKey(hotelFormData?.owneremail),    
+    normalizeForKey(hotelFormData?.establishmentname),      
+    normalizeForKey(selectedPriceId),
+  ];
+
+  return parts.join('|');
+};
+
+const sha256Hex = async (input) => {
+  const encoded = new TextEncoder().encode(input);
+  const hashBuffer = await window.crypto.subtle.digest('SHA-256', encoded);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('');
+};
+
+const getLatLongFromAddress = async (address) => {
+  if (!GOOGLE_MAPS_API_KEY) {
+    return null;
+  }
+
+  const formattedAddress = [
+    address?.streetAddress,
+    address?.suiteUnitNumber,
+    address?.city,
+    address?.state,
+    address?.pinCode,
+    address?.country,
+  ]
+    .map((part) => String(part || '').trim())
+    .filter(Boolean)
+    .join(', ');
+
+  if (!formattedAddress) {
+    return null;
+  }
+
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(formattedAddress)}&key=${GOOGLE_MAPS_API_KEY}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!response.ok || data?.status !== 'OK') {
+      return null;
+    }
+
+    const location = data?.results?.[0]?.geometry?.location;
+    if (!location) {
+      return null;
+    }
+
+    return { lat: location.lat, lng: location.lng };
+  } catch {
+    return null;
+  }
+};
 
 function PaymentDetails({ col, setStep, onCompleteSetup, hotelFormData, isSubmitting }) {
   const dispatch = useDispatch();
@@ -21,13 +89,7 @@ function PaymentDetails({ col, setStep, onCompleteSetup, hotelFormData, isSubmit
   const [selectedPriceId, setSelectedPriceId] = useState(
     PRICE_IDS.length > 0 ? PRICE_IDS[0] : ''
   );
-  console.log(PRICE_IDS,"hotelFormData")
-  console.log(selectedPriceId,"hotelFormData")
-  console.log(hotelFormData,"hotelFormData")
-  console.log(isSubmitting,"hotelFormData")
-  console.log(col,"hotelFormData")
-  console.log(setStep,"hotelFormData")
-  console.log(onCompleteSetup,"hotelFormData")
+
   const handleToggle = () => {
     dispatch(toggle_sidebar(false));
   };
@@ -49,14 +111,35 @@ function PaymentDetails({ col, setStep, onCompleteSetup, hotelFormData, isSubmit
     setLoading(true);
 
     try {
-      const idempotencyKey = `checkout-${Date.now()}-${Math.random()
-        .toString(36)
-        .slice(2, 10)}`;
+      const idempotencySource = buildIdempotencySource(hotelFormData, selectedPriceId);
+      const idempotencyKey = await sha256Hex(idempotencySource);
 
       const hotelToken =
         typeof window !== 'undefined'
           ? localStorage.getItem('phloii_token_auth')
           : null;
+
+      const geolocation = await getLatLongFromAddress({
+        streetAddress: hotelFormData?.streetaddress,
+        suiteUnitNumber: hotelFormData?.unitNumber,
+        city: hotelFormData?.city,
+        state: hotelFormData?.state,
+        pinCode: hotelFormData?.pincode,
+        country: hotelFormData?.country,
+      });
+
+      const hasAddressInput = [
+        hotelFormData?.streetaddress,
+        hotelFormData?.unitNumber,
+        hotelFormData?.city,
+        hotelFormData?.state,
+        hotelFormData?.pincode,
+        hotelFormData?.country,
+      ].some((field) => String(field || '').trim().length > 0);
+
+      if (hasAddressInput && !geolocation) {
+        throw new Error('Address is invalid. Please check the address and try again.');
+      }
 
       const formdata = new FormData();
 
@@ -83,6 +166,11 @@ function PaymentDetails({ col, setStep, onCompleteSetup, hotelFormData, isSubmit
       formdata.append('openTiming', hotelFormData?.opentiming || '');
       formdata.append('closeTiming', hotelFormData?.closetiming || '');
       formdata.append('customerServiceNumber', hotelFormData?.customerservicenumber || '');
+
+      if (geolocation) {
+        formdata.append('lat', String(geolocation.lat));
+        formdata.append('lng', String(geolocation.lng));
+      }
 
       (hotelFormData?.images || []).forEach((image) => {
         formdata.append('images', image);
