@@ -2,87 +2,57 @@
 
 import React, { useState, useEffect } from "react";
 import Button from "../Hotel/Button/Button";
+import MapSelector from "../MapSelector/MapSelector";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
 import { useDispatch } from "react-redux";
 
-const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
-
 const getPlaceAutocompleteSuggestions = async (input) => {
-  if (!GOOGLE_MAPS_API_KEY || !input) {
+  if (!input) {
     return [];
   }
 
-  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(input)}&key=${GOOGLE_MAPS_API_KEY}`;
-
   try {
-    const response = await fetch(url);
+    const response = await fetch('/api/maps/autocomplete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ input }),
+    });
     const data = await response.json();
 
     if (data?.predictions) {
       return data.predictions;
     }
     return [];
-  } catch {
+  } catch (error) {
+    console.error('Autocomplete error:', error);
     return [];
   }
 };
 
 const getPlaceDetails = async (placeId) => {
-  if (!GOOGLE_MAPS_API_KEY || !placeId) {
+  if (!placeId) {
     return null;
   }
 
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=formatted_address,address_components&key=${GOOGLE_MAPS_API_KEY}`;
-
   try {
-    const response = await fetch(url);
+    const response = await fetch('/api/maps/place-details', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ placeId }),
+    });
     const data = await response.json();
 
-    if (data?.result) {
-      const addressComponents = data.result.address_components || [];
-      const details = {
-        streetAddress: '',
-        city: '',
-        state: '',
-        country: '',
-        pinCode: '',
-      };
-
-      addressComponents.forEach((component) => {
-        const types = component.types;
-        if (types.includes('street_number')) {
-          details.streetAddress = component.long_name + ' ' + (details.streetAddress || '');
-        }
-        if (types.includes('route')) {
-          details.streetAddress += component.long_name;
-        }
-        if (types.includes('locality')) {
-          details.city = component.long_name;
-        }
-        if (types.includes('administrative_area_level_1')) {
-          details.state = component.long_name;
-        }
-        if (types.includes('country')) {
-          details.country = component.long_name;
-        }
-        if (types.includes('postal_code')) {
-          details.pinCode = component.long_name;
-        }
-      });
-
-      return details;
+    if (data?.details) {
+      return data.details;
     }
     return null;
-  } catch {
+  } catch (error) {
+    console.error('Place details error:', error);
     return null;
   }
 };
 
 const getLatLongFromAddress = async (address) => {
-  if (!GOOGLE_MAPS_API_KEY) {
-    return null;
-  }
-
   const formattedAddress = [
     address?.streetAddress,
     address?.suiteUnitNumber,
@@ -99,23 +69,21 @@ const getLatLongFromAddress = async (address) => {
     return null;
   }
 
-  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(formattedAddress)}&key=${GOOGLE_MAPS_API_KEY}`;
-
   try {
-    const response = await fetch(url);
+    const response = await fetch('/api/maps/geocode', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ address: formattedAddress }),
+    });
     const data = await response.json();
 
-    if (!response.ok || data?.status !== 'OK') {
+    if (!response.ok || !data?.lat || !data?.lng) {
       return null;
     }
 
-    const location = data?.results?.[0]?.geometry?.location;
-    if (!location) {
-      return null;
-    }
-
-    return { lat: location.lat, lng: location.lng };
-  } catch {
+    return { lat: data.lat, lng: data.lng };
+  } catch (error) {
+    console.error('Geocode error:', error);
     return null;
   }
 };
@@ -138,10 +106,21 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   const [suggestions, setSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [autocompleteLoading, setAutocompleteLoading] = useState(false)
+  const [showMap, setShowMap] = useState(false)
+  const [mapLocation, setMapLocation] = useState(null)
 
   const clearAddressValidation = () => {
     setAddressValidationMessage('')
     setAddressValidationType('')
+  }
+  
+  const handleMapLocationSelect = (locationData) => {
+    setMapLocation(locationData)
+    if (locationData.streetAddress) setStreetAddress(locationData.streetAddress)
+    if (locationData.city) setCity(locationData.city)
+    if (locationData.state) setState(locationData.state)
+    if (locationData.country) setCountry(locationData.country)
+    if (locationData.pinCode) setPincode(locationData.pinCode)
   }
 
   // Debounced autocomplete handler
@@ -150,8 +129,11 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
       if (streetaddress && streetaddress.length > 2) {
         setAutocompleteLoading(true)
         const results = await getPlaceAutocompleteSuggestions(streetaddress)
+        console.log('Autocomplete results:', results)
         setSuggestions(results)
-        setShowSuggestions(true)
+        if (results && results.length > 0) {
+          setShowSuggestions(true)
+        }
         setAutocompleteLoading(false)
       } else {
         setSuggestions([])
@@ -322,7 +304,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
           </div>
         </div> */}
         <div className={col}>
-          <div className="mb-3" style={{ position: 'relative' }}>
+          <div className="mb-3" style={{ position: 'relative', overflow: 'visible' }}>
             <label htmlFor="email" className="form-label cmn_label">
               Street Address
             </label>
@@ -333,8 +315,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               value={streetaddress}
               onChange={(e) => { setStreetAddress(e.target.value); setAddressError(''); clearAddressValidation() }}
               style={addressError ? { border: "1px solid #ff00009c" } : {}}
-              onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
-              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
             />
             {autocompleteLoading && (
               <span style={{ fontSize: "12px", color: "#666" }}>
@@ -347,31 +328,37 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
                 top: '100%',
                 left: 0,
                 right: 0,
-                backgroundColor: '#fff',
-                border: '1px solid #ddd',
+                backgroundColor: '#ffffff',
+                border: '1px solid #cccccc',
                 borderRadius: '4px',
-                zIndex: 10,
-                maxHeight: '200px',
+                zIndex: 1000,
+                maxHeight: '300px',
                 overflowY: 'auto',
-                marginTop: '4px'
+                marginTop: '2px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
               }}>
                 {suggestions.map((suggestion, index) => (
                   <div
                     key={index}
                     onClick={() => handlePlaceSelection(suggestion.place_id)}
                     style={{
-                      padding: '8px 12px',
+                      padding: '10px 12px',
                       cursor: 'pointer',
-                      borderBottom: index < suggestions.length - 1 ? '1px solid #eee' : 'none',
-                      _hover: { backgroundColor: '#f5f5f5' }
+                      borderBottom: index < suggestions.length - 1 ? '1px solid #eeeeee' : 'none',
+                      backgroundColor: '#ffffff',
+                      transition: 'background-color 0.2s'
                     }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = '#f5f5f5'}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = '#fff'}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#f5f5f5';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#ffffff';
+                    }}
                   >
-                    <div style={{ fontSize: "14px", color: "#333" }}>
+                    <div style={{ fontSize: "14px", color: "#333333", fontWeight: '500', marginBottom: '2px' }}>
                       {suggestion.main_text}
                     </div>
-                    <div style={{ fontSize: "12px", color: "#999" }}>
+                    <div style={{ fontSize: "12px", color: "#888888" }}>
                       {suggestion.secondary_text}
                     </div>
                   </div>
@@ -382,6 +369,32 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               <span style={addressError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
                 {addressError}
               </span>
+            )}
+            
+            <button
+              type="button"
+              onClick={() => setShowMap(!showMap)}
+              style={{
+                marginTop: '10px',
+                padding: '8px 16px',
+                backgroundColor: '#007bff',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '14px',
+              }}
+            >
+              {showMap ? '↑ Hide Map' : '↓ Select on Map'}
+            </button>
+            
+            {showMap && (
+              <MapSelector
+                onLocationSelect={handleMapLocationSelect}
+                initialLat={mapLocation?.lat}
+                initialLng={mapLocation?.lng}
+                streetAddress={streetaddress}
+              />
             )}
           </div>
         </div>
