@@ -4,7 +4,7 @@ import '../../../onboarding/onboard.css'
 import OnBoardingSteps from '../../../onboarding/onBoardingSteps'
 
 export async function generateMetadata({ params }) {
-  const { hotelId, name } = params;
+  const { hotelId, name } = await params;
   const decodedName = decodeURIComponent(name)
 
   const metadata = {
@@ -18,8 +18,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-const Page = ({ params }) => {
-  const { hotelId } = params
+const Page = async ({ params }) => {
+  const { hotelId } = await params
   return (
     <SideBar>
       <div className='wrapper'>

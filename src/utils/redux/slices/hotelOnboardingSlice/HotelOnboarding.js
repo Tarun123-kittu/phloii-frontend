@@ -31,6 +31,8 @@ export const onboard_hotel = createAsyncThunk(
       closetiming,
       customerservicenumber,
       images,
+      lat,
+      lng,
     },
     thunkAPI
   ) => {
@@ -61,6 +63,8 @@ export const onboard_hotel = createAsyncThunk(
       formdata.append("openTiming", opentiming);
       formdata.append("closeTiming", closetiming);
       formdata.append("customerServiceNumber", customerservicenumber);
+      if (lat != null) formdata.append("lat", String(lat));
+      if (lng != null) formdata.append("lng", String(lng));
       images.forEach((image) => {
         formdata.append("images", image);
       });

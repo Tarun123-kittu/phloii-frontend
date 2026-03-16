@@ -48,6 +48,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const [citiesList, setCitiesList] = useState([])
   const [atmosphere_description, setAtmosphere_description] = useState('')
   const [customerServiceNumber, setCustomerServiceNumber] = useState('')
+  const [geolocation, setGeolocation] = useState(null)
   const all_countries = useSelector((store) => store.ALL_COUNTRIES?.data?.data)
   const all_cities = useSelector((store) => store.ALL_CITIES)
   const is_hotel_verified = useSelector((store) => store.ONBOARD_HOTEl)
@@ -132,6 +133,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
 
   const handleOnboardHotel = () => {
     dispatch(onboard_hotel({
+      ...(geolocation ? { lat: geolocation.lat, lng: geolocation.lng } : {}),
       establishmentname: establishmentname,
       establishedtype: establishedtype,
       streetaddress: streetaddress,
@@ -141,7 +143,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       city: city,
       pincode: pincode,
       ownername: ownername,
-      ownerphone: ownerPhone.replace('+', ''),
+      ownerphone: ownerPhone && ownerPhone.length > 4 ? String(ownerPhone).replace('+', '') : '',
       webSitelink: websiteLink,
       owneremail: owneremail,
       whyphloii: whyphloii,
@@ -153,7 +155,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       atmosphere_description: atmosphere_description,
       opentiming: openTiming,
       closetiming: closeTiming,
-      customerservicenumber: customerServiceNumber.replace('+', ''),
+      customerservicenumber: String(customerServiceNumber).replace('+', ''),
       images: images,
     }))
   }
@@ -161,6 +163,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
   const updateHotel = () => {
     if (hotelId) {
       dispatch(update_hotel_details({
+        ...(geolocation ? { lat: geolocation.lat, lng: geolocation.lng } : {}),
         hotelId: hotelId,
         establishmentname: establishmentname,
         establishedtype: establishedtype,
@@ -171,7 +174,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
         city: city,
         pincode: pincode,
         ownername: ownername,
-        ownerphone: ownerPhone.replace('+', ''),
+        ownerphone: ownerPhone && ownerPhone.length > 4 ? String(ownerPhone).replace('+', '') : '',
         webSitelink: websiteLink,
         owneremail: owneremail,
         whyphloii: whyphloii,
@@ -183,7 +186,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
         atmosphere_description: atmosphere_description,
         opentiming: openTiming,
         closetiming: closeTiming,
-        customerservicenumber: customerServiceNumber.replace('+', ''),
+        customerservicenumber: String(customerServiceNumber).replace('+', ''),
         images: images,
       }))
     }
@@ -278,7 +281,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
     city: city,
     pincode: pincode,
     ownername: ownername,
-    ownerphone: ownerPhone.replace('+', ''),
+    ownerphone: ownerPhone && ownerPhone.length > 4 ? String(ownerPhone).replace('+', '') : '',
     webSitelink: websiteLink,
     owneremail: owneremail,
     whyphloii: whyphloii,
@@ -290,7 +293,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
     atmosphere_description: atmosphere_description,
     opentiming: openTiming,
     closetiming: closeTiming,
-    customerservicenumber: customerServiceNumber.replace('+', ''),
+    customerservicenumber: String(customerServiceNumber).replace('+', ''),
     images: images,
   }
 
@@ -333,7 +336,7 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       </div>
 
 
-      {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} setCity={setCity} city={city} setCitiesList={setCitiesList} citiesList={citiesList} selected_hotel_details={selected_hotel_details} />}
+      {step === 1 && <EstablishmentDetails col={col} setStep={setStep} establishmentname={establishmentname} setEstablishmentname={setEstablishmentname} establishedtype={establishedtype} setEstablishedtype={setEstablishedtype} streetaddress={streetaddress} setStreetAddress={setStreetAddress} unitNumber={unitNumber} setUnitNumber={setUnitNumber} country={country} setCountry={setCountry} state={state} setState={setState} pincode={pincode} setPincode={setPincode} all_countries={all_countries} setCity={setCity} city={city} setCitiesList={setCitiesList} citiesList={citiesList} selected_hotel_details={selected_hotel_details} setGeolocation={setGeolocation} />}
       {step === 2 && <PersonalDetails col={col} setStep={setStep} ownername={ownername} setOwnername={setOwnername} ownerPhone={ownerPhone} setOwnerPhone={setOwnerPhone} websiteLink={websiteLink} setWebsiteLink={setWebsiteLink} owneremail={owneremail} setOwnerEmail={setOwnerEmail} />}
       {step === 3 && <WhyPhloiiVerified col={col} setStep={setStep} whyphloii={whyphloii} setWhyphloii={setWhyphloii} uniquefeatures={uniquefeatures} setUniqueFeatures={setUniqueFeatures} inpersonvisit={inpersonvisit} setInpersonvisit={setInpersonvisit} safeWord={safeWord} setSafeWord={setSafeWord} images={images} setImages={setImages} handleOnboardHotel={handleOnboardHotel} is_hotel_verified={is_hotel_verified} setFood={setFood} food={food} setServiceValues={setServiceValues} serviceValues={serviceValues} atmosphere={atmosphere} setAtmosphere={setAtmosphere} openTiming={openTiming} setOpenTiming={setOpenTiming} closeTiming={closeTiming} setCloseTiming={setCloseTiming} customerServiceNumber={customerServiceNumber} setCustomerServiceNumber={setCustomerServiceNumber} hotelId={hotelId} updateHotel={updateHotel} is_hotel_updated={is_hotel_updated} setAtmosphere_description={setAtmosphere_description} atmosphere_description={atmosphere_description} setAdditional_information={setAdditional_information} additional_information={additional_information} hasPaymentStep={!hotelId} />}
       {step === 4 && <PaymentDetails col={col} setStep={setStep} onCompleteSetup={handleOnboardHotel} hotelFormData={hotelFormData} isSubmitting={is_hotel_verified?.status === "Loading"} />}

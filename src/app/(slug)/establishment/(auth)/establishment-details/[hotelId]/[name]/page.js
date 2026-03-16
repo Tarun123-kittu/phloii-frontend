@@ -1,7 +1,7 @@
 import HotelDetailsComponent from '@/Component/hotelDetails/HotelDetails';
 
 export async function generateMetadata({ params }) {
-    const { hotelId, name } = params;
+    const { hotelId, name } = await params;
     const decodedName = decodeURIComponent(name)
 
     const metadata = {
@@ -15,8 +15,8 @@ export async function generateMetadata({ params }) {
     };
 }
 
-const HotelDetails = ({ params }) => {
-    const { hotelId } = params;
+const HotelDetails = async ({ params }) => {
+    const { hotelId } = await params;
 
     return <HotelDetailsComponent hotelId={hotelId} />;
 };

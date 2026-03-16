@@ -354,7 +354,7 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                 </button>
                                 <button onClick={() => handleDelete(hotel_details?.hotel?._id)}>
                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.16683 5.41667V8.91667M4.8335 5.41667V8.91667M2.50016 3.08333V10.0833C2.50016 10.3928 2.62308 10.6895 2.84187 10.9083C3.06066 11.1271 3.35741 11.25 3.66683 11.25H8.3335C8.64292 11.25 8.93966 11.1271 9.15845 10.9083C9.37725 10.6895 9.50016 10.3928 9.50016 10.0833V3.08333M1.3335 3.08333H10.6668M3.0835 3.08333L4.25016 0.75H7.75016L8.91683 3.08333" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.16683 5.41667V8.91667M4.8335 5.41667V8.91667M2.50016 3.08333V10.0833C2.50016 10.3928 2.62308 10.6895 2.84187 10.9083C3.06066 11.1271 3.35741 11.25 3.66683 11.25H8.3335C8.64292 11.25 8.93966 11.1271 9.15845 10.9083C9.37725 10.6895 9.50016 10.3928 9.50016 10.0833V3.08333M1.3335 3.08333H10.6668M3.0835 3.08333L4.25016 0.75H7.75016L8.91683 3.08333" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                     <span className='text-light ms-2' >Delete</span>
                                 </button>
@@ -365,8 +365,12 @@ const HotelDetailsComponent = ({ hotelId }) => {
 
                         </div>
                         <ul className='owner_details'>
-                            <li><img src="/assets/mobile_icon.svg" alt="" /> <a href={`tel:${hotel_details?.hotel?.ownerDetails?.ownerPhone}`}>{"+" + hotel_details?.hotel?.ownerDetails?.ownerPhone}</a></li>
-                            <li><img src="/assets/message_icon.svg" alt="" /> <a href={`mailto:${hotel_details?.hotel?.ownerDetails?.ownerEmail}`}>{hotel_details?.hotel?.ownerDetails?.ownerEmail}</a></li>
+                            {hotel_details?.hotel?.ownerDetails?.ownerPhone && (
+                                <li><img src="/assets/mobile_icon.svg" alt="" /> <a href={`tel:+${hotel_details.hotel.ownerDetails.ownerPhone}`}>{`+${hotel_details.hotel.ownerDetails.ownerPhone}`}</a></li>
+                            )}
+                            {hotel_details?.hotel?.ownerDetails?.ownerEmail && (
+                                <li><img src="/assets/message_icon.svg" alt="" /> <a href={`mailto:${hotel_details.hotel.ownerDetails.ownerEmail}`}>{hotel_details.hotel.ownerDetails.ownerEmail}</a></li>
+                            )}
                             {hotel_details?.hotel?.ownerDetails?.websiteLink && <li><img src="/assets/globe_icon.svg" alt="" /> <Link
                                 target="_blank"
                                 rel="noopener noreferrer"

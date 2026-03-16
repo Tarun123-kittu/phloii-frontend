@@ -12,17 +12,12 @@ const PersonalDetails = ({ col, setStep, ownername, setOwnername, ownerPhone, se
   const [websiteError, setWebsiteError] = useState('')
   const [phoneError, setPhoneError] = useState('')
   const handleForward = () => {
-    if (!ownername && !ownerPhone && !owneremail) {
+    if (!ownername && !owneremail) {
       setNameError("Please enter owner name")
-      setPhoneError("Please enter owner phone number")
       setEmailError("Please enter owner email")
     }
     if (!ownername) {
       setNameError("Please enter owner name")
-      return
-    }
-    if (!ownerPhone) {
-      setPhoneError("Please enter owner phone number")
       return
     }
     if (websiteError) {

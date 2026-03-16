@@ -172,7 +172,7 @@ const SideBar = ({ children }) => {
           <ul className="m-0 h-100 d-flex flex-column flex-grow-1">
             {SidebarMenuItems &&
               SidebarMenuItems.map((menu, index) => {
-                const isActive = typeof window !== "undefined" && localStorage.getItem('sidebar_index') == index;
+                const isActive = activeIndex == index;
                 return (
                   <li
                     key={index}

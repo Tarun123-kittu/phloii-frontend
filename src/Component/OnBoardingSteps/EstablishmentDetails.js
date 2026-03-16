@@ -5,8 +5,51 @@ import Button from "../Hotel/Button/Button";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
 import { useDispatch } from "react-redux";
 
+const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
+const getLatLongFromAddress = async (address) => {
+  if (!GOOGLE_MAPS_API_KEY) {
+    return null;
+  }
 
-const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries, setCity, city,citiesList,selected_hotel_details}) => {
+  const formattedAddress = [
+    address?.streetAddress,
+    address?.suiteUnitNumber,
+    address?.city,
+    address?.state,
+    address?.pinCode,
+    address?.country,
+  ]
+    .map((part) => String(part || '').trim())
+    .filter(Boolean)
+    .join(', ');
+
+  if (!formattedAddress) {
+    return null;
+  }
+
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(formattedAddress)}&key=${GOOGLE_MAPS_API_KEY}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!response.ok || data?.status !== 'OK') {
+      return null;
+    }
+
+    const location = data?.results?.[0]?.geometry?.location;
+    if (!location) {
+      return null;
+    }
+
+    return { lat: location.lat, lng: location.lng };
+  } catch {
+    return null;
+  }
+};
+
+
+const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries, setCity, city,citiesList,selected_hotel_details, setGeolocation}) => {
   const [states, setStates] = useState([])
   const dispatch = useDispatch()
   const [establishmentnameError, setEstablishmentError] = useState('')
@@ -17,7 +60,18 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   const [stateError, setStateError] = useState('')
   const [cityError,setCityError] = useState('')
   const [pincodeError, setPincodeError] = useState('')
-  const handleForward = () => {
+  const [addressValidationMessage, setAddressValidationMessage] = useState('')
+  const [addressValidationType, setAddressValidationType] = useState('')
+  const [isValidatingAddress, setIsValidatingAddress] = useState(false)
+
+  const clearAddressValidation = () => {
+    setAddressValidationMessage('')
+    setAddressValidationType('')
+  }
+
+  const handleForward = async () => {
+    if (isValidatingAddress) return
+
     if (!establishmentname && !establishedtype && !streetaddress && !unitNumber && !country && !state && !pincode) {
       setEstablishmentError("Please enter the establishment name")
       // setEstablishmentTypeError("Please Select the establishment type")
@@ -59,7 +113,35 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
       setPincodeError("Please enter the pincode")
       return
     }
-    setStep(2)
+
+    setIsValidatingAddress(true)
+    clearAddressValidation()
+
+    try {
+      const geolocation = await getLatLongFromAddress({
+        streetAddress: streetaddress,
+        suiteUnitNumber: unitNumber,
+        city,
+        state,
+        pinCode: pincode,
+        country,
+      })
+
+      if (!geolocation) {
+        setAddressError("Address is invalid. Please check the address.")
+        setAddressValidationMessage("Address is invalid. Please check and try again.")
+        setAddressValidationType('error')
+        return
+      }
+
+      setAddressError('')
+      setAddressValidationMessage("Address is valid.")
+      setAddressValidationType('success')
+      if (setGeolocation) setGeolocation(geolocation)
+      setStep(2)
+    } finally {
+      setIsValidatingAddress(false)
+    }
   }
   // const handleBackword = () => {
   //   setStep(1)
@@ -134,7 +216,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               className="form-control cmn_input"
               placeholder="Enter street address"
               value={streetaddress}
-              onChange={(e) => { setStreetAddress(e.target.value); setAddressError('') }}
+              onChange={(e) => { setStreetAddress(e.target.value); setAddressError(''); clearAddressValidation() }}
               style={addressError ? { border: "1px solid #ff00009c" } : {}}
             />
             {addressError && (
@@ -159,6 +241,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
                 if (/^\d*$/.test(value)) {
                   setUnitNumber(value);
                   setUnitNumberError('');
+                  clearAddressValidation();
                 }
               }}
               style={unitnumberError ? { border: "1px solid #ff00009c" } : {}}
@@ -177,13 +260,13 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               Country
             </label>
             <select
-              class="form-select cmn-select"
+              className="form-select cmn-select"
               aria-label="Default select example"
-              onChange={(e) => { setCountry(e.target.value); setCountryError('') }}
+              onChange={(e) => { setCountry(e.target.value); setCountryError(''); clearAddressValidation() }}
               style={countryError ? { border: "1px solid #ff00009c" } : {}}
               value={country}
             >
-              <option selected value="">Select country</option>
+              <option value="">Select country</option>
               {all_countries?.map((country, i) => (
                 <option key={i} value={country?.name}>{country?.name}</option>
 
@@ -204,12 +287,12 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
             <select
               className="form-select cmn-select"
               aria-label="Default select example"
-              onChange={(e) => { setState(e.target.value); setStateError('') }}
+              onChange={(e) => { setState(e.target.value); setStateError(''); clearAddressValidation() }}
               style={stateError ? { border: "1px solid #ff00009c" } : {}}
               value={state}
               disabled={country === ""}
             >
-              <option selected>Select state</option>
+              <option value="">Select state</option>
               {states?.map((state, i) => (
                 <option key={i} value={state?.name}>{state?.name}</option>
               ))}
@@ -227,14 +310,14 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               City
             </label>
             <select
-              class="form-select cmn-select"
+              className="form-select cmn-select"
               aria-label="Default select example"
-              onChange={(e) => { setCity(e.target.value); setCityError('') }}
+              onChange={(e) => { setCity(e.target.value); setCityError(''); clearAddressValidation() }}
               style={cityError ? { border: "1px solid #ff00009c" } : {}}
               value={city}
               disabled={citiesList?.length === 0}
             >
-              <option>Select city</option>
+              <option value="">Select city</option>
               {citiesList?.map((city, i) => (
                 <option key={i} value={city}>{city}</option>
 
@@ -262,6 +345,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
                 if (/^\d*$/.test(value)) { // Regex to allow only digits
                   setPincode(value);
                   setPincodeError('');
+                  clearAddressValidation();
                 }
               }}
               style={pincodeError ? { border: "1px solid #ff00009c" } : {}}
@@ -277,8 +361,17 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
 
       <div className="d-flex justify-content-end gap-3">
         {/* <Button buttonClick={handleBackword} text="Previous" className="grey_btn" /> */}
-        <Button buttonClick={handleForward} text="Next" />
+        <Button
+          buttonClick={handleForward}
+          text={isValidatingAddress ? "Validating..." : "Next"}
+          loading={{ status: isValidatingAddress ? "Loading" : "Idle" }}
+        />
       </div>
+      {addressValidationMessage && (
+        <div style={{ color: addressValidationType === 'success' ? '#39d98a' : '#ff00009c', fontSize: '12px', marginTop: '8px' }}>
+          {addressValidationMessage}
+        </div>
+      )}
     </div>
   );
 };
