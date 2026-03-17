@@ -26,7 +26,8 @@ const CommonModal = ({ show, onClose, children, className, closeOnOutsideClick =
       tabIndex="-1"
       role="dialog"
       style={{
-        background: show ? "rgb(255 255 255 / 50%)" : "none",
+        backgroundColor: show ? "rgba(0, 0, 0, 0.75)" : "none",
+        backdropFilter: show ? "blur(4px)" : "none",
         display: show ? "flex" : "none",
         alignItems: "center",
         justifyContent: "center",

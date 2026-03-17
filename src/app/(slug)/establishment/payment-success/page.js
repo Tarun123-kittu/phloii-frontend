@@ -8,6 +8,8 @@ export default function PaymentSuccessPage() {
   const router = useRouter();
   const [status, setStatus] = useState('loading');
   const [error, setError] = useState('');
+  const [countdown, setCountdown] = useState(30);
+  const [redirectPath, setRedirectPath] = useState('/establishment');
 
   useEffect(() => {
     const confirmSubscription = async () => {
@@ -62,9 +64,8 @@ export default function PaymentSuccessPage() {
         const payload = data.data || data;
         const redirectUrl = payload.redirectUrl;
 
-        if (redirectUrl && typeof window !== 'undefined') {
-          window.location.href = redirectUrl;
-          return;
+        if (redirectUrl) {
+          setRedirectPath(redirectUrl);
         }
 
         setStatus('done');
@@ -76,6 +77,20 @@ export default function PaymentSuccessPage() {
 
     confirmSubscription();
   }, [router]);
+
+  useEffect(() => {
+    let timer;
+    if (status === 'done' && countdown > 0) {
+      timer = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+    } else if (status === 'done' && countdown === 0) {
+      if (typeof window !== 'undefined') {
+        window.location.href = redirectPath;
+      }
+    }
+    return () => clearInterval(timer);
+  }, [status, countdown, redirectPath]);
 
   const isLoading = status === 'loading';
 
@@ -92,12 +107,28 @@ export default function PaymentSuccessPage() {
           </>
         )}
 
-        {!isLoading && !error && (
+        {!isLoading && !error && status === 'done' && (
           <>
             <h1 className="h4 mb-3">Payment confirmed</h1>
             <p className="text-muted">
               Your payment was successful. You can now continue using Phloii.
             </p>
+            <div className="mt-4 p-3 bg-light border rounded text-center">
+              <p className="mb-0">
+                Redirecting to your dashboard in <strong>{countdown}</strong> seconds...
+              </p>
+            </div>
+            <button
+              type="button"
+              className="cmn_btn w-100 mt-3"
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.location.href = redirectPath;
+                }
+              }}
+            >
+              Go to Dashboard Now
+            </button>
           </>
         )}
 

@@ -102,7 +102,7 @@ const SideBar = ({ children }) => {
     dispatch(toggle_sidebar(val))
   }
   return (
-    <div className="side_bar_wrapper">
+    <div className="side_bar_wrapper" style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#000' }}>
       {showModal && <ResetModal show={showModal}
         title="Modal Title"
         body="This is the modal content."
@@ -223,7 +223,21 @@ const SideBar = ({ children }) => {
           </ul>
         </div>
       </div>
-      {children}
+      <div
+        className="main_content_container"
+        style={{
+          position: 'relative',
+          flexGrow: 1,
+          backgroundColor: '#000',
+          minHeight: '100vh',
+          marginLeft: deviceType === 'Desktop' ? 'var(--sidebar-width, 230px)' : '0',
+          marginTop: deviceType === 'Mobile' ? '50px' : '76px', // Dynamic header height
+          width: deviceType === 'Desktop' ? 'calc(100% - var(--sidebar-width, 230px))' : '100%',
+          overflow: 'hidden'
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 };
