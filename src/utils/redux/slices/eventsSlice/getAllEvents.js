@@ -12,7 +12,7 @@ export const get_all_events = createAsyncThunk("get_all_events", async ({ hotelI
             redirect: "follow"
         };
 
-        const response = await fetch(`${API_CONFIG.BASE_URL}/hotel/getAllEvents?hotelId=${hotelId}dsds`, requestOptions)
+        const response = await fetch(`${API_CONFIG.BASE_URL}/hotel/getAllEvents?hotelId=${hotelId}`, requestOptions)
         if (!response.ok) {
             const errorMessage = await response.json();
             if (errorMessage) {
