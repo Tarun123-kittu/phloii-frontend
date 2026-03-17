@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import CommonModal from '../Modal/commonModal'
 import Button from '../Hotel/Button/Button'
 import Image from 'next/image'
@@ -9,6 +10,7 @@ import toast from 'react-hot-toast'
 import { changePassword, clear_change_password_state } from '@/utils/redux/slices/authSlice/changePassword'
 
 const ResetContent = ({ show, onClose }) => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const [password, setPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -19,7 +21,7 @@ const ResetContent = ({ show, onClose }) => {
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState('')
   const isPasswordChanged = useSelector((store) => store.CHANGE_PASSWORD)
-   const [confirmPasswrdError, setConfirmPasswrdError] = useState('')
+  const [confirmPasswrdError, setConfirmPasswrdError] = useState('')
   console.log(isPasswordChanged, "isPasswordChanged isPasswordChanged")
 
   const handleChangePassword = () => {
@@ -53,9 +55,17 @@ const ResetContent = ({ show, onClose }) => {
 
   useEffect(() => {
     if (isPasswordChanged.status === "Success") {
-      toast.success("Password changed successfully !!")
-      dispatch(clear_change_password_state())
-      onClose()
+      toast.success("Password changed successfully! Logging you out...");
+
+      // Clear all authentication data
+      localStorage.clear();
+      document.cookie = "phloii_token_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax";
+
+      dispatch(clear_change_password_state());
+      onClose();
+
+      // Redirect to login page
+      router.push("/establishment/login");
     }
     if (isPasswordChanged.status === "Error") {
       toast.error(isPasswordChanged?.error?.message)
@@ -65,37 +75,37 @@ const ResetContent = ({ show, onClose }) => {
   const handlePasswordChange = (e) => {
     const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const newPassword = e.target.value;
-    
+
     setNewPassword(newPassword);
     setNewPasswordError(""); // Corrected the reset for error message
-  
+
     if (!passwordPattern.test(newPassword)) {
       setNewPasswordError(
         "Password must be at least 8 characters long, include one uppercase letter, one number, and one special character."
       );
       return;
     }
-  
+
     if (confirmPassword && newPassword !== confirmPassword) {
       setConfirmPasswrdError("Confirm password doesn't match with password");
     } else {
       setConfirmPasswrdError("");
     }
   };
-  
+
   const handleConfirmPasswordChange = (e) => {
     const newConfirmPassword = e.target.value;
-    
+
     setConfirmPassword(newConfirmPassword);
     setConfirmPasswrdError("");
-  
+
     if (newPassword && newConfirmPassword !== newPassword) {
       setConfirmPasswrdError("Confirm password doesn't match with password");
     } else {
       setConfirmPasswrdError("");
     }
   };
-  
+
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);

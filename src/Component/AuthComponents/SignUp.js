@@ -81,7 +81,7 @@ const SignUP = () => {
       toast.error("Please review and accept the Terms of Service.")
       return
     }
-    dispatch(hotel_signup({ username, email:trimmedEmail, password, phone, profileImage }));
+    dispatch(hotel_signup({ username, email: trimmedEmail, password, phone, profileImage }));
   };
 
   useEffect(() => {
@@ -101,6 +101,9 @@ const SignUP = () => {
       localStorage.setItem("phloii_token_auth", is_loggedIn?.data?.data);
       localStorage.setItem("phloii_user", is_loggedIn?.data?.email);
       localStorage.setItem("phloii_user_name", is_loggedIn?.data?.username);
+
+      // Set cookie for middleware support
+      document.cookie = `phloii_token_auth=${is_loggedIn?.data?.data}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
       if (is_loggedIn?.data?.isOnboradingDone) {
         router.push("/establishment");
       } else {

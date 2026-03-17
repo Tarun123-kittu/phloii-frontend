@@ -89,7 +89,7 @@ const getLatLongFromAddress = async (address) => {
 };
 
 
-const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries, setCity, city,citiesList,selected_hotel_details, setGeolocation}) => {
+const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmentname, establishedtype, setEstablishedtype, streetaddress, setStreetAddress, unitNumber, setUnitNumber, country, setCountry, state, setState, pincode, setPincode, all_countries, setCity, city, citiesList, setCitiesList, selected_hotel_details, setGeolocation }) => {
   const [states, setStates] = useState([])
   const dispatch = useDispatch()
   const [establishmentnameError, setEstablishmentError] = useState('')
@@ -98,7 +98,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   const [unitnumberError, setUnitNumberError] = useState('')
   const [countryError, setCountryError] = useState('')
   const [stateError, setStateError] = useState('')
-  const [cityError,setCityError] = useState('')
+  const [cityError, setCityError] = useState('')
   const [pincodeError, setPincodeError] = useState('')
   const [addressValidationMessage, setAddressValidationMessage] = useState('')
   const [addressValidationType, setAddressValidationType] = useState('')
@@ -109,19 +109,45 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   const [showMap, setShowMap] = useState(false)
   const [mapLocation, setMapLocation] = useState(null)
 
+  // Track city from map to persist it after API resets citiesList
+  const [pendingCity, setPendingCity] = useState(null)
+
   const clearAddressValidation = () => {
     setAddressValidationMessage('')
     setAddressValidationType('')
   }
-  
+
   const handleMapLocationSelect = (locationData) => {
     setMapLocation(locationData)
     if (locationData.streetAddress) setStreetAddress(locationData.streetAddress)
-    if (locationData.city) setCity(locationData.city)
+
+    // Auto-fill state and country first, as they drive the cities API
     if (locationData.state) setState(locationData.state)
     if (locationData.country) setCountry(locationData.country)
     if (locationData.pinCode) setPincode(locationData.pinCode)
+
+    // Handle city - append to list temporarily so the <select> element can bind to it
+    // before the backend API responds with the full list of cities for this state.
+    if (locationData.city) {
+      if (!citiesList?.includes(locationData.city) && typeof setCitiesList === 'function') {
+        setCitiesList([...(citiesList || []), locationData.city])
+      }
+      setCity(locationData.city);
+      setPendingCity(locationData.city); // remember to re-apply after API reset
+    }
   }
+
+  // Re-apply the city if the parent component's API call overwrites citiesList
+  // and blanks out the dropdown during the re-render.
+  useEffect(() => {
+    if (pendingCity && citiesList && citiesList.length > 0) {
+      if (!citiesList.includes(pendingCity) && typeof setCitiesList === 'function') {
+        setCitiesList([...citiesList, pendingCity]);
+      }
+      setCity(pendingCity);
+      setPendingCity(null); // Clear pending city once successfully applied
+    }
+  }, [citiesList, pendingCity, setCity, setCitiesList]);
 
   // Debounced autocomplete handler
   useEffect(() => {
@@ -224,13 +250,13 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
       const placeDetails = await getPlaceDetails(placeId)
       if (placeDetails) {
         const { streetAddress, city, state, country, pinCode } = placeDetails
-        
+
         if (streetAddress) setStreetAddress(streetAddress)
         if (city) setCity(city)
         if (state) setState(state)
         if (country) setCountry(country)
         if (pinCode) setPincode(pinCode)
-        
+
         clearAddressValidation()
       }
       setSuggestions([])
@@ -239,7 +265,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
       console.error('Error selecting place:', error)
     }
   }
-  
+
   // const handleBackword = () => {
   //   setStep(1)
   // }
@@ -250,7 +276,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
         setStates(countryData.states);
       }
     }
-  }, [country,selected_hotel_details]);
+  }, [country, selected_hotel_details]);
 
   const handleToggle = () => {
     dispatch(toggle_sidebar(false))
@@ -370,7 +396,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
                 {addressError}
               </span>
             )}
-            
+
             <button
               type="button"
               onClick={() => setShowMap(!showMap)}
@@ -387,7 +413,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
             >
               {showMap ? '↑ Hide Map' : '↓ Select on Map'}
             </button>
-            
+
             {showMap && (
               <MapSelector
                 onLocationSelect={handleMapLocationSelect}

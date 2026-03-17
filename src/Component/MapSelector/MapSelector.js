@@ -6,6 +6,8 @@ import { useJsApiLoader } from '@react-google-maps/api'
 
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''
 
+const libraries = ['places']
+
 const MapSelector = ({ onLocationSelect, initialLat, initialLng, streetAddress }) => {
   const [markerPosition, setMarkerPosition] = useState({
     lat: initialLat || 28.7041,
@@ -17,7 +19,7 @@ const MapSelector = ({ onLocationSelect, initialLat, initialLng, streetAddress }
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: GOOGLE_MAPS_API_KEY,
-    libraries: ['places'],
+    libraries,
   })
 
   useEffect(() => {

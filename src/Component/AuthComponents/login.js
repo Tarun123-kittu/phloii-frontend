@@ -61,7 +61,7 @@ const Login = () => {
       setPasswordError("Password is required");
       return;
     }
-    dispatch(hotel_login({ email : trimmedEmail, password }));
+    dispatch(hotel_login({ email: trimmedEmail, password }));
   };
 
   useEffect(() => {
@@ -71,6 +71,9 @@ const Login = () => {
       localStorage.setItem("phloii_user", is_loggedIn?.data?.email);
       localStorage.setItem("phloii_user_name", is_loggedIn?.data?.username);
       localStorage.setItem("phloii_onboarding_done", is_loggedIn?.data?.isOnboradingDone);
+
+      // Set cookie for middleware support
+      document.cookie = `phloii_token_auth=${is_loggedIn?.data?.data}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
       if (is_loggedIn?.data?.isOnboradingDone) {
         router.push("/establishment");
       } else {

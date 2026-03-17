@@ -1,6 +1,7 @@
 'use Client'
 
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import CommonModal from "../Modal/commonModal";
 import Button from "../Hotel/Button/Button";
 import Image from "next/image";
@@ -14,6 +15,7 @@ import { getProfile } from "@/utils/redux/slices/profileSlice/profile";
 import AvatarEditor from "react-avatar-editor";
 
 const ProfileContent = ({ show, onClose }) => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -24,6 +26,7 @@ const ProfileContent = ({ show, onClose }) => {
   const [profileImage, setProfileImage] = useState("")
   const [profileImageError, setProfileImageError] = useState("")
   const [previewImage, setPreviewImage] = useState("")
+  const initialEmailRef = useRef("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [scale, setScale] = useState(1);
   const [isImageChanged, setIsImageChanged] = useState(false)
@@ -37,6 +40,7 @@ const ProfileContent = ({ show, onClose }) => {
       setPreviewImage(profileDetails?.data?.image)
       setUsername(profileDetails?.data?.username)
       setEmail(profileDetails?.data?.email)
+      initialEmailRef.current = profileDetails?.data?.email;
       setPhone(profileDetails?.data?.phoneNumber?.toString())
     }
   }, [profileDetails])
@@ -120,10 +124,22 @@ const ProfileContent = ({ show, onClose }) => {
   useEffect(() => {
     if (isProfileUpdated?.status === "Success") {
       toast.success("Profile updated successfully")
-      localStorage.setItem("phloii_user_name",username)
-      dispatch(getProfile())
-      dispatch(clear_profile_update_slice())
-      onClose()
+
+      const emailChanged = email !== initialEmailRef.current;
+
+      if (emailChanged) {
+        toast.success("Email changed. Logging you out for security...");
+        localStorage.clear();
+        document.cookie = "phloii_token_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax";
+        dispatch(clear_profile_update_slice());
+        onClose();
+        router.push("/establishment/login");
+      } else {
+        localStorage.setItem("phloii_user_name", username)
+        dispatch(getProfile())
+        dispatch(clear_profile_update_slice())
+        onClose()
+      }
     }
     if (isProfileUpdated?.status === "Error") {
       toast.error(isProfileUpdated?.error?.message)
@@ -138,7 +154,7 @@ const ProfileContent = ({ show, onClose }) => {
           type: "image/png",
           lastModified: new Date().getTime(),
         });
-  
+
         const reader = new FileReader();
         reader.onloadend = () => {
           setIsImageChanged(true);
@@ -150,125 +166,125 @@ const ProfileContent = ({ show, onClose }) => {
       });
     }
   };
-  
 
 
-return (
-  <CommonModal show={show} onClose={onClose}>
-    <div className="">
-      {!isModalOpen ? <div className="profile_wrapper">
-        <div className="profile_image position-relative">
-          <div className="profile_image_upload position-relative">
 
-            {!isImageChanged ? <svg onClick={handleFileChange} className="position-absolute end-0 top-0" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="24" height="24" rx="12" fill="#FBB90D" />
-              <path d="M8.11763 8.82361H7.41176C7.03733 8.82361 6.67825 8.97235 6.41349 9.2371C6.14874 9.50186 6 9.86094 6 10.2354V16.5883C6 16.9627 6.14874 17.3218 6.41349 17.5865C6.67825 17.8513 7.03733 18 7.41176 18H13.7647C14.1391 18 14.4982 17.8513 14.7629 17.5865C15.0277 17.3218 15.1764 16.9627 15.1764 16.5883V15.8824" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M14.4705 7.41183L16.5881 9.52947M17.5658 8.53065C17.8438 8.25264 18 7.87558 18 7.48242C18 7.08926 17.8438 6.7122 17.5658 6.43419C17.2878 6.15618 16.9107 6 16.5175 6C16.1244 6 15.7473 6.15618 15.4693 6.43419L9.52936 12.353V14.4706H11.647L17.5658 8.53065Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-              :
-              <svg onClick={handleRemoveImage} className="position-absolute end-0 top-0 z-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  return (
+    <CommonModal show={show} onClose={onClose}>
+      <div className="">
+        {!isModalOpen ? <div className="profile_wrapper">
+          <div className="profile_image position-relative">
+            <div className="profile_image_upload position-relative">
+
+              {!isImageChanged ? <svg onClick={handleFileChange} className="position-absolute end-0 top-0" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="24" height="24" rx="12" fill="#FBB90D" />
-                <path d="M16.9119 18.0077L12.0039 13.092L7.09582 18.0077L6 16.9119L10.9158 12.0039L6 7.09582L7.09582 6L12.0039 10.9158L16.9119 6.00772L18 7.09582L13.092 12.0039L18 16.9119L16.9119 18.0077Z" fill="black" />
-              </svg>}
+                <path d="M8.11763 8.82361H7.41176C7.03733 8.82361 6.67825 8.97235 6.41349 9.2371C6.14874 9.50186 6 9.86094 6 10.2354V16.5883C6 16.9627 6.14874 17.3218 6.41349 17.5865C6.67825 17.8513 7.03733 18 7.41176 18H13.7647C14.1391 18 14.4982 17.8513 14.7629 17.5865C15.0277 17.3218 15.1764 16.9627 15.1764 16.5883V15.8824" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M14.4705 7.41183L16.5881 9.52947M17.5658 8.53065C17.8438 8.25264 18 7.87558 18 7.48242C18 7.08926 17.8438 6.7122 17.5658 6.43419C17.2878 6.15618 16.9107 6 16.5175 6C16.1244 6 15.7473 6.15618 15.4693 6.43419L9.52936 12.353V14.4706H11.647L17.5658 8.53065Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+                :
+                <svg onClick={handleRemoveImage} className="position-absolute end-0 top-0 z-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="24" height="24" rx="12" fill="#FBB90D" />
+                  <path d="M16.9119 18.0077L12.0039 13.092L7.09582 18.0077L6 16.9119L10.9158 12.0039L6 7.09582L7.09582 6L12.0039 10.9158L16.9119 6.00772L18 7.09582L13.092 12.0039L18 16.9119L16.9119 18.0077Z" fill="black" />
+                </svg>}
 
 
 
-            <input onChange={handleFileChange} type="file" className="form-control cmn_input" />
-            <img src={previewImage || "/assets/profile-circle.svg"} width={100} height={100} alt="profile_image" />
+              <input onChange={handleFileChange} type="file" className="form-control cmn_input" />
+              <img src={previewImage || "/assets/profile-circle.svg"} width={100} height={100} alt="profile_image" />
+            </div>
+
           </div>
+          <div className="profile_content">
+            <h3 className="main_heading">My Profile</h3>
+            <div className="auth_form">
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label cmn_label">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control cmn_input"
+                  placeholder="Name"
+                  value={username}
+                  onChange={(e) => { setUsername(e.target.value); setUsernameError('') }}
+                  style={usernameError ? { border: "1px solid #ff00009c" } : {}}
+                />
+                {usernameError && (
+                  <span style={usernameError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
+                    {usernameError}
+                  </span>
+                )}
+              </div>
 
-        </div>
-        <div className="profile_content">
-          <h3 className="main_heading">My Profile</h3>
-          <div className="auth_form">
-            <div className="mb-3">
-              <label htmlFor="name" className="form-label cmn_label">
-                Name
-              </label>
-              <input
-                type="text"
-                className="form-control cmn_input"
-                placeholder="Name"
-                value={username}
-                onChange={(e) => { setUsername(e.target.value); setUsernameError('') }}
-                style={usernameError ? { border: "1px solid #ff00009c" } : {}}
-              />
-              {usernameError && (
-                <span style={usernameError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
-                  {usernameError}
-                </span>
-              )}
-            </div>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label cmn_label">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="form-control cmn_input"
+                  placeholder="Enter Your Email"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); setEmailError('') }}
+                  style={emailError ? { border: "1px solid #ff00009c" } : {}}
+                />
+                {emailError && (
+                  <span style={emailError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
+                    {emailError}
+                  </span>
+                )}
+              </div>
 
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label cmn_label">
-                Email
-              </label>
-              <input
-                type="email"
-                className="form-control cmn_input"
-                placeholder="Enter Your Email"
-                value={email}
-                onChange={(e) => { setEmail(e.target.value); setEmailError('') }}
-                style={emailError ? { border: "1px solid #ff00009c" } : {}}
-              />
-              {emailError && (
-                <span style={emailError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
-                  {emailError}
-                </span>
-              )}
-            </div>
-
-            <div className="mb-3 steps_form p-0">
-              <label htmlFor="phone" className="form-label cmn_label">
-                Phone
-              </label>
-              <PhoneInput
-                defaultCountry="ua"
-                value={phone}
-                onChange={(phone) => { setPhone(phone); setPhoneError(""); }}
-                style={phoneError ? { border: "1px solid #ff00009c" } : {}}
-              />
-              {phoneError && (
-                <span style={phoneError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
-                  {phoneError}
-                </span>
-              )}
-            </div>
-            <div className="text-end">
-              <Button text="Cancel" className="grey_btn me-3" buttonClick={onClose} />
-              <Button text={'Update Profile'} buttonClick={handleSignUp} loading={isProfileUpdated} />
+              <div className="mb-3 steps_form p-0">
+                <label htmlFor="phone" className="form-label cmn_label">
+                  Phone
+                </label>
+                <PhoneInput
+                  defaultCountry="ua"
+                  value={phone}
+                  onChange={(phone) => { setPhone(phone); setPhoneError(""); }}
+                  style={phoneError ? { border: "1px solid #ff00009c" } : {}}
+                />
+                {phoneError && (
+                  <span style={phoneError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
+                    {phoneError}
+                  </span>
+                )}
+              </div>
+              <div className="text-end">
+                <Button text="Cancel" className="grey_btn me-3" buttonClick={onClose} />
+                <Button text={'Update Profile'} buttonClick={handleSignUp} loading={isProfileUpdated} />
+              </div>
             </div>
           </div>
         </div>
+          :
+          <div className="editor_modal">
+            <h3 className="text-center m-4 text-white">Edit your profile image</h3>
+            <AvatarEditor
+              ref={editorRef}
+              image={profileImage}
+              width={200}
+              height={200}
+              border={10}
+              color={[255, 255, 255, 0.6]}
+              scale={scale}
+              className="avatar_image"
+            />
+            <input
+              type="range"
+              min="-1"
+              max="3"
+              step="0.1"
+              value={scale}
+              onChange={(e) => setScale(parseFloat(e.target.value))}
+              className="image_editor_input"
+            />
+            <button className="btn_editor cmn_btn px-4" onClick={handleUpload}>Upload Image</button>
+          </div>}
       </div>
-        :
-        <div className="editor_modal">
-          <h3 className="text-center m-4 text-white">Edit your profile image</h3>
-          <AvatarEditor
-            ref={editorRef}
-            image={profileImage}
-            width={200}
-            height={200}
-            border={10}
-            color={[255, 255, 255, 0.6]}
-            scale={scale}
-            className="avatar_image"
-          />
-          <input
-            type="range"
-            min="-1"
-            max="3"
-            step="0.1"
-            value={scale}
-            onChange={(e) => setScale(parseFloat(e.target.value))}
-            className="image_editor_input"
-          />
-          <button className="btn_editor cmn_btn px-4" onClick={handleUpload}>Upload Image</button>
-        </div>}
-    </div>
-  </CommonModal>
-);
+    </CommonModal>
+  );
 };
 
 export default ProfileContent;

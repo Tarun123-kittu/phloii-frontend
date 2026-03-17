@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
 import ResetModal from "../ModalContent/resetContent";
 import ProfileContent from "../ModalContent/profileContent";
+import LogoutContent from "../ModalContent/logoutContent";
+import CommonModal from "../Modal/commonModal";
 import { getProfile } from "@/utils/redux/slices/profileSlice/profile";
 const useDeviceType = () => {
   const dispatch = useDispatch()
@@ -44,11 +46,11 @@ const useDeviceType = () => {
 const SideBar = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   const [currentPath, setCurrentPath] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
   const [userName, setUserName] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [toggle, setToggle] = useState(false)
   const [user, setUser] = useState(null);
   const pathname = usePathname();
@@ -64,17 +66,16 @@ const SideBar = ({ children }) => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if (localStorage.getItem("sidebar_index")) {
-        setActiveIndex(localStorage.getItem('sidebar_index'))
-      }
-      else {
-        localStorage.setItem("sidebar_index", JSON.stringify(activeIndex));
-      }
+      setCurrentPath(window.location.pathname);
     }
-  }, [])
+  }, []);
+
   const handleLogout = () => {
     localStorage.clear();
+    // Clear cookie for middleware support
+    document.cookie = "phloii_token_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax";
     router.push("/establishment/login");
+    setShowLogout(false);
   };
   const handleLogo = () => {
     router.push("/establishment");
@@ -88,22 +89,12 @@ const SideBar = ({ children }) => {
     setUser(storedUser);
   }, []);
 
-  useEffect(() => {
-    // Set the active index based on the current route
-    const activeItemIndex = SidebarMenuItems.findIndex((menu) => {
-      const isEstablishmentRoute = pathname.startsWith("/establishment");
-      return menu.path === "/establishment"
-        ? pathname === menu.path
-        : isEstablishmentRoute && pathname.includes(menu.path);
-    });
-    setActiveIndex(activeItemIndex);
-  }, [pathname, SidebarMenuItems]);
+  // No longer using manual index, logic is handled inline in the render
+
 
   const handleMenuClick = (index) => {
     if (typeof window !== "undefined") {
-      localStorage.setItem("sidebar_index", JSON.stringify(index));
       dispatch(toggle_sidebar(false));
-      setActiveIndex(index);
     }
   };
 
@@ -119,6 +110,14 @@ const SideBar = ({ children }) => {
       {showProfile && <ProfileContent show={showProfile}
         setShowProfile={setShowProfile}
         onClose={() => setShowProfile(false)} />}
+      {showLogout && (
+        <CommonModal show={showLogout} onClose={() => setShowLogout(false)}>
+          <LogoutContent
+            onConfirm={handleLogout}
+            onCancel={() => setShowLogout(false)}
+          />
+        </CommonModal>
+      )}
       <header className={`${sidebarState && 'toggle_header'} d-flex justify-content-end align-items-center`}>
         <div className={`${sidebarState ? 'd-none' : "d-block"} hamburger flex-grow-1`}>
           <svg onClick={() => handleToogle(true)} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -172,7 +171,9 @@ const SideBar = ({ children }) => {
           <ul className="m-0 h-100 d-flex flex-column flex-grow-1">
             {SidebarMenuItems &&
               SidebarMenuItems.map((menu, index) => {
-                const isActive = activeIndex == index;
+                const isActive = menu.path === "/establishment"
+                  ? (pathname === "/establishment" || pathname.startsWith("/establishment/establishment-details"))
+                  : pathname === menu.path;
                 return (
                   <li
                     key={index}
@@ -186,7 +187,7 @@ const SideBar = ({ children }) => {
                 );
               })}
             <li className="flex-grow-1"></li>
-            <li className="logout_btn" onClick={handleLogout}>
+            <li className="logout_btn" onClick={() => setShowLogout(true)}>
               <svg
                 width="24"
                 height="24"
