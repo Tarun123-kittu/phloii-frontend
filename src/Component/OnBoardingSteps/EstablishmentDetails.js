@@ -59,13 +59,15 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   const [addressValidationMessage, setAddressValidationMessage] = useState('')
   const [addressValidationType, setAddressValidationType] = useState('')
   const [isValidatingAddress, setIsValidatingAddress] = useState(false)
-  const [mapLocation, setMapLocation] = useState(() => {
+  const [mapLocation, setMapLocation] = useState(null);
+
+  // Initialize map location once selected_hotel_details is available
+  useEffect(() => {
     const hotel = selected_hotel_details?.data?.data?.hotel;
-    if (hotel?.lat && hotel?.lng) {
-      return { lat: parseFloat(hotel.lat), lng: parseFloat(hotel.lng) };
+    if (hotel?.lat && hotel?.lng && !mapLocation) {
+      setMapLocation({ lat: parseFloat(hotel.lat), lng: parseFloat(hotel.lng) });
     }
-    return null;
-  });
+  }, [selected_hotel_details, mapLocation]);
 
 
   // Track city from map to persist it after API resets citiesList
@@ -216,9 +218,11 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
       const countryData = all_countries?.find((el) => el.name === country);
       if (countryData?.states?.length > 0) {
         setStates(countryData.states);
+      } else {
+        setStates([]); // Reset if no states found
       }
     }
-  }, [country, selected_hotel_details]);
+  }, [country, all_countries]); // Added all_countries to trigger re-load when data arrives
 
   const handleToggle = () => {
     dispatch(toggle_sidebar(false))
@@ -374,9 +378,12 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               disabled={citiesList?.length === 0}
             >
               <option value="">Select city</option>
+              {/* Ensure pre-filled city is visible even if not in API list */}
+              {city && !citiesList?.includes(city) && (
+                <option value={city}>{city}</option>
+              )}
               {citiesList?.map((city, i) => (
                 <option key={i} value={city}>{city}</option>
-
               ))}
             </select>
             {pincodeError && (
