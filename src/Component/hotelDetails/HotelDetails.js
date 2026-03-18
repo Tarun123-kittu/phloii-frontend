@@ -458,27 +458,56 @@ const HotelDetailsComponent = ({ hotelId }) => {
                                                         </div>
                                                     </div>
                                                 </div> */}
-                                                <div class="event-card" onClick={() => { setShowEventModal(true); setEditable(true); setEventId(event?._id); setView(true) }} style={day < CurrentDay ? { opacity: 0.8, border: "1px solid #896262",cursor: "pointer" } : {cursor: "pointer"}}>
+                                                <div class="event-card" style={day < CurrentDay ? { opacity: 0.8, border: "1px solid #896262" } : {}}>
                                                     <img src={event?.image} alt="Event" width={30} height={30} />
                                                     <div class="event-info">
                                                         <div class="event-title">{event?.eventTitle}</div>
                                                         <div class="event-location">📅 {`${dayStart} ${months[monthStart - 1]} at ${convertTo12HourFormat(event?.eventStart.time)}`}</div>
                                                     </div>
-                                                    {/* <div onClick={() => { setViewEventDeleteModal(true); setEventId(event?._id) }} class="event-price"><svg
-                                                        width="18"
-                                                        height="20"
-                                                        viewBox="0 0 18 20"
-                                                        fill="transparent"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <path
-                                                            d="M1 5H17M7 9V15M11 9V15M2 5L3 17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19H13C13.5304 19 14.0391 18.7893 14.4142 18.4142C14.7893 18.0391 15 17.5304 15 17L16 5M6 5V2C6 1.73478 6.10536 1.48043 6.29289 1.29289C6.48043 1.10536 6.73478 1 7 1H11C11.2652 1 11.5196 1.10536 11.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V5"
-                                                            stroke="#666C78"
-                                                            strokeWidth="2"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg></div> */}
+                                                    <div className="d-flex gap-2">
+                                                        <div
+                                                            className="edit_event_btn"
+                                                            title="View Event"
+                                                            onClick={() => {
+                                                                setShowEventModal(true);
+                                                                setEditable(true);
+                                                                setEventId(event?._id);
+                                                                setView(true);
+                                                            }}
+                                                        >
+                                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z" fill="#FBC42E" />
+                                                            </svg>
+                                                        </div>
+                                                        <div
+                                                            className="edit_event_btn"
+                                                            title="Edit Event"
+                                                            onClick={() => {
+                                                                setShowEventModal(true);
+                                                                setEditable(true);
+                                                                setEventId(event?._id);
+                                                                setView(false);
+                                                            }}
+                                                        >
+                                                            <svg width="18" height="18" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6.77748 2.04544L3.02434 6.01801C2.88263 6.16887 2.74548 6.46601 2.71806 6.67173L2.71806 6.67173L2.54891 8.15287C2.48948 8.68773 2.87348 9.05344 3.40377 8.96201L4.87577 8.71058C5.08148 8.67401 5.36948 8.52315 5.5112 8.36773L9.26434 4.39515C9.91348 3.70944 10.2061 2.92773 9.19577 1.9723C8.19006 1.02601 7.42663 1.35973 6.77748 2.04544Z" stroke="#FBC42E" strokeWidth="0.914286" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                                                                <path d="M6.1499 2.70898C6.34647 3.9707 7.37047 4.93527 8.64133 5.06327" stroke="#FBC42E" strokeWidth="0.914286" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                                                                <path d="M2.08569 10.4572H10.3143" stroke="#FBC42E" strokeWidth="0.914286" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                                                            </svg>
+                                                        </div>
+                                                        <div
+                                                            className="edit_event_btn"
+                                                            title="Delete Event"
+                                                            onClick={() => {
+                                                                setViewEventDeleteModal(true);
+                                                                setEventId(event?._id);
+                                                            }}
+                                                        >
+                                                            <svg width="18" height="18" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M1 5H17M7 9V15M11 9V15M2 5L3 17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19H13C13.5304 19 14.0391 18.7893 14.4142 18.4142C14.7893 18.0391 15 17.5304 15 17L16 5M6 5V2C6 1.73478 6.10536 1.48043 6.29289 1.29289C6.48043 1.10536 6.73478 1 7 1H11C11.2652 1 11.5196 1.10536 11.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V5" stroke="#FBC42E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </li>
                                         </>

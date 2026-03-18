@@ -7,6 +7,11 @@ import { Provider } from "react-redux";
 import AppStore from "@/utils/redux/AppStore";
 import { Toaster } from "react-hot-toast";
 import 'react-international-phone/style.css';
+import { initAuthInterceptor } from "@/utils/authInterceptor";
+
+if (typeof window !== "undefined") {
+  initAuthInterceptor();
+}
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

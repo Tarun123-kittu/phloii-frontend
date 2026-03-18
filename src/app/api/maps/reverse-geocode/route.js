@@ -24,31 +24,42 @@ export async function POST(req) {
     const data = await response.json();
 
     if (data?.results && data.results.length > 0) {
-      const result = data.results[0];
-      const addressComponents = result.address_components || [];
-      const address = {
-        streetAddress: result.formatted_address || '',
-        city: '',
-        state: '',
-        country: '',
-        pinCode: '',
-      };
+      const results = data.results;
+      const primary = results[0];
+      const addressComponents = primary.address_components || [];
+      const getComp = (types) => addressComponents.find(c => types.some(t => c.types.includes(t)))?.long_name || '';
 
-      addressComponents.forEach((component) => {
-        const types = component.types;
-        if (types.includes('locality')) {
-          address.city = component.long_name;
+      // Scan all results for a postal code if the primary one doesn't have it
+      let pinCode = getComp(['postal_code']);
+      if (!pinCode) {
+        for (const res of results) {
+          const pc = res.address_components.find(c => c.types.includes('postal_code'))?.long_name;
+          if (pc) {
+            pinCode = pc;
+            break;
+          }
         }
-        if (types.includes('administrative_area_level_1')) {
-          address.state = component.long_name;
+      }
+
+      const country = getComp(['country']);
+      const loc = getComp(['locality']);
+      const admin2 = getComp(['administrative_area_level_2']);
+
+      let city = loc;
+      if (country === 'India' && admin2) {
+        if (!loc || loc.length < 3 || /\d/.test(loc)) {
+          city = admin2;
         }
-        if (types.includes('country')) {
-          address.country = component.long_name;
-        }
-        if (types.includes('postal_code')) {
-          address.pinCode = component.long_name;
-        }
-      });
+      }
+      if (!city) city = admin2 || getComp(['sublocality_level_1', 'neighborhood']);
+
+      const address = {
+        streetAddress: primary.formatted_address || '',
+        city: city,
+        state: getComp(['administrative_area_level_1']),
+        country: country,
+        pinCode: pinCode || '',
+      };
 
       return Response.json({ address });
     }

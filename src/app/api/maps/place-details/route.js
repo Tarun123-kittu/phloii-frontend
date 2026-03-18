@@ -25,35 +25,30 @@ export async function POST(req) {
 
     if (data?.result) {
       const addressComponents = data.result.address_components || [];
-      const details = {
-        streetAddress: '',
-        city: '',
-        state: '',
-        country: '',
-        pinCode: '',
-      };
+      const getComp = (types) => addressComponents.find(c => types.some(t => c.types.includes(t)))?.long_name || '';
 
-      addressComponents.forEach((component) => {
-        const types = component.types;
-        if (types.includes('street_number')) {
-          details.streetAddress = component.long_name + ' ' + (details.streetAddress || '');
+      const country = getComp(['country']);
+      const loc = getComp(['locality']);
+      const admin2 = getComp(['administrative_area_level_2']);
+
+      let city = loc;
+      if (country === 'India' && admin2) {
+        // Heuristic: If locality is very specific (short, has digits, or neighborhood-like), prefer admin2 (District)
+        if (!loc || loc.length < 3 || /\d/.test(loc)) {
+          city = admin2;
         }
-        if (types.includes('route')) {
-          details.streetAddress += component.long_name;
-        }
-        if (types.includes('locality')) {
-          details.city = component.long_name;
-        }
-        if (types.includes('administrative_area_level_1')) {
-          details.state = component.long_name;
-        }
-        if (types.includes('country')) {
-          details.country = component.long_name;
-        }
-        if (types.includes('postal_code')) {
-          details.pinCode = component.long_name;
-        }
-      });
+      }
+      if (!city) city = admin2 || getComp(['sublocality_level_1', 'neighborhood']);
+
+      const details = {
+        streetAddress: data.result.formatted_address || '',
+        city: city,
+        state: getComp(['administrative_area_level_1']),
+        country: country,
+        pinCode: getComp(['postal_code']) || '',
+        lat: data.result.geometry.location.lat,
+        lng: data.result.geometry.location.lng,
+      };
 
       return Response.json({ details });
     }

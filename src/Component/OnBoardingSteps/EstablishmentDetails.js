@@ -2,56 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Button from "../Hotel/Button/Button";
-import MapSelector from "../MapSelector/MapSelector";
+import CommonMapSelector from "../Common/CommonMapSelector";
 import { toggle_sidebar } from "@/utils/redux/slices/sidebarSlice/manageSidebar";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
-const getPlaceAutocompleteSuggestions = async (input) => {
-  if (!input) {
-    return [];
-  }
-
-  try {
-    const response = await fetch('/api/maps/autocomplete', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ input }),
-    });
-    const data = await response.json();
-
-    if (data?.predictions) {
-      return data.predictions;
-    }
-    return [];
-  } catch (error) {
-    console.error('Autocomplete error:', error);
-    return [];
-  }
-};
-
-const getPlaceDetails = async (placeId) => {
-  if (!placeId) {
-    return null;
-  }
-
-  try {
-    const response = await fetch('/api/maps/place-details', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ placeId }),
-    });
-    const data = await response.json();
-
-    if (data?.details) {
-      return data.details;
-    }
-    return null;
-  } catch (error) {
-    console.error('Place details error:', error);
-    return null;
-  }
-};
-
+// Geocode helper for form submission
 const getLatLongFromAddress = async (address) => {
   const formattedAddress = [
     address?.streetAddress,
@@ -103,11 +59,14 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   const [addressValidationMessage, setAddressValidationMessage] = useState('')
   const [addressValidationType, setAddressValidationType] = useState('')
   const [isValidatingAddress, setIsValidatingAddress] = useState(false)
-  const [suggestions, setSuggestions] = useState([])
-  const [showSuggestions, setShowSuggestions] = useState(false)
-  const [autocompleteLoading, setAutocompleteLoading] = useState(false)
-  const [showMap, setShowMap] = useState(false)
-  const [mapLocation, setMapLocation] = useState(null)
+  const [mapLocation, setMapLocation] = useState(() => {
+    const hotel = selected_hotel_details?.data?.data?.hotel;
+    if (hotel?.lat && hotel?.lng) {
+      return { lat: parseFloat(hotel.lat), lng: parseFloat(hotel.lng) };
+    }
+    return null;
+  });
+
 
   // Track city from map to persist it after API resets citiesList
   const [pendingCity, setPendingCity] = useState(null)
@@ -117,25 +76,39 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
     setAddressValidationType('')
   }
 
-  const handleMapLocationSelect = (locationData) => {
-    setMapLocation(locationData)
-    if (locationData.streetAddress) setStreetAddress(locationData.streetAddress)
+  const syncLocationWithForm = (locationData) => {
+    if (locationData.lat && locationData.lng) {
+      setMapLocation(locationData);
+    }
+    if (locationData.streetAddress) setStreetAddress(locationData.streetAddress);
+    if (locationData.pinCode) setPincode(locationData.pinCode);
 
-    // Auto-fill state and country first, as they drive the cities API
-    if (locationData.state) setState(locationData.state)
-    if (locationData.country) setCountry(locationData.country)
-    if (locationData.pinCode) setPincode(locationData.pinCode)
+    // Auto-fill state and country (triggering backend city fetch in parent)
+    if (locationData.state) setState(locationData.state);
 
-    // Handle city - append to list temporarily so the <select> element can bind to it
-    // before the backend API responds with the full list of cities for this state.
+    // Match country name with the standard list
+    if (locationData.country) {
+      const matched = all_countries?.find(c =>
+        c.name.toLowerCase() === locationData.country.toLowerCase()
+      );
+      setCountry(matched ? matched.name : locationData.country);
+    }
+
+    // Handle city synchronization and persistence
     if (locationData.city) {
       if (!citiesList?.includes(locationData.city) && typeof setCitiesList === 'function') {
-        setCitiesList([...(citiesList || []), locationData.city])
+        setCitiesList([...(citiesList || []), locationData.city]);
       }
       setCity(locationData.city);
-      setPendingCity(locationData.city); // remember to re-apply after API reset
+      setPendingCity(locationData.city); // Allow persistence across API-driven list resets
     }
-  }
+
+    clearAddressValidation();
+  };
+
+  const handleMapLocationSelect = (locationData) => {
+    syncLocationWithForm(locationData);
+  };
 
   // Re-apply the city if the parent component's API call overwrites citiesList
   // and blanks out the dropdown during the re-render.
@@ -145,30 +118,18 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
         setCitiesList([...citiesList, pendingCity]);
       }
       setCity(pendingCity);
-      setPendingCity(null); // Clear pending city once successfully applied
+      // City is persisted until user manually changes it
     }
   }, [citiesList, pendingCity, setCity, setCitiesList]);
 
-  // Debounced autocomplete handler
-  useEffect(() => {
-    const debounceTimer = setTimeout(async () => {
-      if (streetaddress && streetaddress.length > 2) {
-        setAutocompleteLoading(true)
-        const results = await getPlaceAutocompleteSuggestions(streetaddress)
-        console.log('Autocomplete results:', results)
-        setSuggestions(results)
-        if (results && results.length > 0) {
-          setShowSuggestions(true)
-        }
-        setAutocompleteLoading(false)
-      } else {
-        setSuggestions([])
-        setShowSuggestions(false)
-      }
-    }, 300)
-
-    return () => clearTimeout(debounceTimer)
-  }, [streetaddress])
+  // Handle manual city selection
+  const handleCityChange = (e) => {
+    const val = e.target.value;
+    setCity(val);
+    setCityError('');
+    clearAddressValidation();
+    setPendingCity(null); // Clear persistence on manual selection
+  };
 
   const handleForward = async () => {
     if (isValidatingAddress) return
@@ -245,26 +206,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
     }
   }
 
-  const handlePlaceSelection = async (placeId) => {
-    try {
-      const placeDetails = await getPlaceDetails(placeId)
-      if (placeDetails) {
-        const { streetAddress, city, state, country, pinCode } = placeDetails
-
-        if (streetAddress) setStreetAddress(streetAddress)
-        if (city) setCity(city)
-        if (state) setState(state)
-        if (country) setCountry(country)
-        if (pinCode) setPincode(pinCode)
-
-        clearAddressValidation()
-      }
-      setSuggestions([])
-      setShowSuggestions(false)
-    } catch (error) {
-      console.error('Error selecting place:', error)
-    }
-  }
+  // Redundant place helpers removed. Using CommonMapSelector instead.
 
   // const handleBackword = () => {
   //   setStep(1)
@@ -329,100 +271,18 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
             )}
           </div>
         </div> */}
-        <div className={col}>
-          <div className="mb-3" style={{ position: 'relative', overflow: 'visible' }}>
-            <label htmlFor="email" className="form-label cmn_label">
-              Street Address
-            </label>
-            <input
-              type="address"
-              className="form-control cmn_input"
-              placeholder="Enter street address"
-              value={streetaddress}
-              onChange={(e) => { setStreetAddress(e.target.value); setAddressError(''); clearAddressValidation() }}
-              style={addressError ? { border: "1px solid #ff00009c" } : {}}
-              onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-            />
-            {autocompleteLoading && (
-              <span style={{ fontSize: "12px", color: "#666" }}>
-                Loading suggestions...
-              </span>
-            )}
-            {showSuggestions && suggestions.length > 0 && (
-              <div style={{
-                position: 'absolute',
-                top: '100%',
-                left: 0,
-                right: 0,
-                backgroundColor: '#ffffff',
-                border: '1px solid #cccccc',
-                borderRadius: '4px',
-                zIndex: 1000,
-                maxHeight: '300px',
-                overflowY: 'auto',
-                marginTop: '2px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
-              }}>
-                {suggestions.map((suggestion, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handlePlaceSelection(suggestion.place_id)}
-                    style={{
-                      padding: '10px 12px',
-                      cursor: 'pointer',
-                      borderBottom: index < suggestions.length - 1 ? '1px solid #eeeeee' : 'none',
-                      backgroundColor: '#ffffff',
-                      transition: 'background-color 0.2s'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#f5f5f5';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#ffffff';
-                    }}
-                  >
-                    <div style={{ fontSize: "14px", color: "#333333", fontWeight: '500', marginBottom: '2px' }}>
-                      {suggestion.main_text}
-                    </div>
-                    <div style={{ fontSize: "12px", color: "#888888" }}>
-                      {suggestion.secondary_text}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-            {addressError && (
-              <span style={addressError ? { color: "#ff00009c", fontSize: "12px" } : {}}>
-                {addressError}
-              </span>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setShowMap(!showMap)}
-              style={{
-                marginTop: '10px',
-                padding: '8px 16px',
-                backgroundColor: '#007bff',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontSize: '14px',
-              }}
-            >
-              {showMap ? '↑ Hide Map' : '↓ Select on Map'}
-            </button>
-
-            {showMap && (
-              <MapSelector
-                onLocationSelect={handleMapLocationSelect}
-                initialLat={mapLocation?.lat}
-                initialLng={mapLocation?.lng}
-                streetAddress={streetaddress}
-              />
-            )}
-          </div>
+        <div className="col-lg-12">
+          <CommonMapSelector
+            initialLat={mapLocation?.lat}
+            initialLng={mapLocation?.lng}
+            value={streetaddress}
+            onLocationSelect={handleMapLocationSelect}
+          />
+          {addressError && (
+            <span style={{ color: "#ff00009c", fontSize: "12px" }}>
+              {addressError}
+            </span>
+          )}
         </div>
         <div className={col}>
           <div className="mb-3">
@@ -436,11 +296,9 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
               value={unitNumber}
               onChange={(e) => {
                 const value = e.target.value;
-                if (/^\d*$/.test(value)) {
-                  setUnitNumber(value);
-                  setUnitNumberError('');
-                  clearAddressValidation();
-                }
+                setUnitNumber(value);
+                setUnitNumberError('');
+                clearAddressValidation();
               }}
               style={unitnumberError ? { border: "1px solid #ff00009c" } : {}}
             />
@@ -510,7 +368,7 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
             <select
               className="form-select cmn-select"
               aria-label="Default select example"
-              onChange={(e) => { setCity(e.target.value); setCityError(''); clearAddressValidation() }}
+              onChange={handleCityChange}
               style={cityError ? { border: "1px solid #ff00009c" } : {}}
               value={city}
               disabled={citiesList?.length === 0}
