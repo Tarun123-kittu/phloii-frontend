@@ -64,8 +64,11 @@ const EstablishmentDetails = ({ col, setStep, establishmentname, setEstablishmen
   // Initialize map location once selected_hotel_details is available
   useEffect(() => {
     const hotel = selected_hotel_details?.data?.data?.hotel;
-    if (hotel?.lat && hotel?.lng && !mapLocation) {
-      setMapLocation({ lat: parseFloat(hotel.lat), lng: parseFloat(hotel.lng) });
+    const lat = hotel?.lat || hotel?.address?.lat || hotel?.latitude;
+    const lng = hotel?.lng || hotel?.address?.lng || hotel?.longitude;
+
+    if (lat && lng && !mapLocation) {
+      setMapLocation({ lat: parseFloat(lat), lng: parseFloat(lng) });
     }
   }, [selected_hotel_details, mapLocation]);
 

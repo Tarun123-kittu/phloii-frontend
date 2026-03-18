@@ -240,6 +240,13 @@ const OnBoardingSteps = ({ col, hotelId }) => {
       setAtmosphere_description(selected_hotel_details?.data?.data?.hotel?.atmosphere_description)
       setFood(selected_hotel_details?.data?.data?.hotel?.food)
       setAdditional_information(selected_hotel_details?.data?.data?.hotel?.additional_information)
+
+      const hotel = selected_hotel_details?.data?.data?.hotel;
+      const lat = hotel?.lat || hotel?.address?.lat || hotel?.latitude;
+      const lng = hotel?.lng || hotel?.address?.lng || hotel?.longitude;
+      if (lat && lng) {
+        setGeolocation({ lat: parseFloat(lat), lng: parseFloat(lng) });
+      }
     }
   }, [selected_hotel_details])
 

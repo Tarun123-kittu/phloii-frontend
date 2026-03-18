@@ -35,14 +35,33 @@ const CommonMapSelector = ({
 
     // Initialize marker position from props
     useEffect(() => {
-        if (initialLat && initialLng) {
+        if (initialLat !== undefined && initialLng !== undefined && initialLat !== null && initialLng !== null) {
             const pos = { lat: parseFloat(initialLat), lng: parseFloat(initialLng) }
             setMarkerPosition(pos)
             if (map) {
                 map.panTo(pos)
             }
+        } else if (value && isLoaded && !markerPosition) {
+            // Fallback: Geocode the address if coordinates are missing
+            const geocoder = new window.google.maps.Geocoder()
+            geocoder.geocode({ address: value }, (results, status) => {
+                if (status === 'OK' && results[0]) {
+                    const pos = {
+                        lat: results[0].geometry.location.lat(),
+                        lng: results[0].geometry.location.lng()
+                    }
+                    setMarkerPosition(pos)
+                    if (map) map.panTo(pos)
+                    // Update parent with coordinates if they were missing
+                    onLocationSelect({
+                        lat: pos.lat,
+                        lng: pos.lng,
+                        streetAddress: value
+                    })
+                }
+            })
         }
-    }, [initialLat, initialLng, map])
+    }, [initialLat, initialLng, value, isLoaded, map])
 
     const onLoad = useCallback((mapInstance) => {
         setMap(mapInstance)
